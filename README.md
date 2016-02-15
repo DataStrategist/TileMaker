@@ -15,5 +15,6 @@ Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,But
 TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "a.html")
 browseURL("a.html")
 ```
+This will give something like this (every element of this is customizable):
 
-![Example](https://github.com/images/example.png)
+![Example](https://github.com/mexindian/TileMaker/blob/master/example.PNG)
