@@ -6,14 +6,14 @@
 ##     ButtonMaker()))
 
 
-TileMaker <- function(MainTitle,Divs,FileName){
+TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE){
   cat('<!DOCTYPE html><html lang="en"><head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   </head><body><h1>',
         MainTitle,
         '</h1>',
-        paste('<h2>Report Date: ',Sys.Date(),'</h2>',sep=""),
+        if(ShowDate){paste('<h2>Report Date: ',Sys.Date(),'</h2>',sep="")},
         Divs,
         '</body></html>',
         file=FileName,sep="")
@@ -21,7 +21,7 @@ TileMaker <- function(MainTitle,Divs,FileName){
 
 
 
-DivMaker <- function(Title,Buttons){
+DivMaker <- function(Title="",Buttons){
   paste('<div class="container"><h2>',
         Title,
         '</h2>',
@@ -30,7 +30,7 @@ DivMaker <- function(Title,Buttons){
 }
 
 
-ButtonMaker <- function(Color=1,Size=4,Value,Subtitle){
+ButtonMaker <- function(Color=1,Size=4,Value,Subtitle=""){
   ## colors
   colorList = c("default",  "primary",  "success",  "info",  "warning",  "danger")
     
