@@ -4,6 +4,7 @@ An R script that enables the creation of data tiles for inclusion in a html dash
 Example:
 
 ```
+source("https://raw.githubusercontent.com/mexindian/TileMaker/master/tilemaker.R")
 Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
 Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
 Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
@@ -14,3 +15,5 @@ Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,But
 TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "a.html")
 browseURL("a.html")
 ```
+
+![Example](https://github.com/images/example.png)
