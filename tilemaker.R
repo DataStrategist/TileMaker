@@ -30,31 +30,34 @@ DivMaker <- function(Title="",Buttons){
 }
 
 
-ButtonMaker <- function(Color=1,Size=4,Value,Subtitle=""){
+ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link=""){
   ## colors
   colorList = c("default",  "primary",  "success",  "info",  "warning",  "danger")
     
   ## sizes:
   SizeList = c("xs","sm","md","lg")
   
-  paste('<button type="button" class="btn btn-',
+  paste('<',
+        if(Link !=""){paste('a href="',Link,'" role="button" ',sep='')} else{'button'},
+        ' type="button" class="btn btn-',
         colorList[Color],' btn-', SizeList[Size],'"><h1>',
         Value,
         '</h1>',
         Subtitle,
-        '</button>',sep="")
+        if(Link !=""){'</a>'} else{'</button>'},
+        sep="")
 }
 
 
 
 #########################################
 
-# Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
-# Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
-# Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
-# Button4 <- ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies")
-# 
-# Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
-# Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,Button4))
-# TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
-# browseURL("example.html")
+Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten",Link = "https://en.wikipedia.org/wiki/Apple")
+Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
+Button4 <- ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies")
+
+Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,Button4))
+TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
+browseURL("example.html")
