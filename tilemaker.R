@@ -30,17 +30,20 @@ DivMaker <- function(Title="",Buttons){
 }
 
 
-ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link=""){
+ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon=""){
   ## colors
   colorList = c("default",  "primary",  "success",  "info",  "warning",  "danger")
     
   ## sizes:
   SizeList = c("xs","sm","md","lg")
   
+  ## for icons, goto http://getbootstrap.com/components/
+  
   paste('<',
         if(Link !=""){paste('a href="',Link,'" role="button" ',sep='')} else{'button'},
         ' type="button" class="btn btn-',
         colorList[Color],' btn-', SizeList[Size],'"><h1>',
+        if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true"></span> ',sep='')},
         Value,
         '</h1>',
         Subtitle,
@@ -52,10 +55,10 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link=""){
 
 #########################################
 
-Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten",Link = "https://en.wikipedia.org/wiki/Apple")
+Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten",Link = "https://en.wikipedia.org/wiki/Apple",Icon="glyphicon glyphicon-apple")
 Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
 Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
-Button4 <- ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies")
+Button4 <- ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies",Icon = "glyphicon glyphicon-pushpin")
 
 Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
 Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,Button4))
