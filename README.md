@@ -18,3 +18,5 @@ browseURL("a.html")
 This will give something like this (every element of this is customizable):
 
 ![Example](https://github.com/mexindian/TileMaker/blob/master/example.PNG)
+
+For latest live version, please see here: http://htmlpreview.github.io/?https://github.com/mexindian/TileMaker/blob/master/example.html
