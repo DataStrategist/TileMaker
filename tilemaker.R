@@ -6,11 +6,12 @@
 ##     ButtonMaker()))
 
 
-TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE){
+TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE){
   cat('<!DOCTYPE html><html lang="en"><head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  </head><body><h1>',
+  <meta name="viewport" content="width=device-width, initial-scale=1">',
+  if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
+    } else {'<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'},
+  '</head><body><h1>',
         MainTitle,
         '</h1>',
         if(ShowDate){paste('<h2>Report Date: ',Sys.Date(),'</h2>',sep="")},
