@@ -23,7 +23,7 @@ For latest live version, please see here: http://htmlpreview.github.io/?https://
 
 ## Arguments
 ### TileMaker 
-MainTitle         Optional title for the whole set of titles
+*MainTitle*         Optional title for the whole set of titles
 
 Divs              The Divs that you want inserted into the tile. If you have more than one div, use paste(Div1,Div2)
 
