@@ -25,44 +25,44 @@ For latest live version, please see here: http://htmlpreview.github.io/?https://
 ### TileMaker 
 **MainTitle**        Optional title for the whole set of titles
 
-Divs              The Divs that you want inserted into the tile. If you have more than one div, use paste(Div1,Div2)
+**Divs**              The Divs that you want inserted into the tile. If you have more than one div, use paste(Div1,Div2)
 
-FileName          The filename the tile should spit out as, including the extension
+**FileName**          The filename the tile should spit out as, including the extension
 
-ShowDate          Optional boolean controlling whether the date should be included or suppressed
+**ShowDate**          Optional boolean controlling whether the date should be included or suppressed
 
-localCSS          Optional boolean to specify whether the bootstrap css file should be served from the internet, or if you have saved                   a local version. If you have saved a local version, make sure to download the "fonts" folder too, otherwise                           glyphicons won't work.
+**localCSS**          Optional boolean to specify whether the bootstrap css file should be served from the internet, or if you have saved                   a local version. If you have saved a local version, make sure to download the "fonts" folder too, otherwise                           glyphicons won't work.
 
 
 ### DivMaker 
-Title             The title for this row of buttons
+**Title**             The title for this row of buttons
 
-Buttons           The Buttons that you want inserted into this row. If you have more than one button, use paste(Button1,Button2)
+**Buttons**           The Buttons that you want inserted into this row. If you have more than one button, use paste(Button1,Button2)
 
 
 ### ButtonMaker
-Color             Optional numeric 1-6, corresponding to the colors specified in the bootstrap css classes: 
+**Color**             Optional numeric 1-6, corresponding to the colors specified in the bootstrap css classes: 
                   "success",  "warning", "danger", "info", "primary", "default"
 
-Size              Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
+**Size**              Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
                   "xs","sm","md","lg")
 
-Value             The numeric value you want to highlight (the main enchilada)
+**Value**             The numeric value you want to highlight (the main enchilada)
 
-Subtitle          Optional subtext that should appear under the value
+**Subtitle**          Optional subtext that should appear under the value
 
-Link              Optional hyperlink that should be followed on click
+**Link**             Optional hyperlink that should be followed on click
 
-Icon              Optional glyphicon that should be displayed from http://getbootstrap.com/components/
+**Icon**              Optional glyphicon that should be displayed from http://getbootstrap.com/components/
 
-Units             Optional units that should be displayed after Value
+**Units**             Optional units that should be displayed after Value
 
-Target            Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
+**Target**            Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
 
-ThresholdHigh     Optional border between "green" and "orange". Use w/ Target and ThresholdLow. This value represents the RATIO
+**ThresholdHigh**     Optional border between "green" and "orange". Use w/ Target and ThresholdLow. This value represents the RATIO
                   of the VALUE to the TARGET that, if above the ThresholdHigh will show as green, and if not, as orange
 
-ThresholdLow      Optional border between "orange" and "red". Use w/ Target and ThresholdLow. This value represents the RATIO
+**ThresholdLow**      Optional border between "orange" and "red". Use w/ Target and ThresholdLow. This value represents the RATIO
                   of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange, and if not, as red
                         
                         
