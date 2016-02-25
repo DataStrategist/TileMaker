@@ -65,4 +65,4 @@ For latest live version, please see here: http://htmlpreview.github.io/?https://
 **ThresholdLow**      Optional border between "orange" and "red". Use w/ Target and ThresholdLow. This value represents the RATIO
                   of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange, and if not, as red
                         
-                        
+**Hover**			  Optional tooltip, or text that will show up when a user rests their mouse over the button.                      
