@@ -32,7 +32,7 @@ DivMaker <- function(Title="",Buttons){
 
 
 ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units="",
-                        Target=0,ThresholdHigh=0,ThresholdLow=0, Hover=""){
+                        Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5){
   ## colors
   colorList = c("success",  "warning", "danger", "info", "primary", "default")
     
@@ -60,7 +60,7 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
         '"',
         if(Hover !=""){paste(' title="',Hover,'" ')},
         '><h1>',sep=''),
-        if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true"></span> ',sep='')},
+        if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true" style="opacity:',alpha,'"></span> ',sep='')},
         if(Units == ""){Value} else {paste(Value,Units,sep="")},
         '</h1>',
         Subtitle,
@@ -76,8 +76,8 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
 # Button2 <- ButtonMaker(Color = 3,Value = 93.7,Subtitle = "Nutritional value",
 #                        Target=100,ThresholdHigh=70,ThresholdLow=40,Units="%",
 #                        Hover="Apples are high in good things. If you eat it, these good things go into your body
-#                        and further the cycle of good. Therefore, you should 
-#                        eat 
+#                        and further the cycle of good. Therefore, you should
+#                        eat
 #                        apples.")
 # Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor",
 #                        Hover="While the yuminess is inferior to chocolate,

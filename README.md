@@ -66,3 +66,5 @@ For latest live version, please see here: http://htmlpreview.github.io/?https://
                   of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange, and if not, as red
                         
 **Hover**			  Optional tooltip, or text that will show up when a user rests their mouse over the button.                      
+
+**alpha**             Optional transparency coefficient for the icon, a decimal from 0-1.
