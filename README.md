@@ -1,10 +1,18 @@
 # TileMaker
 An R script that enables the creation of data tiles for inclusion in a html dashboard or some such.
 
-Example:
+## Now available as a package!
+To install, please type:
+```
+devtools::install_github("mexindian/TileMaker")
+```
+
+
+
+## Example:
 
 ```
-source("https://raw.githubusercontent.com/mexindian/TileMaker/master/tilemaker.R")
+library(TileMaker)
 Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
 Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
 Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
