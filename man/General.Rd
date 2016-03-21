@@ -15,7 +15,8 @@ STEP 3, include those rows, selecting where the css file is, assigning optional 
 }
 \usage{
 ButtonMaker(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units="",
-                        Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5)
+                        Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5,
+                        Former=Value)
 
 DivMaker(Title="",Buttons)
 
@@ -35,6 +36,9 @@ TileMaker(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE)
                   }
   \item{Value}{
              The numeric value you want to highlight (the main enchilada)
+             }
+  \item{Former}{
+             Optional value used to compare the present value against in order to calculate the percent change.
              }
   \item{Subtitle}{
           Optional subtext that should appear under the value
@@ -122,12 +126,13 @@ Amit Kohli
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-Button1 <- ButtonMaker(Color = 2,Value = 65,Subtitle = "Times apple eaten",
+library(TileMaker)
+Button1 <- ButtonMaker(Color = 2,Value = 65,Former=64,Subtitle = "Times apple eaten",
                        Link = "https://en.wikipedia.org/wiki/Apple",
                        Icon="glyphicon glyphicon-apple",
                        Target=100,ThresholdHigh=70,ThresholdLow=40)
-Button2 <- ButtonMaker(Color = 3,Value = 93.7,Subtitle = "Nutritional value",
-                       Target=100,ThresholdHigh=70,ThresholdLow=40,Units="\%",
+Button2 <- ButtonMaker(Color = 3,Value = 93.7,Former=100,Subtitle = "Nutritional value",
+                       Target=100,ThresholdHigh=70,ThresholdLow=40,Units="mg",
                        Hover="Apples are high in good things. If you eat it, these good things go into your body
                        and further the cycle of good. Therefore, you should
                        eat
@@ -142,6 +147,7 @@ Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2)
 Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,Button4))
 TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
 browseURL("example.html")
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

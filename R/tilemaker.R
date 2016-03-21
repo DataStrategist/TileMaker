@@ -29,7 +29,8 @@ DivMaker <- function(Title="",Buttons){
 }
 
 ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units="",
-                        Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5){
+                        Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5,
+                        Former=Value){
   ## colors
   colorList = c("success",  "warning", "danger", "info", "primary", "default")
 
@@ -56,9 +57,16 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
         if(Hover !=""){paste(' title="',Hover,'" ')},
         '><h1>',sep=''),
         if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true" style="opacity:',alpha,'"></span> ',sep='')},
-        if(Units == ""){Value} else {paste(Value,Units,sep="")},
+        paste(Value,Units,sep=''),
+        if(Former>Value){
+          paste('<sup style= "font-size: 10px;color:#EEEEEE">&#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
+        } else if (Former<Value){
+          paste('<sup style= "font-size: 10px;color:#EEEEEE">&#9650;',round((Value-Former)/Former*100,1),'%</sup>',sep='')
+        },
         '</h1>',
         Subtitle,
         if(Link !=""){'</a>'} else{'</button>'},
         sep="")
 }
+
+
