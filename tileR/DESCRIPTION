@@ -1,0 +1,9 @@
+Package: tileR
+Type: Package
+Title: Create Tiles Suitable For Html Dashboards
+Version: 0.1.0
+Author: Amit Kohli
+Maintainer: Amit Kohli <amit@amitkohli.com>
+Description: This uses Bootstrap v3 buttons to create pretty elements for dashboards.
+License: MIT
+LazyData: TRUE
