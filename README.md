@@ -3,11 +3,13 @@ An R script that enables the creation of data tiles for inclusion in a html dash
 
 ## Now available as a package!
 To install, please type:
-`devtools::install_github("mexindian/TileMaker")`
+```
+devtools::install_github("mexindian/TileMaker")
+```
 
 
 
-Example:
+## Example:
 
 ```
 library(TileMaker)
