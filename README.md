@@ -1,3 +1,5 @@
+[![Travis-CI Build Status](https://travis-ci.org/mexindian/TileMaker.svg?branch=master)](https://travis-ci.org/mexindian/TileMaker)
+
 # TileMaker
 An R script that enables the creation of data tiles for inclusion in a html dashboard or some such.
 
