@@ -59,9 +59,9 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
         if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true" style="opacity:',alpha,'"></span> ',sep='')},
         paste(Value,Units,sep=''),
         if(Former>Value){
-          paste('<sup style= "font-size: 10px;color:#EEEEEE">&#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
+          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">&#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
         } else if (Former<Value){
-          paste('<sup style= "font-size: 10px;color:#EEEEEE">&#9650;',round((Value-Former)/Former*100,1),'%</sup>',sep='')
+          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">&#9650;',round((Value-Former)/Former*100,1),'%</sup>',sep='')
         },
         '</h1>',
         Subtitle,
