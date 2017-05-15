@@ -2,36 +2,39 @@
 % Please edit documentation in R/tilemaker.R
 \name{tileMatrix}
 \alias{tileMatrix}
-\title{FUNCTION TITLE}
+\title{tileMatrix}
 \usage{
 tileMatrix(df, Tar = 100, Thre.H = 90, Thre.L = 50, cols = 4, Title,
   FileName, RoundVal = 1, ButtWidth = 100)
 }
 \arguments{
-\item{df}{DESCRIPTION.}
+\item{df}{Dataframe containing information to use. It expects either 2 columns}
 
-\item{Tar}{DESCRIPTION.}
+\item{Tar}{Target value (What's the highest value to compare against). Defaults to 100}
 
-\item{Thre.H}{DESCRIPTION.}
+\item{Thre.H}{The limit between "high" and "medium" values IN PERCENT. Defaults to 90}
 
-\item{Thre.L}{DESCRIPTION.}
+\item{Thre.L}{The limit between "medium" and "low" values IN PERCENT. Defaults to 50}
 
-\item{cols}{DESCRIPTION.}
+\item{cols}{Number of columns that the matrix should tile around. Defaults to 4}
 
-\item{Title}{DESCRIPTION.}
+\item{Title}{The title the matrix should have.}
 
-\item{FileName}{DESCRIPTION.}
+\item{FileName}{The filename that will contain the html}
 
-\item{RoundVal}{DESCRIPTION.}
+\item{RoundVal}{Number of decimals that Value will be rounded to. Defaults to 1}
 
-\item{ButtWidth}{DESCRIPTION.}
+\item{ButtWidth}{The width of each button element, in Number of pixels. Defaults to 100.}
 }
 \value{
-RETURN DESCRIPTION
+Returns an HTML object containing the matrix of buttons
 }
 \description{
-FUNCTION DESCRIPTION
+Create a matrix of buttons suitable for quick comparisons
 }
 \examples{
-# ADD EXAMPLES HERE
+library(dplyr)
+df <- iris \%>\% group_by(Species) \%>\% summarize(c=mean(Sepal.Length),p=median(Sepal.Length))
+tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", ButtWidth=200)
+# @importFrom dplyr \%>\%
 }

@@ -31,36 +31,13 @@ Function 3 of 3, the last step. This function grabs the Divs created by `DivMake
 combines them into an html file.
 }
 \examples{
-Div1 <- '<div class=\\"container\\"><h2>Quantativity factors</h2><a role=\\"button\\"  type=\\"button\\" class=\\"btn btn-warning btn-lg\\"><h1>
-<span class=\\"glyphicon glyphicon-apple\\" aria-hidden=\\"true\\" style=\\"opacity:0.5\\"></span> 65<sup style= \\"font-size: 10px;
-color:#EEEEEE\\">&#9650;1.6\%</sup></h1>Times apple eaten</a> <button type=\\"button\\" class=\\"btn btn-success btn-lg\\" title=\\" Apples are
-high in good things. If you eat em, its nice. and further the cycle of good. Therefore, you should eat apples. \\" ><h1>93.7mg
-<sup style= \\"font-size: 10px;color:#EEEEEE\\">&#9660;6.3\%</sup></h1>
-Nutritional value</button></div>'
-Div2 <- '<div class=\\"container\\"><h2>Implementation procedures</h2></div>'
-## The two Divs above were built using this code... uncomment to see for yourself & experiment
-# Button1 <- ButtonMaker(Color = 2,Value = 65,Former=64,Subtitle = "Times apple eaten",
-#                        Link = "https://en.wikipedia.org/wiki/Apple",
-#                        Icon="glyphicon glyphicon-apple",
-#                        Target=100,ThresholdHigh=70,ThresholdLow=40)
-# Button2 <- ButtonMaker(Color = 3,Value = 93.7,Former=100,Subtitle = "Nutritional value",
-#                        Target=100,ThresholdHigh=70,ThresholdLow=40,Units="mg",
-#                        Hover="Apples are high in good things. If you eat em, its nice.
-#                        and further the cycle of good. Therefore, you should
-#                        eat
-#                        apples.")
-# Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor",
-#                        Hover="While the yuminess is inferior to chocolate,
-#' #                        it's still pretty friggin yummy.")
-# Button4 <- ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies",
-#                        Icon = "glyphicon glyphicon-pushpin")
-#
-# Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
-# Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,Button4))
+# ADD EXAMPLES HERE
+Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
+Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+Div2 <- DivMaker(Title = "Inverse proportions",Buttons = paste(Button2,Button1))
 TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
 browseURL("example.html")
-
-
 }
 \references{
 Uses Twitter's awesome bootstrap V3

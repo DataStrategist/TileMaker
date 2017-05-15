@@ -8,3 +8,4 @@ Description: This uses Bootstrap v3 buttons to create pretty elements for dashbo
 License: MIT + file LICENSE
 LazyData: TRUE
 RoxygenNote: 6.0.1
+Imports: dplyr

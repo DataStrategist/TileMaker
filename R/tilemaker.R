@@ -36,12 +36,12 @@
 #' @return Returns a character string containing HTML code to show the button, assuming the appropriate CSS elements will be available downstream
 #' @examples
 #' # ADD EXAMPLES HERE
-#' # Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
+#' # Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
 #' # Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
 #' # Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
-#' # TileMaker::ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies")
-#' # Button1;Button2;Button3;Button4
-#'
+#' # Button1;Button2;Button3
+#' @export
+
 ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units="",
                         Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5,
                         Former=Value){
@@ -97,9 +97,11 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
 #' @return Returns an HTML string containing \"div\" elements. Beware of using these in Shiny... a it might break the container.
 #' @examples
 #' # ADD EXAMPLES HERE
-#' # TileMaker::ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
-#' # Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
-#' # DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+#' Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
+#' Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+#' DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+#' @export
+
 DivMaker <- function(Title="",Buttons){
   paste('<div class="container"><h2>',
         Title,
@@ -130,32 +132,15 @@ DivMaker <- function(Title="",Buttons){
 #' @references Uses Twitter's awesome bootstrap V3
 #'
 #' @examples
-#' Div1 <- '<div class=\"container\"><button type=\"button\" class=\"btn btn-warning btn-lg\"><h1>3.57</h1>Times apple eaten</button></div>'
-#' Div2 <- '<div class=\"container\"><button type=\"button\" class=\"btn btn-info btn-lg\"><h1>1</h1>color</button></div>'
-#' ## The two Divs above were built using this code... uncomment to see for yourself & experiment
-#' # Button1 <- ButtonMaker(Color = 2,Value = 65,Former=64,Subtitle = "Times apple eaten",
-#' #                        Link = "https://en.wikipedia.org/wiki/Apple",
-#' #                        Icon="glyphicon glyphicon-apple",
-#' #                        Target=100,ThresholdHigh=70,ThresholdLow=40)
-#' # Button2 <- ButtonMaker(Color = 3,Value = 93.7,Former=100,Subtitle = "Nutritional value",
-#' #                        Target=100,ThresholdHigh=70,ThresholdLow=40,Units="mg",
-#' #                        Hover="Apples are high in good things. If you eat em, its nice.
-#' #                        and further the cycle of good. Therefore, you should
-#' #                        eat
-#' #                        apples.")
-#' # Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor",
-#' #                        Hover="While the yuminess is inferior to chocolate,
-#' #' #                        it's still pretty friggin yummy.")
-#' # Button4 <- ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies",
-#' #                        Icon = "glyphicon glyphicon-pushpin")
-#' #
-#' # Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
-#' # Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,Button4))
-#' require(TileMaker)
+#' # ADD EXAMPLES HERE
+#' Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
+#' Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+#' Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+#' Div2 <- DivMaker(Title = "Inverse proportions",Buttons = paste(Button2,Button1))
 #' TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
 #' browseURL("example.html")
-#'
-#'
+#' @export
+
 TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE){
   cat('<!DOCTYPE html><html lang="en"><head>
       <meta name="viewport" content="width=device-width, initial-scale=1">',
@@ -186,10 +171,13 @@ TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE){
 #' @param RoundVal Number of decimals that Value will be rounded to. Defaults to 1
 #' @param ButtWidth The width of each button element, in Number of pixels. Defaults to 100.
 #'
-#' @return RETURN DESCRIPTION
+#' @return Returns an HTML object containing the matrix of buttons
 #' @examples
+#' library(dplyr)
 #' df <- iris %>% group_by(Species) %>% summarize(c=mean(Sepal.Length),p=median(Sepal.Length))
-#' tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="Iris Sepal Lengths", ButtWidth=200)
+#' tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", ButtWidth=200)
+#' # @importFrom dplyr %>%
+#' @export
 tileMatrix <- function(df,Tar=100,Thre.H=90,Thre.L=50,cols=4,
                        Title,FileName,RoundVal=1,ButtWidth=100){
   # tileMatrix <- function(SubT,Value,FormerValue,Tar,Thre.H,Thre.L,cols,Title,FileName){

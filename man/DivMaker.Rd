@@ -20,7 +20,7 @@ or for inclusion within the function of this package `TileMaker`.
 }
 \examples{
 # ADD EXAMPLES HERE
-# TileMaker::ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
-# Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
-# DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
+Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
 }

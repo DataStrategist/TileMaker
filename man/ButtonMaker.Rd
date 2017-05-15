@@ -48,10 +48,8 @@ aesthetic traits for each button
 }
 \examples{
 # ADD EXAMPLES HERE
-# Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
+# Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
 # Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
 # Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
-# TileMaker::ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies")
-# Button1;Button2;Button3;Button4
-
+# Button1;Button2;Button3
 }
