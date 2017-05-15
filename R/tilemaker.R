@@ -6,28 +6,42 @@
 ##     ButtonMaker()))
 
 
-TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE){
-  cat('<!DOCTYPE html><html lang="en"><head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">',
-  if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
-    } else {'<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'},
-  '</head><body><h1>',
-        MainTitle,
-        '</h1>',
-        if(ShowDate){paste('<h2>Report Date: ',Sys.Date(),'</h2>',sep="")},
-        Divs,
-        '</body></html>',
-        file=FileName,sep="")
-}
 
-DivMaker <- function(Title="",Buttons){
-  paste('<div class="container"><h2>',
-        Title,
-        '</h2>',
-        Buttons,
-        '</div>',sep="")
-}
 
+
+
+#' ButtonMaker
+#'
+#' This function crafts the actual button per se, including the specific
+#' aesthetic traits for each button
+#'
+#' @param Color Optional numeric 1-6, corresponding to the colors specified in the bootstrap css classes:
+#' \"success\",  \"warning\", \"danger\", \"info\", \"primary\", \"default\"
+#' @param Size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
+#' \"xs\",\"sm\",\"md\",\"lg\")
+#' @param Value The numeric value you want to highlight (the main enchilada)
+#' @param Subtitle Optional subtext that should appear under the value
+#' @param Link Optional hyperlink that should be followed on click
+#' @param Icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
+#' @param Units Optional units that should be displayed after Value
+#' @param Target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
+#' @param ThresholdHigh Optional border between \"green\" and \"orange\". Use w/ Target and ThresholdLow. This value represents the RATIO
+#' of the VALUE to the TARGET that, if above the ThresholdHigh will show as green, and if not, as orange
+#' @param ThresholdLow Optional border between \"orange\" and \"red\". Use w/ Target and ThresholdLow. This value represents the RATIO
+#' of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange, and if not, as red
+#' @param Hover Optional tooltip, or text that will show up when a user rests their mouse over the button.
+#' @param alpha Optional transparency coefficient for the icon, a decimal from 0-1.
+#' @param Former Optional value to compare against the current value. Will show up as a little arrow pointig the percent change
+#'
+#' @return Returns a character string containing HTML code to show the button, assuming the appropriate CSS elements will be available downstream
+#' @examples
+#' # ADD EXAMPLES HERE
+#' # Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
+#' # Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+#' # Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
+#' # TileMaker::ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies")
+#' # Button1;Button2;Button3;Button4
+#'
 ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units="",
                         Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5,
                         Former=Value){
@@ -38,26 +52,29 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
   SizeList = c("xs","sm","md","lg")
 
   paste(paste('<',
-        if(Link !=""){paste('a href="',Link,'" role="button" ',sep='')} else{'button'},
-        ' type="button" class="btn ',sep=''),
+              if(Link !=""){paste('a href="',Link,'" role="button" ',sep='')} else{'button'},
+              ' type="button" class="btn ',sep=''),
         if(Target ==0){
           paste('btn-',colorList[Color],sep='')
+        } else {
+          Perc <- Value/Target *100
+          if(Perc > ThresholdHigh){
+            'btn-success'
+          } else if(Perc< ThresholdLow){
+            'btn-danger'
           } else {
-            Perc <- Value/Target *100
-            if(Perc > ThresholdHigh){
-              'btn-success'
-            } else if(Perc< ThresholdLow){
-              'btn-danger'
-            } else {
-              'btn-warning'
-            }
-            },
+            'btn-warning'
+          }
+        },
         paste(' btn-', SizeList[Size],
-        '"',
-        if(Hover !=""){paste(' title="',Hover,'" ')},
-        '><h1>',sep=''),
+              '"',
+
+              if(Hover !=""){paste(' title="',Hover,'" ')},
+              '><h1>',sep=''),
+
         if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true" style="opacity:',alpha,'"></span> ',sep='')},
         paste(Value,Units,sep=''),
+
         if(Former>Value){
           paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">&#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
         } else if (Former<Value){
@@ -69,4 +86,155 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
         sep="")
 }
 
+#' DivMaker
+#'
+#' This function takes strings created with the function `ButtonMaker` and makes an HTML div suitable for inclusion in other HTML code,
+#' or for inclusion within the function of this package `TileMaker`.
+#'
+#' @param Title The title for this row of buttons
+#' @param Buttons The Buttons that you want inserted into this row. If you have more than one button, use paste(Button1,Button2)
+#'
+#' @return Returns an HTML string containing \"div\" elements. Beware of using these in Shiny... a it might break the container.
+#' @examples
+#' # ADD EXAMPLES HERE
+#' # TileMaker::ButtonMaker(Color = 2,Value = 3.57,Subtitle = "Times apple eaten")
+#' # Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+#' # DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+DivMaker <- function(Title="",Buttons){
+  paste('<div class="container"><h2>',
+        Title,
+        '</h2>',
+        Buttons,
+        '</div>',sep="")
+}
+
+
+#' TileMaker
+#'
+#' Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker` and
+#' combines them into an html file.
+#'
+#' @param MainTitle Optional title for the whole set of titles
+#' @param Divs The Divs that you want inserted into the tile. If you have more than one div,
+#' use `paste(Div1,Div2)`
+#' @param FileName The filename the tile should spit out as, including the extension (which
+#' should always be html)
+#' @param ShowDate Optional boolean controlling whether the date should be included or suppressed
+#' @param localCSS Optional boolean to specify whether the bootstrap css file should be served from
+#' the internet, or if you have saved a local version. If you have saved a local version, make sure
+#' to download the "fonts" folder too, otherwise glyphicons won't work.
+#'
+#' @return Use this function to output an html file containing all the divs.If you would like just
+#' HTML code (suitable for inserting in a dashboard or another document, you can use the Divs.
+#'
+#' @references Uses Twitter's awesome bootstrap V3
+#'
+#' @examples
+#' Div1 <- '<div class=\"container\"><button type=\"button\" class=\"btn btn-warning btn-lg\"><h1>3.57</h1>Times apple eaten</button></div>'
+#' Div2 <- '<div class=\"container\"><button type=\"button\" class=\"btn btn-info btn-lg\"><h1>1</h1>color</button></div>'
+#' ## The two Divs above were built using this code... uncomment to see for yourself & experiment
+#' # Button1 <- ButtonMaker(Color = 2,Value = 65,Former=64,Subtitle = "Times apple eaten",
+#' #                        Link = "https://en.wikipedia.org/wiki/Apple",
+#' #                        Icon="glyphicon glyphicon-apple",
+#' #                        Target=100,ThresholdHigh=70,ThresholdLow=40)
+#' # Button2 <- ButtonMaker(Color = 3,Value = 93.7,Former=100,Subtitle = "Nutritional value",
+#' #                        Target=100,ThresholdHigh=70,ThresholdLow=40,Units="mg",
+#' #                        Hover="Apples are high in good things. If you eat em, its nice.
+#' #                        and further the cycle of good. Therefore, you should
+#' #                        eat
+#' #                        apples.")
+#' # Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor",
+#' #                        Hover="While the yuminess is inferior to chocolate,
+#' #' #                        it's still pretty friggin yummy.")
+#' # Button4 <- ButtonMaker(Color = 5,Size=1,Value = 5,Subtitle = "Inconsistencies",
+#' #                        Icon = "glyphicon glyphicon-pushpin")
+#' #
+#' # Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+#' # Div2 <- DivMaker(Title = "Implementation procedures",Buttons = paste(Button3,Button4))
+#' require(TileMaker)
+#' TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
+#' browseURL("example.html")
+#'
+#'
+TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE){
+  cat('<!DOCTYPE html><html lang="en"><head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">',
+      if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
+      } else {'<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'},
+      '</head><body><h1>',
+      MainTitle,
+      '</h1>',
+      if(ShowDate){paste('<h2>Report Date: ',Sys.Date(),'</h2>',sep="")},
+      Divs,
+      '</body></html>',
+      file=FileName,sep="")
+}
+
+
+
+#' tileMatrix
+#'
+#' Create a matrix of buttons suitable for quick comparisons
+#'
+#' @param df Dataframe containing information to use. It expects either 2 columns
+#' @param Tar Target value (What's the highest value to compare against). Defaults to 100
+#' @param Thre.H The limit between "high" and "medium" values IN PERCENT. Defaults to 90
+#' @param Thre.L The limit between "medium" and "low" values IN PERCENT. Defaults to 50
+#' @param cols Number of columns that the matrix should tile around. Defaults to 4
+#' @param Title The title the matrix should have.
+#' @param FileName The filename that will contain the html
+#' @param RoundVal Number of decimals that Value will be rounded to. Defaults to 1
+#' @param ButtWidth The width of each button element, in Number of pixels. Defaults to 100.
+#'
+#' @return RETURN DESCRIPTION
+#' @examples
+#' df <- iris %>% group_by(Species) %>% summarize(c=mean(Sepal.Length),p=median(Sepal.Length))
+#' tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="Iris Sepal Lengths", ButtWidth=200)
+tileMatrix <- function(df,Tar=100,Thre.H=90,Thre.L=50,cols=4,
+                       Title,FileName,RoundVal=1,ButtWidth=100){
+  # tileMatrix <- function(SubT,Value,FormerValue,Tar,Thre.H,Thre.L,cols,Title,FileName){
+  # map(1,ButtonMaker,Value= Value,
+  #     Size = 2,Subtitle = SubT,
+  #     Target = Tar,ThresholdHigh = Thre.H,ThresholdLow = Thre.L,
+  #     Former = FormerValue)  -> completed
+  # allButtons <- completed[[1]]
+  # allButtons <- data.frame(allButtons,
+  #                          id=1:length(allButtons),
+  #                          stringsAsFactors = F)
+
+  if(ncol(df)==2){
+    names(df)=c("stuff","Values")
+  } else if (ncol(df)==3){
+    names(df)=c("stuff","Values","Previous")
+  } else {
+    stop("Data frame should consist of a name and a value (and optionally a previous value)")
+  }
+
+  df$stuff <- as.character(df$stuff)
+
+  df$id <- 1:nrow(df)
+  df$butts <- ""
+  df$Values <- round(df$Values,RoundVal)
+  # df$stuff <- str_trunc(df$stuff,min(str_length(df$stuff)),side="right")
+
+  ## protect against NAs
+  df$Values[is.na(df$Values)] <-0.001
+  df$Previous[is.na(df$Previous)] <-0.001
+
+  for(i in 1:nrow(df)){
+    df$butts[i] <- ButtonMaker(Size = 2,Value = df$Values[i],Subtitle = df$stuff[i],
+                               Target=Tar,ThresholdHigh = Thre.H,
+                               ThresholdLow = Thre.L,Former=df$Previous[i])
+  }
+
+  df <- as.data.frame(df)
+
+  df[df$id %% cols == 0,"butts"] <-
+    paste0(df[df$id %% cols == 0,"butts"],"<br>",sep="")
+
+  ## Ghetto width adjuster
+  df$butts = gsub('class',paste('style=width:',ButtWidth,'px class',sep=""),df$butts)
+
+  TileMaker(Title,df$butts,FileName)
+}
 
