@@ -138,10 +138,11 @@ DivMaker <- function(Title="",Buttons){
 #' Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
 #' Div2 <- DivMaker(Title = "Inverse proportions",Buttons = paste(Button2,Button1))
 #' TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
+#' TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2))
 #' browseURL("example.html")
 #' @export
 
-TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE){
+TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,localCSS=FALSE){
   cat('<!DOCTYPE html><html lang="en"><head>
       <meta name="viewport" content="width=device-width, initial-scale=1">',
       if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
@@ -152,7 +153,16 @@ TileMaker <- function(MainTitle="",Divs,FileName,ShowDate=FALSE,localCSS=FALSE){
       if(ShowDate){paste('<h2>Report Date: ',Sys.Date(),'</h2>',sep="")},
       Divs,
       '</body></html>',
-      file=FileName,sep="")
+      sep="") -> somethin
+
+      if (FileName !="x") {
+        sink(FileName)
+        somethin
+        sink()
+
+      } else {
+          somethin
+        }
 }
 
 

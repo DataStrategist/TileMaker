@@ -4,7 +4,7 @@
 \alias{TileMaker}
 \title{TileMaker}
 \usage{
-TileMaker(MainTitle = "", Divs, FileName, ShowDate = FALSE,
+TileMaker(MainTitle = "", Divs, FileName = "x", ShowDate = FALSE,
   localCSS = FALSE)
 }
 \arguments{
@@ -37,6 +37,7 @@ Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
 Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
 Div2 <- DivMaker(Title = "Inverse proportions",Buttons = paste(Button2,Button1))
 TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
+TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2))
 browseURL("example.html")
 }
 \references{
