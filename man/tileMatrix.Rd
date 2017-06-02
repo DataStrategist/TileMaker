@@ -5,7 +5,7 @@
 \title{tileMatrix}
 \usage{
 tileMatrix(df, Tar = 100, Thre.H = 90, Thre.L = 50, cols = 4, Title,
-  FileName, RoundVal = 1, ButtWidth = 100)
+  FileName, RoundVal = 1, ButtWidth = 100, Margin = 3)
 }
 \arguments{
 \item{df}{Dataframe containing information to use. It expects either 2 columns}
@@ -25,6 +25,8 @@ tileMatrix(df, Tar = 100, Thre.H = 90, Thre.L = 50, cols = 4, Title,
 \item{RoundVal}{Number of decimals that Value will be rounded to. Defaults to 1}
 
 \item{ButtWidth}{The width of each button element, in Number of pixels. Defaults to 100.}
+
+\item{Margin}{The amount of margin desired between buttons in pixels. Defaults to 3.}
 }
 \value{
 Returns an HTML object containing the matrix of buttons
@@ -33,8 +35,8 @@ Returns an HTML object containing the matrix of buttons
 Create a matrix of buttons suitable for quick comparisons
 }
 \examples{
-library(dplyr)
-df <- iris \%>\% group_by(Species) \%>\% summarize(c=mean(Sepal.Length),p=median(Sepal.Length))
+df <- aggregate(Petal.Length ~ Species, data=iris, mean)
 tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", ButtWidth=200)
-# @importFrom dplyr \%>\%
+df$previous = c(1,4.260,6)
+tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", Margin=2)
 }

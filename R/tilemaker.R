@@ -143,7 +143,7 @@ DivMaker <- function(Title="",Buttons){
 #' @export
 
 TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,localCSS=FALSE){
-  cat('<!DOCTYPE html><html lang="en"><head>
+  paste('<!DOCTYPE html><html lang="en"><head>
       <meta name="viewport" content="width=device-width, initial-scale=1">',
       if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
       } else {'<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'},
@@ -155,11 +155,12 @@ TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,localCSS=FAL
       '</body></html>',
       sep="") -> somethin
 
+      ## Output file
       if (FileName !="x") {
-        sink(FileName)
-        somethin
-        sink()
-
+        # sink(FileName)
+        # somethin
+        # sink()
+        cat(somethin,file=FileName)
       } else {
           somethin
         }
@@ -180,16 +181,17 @@ TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,localCSS=FAL
 #' @param FileName The filename that will contain the html
 #' @param RoundVal Number of decimals that Value will be rounded to. Defaults to 1
 #' @param ButtWidth The width of each button element, in Number of pixels. Defaults to 100.
+#' @param Margin The amount of margin desired between buttons in pixels. Defaults to 3.
 #'
 #' @return Returns an HTML object containing the matrix of buttons
 #' @examples
-#' library(dplyr)
-#' df <- iris %>% group_by(Species) %>% summarize(c=mean(Sepal.Length),p=median(Sepal.Length))
+#' df <- aggregate(Petal.Length ~ Species, data=iris, mean)
 #' tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", ButtWidth=200)
-#' # @importFrom dplyr %>%
+#' df$previous = c(1,4.260,6)
+#' tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", Margin=2)
 #' @export
 tileMatrix <- function(df,Tar=100,Thre.H=90,Thre.L=50,cols=4,
-                       Title,FileName,RoundVal=1,ButtWidth=100){
+                       Title,FileName,RoundVal=1,ButtWidth=100,Margin=3){
   # tileMatrix <- function(SubT,Value,FormerValue,Tar,Thre.H,Thre.L,cols,Title,FileName){
   # map(1,ButtonMaker,Value= Value,
   #     Size = 2,Subtitle = SubT,
@@ -217,22 +219,35 @@ tileMatrix <- function(df,Tar=100,Thre.H=90,Thre.L=50,cols=4,
 
   ## protect against NAs
   df$Values[is.na(df$Values)] <-0.001
-  df$Previous[is.na(df$Previous)] <-0.001
+  if(ncol(df)==3) df$Previous[is.na(df$Previous)] <-0.001
 
   for(i in 1:nrow(df)){
-    df$butts[i] <- ButtonMaker(Size = 2,Value = df$Values[i],Subtitle = df$stuff[i],
+    if(ncol(df)==5){
+      df$butts[i] <- ButtonMaker(Size = 2,Value = df$Values[i],Subtitle = df$stuff[i],
                                Target=Tar,ThresholdHigh = Thre.H,
                                ThresholdLow = Thre.L,Former=df$Previous[i])
+    } else {
+      df$butts[i] <- ButtonMaker(Size = 2,Value = df$Values[i],Subtitle = df$stuff[i],
+                                 Target=Tar,ThresholdHigh = Thre.H,
+                                 ThresholdLow = Thre.L)
+    }
   }
 
   df <- as.data.frame(df)
 
+  ## Break the button sausage every COLS
   df[df$id %% cols == 0,"butts"] <-
     paste0(df[df$id %% cols == 0,"butts"],"<br>",sep="")
 
-  ## Ghetto width adjuster
-  df$butts = gsub('class',paste('style=width:',ButtWidth,'px class',sep=""),df$butts)
+  ## Ghetto css element adder
+  df$butts = gsub('class',paste('style="width:',ButtWidth,'px; margin:',Margin,'px" class',sep=""),df$butts)
 
-  TileMaker(Title,df$butts,FileName)
+  ## Output file
+  if (FileName !="x") {
+    TileMaker(Title,paste(df$butts,collapse=""),FileName = FileName)
+
+  } else {
+    TileMaker(Title,paste(df$butts,collapse=""))
+  }
 }
 

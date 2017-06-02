@@ -1,0 +1,11 @@
+0.1.0 
+==============
+
+Converting function to stand-alone package
+
+
+0.2.0
+==============
+ - TileMaker now doesn't need a filename
+ - Added TileMatrix function
+ - CRAN-ready version?
