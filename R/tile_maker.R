@@ -1,11 +1,26 @@
-library(htmltools)
+# library(htmltools)
+#' @importFrom htmltools tags
+#' @name tags
+#' @export
+#' @rdname TileMaker-exports
+NULL
 
+#' @importFrom htmltools browseable
+#' @name browseable
+#' @export
+#' @rdname TileMaker-exports
+NULL
+
+#' Auxiliar function to generate icons
+#' @export
 ico <- function(x) {
 
   if(is.null(x)) NULL else tags$i(class = "glyphicon", class = paste0("glyphicon-", x))
 
 }
 
+#' Button maker
+#' @export
 button_maker <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
                          type = "warning", link = NULL, units = NULL, hover = NULL) {
 
@@ -21,6 +36,8 @@ button_maker <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL
 
 }
 
+#' Div maker
+#' @export
 div_maker <- function(title = NULL, ...) {
 
   tags$div(
@@ -31,6 +48,9 @@ div_maker <- function(title = NULL, ...) {
 
 }
 
+#' Tile maker
+#' Tile maker
+#' @export
 tile_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/bootstrap.css") {
 
   tl <- tags$html(
@@ -47,23 +67,23 @@ tile_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 
 }
 
-ico(NULL)
-ico("apple")
-
-b1 <- button_maker(value = 3.57, subtitle = "Times apple eaten", icon = "apple")
-b2 <- button_maker(value = 13.7, subtitle = "Nutritional value", size = "lg")
-b3 <- button_maker(value = 1, subtitle = "Yumminess factor", type = "danger")
-b4 <- button_maker(value = 5, subtitle = "Inconsistencies", hover = "This is the description")
-
-d1 <- div_maker(title = "Quantativity factors", b1, b2)
-d2 <- div_maker(title = "Implementation procedures", b3, b4)
-
-tile_maker(title = "Hello", d1, d2)
-
-map <- leaflet::addTiles(leaflet::leaflet())
-map
-
-tile_maker(title = "Hello", d1, map, d2)
+# ico(NULL)
+# ico("apple")
+#
+# b1 <- button_maker(value = 3.57, subtitle = "Times apple eaten", icon = "apple")
+# b2 <- button_maker(value = 13.7, subtitle = "Nutritional value", size = "lg")
+# b3 <- button_maker(value = 1, subtitle = "Yumminess factor", type = "danger")
+# b4 <- button_maker(value = 5, subtitle = "Inconsistencies", hover = "This is the description")
+#
+# d1 <- div_maker(title = "Quantativity factors", b1, b2)
+# d2 <- div_maker(title = "Implementation procedures", b3, b4)
+#
+# tile_maker(title = "Hello", d1, d2)
+#
+# map <- leaflet::addTiles(leaflet::leaflet())
+# map
+#
+# tile_maker(title = "Hello", d1, map, d2)
 
 
 

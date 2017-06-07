@@ -1,4 +1,5 @@
 Package: TileMaker
+Package: TileMaker
 Type: Package
 Title: Create Tiles Suitable For Html Dashboards
 Version: 0.2.0
@@ -10,3 +11,4 @@ LazyData: TRUE
 RoxygenNote: 6.0.1
 BugReports: 	https://github.com/mexindian/TileMaker/issues
 URL: 	https://github.com/mexindian/TileMaker
+Imports: htmltools
