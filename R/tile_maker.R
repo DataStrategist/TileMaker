@@ -1,12 +1,12 @@
 # library(htmltools)
 #' Tags
-#' @importFrom htmltools tags
+#' @importFrom htmltools tags browsable
 #' @name tags
 #' @export
 #' @rdname TileMaker-exports
 NULL
 
-#' Auxiliar function to generate icons
+#' Auxiliary function to generate icons
 #' @param x Icon name.
 #' @export
 ico <- function(x) {
@@ -94,6 +94,62 @@ tile_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 # map
 #
 # tile_maker(title = "Hello", d1, map, d2)
-
-
+#
+#
+# ## Shinydashboard Test --------------
+# ## app.R ##
+# library(shinydashboard)
+# library(shiny)
+#
+# ui <- dashboardPage(
+#   dashboardHeader(title = "Basic dashboard"),
+#   dashboardSidebar(),
+#   dashboardBody(
+#     # Boxes need to be put in a row (or column)
+#     fluidRow(
+#       box(plotOutput("plot1", height = 250)),
+#
+#       box(
+#         title = "Controls",
+#         d1,
+#         d2,
+#         sliderInput("slider", "Number of observations:", 1, 100, 50)
+#       ),
+#       box(d1),
+#       box(d2),
+#       box(d1,d2)
+#     )
+#   )
+# )
+#
+# server <- function(input, output) {
+#   set.seed(122)
+#   histdata <- rnorm(500)
+#
+#   output$plot1 <- renderPlot({
+#     data <- histdata[seq_len(input$slider)]
+#     hist(data)
+#   })
+# }
+#
+# shinyApp(ui, server)
+#
+# ## shinyTest ---------
+# server <- function(input, output) {
+#   output$distPlot <- renderPlot({
+#     hist(rnorm(input$obs), col = 'darkgray', border = 'white')
+#   })
+# }
+#
+# ui <- fluidPage(
+#   sidebarLayout(
+#     sidebarPanel(
+#       sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
+#     ),
+#     mainPanel(d1,d2,plotOutput("distPlot"),
+#               fluidRow(d1,d2))
+#   )
+# )
+#
+# shinyApp(ui = ui, server = server)
 

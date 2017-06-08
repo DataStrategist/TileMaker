@@ -2,7 +2,7 @@ Package: TileMaker
 Type: Package
 Title: Create Tiles Suitable For Html Dashboards
 Version: 0.2.0
-Author: Amit Kohli
+Author: Amit Kohli, Joshua Kunst
 Maintainer: Amit Kohli <amit@amitkohli.com>
 Description: This uses Bootstrap v3 buttons to create pretty elements for dashboards.
 License: MIT + file LICENSE
