@@ -6,6 +6,11 @@
 \usage{
 div_maker(title = NULL, ...)
 }
+\arguments{
+\item{title}{Title.}
+
+\item{...}{\code{button_maker} elements.}
+}
 \description{
 Div maker
 }

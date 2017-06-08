@@ -1,17 +1,13 @@
 # library(htmltools)
+#' Tags
 #' @importFrom htmltools tags
 #' @name tags
 #' @export
 #' @rdname TileMaker-exports
 NULL
 
-#' @importFrom htmltools browseable
-#' @name browseable
-#' @export
-#' @rdname TileMaker-exports
-NULL
-
 #' Auxiliar function to generate icons
+#' @param x Icon name.
 #' @export
 ico <- function(x) {
 
@@ -20,6 +16,14 @@ ico <- function(x) {
 }
 
 #' Button maker
+#' @param value .
+#' @param subtitle .
+#' @param size .
+#' @param icon .
+#' @param type .
+#' @param link .
+#' @param units .
+#' @param hover .
 #' @export
 button_maker <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
                          type = "warning", link = NULL, units = NULL, hover = NULL) {
@@ -37,6 +41,8 @@ button_maker <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL
 }
 
 #' Div maker
+#' @param title Title.
+#' @param ... \code{button_maker} elements.
 #' @export
 div_maker <- function(title = NULL, ...) {
 
@@ -50,6 +56,10 @@ div_maker <- function(title = NULL, ...) {
 
 #' Tile maker
 #' Tile maker
+#' @param title Title.
+#' @param ... \code{div_maker} elements.
+#' @param css A string indicating css url
+#' @importFrom htmltools browsable
 #' @export
 tile_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/bootstrap.css") {
 

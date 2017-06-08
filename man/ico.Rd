@@ -6,6 +6,9 @@
 \usage{
 ico(x)
 }
+\arguments{
+\item{x}{Icon name.}
+}
 \description{
 Auxiliar function to generate icons
 }

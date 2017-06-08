@@ -8,6 +8,13 @@ Tile maker}
 tile_maker(title = NULL, ...,
   css = "https://bootswatch.com/flatly/bootstrap.css")
 }
+\arguments{
+\item{title}{Title.}
+
+\item{...}{\code{div_maker} elements.}
+
+\item{css}{A string indicating css url}
+}
 \description{
 Tile maker
 Tile maker

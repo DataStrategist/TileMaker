@@ -7,6 +7,23 @@
 button_maker(value = NULL, subtitle = NULL, size = "md", icon = NULL,
   type = "warning", link = NULL, units = NULL, hover = NULL)
 }
+\arguments{
+\item{value}{.}
+
+\item{subtitle}{.}
+
+\item{size}{.}
+
+\item{icon}{.}
+
+\item{type}{.}
+
+\item{link}{.}
+
+\item{units}{.}
+
+\item{hover}{.}
+}
 \description{
 Button maker
 }
