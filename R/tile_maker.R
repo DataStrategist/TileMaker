@@ -7,7 +7,7 @@
 NULL
 
 #' Auxiliary function to generate icons
-#' @param x Icon name.
+#' @param x Icon name. See http://getbootstrap.com/components/
 #' @export
 ico <- function(x) {
 
@@ -15,23 +15,36 @@ ico <- function(x) {
 
 }
 
-#' Button maker
-#' @param value .
-#' @param subtitle .
-#' @param size .
-#' @param icon .
-#' @param type .
-#' @param link .
-#' @param units .
-#' @param hover .
+#' solo_Box
+#'
+#' This function crafts the actual tile per se, including the specific
+#' aesthetic traits for each tile. This is the simple version where you explicitly state the color.
+#'
+#' @param value The numeric value you want to highlight (the main enchilada)
+#' @param subtitle Optional subtext that should appear under the value
+#' @param size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
+#' \"xs\",\"sm\",\"md\",\"lg\")
+#' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
+#' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+#' @param link Optional hyperlink that should be followed on click
+#' @param units Optional units that should be displayed after Value
+#' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
+#' @examples
+#' # ADD EXAMPLES HERE
+#' # tile1 <- solo_Box(Color = 2,Value = 3.57,Subtitle = "B")
+#' # tile2 <- solo_Box(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+#' # tile3 <- solo_Box(Color = 4,Value = 1,Subtitle = "Yumminess factor")
+#' # tile1;tile2;tile3
 #' @export
-button_maker <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
-                         type = "warning", link = NULL, units = NULL, hover = NULL) {
+solo_Box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
+                    type = "warning", link = NULL, units = NULL, hover = NULL) {
 
   tags$a(
     href = link,
     title = hover,
-    type = "button", role = "button",
+    # type = "button",
+    type = type,
+    role = "button",
     # classes: size, color
     class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
     tags$h1(ico(icon), value, units),
@@ -40,9 +53,69 @@ button_maker <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL
 
 }
 
+
+#' solo_Gradient_Box
+#'
+#' This function crafts a tile like solo_Box, but this one changes color according to value
+#'
+#' @param value The numeric value you want to highlight (the main enchilada)
+#' @param subtitle Optional subtext that should appear under the value
+#' @param size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
+#' \"xs\",\"sm\",\"md\",\"lg\")
+#' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
+#' @param Target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
+#' @param ThresholdHigh Optional edge between \"green\" and \"orange\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
+#' of the VALUE to the TARGET that, if above the ThresholdHigh will show as green, and if not, as orange
+#' @param ThresholdLow Optional border between \"orange\" and \"red\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
+#' of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange, and if not, as red
+#' @param link Optional hyperlink that should be followed on click
+#' @param units Optional units that should be displayed after Value
+#' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
+#' @examples
+#' # ADD EXAMPLES HERE
+#' # solo_Gradient_Box(value = 70)
+#' solo_Gradient_Box(value = 40)
+#' solo_Gradient_Box(value = 40,target = 50,thresholdHigh = 80)
+#'
+#' @export
+solo_Gradient_Box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
+                    target=100, thresholdHigh=90, thresholdLow=50,
+                    link = NULL, units = NULL, hover = NULL) {
+
+  Perc <- value/target *100
+  if(Perc > thresholdHigh){
+    finalType='btn-success'
+  } else if(Perc< thresholdLow){
+    finalType='btn-danger'
+  } else {
+    finalType='btn-warning'
+  }
+
+  tags$a(
+    href = link,
+    title = hover,
+    # type = "button",
+    type = finalType,
+    role = "button",
+    # classes: size, color
+    class = "btn", class = paste0("btn-", size), class = paste0("btn-", finalType),
+    tags$h1(ico(icon), value, units),
+    subtitle
+  )
+
+}
+
 #' Div maker
+#'
+#' This function takes strings created with the function `ButtonMaker` and makes an HTML div suitable for inclusion in other HTML code,
+#' or for inclusion within the function of this package `TileMaker`.
+#'
 #' @param title Title.
-#' @param ... \code{button_maker} elements.
+#' @param ... \code{solo_Box OR solo_Gradient_Box} elements.
+#' @example
+#' t1 <- solo_Gradient_Box(value = 70)
+#' t2 <- solo_Box(value=34)
+#' div_maker(title = "Quantativity factors", t1, t2)
 #' @export
 div_maker <- function(title = NULL, ...) {
 
@@ -54,14 +127,20 @@ div_maker <- function(title = NULL, ...) {
 
 }
 
-#' Tile maker
-#' Tile maker
+
+#' file maker
+#'
+#' Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker` and
+#' combines them into an html file.
+#'
 #' @param title Title.
 #' @param ... \code{div_maker} elements.
 #' @param css A string indicating css url
-#' @importFrom htmltools browsable
+#' @param file Optional filename if you desire to save the file. Should end with ".html"
+#' @importFrom htmltools browsable save_html
 #' @export
-tile_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/bootstrap.css") {
+file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/bootstrap.css",
+                       file=NULL) {
 
   tl <- tags$html(
     tags$head(
@@ -73,27 +152,58 @@ tile_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
     )
   )
 
-  browsable(tl)
+  if (is.null(file)) {
+    browsable(tl)
+  } else {
+    save_html(tl,file = file)
+  }
+}
 
+
+#' tileMatrix
+#'
+#' Create a matrix of buttons suitable for quick comparisons
+#'
+#' @param values Vector containing values for each tile
+#' @param titles Vector containing titles for each tile
+#' @param tar Target value (What's the highest value to compare against). Defaults to 100
+#' @param thre.H The limit between "high" and "medium" values IN PERCENT. Defaults to 90
+#' @param thre.L The limit between "medium" and "low" values IN PERCENT. Defaults to 50
+#' @param cols Number of columns that the matrix should tile around. Defaults to 4
+#' @param title The title the matrix should have.
+#' @param fileName The filename that will contain the html
+#' @param roundVal Number of decimals that Value will be rounded to. Defaults to 1
+#' @param buttWidth The width of each button element, in Number of pixels. Defaults to 100.
+#' @param margin The amount of margin desired between buttons in pixels. Defaults to 3.
+#'
+#' @return Returns an HTML object containing the matrix of buttons
+#' @examples
+#' @export
+tileMatrix <- function(values,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
+                       title,fileName,roundVal=1,buttWidth=100,margin=3){
+  if(class(values) != "numeric") stop("values should be numeric")
+  if(class(titles) != "character") stop("Characters should be a character vector")
+
+  if(length(values) != length(titles)) stop("values and titles vectors should be the same length, but they are not.")
 }
 
 # ico(NULL)
 # ico("apple")
 #
-# b1 <- button_maker(value = 3.57, subtitle = "Times apple eaten", icon = "apple")
-# b2 <- button_maker(value = 13.7, subtitle = "Nutritional value", size = "lg")
-# b3 <- button_maker(value = 1, subtitle = "Yumminess factor", type = "danger")
-# b4 <- button_maker(value = 5, subtitle = "Inconsistencies", hover = "This is the description")
+# b1 <- solo_Box(value = 3.57, subtitle = "Times apple eaten", icon = "apple")
+# b2 <- solo_Box(value = 13.7, subtitle = "Nutritional value", size = "lg")
+# b3 <- solo_Box(value = 1, subtitle = "Yumminess factor", type = "danger")
+# b4 <- solo_Box(value = 5, subtitle = "Inconsistencies", hover = "This is the description")
 #
 # d1 <- div_maker(title = "Quantativity factors", b1, b2)
 # d2 <- div_maker(title = "Implementation procedures", b3, b4)
 #
-# tile_maker(title = "Hello", d1, d2)
+# a <- file_maker(title = "Hello", d1, d2,file="boom2.html")
 #
 # map <- leaflet::addTiles(leaflet::leaflet())
 # map
 #
-# tile_maker(title = "Hello", d1, map, d2)
+# file_maker(title = "Hello", d1, map, d2)
 #
 #
 # ## Shinydashboard Test --------------
