@@ -164,6 +164,7 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #' Create a matrix of buttons suitable for quick comparisons
 #'
 #' @param values Vector containing values for each tile
+#' @param previous vector containing previous values (to show change from last)
 #' @param titles Vector containing titles for each tile
 #' @param tar Target value (What's the highest value to compare against). Defaults to 100
 #' @param thre.H The limit between "high" and "medium" values IN PERCENT. Defaults to 90
@@ -179,13 +180,73 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #' @examples
 #' tile_matrix(c(3,4,5),c("Bob","Pedro","Ana"))
 #' @export tile_matrix
-tile_matrix <- function(values,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
-                       title,fileName,roundVal=1,buttWidth=100,margin=3){
+tile_matrix <- function(values,previous=NULL,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
+                       title,fileName=NULL,roundVal=1,buttWidth=100,margin=3){
+
+  ## Errors
   if(class(values) != "numeric") stop("values should be numeric")
   if(class(titles) != "character") stop("Characters should be a character vector")
-
   if(length(values) != length(titles)) stop("values and titles vectors should be the same length, but they are not.")
+  if(!is.null(previous) & length(values) != length(previous)) stop("'values' and 'previous' vectors should be the same length, but they are not.")
+
+
+  ## Clean inputs
+  titles <- as.character(titles)
+  values <- round(values,roundVal)
+
+  ## Make df and start adding extra stuffs
+  if (is.null(previous)){
+    df <- data.frame(titles,values)
+  } else{
+    df <- data.frame(titles,values,previous)
+  }
+
+  df$id <- 1:nrow(df)
+  df$butts <- list("")
+
+  # df$stuff <- str_trunc(df$stuff,min(str_length(df$stuff)),side="right")
+
+  ## protect against NAs
+  if(any(is.na(df$value))){
+    df$value[is.na(df$value)] <-0.001
+    warning("Converted NAs in values to 0.001")
+  }
+  if(!is.null(previous) ) {
+    df$previous[is.na(df$previous)] <-0.001
+    warning("Converted NAs in previous to 0.001")
+  }
+
+  for(i in 1:nrow(df)){
+      if(!is.null(previous)){
+        df$butts[[i]] <- solo_gradient_box(value = df$value[i],subtitle = df$title[i],
+                                         size = 2,target=tar,thresholdHigh = thre.H,
+                                   thresholdLow = thre.L,former=df$previous[i])
+      } else {
+        df$butts[[i]] <- as.character(solo_gradient_box(value = df$value[i],subtitle = df$title[i],
+                                         size = 2,target=tar,thresholdHigh = thre.H,
+                                         thresholdLow = thre.L))
+      }
+    }
+
+  df <- as.data.frame(df)
+
+  ## Break the button sausage every COLS
+  df[df$id %% cols == 0,"butts"] <-
+  paste0(df[df$id %% cols == 0,"butts"],"<br>",sep="")
+
+  ## Ghetto css element adder
+  df$butts = gsub('class',paste('style="width:',buttWidth,'px; margin:',margin,'px" class',sep=""),df$butts)
+
+  ## Output file
+    if (!is.null(fileName)) {
+      file_maker(title=title,paste(df$butts,collapse=""),fileName = fileName)
+    } else {
+      file_maker(title=title,paste(df$butts,collapse=""))
+    }
+
 }
+
+a <- tile_matrix(values = iris$Sepal.Length,titles = iris$Species,tar = 5,thre.H = 4,thre.L = 3)
 
 # ico(NULL)
 # ico("apple")
@@ -198,7 +259,7 @@ tile_matrix <- function(values,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
 # d1 <- div_maker(title = "Quantativity factors", b1, b2)
 # d2 <- div_maker(title = "Implementation procedures", b3, b4)
 #
-# a <- file_maker(title = "Hello", d1, d2,file="boom2.html")
+# file_maker(title = "Hello", b1, b2)
 #
 # map <- leaflet::addTiles(leaflet::leaflet())
 # map
