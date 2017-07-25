@@ -15,7 +15,7 @@ ico <- function(x) {
 
 }
 
-#' solo_Box
+#' solo_box
 #'
 #' This function crafts the actual tile per se, including the specific
 #' aesthetic traits for each tile. This is the simple version where you explicitly state the color.
@@ -26,17 +26,17 @@ ico <- function(x) {
 #' \"xs\",\"sm\",\"md\",\"lg\")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
 #' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+#' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
 #' @examples
-#' # ADD EXAMPLES HERE
-#' # tile1 <- solo_Box(Color = 2,Value = 3.57,Subtitle = "B")
-#' # tile2 <- solo_Box(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
-#' # tile3 <- solo_Box(Color = 4,Value = 1,Subtitle = "Yumminess factor")
-#' # tile1;tile2;tile3
-#' @export
-solo_Box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
+#' tile1 <- solo_box(type="warning",value = 3.57,subtitle = "B")
+#' tile2 <- solo_box(type="danger",value = 13.7,subtitle = "Nutritional value")
+#' tile3 <- solo_box(type="success",value = 1,subtitle = "Yumminess factor")
+#' tile1;tile2;tile3
+#' @export solo_box
+solo_box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
                     type = "warning", link = NULL, units = NULL, hover = NULL) {
 
   tags$a(
@@ -54,31 +54,30 @@ solo_Box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
 }
 
 
-#' solo_Gradient_Box
+#' solo_gradient_box
 #'
-#' This function crafts a tile like solo_Box, but this one changes color according to value
+#' This function crafts a tile like solo_box, but this one changes color according to value
 #'
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param subtitle Optional subtext that should appear under the value
 #' @param size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
 #' \"xs\",\"sm\",\"md\",\"lg\")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
-#' @param Target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
-#' @param ThresholdHigh Optional edge between \"green\" and \"orange\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
+#' @param target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
+#' @param thresholdHigh Optional edge between \"green\" and \"orange\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
 #' of the VALUE to the TARGET that, if above the ThresholdHigh will show as green, and if not, as orange
-#' @param ThresholdLow Optional border between \"orange\" and \"red\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
+#' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
 #' of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange, and if not, as red
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
 #' @examples
 #' # ADD EXAMPLES HERE
-#' # solo_Gradient_Box(value = 70)
-#' solo_Gradient_Box(value = 40)
-#' solo_Gradient_Box(value = 40,target = 50,thresholdHigh = 80)
+#' solo_gradient_box(value = 40)
+#' solo_gradient_box(value = 40,target = 50,thresholdHigh = 80)
 #'
-#' @export
-solo_Gradient_Box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
+#' @export solo_gradient_box
+solo_gradient_box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
                     target=100, thresholdHigh=90, thresholdLow=50,
                     link = NULL, units = NULL, hover = NULL) {
 
@@ -111,12 +110,12 @@ solo_Gradient_Box <- function(value = NULL, subtitle = NULL, size = "md", icon =
 #' or for inclusion within the function of this package `TileMaker`.
 #'
 #' @param title Title.
-#' @param ... \code{solo_Box OR solo_Gradient_Box} elements.
-#' @example
-#' t1 <- solo_Gradient_Box(value = 70)
-#' t2 <- solo_Box(value=34)
-#' div_maker(title = "Quantativity factors", t1, t2)
-#' @export
+#' @param ... \code{solo_box OR solo_gradient_box} elements.
+#' @examples
+#' div_maker(title = "Quantativity factors",
+#'           solo_gradient_box(value = 70),
+#'           solo_box(value=34))
+#' @export div_maker
 div_maker <- function(title = NULL, ...) {
 
   tags$div(
@@ -138,7 +137,7 @@ div_maker <- function(title = NULL, ...) {
 #' @param css A string indicating css url
 #' @param file Optional filename if you desire to save the file. Should end with ".html"
 #' @importFrom htmltools browsable save_html
-#' @export
+#' @export file_maker
 file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/bootstrap.css",
                        file=NULL) {
 
@@ -178,8 +177,9 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #'
 #' @return Returns an HTML object containing the matrix of buttons
 #' @examples
-#' @export
-tileMatrix <- function(values,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
+#' tile_matrix(c(3,4,5),c("Bob","Pedro","Ana"))
+#' @export tile_matrix
+tile_matrix <- function(values,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
                        title,fileName,roundVal=1,buttWidth=100,margin=3){
   if(class(values) != "numeric") stop("values should be numeric")
   if(class(titles) != "character") stop("Characters should be a character vector")
@@ -190,10 +190,10 @@ tileMatrix <- function(values,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
 # ico(NULL)
 # ico("apple")
 #
-# b1 <- solo_Box(value = 3.57, subtitle = "Times apple eaten", icon = "apple")
-# b2 <- solo_Box(value = 13.7, subtitle = "Nutritional value", size = "lg")
-# b3 <- solo_Box(value = 1, subtitle = "Yumminess factor", type = "danger")
-# b4 <- solo_Box(value = 5, subtitle = "Inconsistencies", hover = "This is the description")
+# b1 <- solo_box(value = 3.57, subtitle = "Times apple eaten", icon = "apple")
+# b2 <- solo_box(value = 13.7, subtitle = "Nutritional value", size = "lg")
+# b3 <- solo_box(value = 1, subtitle = "Yumminess factor", type = "danger")
+# b4 <- solo_box(value = 5, subtitle = "Inconsistencies", hover = "This is the description")
 #
 # d1 <- div_maker(title = "Quantativity factors", b1, b2)
 # d2 <- div_maker(title = "Implementation procedures", b3, b4)

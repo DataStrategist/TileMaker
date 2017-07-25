@@ -45,6 +45,9 @@
 ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units="",
                         Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5,
                         Former=Value){
+  .Deprecated(solo_box, package="tileMaker", "These functions are provided for compatibility with older versions of R only, and may be
+              defunct as soon as of the next release.",
+              old = as.character(sys.call(sys.parent()))[1L])
   ## colors
   colorList = c("success",  "warning", "danger", "info", "primary", "default")
 
@@ -103,6 +106,9 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
 #' @export
 
 DivMaker <- function(Title="",Buttons){
+  .Deprecated(div_maker, package="tileMaker", "These functions are provided for compatibility with older versions of R only, and may be
+              defunct as soon as of the next release.",
+              old = as.character(sys.call(sys.parent()))[1L])
   paste('<div class="container"><h2>',
         Title,
         '</h2>',
@@ -143,6 +149,9 @@ DivMaker <- function(Title="",Buttons){
 #' @export
 
 TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,localCSS=FALSE){
+  .Deprecated(file_maker, package="tileMaker", "These functions are provided for compatibility with older versions of R only, and may be
+              defunct as soon as of the next release.",
+              old = as.character(sys.call(sys.parent()))[1L])
   paste('<!DOCTYPE html><html lang="en"><head>
       <meta name="viewport" content="width=device-width, initial-scale=1">',
       if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
@@ -165,89 +174,3 @@ TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,localCSS=FAL
           somethin
         }
 }
-
-
-
-#' tileMatrix
-#'
-#' Create a matrix of buttons suitable for quick comparisons
-#'
-#' @param df Dataframe containing information to use. It expects either 2 columns
-#' @param Tar Target value (What's the highest value to compare against). Defaults to 100
-#' @param Thre.H The limit between "high" and "medium" values IN PERCENT. Defaults to 90
-#' @param Thre.L The limit between "medium" and "low" values IN PERCENT. Defaults to 50
-#' @param cols Number of columns that the matrix should tile around. Defaults to 4
-#' @param Title The title the matrix should have.
-#' @param FileName The filename that will contain the html
-#' @param RoundVal Number of decimals that Value will be rounded to. Defaults to 1
-#' @param ButtWidth The width of each button element, in Number of pixels. Defaults to 100.
-#' @param Margin The amount of margin desired between buttons in pixels. Defaults to 3.
-#'
-#' @return Returns an HTML object containing the matrix of buttons
-#' @examples
-#' df <- aggregate(Petal.Length ~ Species, data=iris, mean)
-#' tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", ButtWidth=200)
-#' df$previous = c(1,4.260,6)
-#' tileMatrix(df,Tar=7,Thre.H=90,Thre.L=80,FileName="matrixTest.html",Title="", Margin=2)
-#' @export
-tileMatrix <- function(df,Tar=100,Thre.H=90,Thre.L=50,cols=4,
-                       Title,FileName,RoundVal=1,ButtWidth=100,Margin=3){
-  # tileMatrix <- function(SubT,Value,FormerValue,Tar,Thre.H,Thre.L,cols,Title,FileName){
-  # map(1,ButtonMaker,Value= Value,
-  #     Size = 2,Subtitle = SubT,
-  #     Target = Tar,ThresholdHigh = Thre.H,ThresholdLow = Thre.L,
-  #     Former = FormerValue)  -> completed
-  # allButtons <- completed[[1]]
-  # allButtons <- data.frame(allButtons,
-  #                          id=1:length(allButtons),
-  #                          stringsAsFactors = F)
-
-  if(ncol(df)==2){
-    names(df)=c("stuff","Values")
-  } else if (ncol(df)==3){
-    names(df)=c("stuff","Values","Previous")
-  } else {
-    stop("Data frame should consist of a name and a value (and optionally a previous value)")
-  }
-
-  df$stuff <- as.character(df$stuff)
-
-  df$id <- 1:nrow(df)
-  df$butts <- ""
-  df$Values <- round(df$Values,RoundVal)
-  # df$stuff <- str_trunc(df$stuff,min(str_length(df$stuff)),side="right")
-
-  ## protect against NAs
-  df$Values[is.na(df$Values)] <-0.001
-  if(ncol(df)==3) df$Previous[is.na(df$Previous)] <-0.001
-
-  for(i in 1:nrow(df)){
-    if(ncol(df)==5){
-      df$butts[i] <- ButtonMaker(Size = 2,Value = df$Values[i],Subtitle = df$stuff[i],
-                               Target=Tar,ThresholdHigh = Thre.H,
-                               ThresholdLow = Thre.L,Former=df$Previous[i])
-    } else {
-      df$butts[i] <- ButtonMaker(Size = 2,Value = df$Values[i],Subtitle = df$stuff[i],
-                                 Target=Tar,ThresholdHigh = Thre.H,
-                                 ThresholdLow = Thre.L)
-    }
-  }
-
-  df <- as.data.frame(df)
-
-  ## Break the button sausage every COLS
-  df[df$id %% cols == 0,"butts"] <-
-    paste0(df[df$id %% cols == 0,"butts"],"<br>",sep="")
-
-  ## Ghetto css element adder
-  df$butts = gsub('class',paste('style="width:',ButtWidth,'px; margin:',Margin,'px" class',sep=""),df$butts)
-
-  ## Output file
-  if (FileName !="x") {
-    TileMaker(Title,paste(df$butts,collapse=""),FileName = FileName)
-
-  } else {
-    TileMaker(Title,paste(df$butts,collapse=""))
-  }
-}
-

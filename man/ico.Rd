@@ -2,13 +2,13 @@
 % Please edit documentation in R/tile_maker.R
 \name{ico}
 \alias{ico}
-\title{Auxiliar function to generate icons}
+\title{Auxiliary function to generate icons}
 \usage{
 ico(x)
 }
 \arguments{
-\item{x}{Icon name.}
+\item{x}{Icon name. See http://getbootstrap.com/components/}
 }
 \description{
-Auxiliar function to generate icons
+Auxiliary function to generate icons
 }

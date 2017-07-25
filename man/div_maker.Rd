@@ -9,8 +9,14 @@ div_maker(title = NULL, ...)
 \arguments{
 \item{title}{Title.}
 
-\item{...}{\code{button_maker} elements.}
+\item{...}{\code{solo_box OR solo_gradient_box} elements.}
 }
 \description{
-Div maker
+This function takes strings created with the function `ButtonMaker` and makes an HTML div suitable for inclusion in other HTML code,
+or for inclusion within the function of this package `TileMaker`.
+}
+\examples{
+div_maker(title = "Quantativity factors",
+          solo_gradient_box(value = 70),
+          solo_box(value=34))
 }
