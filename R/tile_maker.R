@@ -21,6 +21,7 @@ ico <- function(x) {
 #' aesthetic traits for each tile. This is the simple version where you explicitly state the color.
 #'
 #' @param value The numeric value you want to highlight (the main enchilada)
+#' @param former The numeric old value to use for comparison to 'value'
 #' @param subtitle Optional subtext that should appear under the value
 #' @param size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
 #' \"xs\",\"sm\",\"md\",\"lg\")
@@ -34,9 +35,10 @@ ico <- function(x) {
 #' tile1 <- solo_box(type="warning",value = 3.57,subtitle = "B")
 #' tile2 <- solo_box(type="danger",value = 13.7,subtitle = "Nutritional value")
 #' tile3 <- solo_box(type="success",value = 1,subtitle = "Yumminess factor")
-#' tile1;tile2;tile3
+#' tile4 <- solo_box(value = 3.57, former=3,subtitle = "Times apple eaten", icon = "apple")
+#' file_maker(div_maker(tile1,tile2),div_maker(tile3,tile4))
 #' @export solo_box
-solo_box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
+solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", icon = NULL,
                     type = "warning", link = NULL, units = NULL, hover = NULL) {
 
   tags$a(
@@ -47,7 +49,14 @@ solo_box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
     role = "button",
     # classes: size, color
     class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
-    tags$h1(ico(icon), value, units),
+    tags$h1(ico(icon), value, units,
+            if(!is.null(former)){
+              if(former>value){
+                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;", ico('chevron-down'),paste(round((former-value)/former*100,1),'%',sep=''))
+              } else {
+                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;", ico('chevron-up'),paste(round((former-value)/former*100,1),'%',sep=''))
+              }
+            }),
     subtitle
   )
 
@@ -164,7 +173,7 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #' Create a matrix of buttons suitable for quick comparisons
 #'
 #' @param values Vector containing values for each tile
-#' @param previous vector containing previous values (to show change from last)
+#' @param former vector containing former values (to show change from last)
 #' @param titles Vector containing titles for each tile
 #' @param tar Target value (What's the highest value to compare against). Defaults to 100
 #' @param thre.H The limit between "high" and "medium" values IN PERCENT. Defaults to 90
@@ -180,14 +189,14 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #' @examples
 #' tile_matrix(c(3,4,5),c("Bob","Pedro","Ana"))
 #' @export tile_matrix
-tile_matrix <- function(values,previous=NULL,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
+tile_matrix <- function(values,former=NULL,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
                        title,fileName=NULL,roundVal=1,buttWidth=100,margin=3){
 
   ## Errors
   if(class(values) != "numeric") stop("values should be numeric")
   if(class(titles) != "character") stop("Characters should be a character vector")
   if(length(values) != length(titles)) stop("values and titles vectors should be the same length, but they are not.")
-  if(!is.null(previous) & length(values) != length(previous)) stop("'values' and 'previous' vectors should be the same length, but they are not.")
+  if(!is.null(former) & length(values) != length(former)) stop("'values' and 'former' vectors should be the same length, but they are not.")
 
 
   ## Clean inputs
@@ -195,10 +204,10 @@ tile_matrix <- function(values,previous=NULL,titles= NULL,tar=100,thre.H=90,thre
   values <- round(values,roundVal)
 
   ## Make df and start adding extra stuffs
-  if (is.null(previous)){
+  if (is.null(former)){
     df <- data.frame(titles,values)
   } else{
-    df <- data.frame(titles,values,previous)
+    df <- data.frame(titles,values,former)
   }
 
   df$id <- 1:nrow(df)
@@ -211,16 +220,16 @@ tile_matrix <- function(values,previous=NULL,titles= NULL,tar=100,thre.H=90,thre
     df$value[is.na(df$value)] <-0.001
     warning("Converted NAs in values to 0.001")
   }
-  if(!is.null(previous) ) {
-    df$previous[is.na(df$previous)] <-0.001
-    warning("Converted NAs in previous to 0.001")
+  if(!is.null(former) ) {
+    df$former[is.na(df$former)] <-0.001
+    warning("Converted NAs in former to 0.001")
   }
 
   for(i in 1:nrow(df)){
-      if(!is.null(previous)){
+      if(!is.null(former)){
         df$butts[[i]] <- solo_gradient_box(value = df$value[i],subtitle = df$title[i],
                                          size = 2,target=tar,thresholdHigh = thre.H,
-                                   thresholdLow = thre.L,former=df$previous[i])
+                                   thresholdLow = thre.L,former=df$former[i])
       } else {
         df$butts[[i]] <- as.character(solo_gradient_box(value = df$value[i],subtitle = df$title[i],
                                          size = 2,target=tar,thresholdHigh = thre.H,
