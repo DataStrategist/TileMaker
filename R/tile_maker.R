@@ -9,10 +9,17 @@ NULL
 #' Auxiliary function to generate icons
 #' @param x Icon name. See http://getbootstrap.com/components/
 #' @export
-ico <- function(x) {
+ico <- function(x,chevron=FALSE) {
 
-  if(is.null(x)) NULL else tags$i(class = "glyphicon", class = paste0("glyphicon-", x))
-
+  if(is.null(x)){
+    NULL
+    } else if(chevron==FALSE){
+      tags$i(class = "glyphicon", class = paste0("glyphicon-", x))
+    } else if(chevron==TRUE) {
+      tags$i(class = "glyphicon",
+             class = paste0("glyphicon-", x),
+             style="font-size: 10px; vertical-align: top;")
+    }
 }
 
 #' solo_box
@@ -37,7 +44,7 @@ ico <- function(x) {
 #' tile3 <- solo_box(type="success",value = 1,subtitle = "Yumminess factor")
 #' tile4 <- solo_box(value = 3.57, former=3,subtitle = "Times apple eaten", icon = "apple")
 #' file_maker(tile1,tile2,tile3,tile4)
-#' file_maker(div_maker(tile1,tile2),div_maker(tile3,tile4))
+#' file_maker(div_maker(tile1,tile2,tile3),div_maker(tile4))
 #' @export solo_box
 solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", icon = NULL,
                     type = "warning", link = NULL, units = NULL, hover = NULL) {
@@ -53,14 +60,15 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
     tags$h1(ico(icon), value, units,
             if(!is.null(former)){
               if(former>value){
-                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;", ico('chevron-down'),paste(round((former-value)/former*100,1),'%',sep=''))
+                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                         ico('chevron-down',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
               } else {
-                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;", ico('chevron-up'),paste(round((former-value)/former*100,1),'%',sep=''))
+                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                         ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
               }
             }),
     subtitle
   )
-
 }
 
 
