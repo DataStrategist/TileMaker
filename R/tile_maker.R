@@ -36,6 +36,7 @@ ico <- function(x) {
 #' tile2 <- solo_box(type="danger",value = 13.7,subtitle = "Nutritional value")
 #' tile3 <- solo_box(type="success",value = 1,subtitle = "Yumminess factor")
 #' tile4 <- solo_box(value = 3.57, former=3,subtitle = "Times apple eaten", icon = "apple")
+#' file_maker(tile1,tile2,tile3,tile4)
 #' file_maker(div_maker(tile1,tile2),div_maker(tile3,tile4))
 #' @export solo_box
 solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", icon = NULL,
