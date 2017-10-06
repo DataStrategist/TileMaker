@@ -4,13 +4,16 @@
 \alias{solo_box}
 \title{solo_box}
 \usage{
-solo_box(value = NULL, subtitle = NULL, size = "md", icon = NULL,
-  type = "warning", link = NULL, units = NULL, hover = NULL)
+solo_box(value = NULL, subtitle = NULL, former = NULL, size = "md",
+  icon = NULL, type = "warning", link = NULL, units = NULL,
+  hover = NULL)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
 
 \item{subtitle}{Optional subtext that should appear under the value}
+
+\item{former}{The numeric old value to use for comparison to 'value'}
 
 \item{size}{Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
 \"xs\",\"sm\",\"md\",\"lg\")}
@@ -34,5 +37,7 @@ aesthetic traits for each tile. This is the simple version where you explicitly 
 tile1 <- solo_box(type="warning",value = 3.57,subtitle = "B")
 tile2 <- solo_box(type="danger",value = 13.7,subtitle = "Nutritional value")
 tile3 <- solo_box(type="success",value = 1,subtitle = "Yumminess factor")
-tile1;tile2;tile3
+tile4 <- solo_box(value = 3.57, former=3,subtitle = "Times apple eaten", icon = "apple")
+file_maker(tile1,tile2,tile3,tile4)
+file_maker(div_maker(tile1,tile2,tile3),div_maker(tile4))
 }

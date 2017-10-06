@@ -4,7 +4,7 @@
 \alias{ico}
 \title{Auxiliary function to generate icons}
 \usage{
-ico(x)
+ico(x, chevron = FALSE)
 }
 \arguments{
 \item{x}{Icon name. See http://getbootstrap.com/components/}

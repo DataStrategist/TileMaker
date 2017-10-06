@@ -4,13 +4,15 @@
 \alias{tile_matrix}
 \title{tileMatrix}
 \usage{
-tile_matrix(values, titles = NULL, tar = 100, thre.H = 90, thre.L = 50,
-  cols = 4, title, fileName, roundVal = 1, buttWidth = 100, margin = 3)
+tile_matrix(values, titles, former = NULL, tar = 100, thre.H = 90,
+  thre.L = 50, cols = 4, mainTitle = NULL, roundVal = 1)
 }
 \arguments{
 \item{values}{Vector containing values for each tile}
 
 \item{titles}{Vector containing titles for each tile}
+
+\item{former}{vector containing former values (to show change from last)}
 
 \item{tar}{Target value (What's the highest value to compare against). Defaults to 100}
 
@@ -20,22 +22,16 @@ tile_matrix(values, titles = NULL, tar = 100, thre.H = 90, thre.L = 50,
 
 \item{cols}{Number of columns that the matrix should tile around. Defaults to 4}
 
-\item{title}{The title the matrix should have.}
-
-\item{fileName}{The filename that will contain the html}
+\item{mainTitle}{The title the matrix should have.}
 
 \item{roundVal}{Number of decimals that Value will be rounded to. Defaults to 1}
-
-\item{buttWidth}{The width of each button element, in Number of pixels. Defaults to 100.}
-
-\item{margin}{The amount of margin desired between buttons in pixels. Defaults to 3.}
 }
 \value{
-Returns an HTML object containing the matrix of buttons
+Returns a list object containing the matrix of buttons
 }
 \description{
 Create a matrix of buttons suitable for quick comparisons
 }
 \examples{
-tile_matrix(c(3,4,5),c("Bob","Pedro","Ana"))
+file_maker(tile_matrix(values=c(3,4,5),titles=c("Bob","Pedro","Ana")))
 }

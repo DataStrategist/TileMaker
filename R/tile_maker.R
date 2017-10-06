@@ -78,6 +78,7 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #'
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param subtitle Optional subtext that should appear under the value
+#' @param former The last value that should be used for comparison purposes
 #' @param size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
 #' \"xs\",\"sm\",\"md\",\"lg\")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
@@ -92,15 +93,15 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @examples
 #' # ADD EXAMPLES HERE
 #' solo_gradient_box(value = 40)
-#' solo_gradient_box(value = 40,target = 50,thresholdHigh = 80)
+#' solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
 #'
 #' @export solo_gradient_box
-solo_gradient_box <- function(value = NULL, subtitle = NULL, size = "md", icon = NULL,
+solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size = "md", icon = NULL,
                     target=100, thresholdHigh=90, thresholdLow=50,
                     link = NULL, units = NULL, hover = NULL) {
 
   Perc <- value/target *100
-  if(Perc > thresholdHigh){
+  if(Perc >= thresholdHigh){
     finalType='btn-success'
   } else if(Perc< thresholdLow){
     finalType='btn-danger'
@@ -115,8 +116,17 @@ solo_gradient_box <- function(value = NULL, subtitle = NULL, size = "md", icon =
     type = finalType,
     role = "button",
     # classes: size, color
-    class = "btn", class = paste0("btn-", size), class = paste0("btn-", finalType),
-    tags$h1(ico(icon), value, units),
+    class = "btn", class = paste0("btn-", size), class = finalType,
+    tags$h1(ico(icon), value, units,
+            if(!is.null(former)){
+              if(former>value){
+                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                         ico('chevron-down',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
+              } else {
+                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                         ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
+              }
+            }),
     subtitle
   )
 
@@ -188,28 +198,25 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #' @param thre.H The limit between "high" and "medium" values IN PERCENT. Defaults to 90
 #' @param thre.L The limit between "medium" and "low" values IN PERCENT. Defaults to 50
 #' @param cols Number of columns that the matrix should tile around. Defaults to 4
-#' @param title The title the matrix should have.
-#' @param fileName The filename that will contain the html
+#' @param mainTitle The title the matrix should have.
 #' @param roundVal Number of decimals that Value will be rounded to. Defaults to 1
-#' @param buttWidth The width of each button element, in Number of pixels. Defaults to 100.
-#' @param margin The amount of margin desired between buttons in pixels. Defaults to 3.
 #'
-#' @return Returns an HTML object containing the matrix of buttons
+#' @return Returns a list object containing the matrix of buttons
 #' @examples
-#' tile_matrix(c(3,4,5),c("Bob","Pedro","Ana"))
+#' file_maker(tile_matrix(values=c(3,4,5),titles=c("Bob","Pedro","Ana")))
 #' @export tile_matrix
-tile_matrix <- function(values,former=NULL,titles= NULL,tar=100,thre.H=90,thre.L=50,cols=4,
-                       title,fileName=NULL,roundVal=1,buttWidth=100,margin=3){
+tile_matrix <- function(values,titles,former=NULL,tar=100,thre.H=90,thre.L=50,cols=4,
+                       mainTitle=NULL,roundVal=1){
 
   ## Errors
   if(class(values) != "numeric") stop("values should be numeric")
-  if(class(titles) != "character") stop("Characters should be a character vector")
+  if(class(titles) == "factor") titles <- as.character(titles)
+  if(class(titles) != "character") stop("titles should be a character vector")
   if(length(values) != length(titles)) stop("values and titles vectors should be the same length, but they are not.")
   if(!is.null(former) & length(values) != length(former)) stop("'values' and 'former' vectors should be the same length, but they are not.")
 
 
   ## Clean inputs
-  titles <- as.character(titles)
   values <- round(values,roundVal)
 
   ## Make df and start adding extra stuffs
@@ -240,31 +247,27 @@ tile_matrix <- function(values,former=NULL,titles= NULL,tar=100,thre.H=90,thre.L
                                          size = 2,target=tar,thresholdHigh = thre.H,
                                    thresholdLow = thre.L,former=df$former[i])
       } else {
-        df$butts[[i]] <- as.character(solo_gradient_box(value = df$value[i],subtitle = df$title[i],
-                                         size = 2,target=tar,thresholdHigh = thre.H,
-                                         thresholdLow = thre.L))
+        df$butts[[i]] <- solo_gradient_box(value = df$value[i],subtitle = df$title[i],
+                                           size = 2,target=tar,thresholdHigh = thre.H,
+                                           thresholdLow = thre.L)
       }
+  }
+
+  Sausage = df$butts
+
+  # ## Break the button sausage every cols
+  splitter <- function(Sausage,cols){
+    Outputter <- list("")
+    for (i in 1:ceiling(length(Sausage)/cols)){
+      Outputter[[i]] <- div_maker(Sausage[((i-1)*cols+1):(cols*i)])
     }
+    Outputter
+  }
 
-  df <- as.data.frame(df)
-
-  ## Break the button sausage every COLS
-  df[df$id %% cols == 0,"butts"] <-
-  paste0(df[df$id %% cols == 0,"butts"],"<br>",sep="")
-
-  ## Ghetto css element adder
-  df$butts = gsub('class',paste('style="width:',buttWidth,'px; margin:',margin,'px" class',sep=""),df$butts)
-
-  ## Output file
-    if (!is.null(fileName)) {
-      file_maker(title=title,paste(df$butts,collapse=""),fileName = fileName)
-    } else {
-      file_maker(title=title,paste(df$butts,collapse=""))
-    }
-
+  splitter(Sausage,cols)
 }
 
-a <- tile_matrix(values = iris$Sepal.Length,titles = iris$Species,tar = 5,thre.H = 4,thre.L = 3)
+# a <- tile_matrix(values = iris$Sepal.Length,titles = iris$Species,tar = 5,thre.H = 4,thre.L = 3)
 
 # ico(NULL)
 # ico("apple")

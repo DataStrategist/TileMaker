@@ -4,14 +4,16 @@
 \alias{solo_gradient_box}
 \title{solo_gradient_box}
 \usage{
-solo_gradient_box(value = NULL, subtitle = NULL, size = "md",
-  icon = NULL, target = 100, thresholdHigh = 90, thresholdLow = 50,
-  link = NULL, units = NULL, hover = NULL)
+solo_gradient_box(value = NULL, subtitle = NULL, former = NULL,
+  size = "md", icon = NULL, target = 100, thresholdHigh = 90,
+  thresholdLow = 50, link = NULL, units = NULL, hover = NULL)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
 
 \item{subtitle}{Optional subtext that should appear under the value}
+
+\item{former}{The last value that should be used for comparison purposes}
 
 \item{size}{Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
 \"xs\",\"sm\",\"md\",\"lg\")}
@@ -38,6 +40,6 @@ This function crafts a tile like solo_box, but this one changes color according 
 \examples{
 # ADD EXAMPLES HERE
 solo_gradient_box(value = 40)
-solo_gradient_box(value = 40,target = 50,thresholdHigh = 80)
+solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
 
 }
