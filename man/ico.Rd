@@ -8,6 +8,8 @@ ico(x, chevron = FALSE)
 }
 \arguments{
 \item{x}{Icon name. See http://getbootstrap.com/components/}
+
+\item{chevron}{binary to denote whether there is a former value to compare against or not.}
 }
 \description{
 Auxiliary function to generate icons

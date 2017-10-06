@@ -8,6 +8,7 @@ NULL
 
 #' Auxiliary function to generate icons
 #' @param x Icon name. See http://getbootstrap.com/components/
+#' @param chevron binary to denote whether there is a former value to compare against or not.
 #' @export
 ico <- function(x,chevron=FALSE) {
 
