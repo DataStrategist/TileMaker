@@ -10,4 +10,5 @@ Converting function to stand-alone package
  - Seperated simple box from one that responds to threshold to clarify better hat imputs are required to each
  - TileMaker now doesn't need a filename
  - Added tile_matrix function to make multiple buttons suitable to quickly take inputs from a dataframe
+ - Added multi_box function to create buttons that contain more than one value and icon.
  - CRAN-ready version

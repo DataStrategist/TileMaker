@@ -4,13 +4,13 @@
 \alias{tile_matrix}
 \title{tileMatrix}
 \usage{
-tile_matrix(values, titles, former = NULL, tar = 100, thre.H = 90,
+tile_matrix(values, subtitles, former = NULL, tar = 100, thre.H = 90,
   thre.L = 50, cols = 4, mainTitle = NULL, roundVal = 1)
 }
 \arguments{
 \item{values}{Vector containing values for each tile}
 
-\item{titles}{Vector containing titles for each tile}
+\item{subtitles}{Vector containing titles for each tile}
 
 \item{former}{vector containing former values (to show change from last)}
 
@@ -33,5 +33,5 @@ Returns a list object containing the matrix of buttons
 Create a matrix of buttons suitable for quick comparisons
 }
 \examples{
-file_maker(tile_matrix(values=c(3,4,5),titles=c("Bob","Pedro","Ana")))
+file_maker(tile_matrix(values=c(3,4,5),subtitles=c("Bob","Pedro","Ana")))
 }

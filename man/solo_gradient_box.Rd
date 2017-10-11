@@ -15,7 +15,7 @@ solo_gradient_box(value = NULL, subtitle = NULL, former = NULL,
 
 \item{former}{The last value that should be used for comparison purposes}
 
-\item{size}{Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
+\item{size}{Optional size specified in the bootstrap css classes:
 \"xs\",\"sm\",\"md\",\"lg\")}
 
 \item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/}

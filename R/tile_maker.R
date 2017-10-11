@@ -39,6 +39,7 @@ ico <- function(x,chevron=FALSE) {
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
+#' @importFrom htmltools HTML
 #' @examples
 #' tile1 <- solo_box(type="warning",value = 3.57,subtitle = "B")
 #' tile2 <- solo_box(type="danger",value = 13.7,subtitle = "Nutritional value")
@@ -91,6 +92,7 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
+#' @importFrom htmltools HTML
 #' @examples
 #' # ADD EXAMPLES HERE
 #' solo_gradient_box(value = 40)
@@ -194,17 +196,17 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #'
 #' @param values Vector containing values for each tile
 #' @param former vector containing former values (to show change from last)
-#' @param titles Vector containing titles for each tile
+#' @param subtitles Vector containing titles for each tile
 #' @param tar Target value (What's the highest value to compare against). Defaults to 100
 #' @param thre.H The limit between "high" and "medium" values IN PERCENT. Defaults to 90
 #' @param thre.L The limit between "medium" and "low" values IN PERCENT. Defaults to 50
 #' @param cols Number of columns that the matrix should tile around. Defaults to 4
 #' @param mainTitle The title the matrix should have.
 #' @param roundVal Number of decimals that Value will be rounded to. Defaults to 1
-#'
+#' @importFrom htmltools HTML
 #' @return Returns a list object containing the matrix of buttons
 #' @examples
-#' file_maker(tile_matrix(values=c(3,4,5),titles=c("Bob","Pedro","Ana")))
+#' file_maker(tile_matrix(values=c(3,4,5),subtitles=c("Bob","Pedro","Ana")))
 #' @export tile_matrix
 tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50,cols=4,
                        mainTitle=NULL,roundVal=1){
@@ -284,11 +286,13 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
 #' @param MB_units vector of Units that explain the values, Default: NULL
 #' @param hover Optional tooltip, or text that will show up when a user rests their
 #' mouse over the tile, Default: NULL
+#' @importFrom purrr pmap
+#' @importFrom htmltools HTML
 #' @return OUTPUT_DESCRIPTION
 #' @details DETAILS
 #' @examples
-#' multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",MB_icons=c("apple","calendar"),
-#' type="warning", MB_units=c("times","reports")) %>% file_maker
+#' file_maker(multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",
+#' MB_icons=c("apple","calendar"), type="warning", MB_units=c("times","reports")))
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
