@@ -31,7 +31,7 @@ ico <- function(x,chevron=FALSE) {
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param former The numeric old value to use for comparison to 'value'
 #' @param subtitle Optional subtext that should appear under the value
-#' @param size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
+#' @param size Optional size specified in the bootstrap css classes:
 #' \"xs\",\"sm\",\"md\",\"lg\")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
 #' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
@@ -48,7 +48,7 @@ ico <- function(x,chevron=FALSE) {
 #' file_maker(div_maker(tile1,tile2,tile3),div_maker(tile4))
 #' @export solo_box
 solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", icon = NULL,
-                    type = "warning", link = NULL, units = NULL, hover = NULL) {
+                    type = "info", link = NULL, units = NULL, hover = NULL) {
 
   tags$a(
     href = link,
@@ -68,7 +68,7 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
                          ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
               }
             }),
-    subtitle
+    HTML(subtitle)
   )
 }
 
@@ -80,7 +80,7 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param subtitle Optional subtext that should appear under the value
 #' @param former The last value that should be used for comparison purposes
-#' @param size Optional numeric 1-4, corresponding to the sizes specified in the bootstrap css classes:
+#' @param size Optional size specified in the bootstrap css classes:
 #' \"xs\",\"sm\",\"md\",\"lg\")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
 #' @param target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
@@ -128,7 +128,7 @@ solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size =
                          ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
               }
             }),
-    subtitle
+    HTML(subtitle)
   )
 
 }
@@ -206,14 +206,14 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #' @examples
 #' file_maker(tile_matrix(values=c(3,4,5),titles=c("Bob","Pedro","Ana")))
 #' @export tile_matrix
-tile_matrix <- function(values,titles,former=NULL,tar=100,thre.H=90,thre.L=50,cols=4,
+tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50,cols=4,
                        mainTitle=NULL,roundVal=1){
 
   ## Errors
   if(class(values) != "numeric") stop("values should be numeric")
-  if(class(titles) == "factor") titles <- as.character(titles)
-  if(class(titles) != "character") stop("titles should be a character vector")
-  if(length(values) != length(titles)) stop("values and titles vectors should be the same length, but they are not.")
+  if(class(subtitles) == "factor") subtitles <- as.character(subtitles)
+  if(class(subtitles) != "character") stop("subtitles should be a character vector")
+  if(length(values) != length(subtitles)) stop("values and subtitles vectors should be the same length, but they are not.")
   if(!is.null(former) & length(values) != length(former)) stop("'values' and 'former' vectors should be the same length, but they are not.")
 
 
@@ -222,9 +222,9 @@ tile_matrix <- function(values,titles,former=NULL,tar=100,thre.H=90,thre.L=50,co
 
   ## Make df and start adding extra stuffs
   if (is.null(former)){
-    df <- data.frame(titles,values)
+    df <- data.frame(subtitles,values)
   } else{
-    df <- data.frame(titles,values,former)
+    df <- data.frame(subtitles,values,former)
   }
 
   df$id <- 1:nrow(df)
@@ -265,9 +265,62 @@ tile_matrix <- function(values,titles,former=NULL,tar=100,thre.H=90,thre.L=50,co
     Outputter
   }
 
-  splitter(Sausage,cols)
+  tags$a(
+    tags$h1(HTML(mainTitle)),
+    splitter(Sausage,cols)
+  )
 }
 
+#' @title multi_box
+#' @description Create a tile that contains more than one value, icon and units
+#' @param MB_values vector of values to display, Default: NULL
+#' @param mainTitle Top title, Default: NULL
+#' @param size Optional size specified in the bootstrap css classes:
+#' \"xs\",\"sm\",\"md\",\"lg\")
+#' @param MB_icons vector of Icons to display, Default: NULL
+#' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+#' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'
+#' @param link Optional hyperlink to redirect to after a user click, Default: NULL
+#' @param MB_units vector of Units that explain the values, Default: NULL
+#' @param hover Optional tooltip, or text that will show up when a user rests their
+#' mouse over the tile, Default: NULL
+#' @return OUTPUT_DESCRIPTION
+#' @details DETAILS
+#' @examples
+#' multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",MB_icons=c("apple","calendar"),
+#' type="warning", MB_units=c("times","reports")) %>% file_maker
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname multi_box
+#' @export
+
+multi_box <- function(MB_values = NULL, mainTitle = NULL ,size = "md", MB_icons = NULL,
+                     type = "info", link = NULL, MB_units = NULL, hover = NULL) {
+  ## Define function that can be pmapped
+  gutsMaker <- function(MB_values,MB_units,MB_icons){
+    tags$h3(ico(MB_icons), MB_values, MB_units)
+  }
+
+  ## Now build button
+  tags$a(
+    href = link,
+    title = hover,
+    # type = "button",
+    type = type,
+    role = "button",
+    # classes: size, color
+    class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
+    tags$h1(HTML(mainTitle)),
+    pmap(list(MB_values,MB_units,MB_icons),gutsMaker)
+  )
+}
+
+
+# library(dplyr)
+# library(htmltools)
 # a <- tile_matrix(values = iris$Sepal.Length,titles = iris$Species,tar = 5,thre.H = 4,thre.L = 3)
 
 # ico(NULL)
@@ -345,4 +398,6 @@ tile_matrix <- function(values,titles,former=NULL,tar=100,thre.H=90,thre.L=50,co
 # )
 #
 # shinyApp(ui = ui, server = server)
+
+
 
