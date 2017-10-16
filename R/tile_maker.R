@@ -212,7 +212,7 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
                        mainTitle=NULL,roundVal=1){
 
   ## Errors
-  if(class(values) != "numeric"&class(values) != "integer") stop("values should be numeric")
+  if(class(values) != "numeric" & class(values) != "integer") stop("values should be numeric")
   if(class(subtitles) == "factor") subtitles <- as.character(subtitles)
   if(class(subtitles) != "character") stop("subtitles should be a character vector")
   if(length(values) != length(subtitles)) stop("values and subtitles vectors should be the same length, but they are not.")
@@ -224,9 +224,9 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
 
   ## Make df and start adding extra stuffs
   if (is.null(former)){
-    df <- data.frame(subtitles,values)
+    df <- data.frame(subtitles,values,stringsAsFactors = F)
   } else{
-    df <- data.frame(subtitles,values,former)
+    df <- data.frame(subtitles,values,former,stringsAsFactors = F)
   }
 
   df$id <- 1:nrow(df)
@@ -246,11 +246,11 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
 
   for(i in 1:nrow(df)){
       if(!is.null(former)){
-        df$butts[[i]] <- solo_gradient_box(value = df$value[i],subtitle = df$title[i],
+        df$butts[[i]] <- solo_gradient_box(value = df$value[i],subtitle = df$subtitles[i],
                                          size = 2,target=tar,thresholdHigh = thre.H,
                                    thresholdLow = thre.L,former=df$former[i])
       } else {
-        df$butts[[i]] <- solo_gradient_box(value = df$value[i],subtitle = df$title[i],
+        df$butts[[i]] <- solo_gradient_box(value = df$value[i],subtitle = df$subtitles[i],
                                            size = 2,target=tar,thresholdHigh = thre.H,
                                            thresholdLow = thre.L)
       }
