@@ -201,6 +201,7 @@ file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/b
 #' @param cols Number of columns that the matrix should tile around. Defaults to 4
 #' @param mainTitle The title the matrix should have.
 #' @param roundVal Number of decimals that Value will be rounded to. Defaults to 1
+#' @importFrom htmltools HTML
 #'
 #' @return Returns a list object containing the matrix of buttons
 #' @examples
