@@ -210,7 +210,7 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
                        mainTitle=NULL,roundVal=1){
 
   ## Errors
-  if(class(values) != "numeric") stop("values should be numeric")
+  if(class(values) != "numeric"|class(values) != "integer") stop("values should be numeric")
   if(class(subtitles) == "factor") subtitles <- as.character(subtitles)
   if(class(subtitles) != "character") stop("subtitles should be a character vector")
   if(length(values) != length(subtitles)) stop("values and subtitles vectors should be the same length, but they are not.")
