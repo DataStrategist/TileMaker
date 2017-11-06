@@ -5,7 +5,7 @@
 \title{file maker}
 \usage{
 file_maker(title = NULL, ...,
-  css = "https://bootswatch.com/flatly/bootstrap.css", file = NULL)
+  css = "https://bootswatch.com/4/flatly/bootstrap.css", file = NULL)
 }
 \arguments{
 \item{title}{Title.}

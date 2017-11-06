@@ -15,7 +15,7 @@ solo_box(value = NULL, subtitle = NULL, former = NULL, size = "md",
 \item{former}{The numeric old value to use for comparison to 'value'}
 
 \item{size}{Optional size specified in the bootstrap css classes:
-\"xs\",\"sm\",\"md\",\"lg\")}
+"xs","sm","md","lg")}
 
 \item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/}
 

@@ -4,42 +4,48 @@
 \alias{multi_box}
 \title{multi_box}
 \usage{
-multi_box(MB_values = NULL, mainTitle = NULL, size = "md",
-  MB_icons = NULL, type = "info", link = NULL, MB_units = NULL,
-  hover = NULL)
+multi_box(MB_values = NULL, MB_icons = NULL, MB_units = NULL,
+  mainTitle = NULL, size = "md", type = "info", link = NULL,
+  number_zoom = 150, hover = NULL, ...)
 }
 \arguments{
 \item{MB_values}{vector of values to display, Default: NULL}
 
+\item{MB_icons}{vector of Icons to display, Default: NULL}
+
+\item{MB_units}{vector of Units that explain the values, Default: NULL}
+
 \item{mainTitle}{Top title, Default: NULL}
 
 \item{size}{Optional size specified in the bootstrap css classes:
-\"xs\",\"sm\",\"md\",\"lg\")}
-
-\item{MB_icons}{vector of Icons to display, Default: NULL}
+"xs","sm","md","lg")}
 
 \item{type}{Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
 Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'}
 
 \item{link}{Optional hyperlink to redirect to after a user click, Default: NULL}
 
-\item{MB_units}{vector of Units that explain the values, Default: NULL}
+\item{number_zoom}{Optional magnification \% for number vs normal text, Default: 150}
 
 \item{hover}{Optional tooltip, or text that will show up when a user rests their
 mouse over the tile, Default: NULL}
+
+\item{...}{add any other html code here}
 }
 \value{
-OUTPUT_DESCRIPTION
+an HTML object
 }
 \description{
 Create a tile that contains more than one value, icon and units
 }
 \details{
-DETAILS
+Allows for each button to contain several icon-number-units descriptions.
 }
 \examples{
-file_maker(multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",
-MB_icons=c("apple","calendar"), type="warning", MB_units=c("times","reports")))
+library(dplyr)
+multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",number_zoom=300,
+MB_icons=c("apple","calendar"), type="warning", MB_units=c("times","reports")) \%>\%
+file_maker
 \dontrun{
 if(interactive()){
  #EXAMPLE1

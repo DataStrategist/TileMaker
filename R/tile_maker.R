@@ -32,7 +32,7 @@ ico <- function(x,chevron=FALSE) {
 #' @param former The numeric old value to use for comparison to 'value'
 #' @param subtitle Optional subtext that should appear under the value
 #' @param size Optional size specified in the bootstrap css classes:
-#' \"xs\",\"sm\",\"md\",\"lg\")
+#' "xs","sm","md","lg")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
 #' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
 #' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"
@@ -82,7 +82,7 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @param subtitle Optional subtext that should appear under the value
 #' @param former The last value that should be used for comparison purposes
 #' @param size Optional size specified in the bootstrap css classes:
-#' \"xs\",\"sm\",\"md\",\"lg\")
+#' "xs","sm","md","lg")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/
 #' @param target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
 #' @param thresholdHigh Optional edge between \"green\" and \"orange\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
@@ -95,9 +95,9 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @importFrom htmltools HTML
 #' @examples
 #' # ADD EXAMPLES HERE
-#' solo_gradient_box(value = 40)
-#' solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-#'
+#' g1 <- solo_gradient_box(value = 40)
+#' g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
+#' file_maker(div_maker(g1,g2))
 #' @export solo_gradient_box
 solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size = "md", icon = NULL,
                     target=100, thresholdHigh=90, thresholdLow=50,
@@ -169,7 +169,7 @@ div_maker <- function(title = NULL, ...) {
 #' @param file Optional filename if you desire to save the file. Should end with ".html"
 #' @importFrom htmltools browsable save_html
 #' @export file_maker
-file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/flatly/bootstrap.css",
+file_maker <- function(title = NULL, ..., css = "https://bootswatch.com/4/flatly/bootstrap.css",
                        file=NULL) {
 
   tl <- tags$html(
@@ -275,24 +275,29 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
 
 #' @title multi_box
 #' @description Create a tile that contains more than one value, icon and units
+#' @param MB_icons vector of Icons to display, Default: NULL
 #' @param MB_values vector of values to display, Default: NULL
+#' @param MB_units vector of Units that explain the values, Default: NULL
 #' @param mainTitle Top title, Default: NULL
 #' @param size Optional size specified in the bootstrap css classes:
-#' \"xs\",\"sm\",\"md\",\"lg\")
-#' @param MB_icons vector of Icons to display, Default: NULL
+#' "xs","sm","md","lg")
 #' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
 #' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'
 #' @param link Optional hyperlink to redirect to after a user click, Default: NULL
-#' @param MB_units vector of Units that explain the values, Default: NULL
+#' @param number_zoom Optional magnification \% for number vs normal text, Default: 150
+#'
 #' @param hover Optional tooltip, or text that will show up when a user rests their
 #' mouse over the tile, Default: NULL
+#' @param ... add any other html code here
 #' @importFrom purrr pmap
 #' @importFrom htmltools HTML
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
+#' @return an HTML object
+#' @details Allows for each button to contain several icon-number-units descriptions.
 #' @examples
-#' file_maker(multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",
-#' MB_icons=c("apple","calendar"), type="warning", MB_units=c("times","reports")))
+#' library(dplyr)
+#' multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",number_zoom=300,
+#' MB_icons=c("apple","calendar"), type="warning", MB_units=c("times","reports")) %>%
+#' file_maker
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -300,13 +305,18 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
 #' }
 #' @rdname multi_box
 #' @export
-
-multi_box <- function(MB_values = NULL, mainTitle = NULL ,size = "md", MB_icons = NULL,
-                     type = "info", link = NULL, MB_units = NULL, hover = NULL) {
+multi_box <- function(MB_values = NULL, MB_icons = NULL, MB_units = NULL,
+                      mainTitle = NULL ,size = "md",
+                      type = "info", link = NULL,number_zoom=150, hover = NULL,...) {
   ## Define function that can be pmapped
   gutsMaker <- function(MB_values,MB_units,MB_icons){
-    tags$h3(ico(MB_icons), MB_values, MB_units)
+    tags$h3(ico(MB_icons),
+            span(MB_values,style=paste('font-size:',number_zoom,'%',sep='')),
+            MB_units)
   }
+  ## Protect gainst empty values icons or units
+  if(is.null(MB_units)) MB_units <- rep(" ",length(MB_values))
+  if(is.null(MB_icons)) MB_units <- rep(" ",length(MB_values))
 
   ## Now build button
   tags$a(

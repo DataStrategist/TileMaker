@@ -16,7 +16,7 @@ solo_gradient_box(value = NULL, subtitle = NULL, former = NULL,
 \item{former}{The last value that should be used for comparison purposes}
 
 \item{size}{Optional size specified in the bootstrap css classes:
-\"xs\",\"sm\",\"md\",\"lg\")}
+"xs","sm","md","lg")}
 
 \item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/}
 
@@ -39,7 +39,7 @@ This function crafts a tile like solo_box, but this one changes color according 
 }
 \examples{
 # ADD EXAMPLES HERE
-solo_gradient_box(value = 40)
-solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-
+g1 <- solo_gradient_box(value = 40)
+g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
+file_maker(div_maker(g1,g2))
 }
