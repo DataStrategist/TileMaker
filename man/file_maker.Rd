@@ -12,7 +12,7 @@ file_maker(title = NULL, ...,
 
 \item{...}{\code{div_maker} elements.}
 
-\item{css}{A string indicating css url}
+\item{css}{A string indicating css url, for final installations pls save the css file locally.}
 
 \item{file}{Optional filename if you desire to save the file. Should end with ".html"}
 }

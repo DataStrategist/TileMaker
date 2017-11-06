@@ -50,26 +50,27 @@ ico <- function(x,chevron=FALSE) {
 #' @export solo_box
 solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", icon = NULL,
                     type = "info", link = NULL, units = NULL, hover = NULL) {
-
   tags$a(
     href = link,
-    title = hover,
-    # type = "button",
-    type = type,
-    role = "button",
-    # classes: size, color
-    class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
-    tags$h1(ico(icon), value, units,
-            if(!is.null(former)){
-              if(former>value){
-                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                         ico('chevron-down',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
-              } else {
-                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                         ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
-              }
-            }),
-    HTML(subtitle)
+    tags$button(
+      title = hover,
+      # type = "button",
+      type = type,
+      role = "button",
+      # classes: size, color
+      class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
+      tags$h1(ico(icon), value, units,
+              if(!is.null(former)){
+                if(former>value){
+                  tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                           ico('chevron-down',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
+                } else {
+                  tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                           ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
+                }
+              }),
+      HTML(subtitle)
+    )
   )
 }
 
@@ -114,25 +115,27 @@ solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size =
 
   tags$a(
     href = link,
-    title = hover,
-    # type = "button",
-    type = finalType,
-    role = "button",
-    # classes: size, color
-    class = "btn", class = paste0("btn-", size), class = finalType,
-    tags$h1(ico(icon), value, units,
-            if(!is.null(former)){
-              if(former>value){
-                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                         ico('chevron-down',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
-              } else {
-                tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                         ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
-              }
-            }),
-    HTML(subtitle)
+    tags$button(
+      href = link,
+      title = hover,
+      # type = "button",
+      type = finalType,
+      role = "button",
+      # classes: size, color
+      class = "btn", class = paste0("btn-", size), class = finalType,
+      tags$h1(ico(icon), value, units,
+              if(!is.null(former)){
+                if(former>value){
+                  tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                           ico('chevron-down',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
+                } else {
+                  tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                           ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
+                }
+              }),
+      HTML(subtitle)
+    )
   )
-
 }
 
 #' Div maker
@@ -165,7 +168,7 @@ div_maker <- function(title = NULL, ...) {
 #'
 #' @param title Title.
 #' @param ... \code{div_maker} elements.
-#' @param css A string indicating css url
+#' @param css A string indicating css url, for final installations pls save the css file locally.
 #' @param file Optional filename if you desire to save the file. Should end with ".html"
 #' @importFrom htmltools browsable save_html
 #' @export file_maker
@@ -321,14 +324,17 @@ multi_box <- function(MB_values = NULL, MB_icons = NULL, MB_units = NULL,
   ## Now build button
   tags$a(
     href = link,
-    title = hover,
-    # type = "button",
-    type = type,
-    role = "button",
-    # classes: size, color
-    class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
-    tags$h1(HTML(mainTitle)),
-    pmap(list(MB_values,MB_units,MB_icons),gutsMaker)
+    tags$button(
+      href = link,
+      title = hover,
+      # type = "button",
+      type = type,
+      role = "button",
+      # classes: size, color
+      class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
+      tags$h1(HTML(mainTitle)),
+      pmap(list(MB_values,MB_units,MB_icons),gutsMaker)
+    )
   )
 }
 
