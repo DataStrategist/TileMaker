@@ -293,7 +293,7 @@ tile_matrix <- function(values,subtitles,former=NULL,tar=100,thre.H=90,thre.L=50
 #' mouse over the tile, Default: NULL
 #' @param ... add any other html code here
 #' @importFrom purrr pmap
-#' @importFrom htmltools HTML
+#' @importFrom htmltools HTML span
 #' @return an HTML object
 #' @details Allows for each button to contain several icon-number-units descriptions.
 #' @examples
