@@ -93,16 +93,20 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
+#' @param hide_value Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
+#' the large number, but still take advantage of the conditional formatting.
 #' @importFrom htmltools HTML
 #' @examples
 #' # ADD EXAMPLES HERE
 #' g1 <- solo_gradient_box(value = 40)
 #' g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-#' file_maker(div_maker(g1,g2))
+#' g3 <- solo_gradient_box(value = 20,subtitle="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+#' g4 <- solo_gradient_box(value = 35,subtitle="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+#' file_maker(div_maker(g1,g2,g3,g4))
 #' @export solo_gradient_box
 solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size = "md", icon = NULL,
                     target=100, thresholdHigh=90, thresholdLow=50,
-                    link = NULL, units = NULL, hover = NULL) {
+                    link = NULL, units = NULL, hover = NULL, hide_value=FALSE) {
 
   Perc <- value/target *100
   if(Perc >= thresholdHigh){
@@ -123,7 +127,8 @@ solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size =
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = finalType,
-      tags$h1(ico(icon), value, units,
+      if(hide_value==FALSE){
+        tags$h1(ico(icon), value, units,
               if(!is.null(former)){
                 if(former>value){
                   tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
@@ -132,7 +137,8 @@ solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size =
                   tags$sup(style= "font-size: 12px;color:#EEEEEE;vertical-align: top;",
                            ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
                 }
-              }),
+              }
+              )},
       HTML(subtitle)
     )
   )
