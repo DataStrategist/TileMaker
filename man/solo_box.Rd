@@ -5,7 +5,8 @@
 \title{solo_box}
 \usage{
 solo_box(value = NULL, subtitle = NULL, former = NULL, size = "md",
-  icon = NULL, type = "info", link = NULL, units = NULL, hover = NULL)
+  icon = NULL, type = "info", link = NULL, units = NULL, hover = NULL,
+  ...)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
@@ -27,6 +28,8 @@ Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"}
 \item{units}{Optional units that should be displayed after Value}
 
 \item{hover}{Optional tooltip, or text that will show up when a user rests their mouse over the tile.}
+
+\item{...}{Optional additional html elements}
 }
 \description{
 This function crafts the actual tile per se, including the specific

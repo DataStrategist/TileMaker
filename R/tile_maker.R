@@ -39,6 +39,7 @@ ico <- function(x,chevron=FALSE) {
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
+#' @param ... Optional additional html elements
 #' @importFrom htmltools HTML
 #' @examples
 #' tile1 <- solo_box(type="warning",value = 3.57,subtitle = "B")
@@ -49,7 +50,7 @@ ico <- function(x,chevron=FALSE) {
 #' file_maker(div_maker(tile1,tile2,tile3),div_maker(tile4))
 #' @export solo_box
 solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", icon = NULL,
-                    type = "info", link = NULL, units = NULL, hover = NULL) {
+                    type = "info", link = NULL, units = NULL, hover = NULL, ...) {
   tags$a(
     href = link,
     tags$button(
@@ -69,7 +70,8 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
                            ico('chevron-up',chevron = T),paste(round((former-value)/former*100,1),'%',sep=''))
                 }
               }),
-      HTML(subtitle)
+      HTML(subtitle),
+      ...
     )
   )
 }
@@ -95,6 +97,7 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
 #' @param hide_value Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
 #' the large number, but still take advantage of the conditional formatting.
+#' @param ... Optional additional html elements
 #' @importFrom htmltools HTML
 #' @examples
 #' # ADD EXAMPLES HERE
@@ -106,7 +109,7 @@ solo_box <- function(value = NULL, subtitle = NULL, former=NULL,size = "md", ico
 #' @export solo_gradient_box
 solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size = "md", icon = NULL,
                     target=100, thresholdHigh=90, thresholdLow=50,
-                    link = NULL, units = NULL, hover = NULL, hide_value=FALSE) {
+                    link = NULL, units = NULL, hover = NULL, hide_value=FALSE,...) {
 
   Perc <- value/target *100
   if(Perc >= thresholdHigh){
@@ -139,7 +142,8 @@ solo_gradient_box <- function(value = NULL, subtitle = NULL, former=NULL, size =
                 }
               }
               )},
-      HTML(subtitle)
+      HTML(subtitle),
+      ...
     )
   )
 }

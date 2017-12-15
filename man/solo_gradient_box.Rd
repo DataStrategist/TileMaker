@@ -7,7 +7,7 @@
 solo_gradient_box(value = NULL, subtitle = NULL, former = NULL,
   size = "md", icon = NULL, target = 100, thresholdHigh = 90,
   thresholdLow = 50, link = NULL, units = NULL, hover = NULL,
-  hide_value = FALSE)
+  hide_value = FALSE, ...)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
@@ -37,6 +37,8 @@ of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange,
 
 \item{hide_value}{Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
 the large number, but still take advantage of the conditional formatting.}
+
+\item{...}{Optional additional html elements}
 }
 \description{
 This function crafts a tile like solo_box, but this one changes color according to value
@@ -45,6 +47,7 @@ This function crafts a tile like solo_box, but this one changes color according 
 # ADD EXAMPLES HERE
 g1 <- solo_gradient_box(value = 40)
 g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-g3 <- solo_gradient_box(value = 20,subtitle="Test",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
-file_maker(div_maker(g1,g2,g3))
+g3 <- solo_gradient_box(value = 20,subtitle="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+g4 <- solo_gradient_box(value = 35,subtitle="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+file_maker(div_maker(g1,g2,g3,g4))
 }
