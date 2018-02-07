@@ -4,18 +4,18 @@
 \alias{multi_box}
 \title{multi_box}
 \usage{
-multi_box(MB_values = NULL, MB_icons = NULL, MB_units = NULL,
-  mainTitle = NULL, size = "md", type = "info", link = NULL,
-  number_zoom = 150, hover = NULL, ...)
+multi_box(icons = NULL, text = NULL, values = NULL, title = NULL,
+  size = "md", type = "info", link = NULL, number_zoom = 150,
+  hover = NULL, ...)
 }
 \arguments{
-\item{MB_values}{vector of values to display, Default: NULL}
+\item{icons}{vector of Icons to display, Default: NULL}
 
-\item{MB_icons}{vector of Icons to display, Default: NULL}
+\item{text}{Optional subtext that should appear under the value}
 
-\item{MB_units}{vector of Units that explain the values, Default: NULL}
+\item{values}{vector of values to display, Default: NULL}
 
-\item{mainTitle}{Top title, Default: NULL}
+\item{title}{Top title, Default: NULL}
 
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
@@ -36,15 +36,15 @@ mouse over the tile, Default: NULL}
 an HTML object
 }
 \description{
-Create a tile that contains more than one value, icon and units
+Create a tile that contains more than one value, icon and text
 }
 \details{
-Allows for each button to contain several icon-number-units descriptions.
+Allows for each button to contain several icon-number-text descriptions.
 }
 \examples{
 library(dplyr)
-multi_box(MB_values=c(3,45),mainTitle = "Important <br>button",number_zoom=300,
-MB_icons=c("apple","calendar"), type="warning", MB_units=c("times","reports")) \%>\%
+multi_box(values=c(3,45),title = "Important <br>button",number_zoom=300,
+icons=c("apple","calendar"), type="warning", text=c("times","reports")) \%>\%
 file_maker
 \dontrun{
 if(interactive()){

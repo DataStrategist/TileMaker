@@ -4,30 +4,33 @@
 \alias{solo_gradient_box}
 \title{solo_gradient_box}
 \usage{
-solo_gradient_box(value = NULL, subtitle = NULL, former = NULL,
-  size = "md", icon = NULL, target = 100, thresholdHigh = 90,
-  thresholdLow = 50, link = NULL, units = NULL, hover = NULL,
-  hide_value = FALSE, ...)
+solo_gradient_box(value = NULL, text = NULL, former = NULL, size = "md",
+  icon = NULL, target = 100, thresholdHigh = 90, thresholdLow = 50,
+  link = NULL, units = NULL, hover = NULL, hide_value = FALSE,
+  textModifier = "h1", ...)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
 
-\item{subtitle}{Optional subtext that should appear under the value}
+\item{text}{Optional subtext that should appear under the value}
 
 \item{former}{The last value that should be used for comparison purposes}
 
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
 
-\item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/}
+\item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
+the name of thing you want, like "check"... not the full "gyphicon-check"}
 
 \item{target}{Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow}
 
-\item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
-of the VALUE to the TARGET that, if above the ThresholdHigh will show as green, and if not, as orange}
+\item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from 0-100 as a percent of target. IE, this value
+represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdHigh will show as green,
+and if not, as orange. Use w/ target and ThresholdLow.}
 
-\item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100. Use w/ Target and ThresholdLow. This value represents the RATIO
-of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange, and if not, as red}
+\item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100 as a percent of target. IE, this value
+represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdLow will show as orange,
+and if not, as red. Use w/ target and ThresholdHigh.}
 
 \item{link}{Optional hyperlink that should be followed on click}
 
@@ -38,6 +41,8 @@ of the VALUE to the TARGET that, if above the ThresholdHigh will show as orange,
 \item{hide_value}{Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
 the large number, but still take advantage of the conditional formatting.}
 
+\item{textModifier}{Optional css category of "large" text. In this case, the icon, value and unit. Default=h1}
+
 \item{...}{Optional additional html elements}
 }
 \description{
@@ -47,7 +52,7 @@ This function crafts a tile like solo_box, but this one changes color according 
 # ADD EXAMPLES HERE
 g1 <- solo_gradient_box(value = 40)
 g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-g3 <- solo_gradient_box(value = 20,subtitle="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
-g4 <- solo_gradient_box(value = 35,subtitle="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
-file_maker(div_maker(g1,g2,g3,g4))
+g3 <- solo_gradient_box(value = 20,text="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+g4 <- solo_gradient_box(value = 35,text="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+finisher(div_maker(g1,g2,g3,g4))
 }

@@ -4,10 +4,12 @@
 \alias{div_maker}
 \title{Div maker}
 \usage{
-div_maker(title = NULL, ...)
+div_maker(subtitle = NULL, textModifier = "h2", ...)
 }
 \arguments{
-\item{title}{Title.}
+\item{subtitle}{The text heading of this row of buttons}
+
+\item{textModifier}{Optional css category of "large" text. In this case, subtitle. Default=h2}
 
 \item{...}{\code{solo_box OR solo_gradient_box} elements.}
 }
