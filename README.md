@@ -13,4 +13,4 @@ To install, please type:
 
     devtools::install_github("mexindian/TileMaker")
 
-Please see the [Intro vignette](%22http://htmlpreview.github.io/?https://raw.githubusercontent.com/DataStrategist/TileMaker/master/Vignette.html%22) to learn more about how to do some lovely stuff.
+Please see the [Intro vignette](http://htmlpreview.github.io/?https://raw.githubusercontent.com/DataStrategist/TileMaker/master/Vignette.html) to learn more about how to do some lovely stuff.
