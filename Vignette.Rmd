@@ -95,12 +95,14 @@ mtcars %>%
 The concept of the `tile_matrix` is to provide a quick way to visualize simple information... for example summaries. The fact that the thresholds scale automatically to the target is also then useful, since one need only set the target in order to quickly obtain actionable information. For example, if one wanted to quickly see diamond prices, we could:
 
 ```{r}
+library(dplyr)
 library(ggplot2)
-diamonds %>%
-  group_by(color) %>% summarize(price=mean(price)) %>% 
+df <- diamonds %>%
+  group_by(color) %>% summarize(price=mean(price)) %>%
   ## Assume there was some former price that was a bit different
-  mutate(old_price=price*runif(n = 7,min=-.2,max = .5)) %>%
-tile_matrix(values = price,text = color,former=old_price,target=5000,roundVal = 0)
+  mutate(old_price=price*(1-runif(n = 7,min=-.2,max = .5)))
+
+tile_matrix(df,values = price,text = color,former=old_price,target=5000,roundVal = 0)
 ```
 
 ### What's this "former" business?
@@ -109,12 +111,12 @@ So we've talked about former a bunch, which provides a comparison to the display
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
-df <- data_frame(v=seq(from=0,to=100,by=10),
-                 t="comparison to 50",
-                 f=50)
+df <- data_frame(values=seq(from=0,to=100,by=10),
+                 text="comparison to 50",
+                 former=50)
 
 ## Let's pretend that all previous values were 50... so:
-df %>% tile_matrix(values = v,text = t)
+df %>% tile_matrix(data = df,values = values,text = text,former=former)
 ```
 
 ### Grammar of tile_maker

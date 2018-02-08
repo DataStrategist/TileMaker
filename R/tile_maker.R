@@ -246,25 +246,26 @@ multi_box <- function(icons = NULL,text=NULL,values = NULL,
 #' @param textModifier Optional css category of "large" text. In this case, the icon, value and unit. Default=h1
 #' @importFrom htmltools HTML
 #' @importFrom dplyr pull
-#' @importFrom rlang !! enquo
+#' @importFrom rlang !! enquo UQ
 #' @return Returns a list object containing the matrix of buttons
 #' @examples
 #' finisher(tile_matrix(values=c(3,4,5),text=c("Bob","Pedro","Ana")))
 #' @export tile_matrix
 tile_matrix <- function(data,values=NULL,text=NULL,icon=NULL,former=NULL,target=100,thresholdHigh=90,thresholdLow=50,cols=4,
                         title=NULL,roundVal=1, textModifier="h1"){
-
+# browser()
   ## Prep the NSE of the inputnames
   v <- enquo(values)
   t <- enquo(text)
-  if (!is.null(former)) f <- enquo(former)
-  if (!is.null(icon)) i <- enquo(icon)
+  f <- enquo(former)
+  i <- enquo(icon)
 
   ## Now push them back into original names
-  values <- pull(data,!!v)
-  text <- pull(data,!!t) %>% as.character
-  if (!is.null(former)) former <- pull(data,!!f)
-  if (!is.null(icon)) icon <- pull(data,!!i)
+  if (as.character(UQ(v))[2]!="." & as.character(UQ(v))[2]!="NULL") values <- pull(data,!!v)
+  if (as.character(UQ(t))[2]!="." & as.character(UQ(t))[2]!="NULL") text <- pull(data,!!t) %>% as.character
+  if (as.character(UQ(f))[2]!="." & as.character(UQ(f))[2]!="NULL") former <- pull(data,!!f)
+  if (as.character(UQ(i))[2]!="." & as.character(UQ(i))[2]!="NULL") icon <- pull(data,!!i)
+
 
   ## Errors
   if(class(values) != "numeric" & class(values) != "integer") stop("values should be numeric")

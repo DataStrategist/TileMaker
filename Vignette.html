@@ -487,36 +487,65 @@ Volvo 142E
 </div>
 </a>
 <p>The concept of the <code>tile_matrix</code> is to provide a quick way to visualize simple information… for example summaries. The fact that the thresholds scale automatically to the target is also then useful, since one need only set the target in order to quickly obtain actionable information. For example, if one wanted to quickly see diamond prices, we could:</p>
-<pre class="r"><code>library(ggplot2)
-diamonds %&gt;%
+<pre class="r"><code>library(dplyr)
+library(ggplot2)
+df &lt;- diamonds %&gt;%
   group_by(color) %&gt;% summarize(price=mean(price)) %&gt;%
-# Since I'm piping into the next statement, I don't need to explicitly write the `data` input
-tile_matrix(values = price,text = color,target=5000,roundVal = 0)</code></pre>
+  ## Assume there was some former price that was a bit different
+  mutate(old_price=price*(1-runif(n = 7,min=-.2,max = .5)))
+
+tile_matrix(df,values = price,text = color,former=old_price,target=5000,roundVal = 0)</code></pre>
+<pre><code>## Warning in tile_matrix(df, values = price, text = color, former =
+## old_price, : Converted NAs in former to 0.001</code></pre>
 <a>
 <h1></h1>
 <div class="container">
 <h2>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>3170</h1>
+<h1>
+3170
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+7.6%
+</sup>
+</h1>
 D
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>3077</h1>
+<h1>
+3077
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-13.5%
+</sup>
+</h1>
 E
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>3725</h1>
+<h1>
+3725
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-84.5%
+</sup>
+</h1>
 F
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>3999</h1>
+<h1>
+3999
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+13%
+</sup>
+</h1>
 G
 </button>
 </a>
@@ -526,19 +555,37 @@ G
 <h2>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>4487</h1>
+<h1>
+4487
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-17%
+</sup>
+</h1>
 H
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-success" role="button" type="success">
-<h1>5092</h1>
+<h1>
+5092
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-68.1%
+</sup>
+</h1>
 I
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-success" role="button" type="success">
-<h1>5324</h1>
+<h1>
+5324
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-1.7%
+</sup>
+</h1>
 J
 </button>
 </a>
@@ -550,37 +597,63 @@ J
 <h3>What’s this “former” business?</h3>
 <p>So we’ve talked about former a bunch, which provides a comparison to the displayed value. This is especially useful to measure performance increase or declines. In order to show the functionality, let’s use a quite contrived scenario:</p>
 <pre class="r"><code>suppressPackageStartupMessages(library(dplyr))
-df &lt;- data_frame(v=seq(from=0,to=100,by=10),
-                 t=&quot;comparison to 50&quot;,
-                 f=50)
+df &lt;- data_frame(values=seq(from=0,to=100,by=10),
+                 text=&quot;comparison to 50&quot;,
+                 former=50)
 
 ## Let's pretend that all previous values were 50... so:
-df %&gt;% tile_matrix(values = v,text = t)</code></pre>
+df %&gt;% tile_matrix(data = df,values = values,text = text,former=former)</code></pre>
+<pre><code>## Warning in tile_matrix(., data = df, values = values, text = text, former =
+## former): Converted NAs in former to 0.001</code></pre>
 <a>
 <h1></h1>
 <div class="container">
 <h2>
 <a>
 <button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>0</h1>
+<h1>
+0
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+100%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>10</h1>
+<h1>
+10
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+80%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>20</h1>
+<h1>
+20
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+60%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>30</h1>
+<h1>
+30
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+40%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
@@ -590,25 +663,49 @@ comparison to 50
 <h2>
 <a>
 <button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>40</h1>
+<h1>
+40
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+20%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>50</h1>
+<h1>
+50
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+0%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>60</h1>
+<h1>
+60
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-20%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>70</h1>
+<h1>
+70
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-40%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
@@ -618,19 +715,37 @@ comparison to 50
 <h2>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>80</h1>
+<h1>
+80
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-60%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-success" role="button" type="success">
-<h1>90</h1>
+<h1>
+90
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-80%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-success" role="button" type="success">
-<h1>100</h1>
+<h1>
+100
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+-100%
+</sup>
+</h1>
 comparison to 50
 </button>
 </a>
