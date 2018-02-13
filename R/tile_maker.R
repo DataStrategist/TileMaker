@@ -330,12 +330,12 @@ tile_matrix <- function(data,values=NULL,text=NULL,icon=NULL,former=NULL,target=
 
 #' Div maker
 #'
-#' This function takes strings created with the function `ButtonMaker` and makes an HTML div suitable for inclusion in other HTML code,
-#' or for inclusion within the function of this package `TileMaker`.
+#' This function takes buttons made by any of the solo or multi buttons and makes an a row (HTML `div`) suitable for inclusion in
+#' other HTML code, or for inclusion within the function of this package `finisher`.
 #'
 #' @param subtitle The text heading of this row of buttons
 #' @param textModifier Optional css category of "large" text. In this case, subtitle. Default=h2
-#' @param ... \code{solo_box OR solo_gradient_box} elements.
+#' @param ... \code{buttons to insert into the div} elements.
 #' @examples
 #' div_maker(title = "Quantativity factors",
 #'           solo_gradient_box(value = 70),
@@ -352,29 +352,30 @@ div_maker <- function(subtitle = NULL, textModifier="h2",...) {
 }
 
 
-#' file maker
+#' finisher
 #'
-#' Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker` and
-#' combines them into an html file.
+#' Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker`, or individual buttons if so desired, and
+#' combines them into a freestanding html file. Use this when you don't want the buttons to be part of a file, but a file itself.
+#' or, you could also use this as a convenient way of wrapping up buttons without using a div (although it is a bit irregular).
 #'
 #' @param title Title.
-#' @param ... \code{div_maker} elements.
-#' @param css A string indicating css url, for final installations pls save the css file locally.
-#' @param file Optional filename if you desire to save the file. By default we are using the 3.3.7 bootstrap CDN because
+#' @param css A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7 bootstrap CDN because
 #' they support icons, but some others that might be interesting to you are:
 #' https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css
+#' @param file Optional filename if you desire to save the file.
 #' @param textModifier Optional css category of "large" text. In this case, title. Default=h1
+#' @param ... \code{div_maker} elements (or individual buttons).
 #' @importFrom htmltools browsable save_html
 #' @export finisher
-finisher <- function(title = NULL, ..., css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
-                     file=NULL, textModifier="h1") {
+finisher <- function(title = NULL, css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
+                     file=NULL, textModifier="h1", ...) {
 
   tl <- tags$html(
     tags$head(
       tags$link(rel = "stylesheet", href = css)
     ),
     tags$body(
-      tags$h1(title),
+      tag(textModifier,tags$span(title)$children),
       ...
     )
   )

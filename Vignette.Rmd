@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Meet the Tile
 
-Dashboard Tiles/Notecards are a great way to visualize just one number, and make it big and pretty. They can emphasize results in an easily digestible and colourful format. This package dates back to the days before infoboxes and valueboxes were available from flexdashboard and shinydashboards, and I think due to it's flexibiility, it still has some utility.
+Dashboard Tiles/Notecards are a great way to visualize just one number, and make it big and pretty. They can emphasize results in an easily digestible and colourful format. This package dates back to the days before infoboxes and valueboxes were available from [flexdashboard]](https://rmarkdown.rstudio.com/flexdashboard/) and [shinydashboards](https://rstudio.github.io/shinydashboard/), and still has some utility due to it's flexibility.
 
 This package uses Twitter's [Bootstrap](https://getbootstrap.com/), and pushes content into buttons that then have different functionality. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!
 
@@ -100,7 +100,7 @@ library(ggplot2)
 df <- diamonds %>%
   group_by(color) %>% summarize(price=mean(price)) %>%
   ## Assume there was some former price that was a bit different
-  mutate(old_price=price*(1-runif(n = 7,min=-.2,max = .5)))
+  mutate(old_price=price*(1*runif(n = 7,min=-.2,max = .5)))
 
 tile_matrix(df,values = price,text = color,former=old_price,target=5000,roundVal = 0)
 ```
@@ -123,26 +123,26 @@ df %>% tile_matrix(data = df,values = values,text = text,former=former)
 Buttons are put into a div (which is more or less an html "row"... kinda). And these divs are put into a finalizer.
 
 ```{r}
-# Value1 = 88
-# Value2 = 1985
-# Value3 = 1.22
-# Value4 = 30
-# Value5 = 42
-# 
-# ## Make the buttons how you like
-# Button1 <- solo_box(value = Value1, text = "Speed", units = "mph",type = "danger")
-# Button2 <- solo_box(value = Value2, text = "Origin", type = "warning")
-# Button3 <- solo_box(value = Value3, text = "Powah",  units = "GW",  hover = "Great Scott!",type="success")
-# Button4 <- solo_box(value = Value4, text = "Heads turned",units = "K",type="info")
-# Button5 <- solo_box(value = Value5, text = "Answer", hover = "Whales rule. Petunias suck",
-#   link = "https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy",type="primary")
-# 
-# ## Combine in 2 rows:
-# Div1 <- div_maker(subtitle = "Future",Button1, Button2, Button3)
-# Div2 <- div_maker(subtitle = "Effect", Button4, Button5)
-# 
-# ## Now put them all together:
-# finisher(title="Important block",Div1, Div2)
+Value1 = 88
+Value2 = 1985
+Value3 = 1.22
+Value4 = 30
+Value5 = 42
+
+## Make the buttons how you like
+Button1 <- solo_box(value = Value1, text = "Speed", units = "mph",type = "danger")
+Button2 <- solo_box(value = Value2, text = "Origin", type = "warning")
+Button3 <- solo_box(value = Value3, text = "Powah",  units = "GW",  hover = "Great Scott!",type="success")
+Button4 <- solo_box(value = Value4, text = "Heads turned",units = "K",type="info")
+Button5 <- solo_box(value = Value5, text = "Answer", hover = "Whales rule. Petunias suck",
+  link = "https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy",type="primary")
+
+## Combine in 2 rows:
+Div1 <- div_maker(subtitle = "Future",Button1, Button2, Button3)
+Div2 <- div_maker(subtitle = "Effect", Button4, Button5)
+
+## Now put them all together:
+finisher(title="Important block",Div1, Div2)
 ```
 
 This button displays from red to green depending on the value passed to it, the target and the threshold.

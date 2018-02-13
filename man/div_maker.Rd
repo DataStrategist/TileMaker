@@ -11,11 +11,11 @@ div_maker(subtitle = NULL, textModifier = "h2", ...)
 
 \item{textModifier}{Optional css category of "large" text. In this case, subtitle. Default=h2}
 
-\item{...}{\code{solo_box OR solo_gradient_box} elements.}
+\item{...}{\code{buttons to insert into the div} elements.}
 }
 \description{
-This function takes strings created with the function `ButtonMaker` and makes an HTML div suitable for inclusion in other HTML code,
-or for inclusion within the function of this package `TileMaker`.
+This function takes buttons made by any of the solo or multi buttons and makes an a row (HTML `div`) suitable for inclusion in
+other HTML code, or for inclusion within the function of this package `finisher`.
 }
 \examples{
 div_maker(title = "Quantativity factors",

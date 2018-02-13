@@ -2,26 +2,27 @@
 % Please edit documentation in R/tile_maker.R
 \name{finisher}
 \alias{finisher}
-\title{file maker}
+\title{finisher}
 \usage{
-finisher(title = NULL, ...,
+finisher(title = NULL,
   css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
-  file = NULL, textModifier = "h1")
+  file = NULL, textModifier = "h1", ...)
 }
 \arguments{
 \item{title}{Title.}
 
-\item{...}{\code{div_maker} elements.}
-
-\item{css}{A string indicating css url, for final installations pls save the css file locally.}
-
-\item{file}{Optional filename if you desire to save the file. By default we are using the 3.3.7 bootstrap CDN because
+\item{css}{A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7 bootstrap CDN because
 they support icons, but some others that might be interesting to you are:
 https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css}
 
+\item{file}{Optional filename if you desire to save the file.}
+
 \item{textModifier}{Optional css category of "large" text. In this case, title. Default=h1}
+
+\item{...}{\code{div_maker} elements (or individual buttons).}
 }
 \description{
-Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker` and
-combines them into an html file.
+Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker`, or individual buttons if so desired, and
+combines them into a freestanding html file. Use this when you don't want the buttons to be part of a file, but a file itself.
+or, you could also use this as a convenient way of wrapping up buttons without using a div (although it is a bit irregular).
 }
