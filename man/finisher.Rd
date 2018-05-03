@@ -4,7 +4,7 @@
 \alias{finisher}
 \title{finisher}
 \usage{
-finisher(title = NULL,
+finisher(title,
   css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
   file = NULL, textModifier = "h1", ...)
 }

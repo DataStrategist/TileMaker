@@ -2,7 +2,7 @@
 % Please edit documentation in R/tile_maker.R
 \name{ico}
 \alias{ico}
-\title{Auxiliary function to generate icons}
+\title{ico}
 \usage{
 ico(x, chevron = FALSE)
 }

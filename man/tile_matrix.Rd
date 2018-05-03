@@ -4,16 +4,16 @@
 \alias{tile_matrix}
 \title{tileMatrix}
 \usage{
-tile_matrix(data, values = NULL, text = NULL, icon = NULL,
-  former = NULL, target = 100, thresholdHigh = 90, thresholdLow = 50,
-  cols = 4, title = NULL, roundVal = 1, textModifier = "h1")
+tile_matrix(data, values, txt, icon, former, target = 100,
+  thresholdHigh = 90, thresholdLow = 50, cols = 4, title = NULL,
+  roundVal = 1, textModifier = "h1")
 }
 \arguments{
 \item{data}{a dataframe containing the data you would like to plot}
 
 \item{values}{a Vector containing values for each tile, contained in the datframe `data`}
 
-\item{text}{Vector containing titles for each tile, contained in the datframe `data`}
+\item{txt}{Vector containing titles for each tile, contained in the datframe `data`}
 
 \item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
 the name of thing you want, like "check"... not the full "gyphicon-check"}
@@ -45,5 +45,5 @@ Returns a list object containing the matrix of buttons
 Create a matrix of buttons suitable for quick comparisons
 }
 \examples{
-finisher(tile_matrix(values=c(3,4,5),text=c("Bob","Pedro","Ana")))
+finisher(tile_matrix(values=c(3,4,5),txt=c("Bob","Pedro","Ana")))
 }

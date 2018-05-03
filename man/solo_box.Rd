@@ -4,14 +4,14 @@
 \alias{solo_box}
 \title{solo_box}
 \usage{
-solo_box(value = NULL, text = NULL, former = NULL, size = "md",
+solo_box(value = NULL, txt = NULL, former = NULL, size = "md",
   icon = NULL, type = "info", link = NULL, units = NULL, hover = NULL,
   textModifier = "h1", ...)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
 
-\item{text}{Optional subtext that should appear under the value}
+\item{txt}{Optional subtext that should appear under the value}
 
 \item{former}{The numeric old value to use for comparison to 'value'}
 
@@ -40,13 +40,13 @@ This function crafts the actual tile per se, including the specific
 aesthetic traits for each tile. This is the simple version where you explicitly state the color.
 }
 \examples{
-b1 <- solo_box(type="warning",value = 3.57,text = "B")
-b2 <- solo_box(type="danger",value = 13.7,text = "Nutritional value")
-b3 <- solo_box(type="success",value = 1,text = "Yumminess factor")
-b4 <- solo_box(value = 3.57, former=3,text = "Times apple eaten", icon = "apple")
+b1 <- solo_box(type="warning",value = 3.57,txt = "B")
+b2 <- solo_box(type="danger",value = 13.7,txt = "Nutritional value")
+b3 <- solo_box(type="success",value = 1,txt = "Yumminess factor")
+b4 <- solo_box(value = 3.57, former=3,txt = "Times apple eaten", icon = "apple")
 finisher(b1,b2,b3,b4)
 finisher(div_maker(b1,b2,b3),div_maker(b4))
 
 ## Or taking advantage of the ability to change the textModifier:
-finisher(solo_box(value = 3,text="uh huh",former = 2,textModifier = "h4"))
+finisher(solo_box(value = 3,txt="uh huh",former = 2,textModifier = "h4"))
 }

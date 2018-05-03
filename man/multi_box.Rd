@@ -4,14 +4,14 @@
 \alias{multi_box}
 \title{multi_box}
 \usage{
-multi_box(icons = NULL, text = NULL, values = NULL, title = NULL,
+multi_box(icons = NULL, txt = NULL, values = NULL, title = NULL,
   size = "md", type = "info", link = NULL, number_zoom = 150,
   hover = NULL, ...)
 }
 \arguments{
 \item{icons}{vector of Icons to display, Default: NULL}
 
-\item{text}{Optional subtext that should appear under the value}
+\item{txt}{Optional subtext that should appear under the value}
 
 \item{values}{vector of values to display, Default: NULL}
 
@@ -44,7 +44,7 @@ Allows for each button to contain several icon-number-text descriptions.
 \examples{
 library(dplyr)
 multi_box(values=c(3,45),title = "Important <br>button",number_zoom=300,
-icons=c("apple","calendar"), type="warning", text=c("times","reports")) \%>\%
+icons=c("apple","calendar"), type="warning", txt=c("times","reports")) \%>\%
 file_maker
 \dontrun{
 if(interactive()){

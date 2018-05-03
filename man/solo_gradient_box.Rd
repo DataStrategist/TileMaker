@@ -4,7 +4,7 @@
 \alias{solo_gradient_box}
 \title{solo_gradient_box}
 \usage{
-solo_gradient_box(value = NULL, text = NULL, former = NULL, size = "md",
+solo_gradient_box(value = NULL, txt = NULL, former = NULL, size = "md",
   icon = NULL, target = 100, thresholdHigh = 90, thresholdLow = 50,
   link = NULL, units = NULL, hover = NULL, hide_value = FALSE,
   textModifier = "h1", ...)
@@ -12,7 +12,7 @@ solo_gradient_box(value = NULL, text = NULL, former = NULL, size = "md",
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
 
-\item{text}{Optional subtext that should appear under the value}
+\item{txt}{Optional subtext that should appear under the value}
 
 \item{former}{The last value that should be used for comparison purposes}
 
@@ -52,7 +52,7 @@ This function crafts a tile like solo_box, but this one changes color according 
 # ADD EXAMPLES HERE
 g1 <- solo_gradient_box(value = 40)
 g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-g3 <- solo_gradient_box(value = 20,text="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
-g4 <- solo_gradient_box(value = 35,text="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+g3 <- solo_gradient_box(value = 20,txt="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
 finisher(div_maker(g1,g2,g3,g4))
 }

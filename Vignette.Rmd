@@ -17,14 +17,14 @@ Let's start small. Here's the most basic button:
 
 ```{r}
 library(TileMaker) ## to install, use devtools::install_github("mexindian/TileMaker")
-solo_box(value = 3.3, text="Important parameter")
+solo_box(value = 3.3, txt="Important parameter")
 
 ```
 
 ^ The solo_box only represents one value. But that doesn't mean it's boring! Here's a fully featured `solo_box`:
 
 ```{r}
-solo_box(value = 42, text = "Absolute truth", former=99,size = "lg", icon = "check",
+solo_box(value = 42, txt= "Absolute truth", former=99,size = "lg", icon = "check",
                     type = "warning", link = "http://google.com", units = "kg", hover = "I believe in fairies", textModifier="h3")
 ```
 
@@ -37,22 +37,22 @@ Now let's meet the rest of the family:
 The solo_gradient box automatically changes colors from red to yellow to green based on a target and some thresholds. By default, the `target` is set to 100 and the thresholds are set to 50 and 90, but obviously those are customizeable.
 
 ```{r}
-solo_gradient_box(value = 95,text="Grade 1")
-solo_gradient_box(value = 80,text="Grade 2")
-solo_gradient_box(value = 40,text="Grade 3")
+solo_gradient_box(value = 95, txt="Grade 1")
+solo_gradient_box(value = 80, txt="Grade 2")
+solo_gradient_box(value = 40, txt="Grade 3")
 ```
 
 Now let's change the target only, but leave the thresholds on their default values (set to 50% and 90% of targets respectively) .
 
 ```{r}
-solo_gradient_box(value = 46,text="Customized target",target = 50)
+solo_gradient_box(value = 46, txt="Customized target",target = 50)
 
 ```
 
 The above shows up green, because 46 of 50 is still 92%, but if we change the thresholdHigh to 93%:
 
 ```{r}
-solo_gradient_box(value = 46,text="Customized target<br>and threshold",target = 50,thresholdHigh = 93)
+solo_gradient_box(value = 46, txt="Customized target<br>and threshold",target = 50,thresholdHigh = 93)
 ```
 
 You can see that the box changes to orange since it's now between `thresholdHigh` and `thresholdLow`. By the way, the thresholds are optimistic (ie, round up (so 90=green and 50=orange on default settings), because juuuuuuuust passing feels awesome and juuuuuust failing feels terrible.
@@ -64,7 +64,7 @@ By the way, you will also notice the `<br>` above forcing a line break. Yes, tha
 The `multi_box`, in contrast to the `solo_box`, takes multiple values in one button, providing an easy way to summarize a ton of information in one button.
 
 ```{r}
-multi_box(values = c(4,5,6),text = c("Sally","George", "Mohammed"),icons = c("check","plus","calendar"),title = "Candidates")
+multi_box(values = c(4,5,6), txt= c("Sally","George", "Mohammed"),icons = c("check","plus","calendar"),title = "Candidates")
 
 ```
 
@@ -76,7 +76,7 @@ Naturally, I was tempted to also construct a multi_gradient_box, but I haven't b
 suppressPackageStartupMessages(library(dplyr))
 df <- data_frame(values = c(2,5,6),
                  text = c("Sally","George", "Mohammed"))
-tile_matrix(df,values=values,text=text,target=10,thresholdHigh = 60,thresholdLow = 40)
+tile_matrix(df,values=values,target=10,thresholdHigh = 60,thresholdLow = 40,textModifier="h2")
 
 ```
 
@@ -87,7 +87,7 @@ mtcars %>%
   ## we can't feed `names(mtcars)` as an input, so let's assign it as a column heading
   mutate(names=rownames(mtcars)) %>%
   ## pipe the dataframe directly into the tile_matrix! 
-  tile_matrix(values = "disp",text = "names",
+  tile_matrix(values = "disp", txt= "names",
               target = 500,thresholdHigh = 80,thresholdLow = 50)
 
 ```
@@ -102,7 +102,7 @@ df <- diamonds %>%
   ## Assume there was some former price that was a bit different
   mutate(old_price=price*(1*runif(n = 7,min=-.2,max = .5)))
 
-tile_matrix(df,values = price,text = color,former=old_price,target=5000,roundVal = 0)
+tile_matrix(df,values = price, txt= color,former=old_price,target=5000,roundVal = 0)
 ```
 
 ### What's this "former" business?
@@ -116,7 +116,7 @@ df <- data_frame(values=seq(from=0,to=100,by=10),
                  former=50)
 
 ## Let's pretend that all previous values were 50... so:
-df %>% tile_matrix(data = df,values = values,text = text,former=former)
+# df %>% tile_matrix(data = df,values = values,former=former)
 ```
 
 ### Grammar of tile_maker
@@ -130,19 +130,20 @@ Value4 = 30
 Value5 = 42
 
 ## Make the buttons how you like
-Button1 <- solo_box(value = Value1, text = "Speed", units = "mph",type = "danger")
-Button2 <- solo_box(value = Value2, text = "Origin", type = "warning")
-Button3 <- solo_box(value = Value3, text = "Powah",  units = "GW",  hover = "Great Scott!",type="success")
-Button4 <- solo_box(value = Value4, text = "Heads turned",units = "K",type="info")
-Button5 <- solo_box(value = Value5, text = "Answer", hover = "Whales rule. Petunias suck",
+Button1 <- solo_box(value = Value1, txt= "Speed", units = "mph",type = "danger")
+Button2 <- solo_box(value = Value2, txt= "Origin", type = "warning")
+Button3 <- solo_box(value = Value3, txt= "Powah",  units = "GW",  hover = "Great Scott!",type="success")
+Button4 <- solo_box(value = Value4, txt= "Heads turned",units = "K",type="info")
+Button5 <- solo_box(value = Value5, txt= "Answer", hover = "Whales rule. Petunias suck",
   link = "https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy",type="primary")
 
 ## Combine in 2 rows:
-Div1 <- div_maker(subtitle = "Future",Button1, Button2, Button3)
-Div2 <- div_maker(subtitle = "Effect", Button4, Button5)
+Div1 <- div_maker(subtitle = "Future", textModifier="h2",Button1, Button2, Button3)
+Div2 <- div_maker(subtitle = "Effect", textModifier="h2", Button4, Button5)
 
 ## Now put them all together:
-finisher(title="Important block",Div1, Div2)
+finisher(title="Important block",css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
+                     file=NULL, textModifier="h1",Div1, Div2)
 ```
 
 This button displays from red to green depending on the value passed to it, the target and the threshold.

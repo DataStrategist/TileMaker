@@ -4,12 +4,13 @@
 \alias{div_maker}
 \title{Div maker}
 \usage{
-div_maker(subtitle = NULL, textModifier = "h2", ...)
+div_maker(subtitle = NULL, textModifier, ...)
 }
 \arguments{
 \item{subtitle}{The text heading of this row of buttons}
 
-\item{textModifier}{Optional css category of "large" text. In this case, subtitle. Default=h2}
+\item{textModifier}{Optional css category of "large" text. In this case, subtitle. Use css flags
+like "h2", "h3","p", etc.}
 
 \item{...}{\code{buttons to insert into the div} elements.}
 }
