@@ -4,13 +4,13 @@
 \alias{div_maker}
 \title{Div maker}
 \usage{
-div_maker(subtitle = NULL, textModifier, ...)
+div_maker(subtitle = NULL, textModifier = "h1", ...)
 }
 \arguments{
 \item{subtitle}{The text heading of this row of buttons}
 
 \item{textModifier}{Optional css category of "large" text. In this case, subtitle. Use css flags
-like "h2", "h3","p", etc.}
+like "h2", "h3","p", etc. Default = "h1"}
 
 \item{...}{\code{buttons to insert into the div} elements.}
 }
@@ -19,7 +19,7 @@ This function takes buttons made by any of the solo or multi buttons and makes a
 other HTML code, or for inclusion within the function of this package `finisher`.
 }
 \examples{
-div_maker(title = "Quantativity factors",
+div_maker(subtitle = "Quantativity factors",
           solo_gradient_box(value = 70),
           solo_box(value=34))
 }

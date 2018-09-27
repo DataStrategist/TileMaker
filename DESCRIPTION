@@ -11,3 +11,5 @@ RoxygenNote: 6.0.1.9000
 BugReports: https://github.com/mexindian/TileMaker/issues
 URL: https://github.com/mexindian/TileMaker
 Imports: htmltools, purrr, dplyr, rlang
+Suggests: 
+    testthat

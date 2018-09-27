@@ -42,20 +42,22 @@
 #' # Button1;Button2;Button3
 #' @export
 
-ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units="",
-                        Target=0,ThresholdHigh=0,ThresholdLow=0, Hover="", alpha=0.5,
-                        Former=Value){
-  .Deprecated(solo_box, package="tileMaker", "These functions are provided for compatibility with older versions of R only, and may be
+ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="",
+                        Units="", Target=0,ThresholdHigh=0,ThresholdLow=0,
+                        Hover="", alpha=0.5, Former=Value){
+  .Deprecated(solo_box, package="tileMaker", "These functions are provided for
+compatibility with older versions of R only, and may be
               defunct as soon as of the next release.",
               old = as.character(sys.call(sys.parent()))[1L])
   ## colors
-  colorList = c("success",  "warning", "danger", "info", "primary", "default")
+  colorList <- c("success",  "warning", "danger", "info", "primary", "default")
 
   ## sizes:
-  SizeList = c("xs","sm","md","lg")
+  SizeList <- c("xs","sm","md","lg")
 
   paste(paste('<',
-              if(Link !=""){paste('a href="',Link,'" role="button" ',sep='')} else{'button'},
+              if(Link !=""){paste('a href="',Link,'" role="button" ',sep='')
+                } else{'button'},
               ' type="button" class="btn ',sep=''),
         if(Target ==0){
           paste('btn-',colorList[Color],sep='')
@@ -75,13 +77,16 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
               if(Hover !=""){paste(' title="',Hover,'" ')},
               '><h1>',sep=''),
 
-        if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true" style="opacity:',alpha,'"></span> ',sep='')},
+        if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true" style=
+                            "opacity:',alpha,'"></span> ',sep='')},
         paste(Value,Units,sep=''),
 
         if(Former>Value){
-          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">&#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
+          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">
+                &#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
         } else if (Former<Value){
-          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">&#9650;',round((Value-Former)/Former*100,1),'%</sup>',sep='')
+          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">
+                &#9650;',round((Value-Former)/Former*100,1),'%</sup>',sep='')
         },
         '</h1>',
         Subtitle,
@@ -106,8 +111,9 @@ ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="", Units=
 #' @export
 
 DivMaker <- function(Title="",Buttons){
-  .Deprecated(div_maker, package="tileMaker", "These functions are provided for compatibility with older versions of R only, and may be
-              defunct as soon as of the next release.",
+  .Deprecated(div_maker, package="tileMaker",
+"These functions are provided for compatibility with older versions of R only,
+and may be defunct as soon as of the next release.",
               old = as.character(sys.call(sys.parent()))[1L])
   paste('<div class="container"><h2>',
         Title,
@@ -148,14 +154,17 @@ DivMaker <- function(Title="",Buttons){
 #' browseURL("example.html")
 #' @export
 
-TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,localCSS=FALSE){
-  .Deprecated(file_maker, package="tileMaker", "These functions are provided for compatibility with older versions of R only, and may be
-              defunct as soon as of the next release.",
+TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,
+                      localCSS=FALSE){
+  .Deprecated(TileMaker, package="tileMaker",
+"These functions are provided for compatibility with older versions of R only,
+and may be defunct as soon as of the next release.",
               old = as.character(sys.call(sys.parent()))[1L])
   paste('<!DOCTYPE html><html lang="en"><head>
       <meta name="viewport" content="width=device-width, initial-scale=1">',
       if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
-      } else {'<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'},
+      } else {'<link rel="stylesheet" href=
+        "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'},
       '</head><body><h1>',
       MainTitle,
       '</h1>',

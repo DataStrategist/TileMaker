@@ -4,15 +4,15 @@
 \alias{finisher}
 \title{finisher}
 \usage{
-finisher(title,
+finisher(title = NULL,
   css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
   file = NULL, textModifier = "h1", ...)
 }
 \arguments{
-\item{title}{Title.}
+\item{title}{Title. Default NULL}
 
-\item{css}{A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7 bootstrap CDN because
-they support icons, but some others that might be interesting to you are:
+\item{css}{A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7
+bootstrap CDN because they support icons, but some others that might be interesting to you are:
 https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css}
 
 \item{file}{Optional filename if you desire to save the file.}

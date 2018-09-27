@@ -54,8 +54,9 @@ ico <- function(x, chevron=FALSE) {
 #' ## Or taking advantage of the ability to change the textModifier:
 #' finisher(solo_box(value = 3,txt="uh huh",former = 2,textModifier = "h4"))
 #' @export solo_box
-solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md", icon = NULL,
-                     type = "info", link = NULL, units = NULL, hover = NULL, textModifier="h1", ...) {
+solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md",
+                     icon = NULL, type = "info", link = NULL, units = NULL,
+                     hover = NULL, textModifier="h1", ...) {
   tags$a(
     href = link,
     tags$button(
@@ -71,12 +72,16 @@ solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md", icon = 
           if (former > value) {
             tags$sup(
               style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-              ico("chevron-down", chevron = T), paste(round((as.numeric(former) - as.numeric(value)) / as.numeric(former) * 100, 1), "%", sep = "")
+              ico("chevron-down", chevron = TRUE),
+              paste(round((as.numeric(former) - as.numeric(value)) /
+                            as.numeric(former) * 100, 1), "%", sep = "")
             )
           } else {
             tags$sup(
               style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-              ico("chevron-up", chevron = T), paste(round((as.numeric(value) - as.numeric(former)) / as.numeric(former) * 100, 1), "%", sep = "")
+              ico("chevron-up", chevron = TRUE),
+              paste(round((as.numeric(value) - as.numeric(former)) /
+                            as.numeric(former) * 100, 1), "%", sep = "")
             )
           }
         }
@@ -117,14 +122,19 @@ solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md", icon = 
 #' @examples
 #' # ADD EXAMPLES HERE
 #' g1 <- solo_gradient_box(value = 40)
-#' g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-#' g3 <- solo_gradient_box(value = 20,txt="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
-#' g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+#' g2 <- solo_gradient_box(value = 40,target = 50,
+#' thresholdHigh = 80, thresholdLow=60)
+#' g3 <- solo_gradient_box(value = 20,txt="Test1",target = 50,
+#' thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
+#' g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,
+#' thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
 #' finisher(div_maker(g1,g2,g3,g4))
 #' @export solo_gradient_box
-solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL, size = "md", icon = NULL,
-                              target=100, thresholdHigh=90, thresholdLow=50,
-                              link = NULL, units = NULL, hover = NULL, hide_value=FALSE, textModifier="h1", ...) {
+solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL, size = "md",
+                              icon = NULL, target=100, thresholdHigh=90,
+                              thresholdLow=50, link = NULL, units = NULL,
+                              hover = NULL, hide_value=FALSE,
+                              textModifier="h1", ...) {
   Perc <- value / target * 100
   if (Perc >= thresholdHigh) {
     finalType <- "success"
@@ -143,7 +153,8 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL, size = "md"
       type = finalType,
       role = "button",
       # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", finalType),
+      class = "btn", class = paste0("btn-", size),
+      class = paste0("btn-", finalType),
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
           ico(icon), value, units,
@@ -151,12 +162,19 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL, size = "md"
             if (former > value) {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                ico("chevron-down", chevron = T), paste(round((as.numeric(former) - as.numeric(value)) / as.numeric(former) * 100, 1), "%", sep = "")
+                ico("chevron-down", chevron = TRUE),
+                paste(round((as.numeric(former) -
+                               as.numeric(value)) /
+                              as.numeric(former) * 100, 1), "%", sep = "")
               )
             } else {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                ico("chevron-up", chevron = T), paste(round((as.numeric(value) - as.numeric(former)) / as.numeric(former) * 100, 1), "%", sep = "")
+                ico("chevron-up", chevron = TRUE),
+                paste(round((as.numeric(value) -
+                               as.numeric(former)) /
+                              as.numeric(former) * 100, 1),
+                      "%", sep = "")
               )
             }
           }
@@ -203,7 +221,8 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL, size = "md"
 #' @export
 multi_box <- function(icons = NULL, txt=NULL, values = NULL,
                       title = NULL, size = "md",
-                      type = "info", link = NULL, number_zoom=150, hover = NULL, ...) {
+                      type = "info", link = NULL, number_zoom=150,
+                      hover = NULL, ...) {
   ## Define function that can be pmapped
   gutsMaker <- function(values, txt, icons) {
     tags$h3(
@@ -256,13 +275,14 @@ multi_box <- function(icons = NULL, txt=NULL, values = NULL,
 #' @param roundVal Number of decimals that Value will be rounded to. Defaults to 1
 #' @param textModifier Optional css category of "large" text. In this case, the icon, value and unit. Default=h1
 #' @importFrom htmltools HTML tag tags
-#' @importFrom dplyr pull
+#' @importFrom dplyr pull %>%  data_frame
 #' @importFrom rlang !! enquo syms
 #' @return Returns a list object containing the matrix of buttons
 #' @examples
 #' finisher(tile_matrix(values=c(3,4,5),txt=c("Bob","Pedro","Ana")))
 #' @export tile_matrix
-tile_matrix <- function(data, values, txt, icon, former, target=100, thresholdHigh=90, thresholdLow=50, cols=4,
+tile_matrix <- function(data, values, txt, icon, former, target=100,
+                        thresholdHigh=90, thresholdLow=50, cols=4,
                         title=NULL, roundVal=1, textModifier="h1") {
 
 
@@ -293,7 +313,8 @@ tile_matrix <- function(data, values, txt, icon, former, target=100, thresholdHi
   )
 
   ## Errors
-  if (class(values) != "numeric" & class(values) != "integer") stop("values should be numeric")
+  if (class(values) != "numeric" & class(values) != "integer") stop(
+    "values should be numeric")
 
 
   ## Clean inputs
@@ -340,7 +361,8 @@ tile_matrix <- function(data, values, txt, icon, former, target=100, thresholdHi
   splitter <- function(Sausage, cols) {
     Outputter <- list("")
     for (i in 1:ceiling(length(Sausage) / cols)) {
-      Outputter[[i]] <- div_maker(Sausage[((i - 1) * cols + 1):(cols * i)], textModifier = "h2")
+      Outputter[[i]] <- div_maker(Sausage[((i - 1) * cols + 1):(cols * i)],
+                                  textModifier = "h2")
     }
     Outputter
   }
@@ -359,14 +381,14 @@ tile_matrix <- function(data, values, txt, icon, former, target=100, thresholdHi
 #'
 #' @param subtitle The text heading of this row of buttons
 #' @param textModifier Optional css category of "large" text. In this case, subtitle. Use css flags
-#' like "h2", "h3","p", etc.
+#' like "h2", "h3","p", etc. Default = "h1"
 #' @param ... \code{buttons to insert into the div} elements.
 #' @examples
-#' div_maker(title = "Quantativity factors",
+#' div_maker(subtitle = "Quantativity factors",
 #'           solo_gradient_box(value = 70),
 #'           solo_box(value=34))
 #' @export div_maker
-div_maker <- function(subtitle = NULL, textModifier, ...) {
+div_maker <- function(subtitle = NULL, textModifier = "h1", ...) {
   tags$div(
     class = "container",
     tag(textModifier, tags$span(subtitle)$children),
@@ -390,16 +412,17 @@ div_maker <- function(subtitle = NULL, textModifier, ...) {
 #' combines them into a freestanding html file. Use this when you don't want the buttons to be part of a file, but a file itself.
 #' or, you could also use this as a convenient way of wrapping up buttons without using a div (although it is a bit irregular).
 #'
-#' @param title Title.
-#' @param css A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7 bootstrap CDN because
-#' they support icons, but some others that might be interesting to you are:
+#' @param title Title. Default NULL
+#' @param css A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7
+#' bootstrap CDN because they support icons, but some others that might be interesting to you are:
 #' https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css
 #' @param file Optional filename if you desire to save the file.
 #' @param textModifier Optional css category of "large" text. In this case, title. Default=h1
 #' @param ... \code{div_maker} elements (or individual buttons).
 #' @importFrom htmltools browsable save_html
 #' @export finisher
-finisher <- function(title, css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
+finisher <- function(title = NULL, css =
+                       "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
                      file=NULL, textModifier="h1", ...) {
   tl <- tags$html(
     tags$head(

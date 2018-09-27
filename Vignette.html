@@ -90,6 +90,9 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
 }
@@ -124,11 +127,11 @@ $(document).ready(function () {
 
 <div id="meet-the-tile" class="section level2">
 <h2>Meet the Tile</h2>
-<p>Dashboard Tiles/Notecards are a great way to visualize just one number, and make it big and pretty. They can emphasize results in an easily digestible and colourful format. This package dates back to the days before infoboxes and valueboxes were available from [flexdashboard]](<a href="https://rmarkdown.rstudio.com/flexdashboard/" class="uri">https://rmarkdown.rstudio.com/flexdashboard/</a>) and <a href="https://rstudio.github.io/shinydashboard/">shinydashboards</a>, and still has some utility due to it’s flexibility.</p>
-<p>This package uses Twitter’s <a href="https://getbootstrap.com/">Bootstrap</a>, and pushes content into buttons that then have different functionality. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!</p>
+<p>Dashboard Tiles/Notecards are a great way to visualize just one number, and make it big and pretty. They can emphasize results in an easily digestible and colourful format. This package dates back to the days before infoboxes and valueboxes were available from <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a> and <a href="https://rstudio.github.io/shinydashboard/">shinydashboards</a>, and still has some utility today due to it’s flexibility.</p>
+<p>This package uses Twitter’s <a href="https://getbootstrap.com/">Bootstrap</a> CSS files, and pushes content into buttons that then have different functionality. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!</p>
 <p>Let’s start small. Here’s the most basic button:</p>
 <pre class="r"><code>library(TileMaker) ## to install, use devtools::install_github(&quot;mexindian/TileMaker&quot;)
-solo_box(value = 3.3, txt=&quot;Important parameter&quot;)</code></pre>
+solo_box(value = 3.3, txt = &quot;Important parameter&quot;)</code></pre>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
 <h1>3.3</h1>
@@ -136,8 +139,10 @@ Important parameter
 </button>
 </a>
 <p>^ The solo_box only represents one value. But that doesn’t mean it’s boring! Here’s a fully featured <code>solo_box</code>:</p>
-<pre class="r"><code>solo_box(value = 42, txt= &quot;Absolute truth&quot;, former=99,size = &quot;lg&quot;, icon = &quot;check&quot;,
-                    type = &quot;warning&quot;, link = &quot;http://google.com&quot;, units = &quot;kg&quot;, hover = &quot;I believe in fairies&quot;, textModifier=&quot;h3&quot;)</code></pre>
+<pre class="r"><code>solo_box(
+  value = 42, txt = &quot;Absolute truth&quot;, former = 99, size = &quot;lg&quot;, icon = &quot;check&quot;,
+  type = &quot;warning&quot;, link = &quot;http://google.com&quot;, units = &quot;kg&quot;, hover = &quot;I believe in fairies&quot;, textModifier = &quot;h3&quot;
+)</code></pre>
 <a href="http://google.com">
 <button class="btn btn-lg btn-warning" role="button" title="I believe in fairies" type="warning">
 <h3>
@@ -152,34 +157,118 @@ kg
 Absolute truth
 </button>
 </a>
-<p>As you can see, plenty of bells and whistles. Most of the stuff above is self explanatory, except for the <code>size</code> which represents the relative size of the button(<code>md</code> = medium, <code>lg</code> = large etc), and the <code>type</code>, which dictates the color using the css classes : Default, Primary, Success, Info, Warning, Danger (we are using Bootstrap Version 3 by default… more on that later).</p>
-<p>Now let’s meet the rest of the family:</p>
+<p>(did you try to hover your mouse over the button?) As you can see, plenty of bells and whistles. Most of the stuff above is self explanatory, except for the <code>size</code> which represents the relative size of the button (ignore the <code>div_maker</code> for now):</p>
+<pre class="r"><code>div_maker(subtitle = &quot;sizes&quot;, textModifier = &quot;h1&quot;,
+          solo_box(value = 3.3, txt = &quot;extra small&quot;, size = &quot;xs&quot;),
+          solo_box(value = 3.3, txt = &quot;small&quot;, size = &quot;sm&quot;),
+          solo_box(value = 3.3, txt = &quot;medium&quot;, size = &quot;md&quot;),
+          solo_box(value = 3.3, txt = &quot;large&quot;, size = &quot;lg&quot;))</code></pre>
+<div class="container">
+<h1>sizes</h1>
+<a>
+<button class="btn btn-xs btn-info" role="button" type="info">
+<h1>3.3</h1>
+extra small
+</button>
+</a>
+<a>
+<button class="btn btn-sm btn-info" role="button" type="info">
+<h1>3.3</h1>
+small
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-info" role="button" type="info">
+<h1>3.3</h1>
+medium
+</button>
+</a>
+<a>
+<button class="btn btn-lg btn-info" role="button" type="info">
+<h1>3.3</h1>
+large
+</button>
+</a>
+</div>
+<p>… and the <code>type</code>, which dictates the color using the css classes (watch the case sensitivity here!):</p>
+<pre class="r"><code>div_maker(subtitle = &quot;colors&quot;, textModifier = &quot;h1&quot;,
+          solo_box(value = 3.3, txt = &quot;Default&quot;, type = &quot;default&quot;),
+          solo_box(value = 3.3, txt = &quot;Primary&quot;, type = &quot;primary&quot;),
+          solo_box(value = 3.3, txt = &quot;Success&quot;, type = &quot;success&quot;),
+          solo_box(value = 3.3, txt = &quot;Info&quot;, type = &quot;info&quot;),
+          solo_box(value = 3.3, txt = &quot;Warning&quot;, type = &quot;warning&quot;),
+          solo_box(value = 3.3, txt = &quot;Danger&quot;, type = &quot;danger&quot;))</code></pre>
+<div class="container">
+<h1>colors</h1>
+<a>
+<button class="btn btn-md btn-default" role="button" type="default">
+<h1>3.3</h1>
+Default
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-primary" role="button" type="primary">
+<h1>3.3</h1>
+Primary
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-success" role="button" type="success">
+<h1>3.3</h1>
+Success
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-info" role="button" type="info">
+<h1>3.3</h1>
+Info
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-warning" role="button" type="warning">
+<h1>3.3</h1>
+Warning
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-danger" role="button" type="danger">
+<h1>3.3</h1>
+Danger
+</button>
+</a>
+</div>
+<p>(we are using Bootstrap Version 3 by default but that’s customizeable).</p>
+<p>So it’s cool that we can change colors, but what if we wanted the color to change automatically, based on value? Well, let’s meet the next member of the family:</p>
 <div id="lets-go-solo_gradient_box" class="section level3">
 <h3>Let’s go solo_gradient_box!!!</h3>
 <p>The solo_gradient box automatically changes colors from red to yellow to green based on a target and some thresholds. By default, the <code>target</code> is set to 100 and the thresholds are set to 50 and 90, but obviously those are customizeable.</p>
-<pre class="r"><code>solo_gradient_box(value = 95, txt=&quot;Grade 1&quot;)</code></pre>
+<pre class="r"><code>div_maker(subtitle = &quot;colors&quot;, textModifier = &quot;h1&quot;,
+  solo_gradient_box(value = 95, txt = &quot;Grade 1&quot;),
+  solo_gradient_box(value = 80, txt = &quot;Grade 2&quot;),
+  solo_gradient_box(value = 40, txt = &quot;Grade 3&quot;))</code></pre>
+<div class="container">
+<h1>colors</h1>
 <a>
 <button class="btn btn-md btn-success" role="button" type="success">
 <h1>95</h1>
 Grade 1
 </button>
 </a>
-<pre class="r"><code>solo_gradient_box(value = 80, txt=&quot;Grade 2&quot;)</code></pre>
 <a>
 <button class="btn btn-md btn-warning" role="button" type="warning">
 <h1>80</h1>
 Grade 2
 </button>
 </a>
-<pre class="r"><code>solo_gradient_box(value = 40, txt=&quot;Grade 3&quot;)</code></pre>
 <a>
 <button class="btn btn-md btn-danger" role="button" type="danger">
 <h1>40</h1>
 Grade 3
 </button>
 </a>
-<p>Now let’s change the target only, but leave the thresholds on their default values (set to 50% and 90% of targets respectively) .</p>
-<pre class="r"><code>solo_gradient_box(value = 46, txt=&quot;Customized target&quot;,target = 50)</code></pre>
+</div>
+<p>Now let’s change the target only, but leave the thresholds on their default values (set to 50% and 90% of targets respectively) . Let’s change the target to 50.</p>
+<pre class="r"><code>solo_gradient_box(value = 46, txt = &quot;Customized target&quot;, target = 50)</code></pre>
 <a>
 <button class="btn btn-md btn-success" role="button" type="success">
 <h1>46</h1>
@@ -187,7 +276,7 @@ Customized target
 </button>
 </a>
 <p>The above shows up green, because 46 of 50 is still 92%, but if we change the thresholdHigh to 93%:</p>
-<pre class="r"><code>solo_gradient_box(value = 46, txt=&quot;Customized target&lt;br&gt;and threshold&quot;,target = 50,thresholdHigh = 93)</code></pre>
+<pre class="r"><code>solo_gradient_box(value = 46, txt = &quot;Customized target&lt;br&gt;and threshold&quot;, target = 50, thresholdHigh = 93)</code></pre>
 <a>
 <button class="btn btn-md btn-warning" role="button" type="warning">
 <h1>46</h1>
@@ -200,7 +289,7 @@ Customized target<br>and threshold
 <div id="its-your-turn-multi_box" class="section level3">
 <h3>It’s your turn, multi_box!</h3>
 <p>The <code>multi_box</code>, in contrast to the <code>solo_box</code>, takes multiple values in one button, providing an easy way to summarize a ton of information in one button.</p>
-<pre class="r"><code>multi_box(values = c(4,5,6), txt= c(&quot;Sally&quot;,&quot;George&quot;, &quot;Mohammed&quot;),icons = c(&quot;check&quot;,&quot;plus&quot;,&quot;calendar&quot;),title = &quot;Candidates&quot;)</code></pre>
+<pre class="r"><code>multi_box(values = c(4, 5, 6), txt = c(&quot;Sally&quot;, &quot;George&quot;, &quot;Mohammed&quot;), icons = c(&quot;check&quot;, &quot;plus&quot;, &quot;calendar&quot;), title = &quot;Candidates&quot;)</code></pre>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
 <h1>Candidates</h1>
@@ -225,10 +314,13 @@ Mohammed
 </div>
 <div id="last-but-not-least-heres-the-tile_matrix" class="section level3">
 <h3>Last but not least, here’s the tile_matrix</h3>
-<pre class="r"><code>suppressPackageStartupMessages(library(dplyr))
-df &lt;- data_frame(values = c(2,5,6),
-                 text = c(&quot;Sally&quot;,&quot;George&quot;, &quot;Mohammed&quot;))
-tile_matrix(df,values=values,target=10,thresholdHigh = 60,thresholdLow = 40,textModifier=&quot;h2&quot;)</code></pre>
+<pre class="r"><code>suppressPackageStartupMessages(library(dplyr))</code></pre>
+<pre><code>## Warning: package 'dplyr' was built under R version 3.5.1</code></pre>
+<pre class="r"><code>df &lt;- data_frame(
+  values = c(2, 5, 6),
+  txt = c(&quot;Sally&quot;, &quot;George&quot;, &quot;Mohammed&quot;)
+)
+tile_matrix(df, values = values,txt = txt, target = 10, thresholdHigh = 60, thresholdLow = 40, textModifier = &quot;h2&quot;)</code></pre>
 <a>
 <h1></h1>
 <div class="container">
@@ -236,31 +328,33 @@ tile_matrix(df,values=values,target=10,thresholdHigh = 60,thresholdLow = 40,text
 <a>
 <button class="btn btn-2 btn-danger" role="button" type="danger">
 <h1>2</h1>
-NA
+Sally
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-warning" role="button" type="warning">
 <h1>5</h1>
-NA
+George
 </button>
 </a>
 <a>
 <button class="btn btn-2 btn-success" role="button" type="success">
 <h1>6</h1>
-NA
+Mohammed
 </button>
 </a>
 </h2>
 </div>
 </a>
-<p>^ As you can see, the <code>tile_matrix</code> creates several new solo_gradient_boxes and compiles them all into a matrix. The point of this is to easily visualize data from a dataset, and of course it takes a dataset as a first input in order to be tidyverse compliant. Some examples:</p>
+<p>^ As you can see, the <code>tile_matrix</code> creates several new solo_gradient_boxes and compiles them all into a matrix. The point of this is to easily visualize data from a <code>data.frame</code>, and of course it takes a <code>data.frame</code> as a first input in order to be tidyverse compliant. Some examples:</p>
 <pre class="r"><code>mtcars %&gt;%
   ## we can't feed `names(mtcars)` as an input, so let's assign it as a column heading
-  mutate(names=rownames(mtcars)) %&gt;%
-  ## pipe the dataframe directly into the tile_matrix! 
-  tile_matrix(values = &quot;disp&quot;, txt= &quot;names&quot;,
-              target = 500,thresholdHigh = 80,thresholdLow = 50)</code></pre>
+  mutate(names = rownames(mtcars)) %&gt;%
+  ## pipe the dataframe directly into the tile_matrix!
+  tile_matrix(data = .,
+    values = &quot;disp&quot;, txt = &quot;names&quot;,
+    target = 500, thresholdHigh = 80, thresholdLow = 50
+  )</code></pre>
 <a>
 <h1></h1>
 <div class="container">
@@ -488,16 +582,16 @@ Volvo 142E
 </h2>
 </div>
 </a>
-<p>The concept of the <code>tile_matrix</code> is to provide a quick way to visualize simple information… for example summaries. The fact that the thresholds scale automatically to the target is also then useful, since one need only set the target in order to quickly obtain actionable information. For example, if one wanted to quickly see diamond prices, we could:</p>
+<p>The concept of the <code>tile_matrix</code> is to provide a quick way to visualize simple information… for example summaries. The fact that the thresholds scale automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information. For example, if one wanted to quickly see diamond prices, we could:</p>
 <pre class="r"><code>library(dplyr)
 library(ggplot2)
-df &lt;- diamonds %&gt;%
+diamonds %&gt;%
   group_by(color) %&gt;% summarize(price=mean(price)) %&gt;%
   ## Assume there was some former price that was a bit different
-  mutate(old_price=price*(1*runif(n = 7,min=-.2,max = .5)))
+  mutate(old_price=price*(1*runif(n = 7,min=-.2,max = .5))) %&gt;% 
 
-tile_matrix(df,values = price, txt= color,former=old_price,target=5000,roundVal = 0)</code></pre>
-<pre><code>## Warning in tile_matrix(df, values = price, txt = color, former =
+  tile_matrix(data = .,values = price, txt= color,former=old_price,target=5000,roundVal = 0)</code></pre>
+<pre><code>## Warning in tile_matrix(data = ., values = price, txt = color, former =
 ## old_price, : Converted NAs in former to 0.001</code></pre>
 <a>
 <h1></h1>
@@ -509,7 +603,7 @@ tile_matrix(df,values = price, txt= color,former=old_price,target=5000,roundVal 
 3170
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
 <i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-665.6%
+4148.2%
 </sup>
 </h1>
 D
@@ -521,7 +615,7 @@ D
 3077
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
 <i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-651.5%
+537.1%
 </sup>
 </h1>
 E
@@ -533,7 +627,7 @@ E
 3725
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
 <i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--343.5%
+-658.2%
 </sup>
 </h1>
 F
@@ -545,7 +639,7 @@ F
 3999
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
 <i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--745.4%
+127.8%
 </sup>
 </h1>
 G
@@ -561,7 +655,7 @@ G
 4487
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
 <i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--302.4%
+-695.8%
 </sup>
 </h1>
 H
@@ -573,7 +667,7 @@ H
 5092
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
 <i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--725.1%
+644.2%
 </sup>
 </h1>
 I
@@ -585,7 +679,7 @@ I
 5324
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
 <i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--756%
+123.9%
 </sup>
 </h1>
 J
@@ -597,14 +691,163 @@ J
 </div>
 <div id="whats-this-former-business" class="section level3">
 <h3>What’s this “former” business?</h3>
-<p>So we’ve talked about former a bunch, which provides a comparison to the displayed value. This is especially useful to measure performance increase or declines. In order to show the functionality, let’s use a quite contrived scenario:</p>
+<p>So we’ve seen this <code>former</code> value a few times now, but what does it do? Simply put it contextualizes the displayed value in comparision with a former value. This is especially useful to measure performance increase or declines. In order to show the functionality, let’s use a quite contrived scenario:</p>
 <pre class="r"><code>suppressPackageStartupMessages(library(dplyr))
 df &lt;- data_frame(values=seq(from=0,to=100,by=10),
-                 text=&quot;comparison to 50&quot;,
+                 txt=&quot;comparison to 50&quot;,
                  former=50)
 
 ## Let's pretend that all previous values were 50... so:
-# df %&gt;% tile_matrix(data = df,values = values,former=former)</code></pre>
+tile_matrix(data = df, values = values, txt = txt, former = former)</code></pre>
+<pre><code>## Warning in tile_matrix(data = df, values = values, txt = txt, former =
+## former): Converted NAs in former to 0.001</code></pre>
+<a>
+<h1></h1>
+<div class="container">
+<h2>
+<a>
+<button class="btn btn-2 btn-danger" role="button" type="danger">
+<h1>
+0
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+100%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-danger" role="button" type="danger">
+<h1>
+10
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+80%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-danger" role="button" type="danger">
+<h1>
+20
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+60%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-danger" role="button" type="danger">
+<h1>
+30
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+40%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+</h2>
+</div>
+<div class="container">
+<h2>
+<a>
+<button class="btn btn-2 btn-danger" role="button" type="danger">
+<h1>
+40
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
+20%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-warning" role="button" type="warning">
+<h1>
+50
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+0%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-warning" role="button" type="warning">
+<h1>
+60
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+20%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-warning" role="button" type="warning">
+<h1>
+70
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+40%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+</h2>
+</div>
+<div class="container">
+<h2>
+<a>
+<button class="btn btn-2 btn-warning" role="button" type="warning">
+<h1>
+80
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+60%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-success" role="button" type="success">
+<h1>
+90
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+80%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+<a>
+<button class="btn btn-2 btn-success" role="button" type="success">
+<h1>
+100
+<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;">
+<i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
+100%
+</sup>
+</h1>
+comparison to 50
+</button>
+</a>
+</h2>
+</div>
+</a>
 </div>
 <div id="grammar-of-tile_maker" class="section level3">
 <h3>Grammar of tile_maker</h3>
@@ -616,20 +859,27 @@ Value4 = 30
 Value5 = 42
 
 ## Make the buttons how you like
-Button1 &lt;- solo_box(value = Value1, txt= &quot;Speed&quot;, units = &quot;mph&quot;,type = &quot;danger&quot;)
-Button2 &lt;- solo_box(value = Value2, txt= &quot;Origin&quot;, type = &quot;warning&quot;)
-Button3 &lt;- solo_box(value = Value3, txt= &quot;Powah&quot;,  units = &quot;GW&quot;,  hover = &quot;Great Scott!&quot;,type=&quot;success&quot;)
-Button4 &lt;- solo_box(value = Value4, txt= &quot;Heads turned&quot;,units = &quot;K&quot;,type=&quot;info&quot;)
-Button5 &lt;- solo_box(value = Value5, txt= &quot;Answer&quot;, hover = &quot;Whales rule. Petunias suck&quot;,
-  link = &quot;https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy&quot;,type=&quot;primary&quot;)
+Button1 &lt;- solo_box(value = Value1, txt = &quot;Speed&quot;, units = &quot;mph&quot;, type = &quot;danger&quot;)
+Button2 &lt;- solo_box(value = Value2, txt = &quot;Origin&quot;, type = &quot;warning&quot;, icon = &quot;flash&quot;)
+Button3 &lt;- solo_gradient_box(
+  value = Value3, txt = &quot;Powah&quot;, units = &quot;GW&quot;, hover = &quot;Great Scott!&quot;,
+  target = 1.22, thresholdHigh = 100, thresholdLow = 99
+)
+Button4 &lt;- solo_box(value = Value4, txt = &quot;Heads turned&quot;, units = &quot;K&quot;, type = &quot;info&quot;)
+Button5 &lt;- solo_box(
+  value = Value5, txt = &quot;Answer&quot;, hover = &quot;Whales rule. Petunias suck&quot;,
+  link = &quot;https://en.wikipedia.org/wiki/The_Hitchhiker%27s_Guide_to_the_Galaxy&quot;, type = &quot;primary&quot;
+)
 
 ## Combine in 2 rows:
-Div1 &lt;- div_maker(subtitle = &quot;Future&quot;, textModifier=&quot;h2&quot;,Button1, Button2, Button3)
-Div2 &lt;- div_maker(subtitle = &quot;Effect&quot;, textModifier=&quot;h2&quot;, Button4, Button5)
+Div1 &lt;- div_maker(subtitle = &quot;Future&quot;, textModifier = &quot;h2&quot;, Button1, Button2, Button3)
+Div2 &lt;- div_maker(subtitle = &quot;Effect&quot;, textModifier = &quot;h2&quot;, Button4, Button5)
 
 ## Now put them all together:
-finisher(title=&quot;Important block&quot;,css = &quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot;,
-                     file=NULL, textModifier=&quot;h1&quot;,Div1, Div2)</code></pre>
+finisher(
+  title = &quot;Important block&quot;, css = &quot;https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css&quot;,
+  file = NULL, textModifier = &quot;h1&quot;, Div1, Div2
+)</code></pre>
 <html>
 <body>
 <h1>Important block</h1>
@@ -646,7 +896,10 @@ Speed
 </a>
 <a>
 <button class="btn btn-md btn-warning" role="button" type="warning">
-<h1>1985</h1>
+<h1>
+<i class="glyphicon glyphicon-flash"></i>
+1985
+</h1>
 Origin
 </button>
 </a>
@@ -680,8 +933,15 @@ Answer
 </div>
 </body>
 </html>
-<p>This button displays from red to green depending on the value passed to it, the target and the threshold.</p>
-<p>The way to control colors is using the bootstrap types,</p>
+<p>These functions are included to help with inclusion in different document types.. sometimes report types get finicky, but perhaps can stop complaining if they are included within a <code>finisher</code> block.</p>
+</div>
+<div id="its-not-working-you-broke-my-entire-report-help" class="section level3">
+<h3>It’s not working / you broke my entire report / help</h3>
+<p>So let’s be very clear… this is a hack, might even be an ugly hack. I’m controlling how these elements work by porting and controlling the HTML element within. Sometimes that makes a mess out of the document you’re preparing. Towhit, I have included a few features:</p>
+<ol style="list-style-type: decimal">
+<li>As mentioned in the previous section, try wrapping your buttons or groups of buttons in <code>div_maker</code>s, and/or in <code>finisher</code>s… that seems to do the trick most of the time.</li>
+<li>In some cases, for example in markdown documents that include a Table of Contents, that format depends on html stuff as well… so that’s where the <code>textModifier</code> bit comes in handy. You can change the textModifier from the default <code>h1</code> to <code>h4</code> or <code>&lt;br&gt;</code> or whatever else you think might work in your report. Experiment around!</li>
+</ol>
 </div>
 </div>
 

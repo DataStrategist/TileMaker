@@ -51,8 +51,11 @@ This function crafts a tile like solo_box, but this one changes color according 
 \examples{
 # ADD EXAMPLES HERE
 g1 <- solo_gradient_box(value = 40)
-g2 <- solo_gradient_box(value = 40,target = 50,thresholdHigh = 80, thresholdLow=60)
-g3 <- solo_gradient_box(value = 20,txt="Test1",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
-g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,thresholdHigh = 80, thresholdLow=60,hide_value=T)
+g2 <- solo_gradient_box(value = 40,target = 50,
+thresholdHigh = 80, thresholdLow=60)
+g3 <- solo_gradient_box(value = 20,txt="Test1",target = 50,
+thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
+g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,
+thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
 finisher(div_maker(g1,g2,g3,g4))
 }

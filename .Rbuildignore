@@ -3,3 +3,5 @@
 ^\.travis\.yml$
 ^.*\.html$
 ^.*\.png$
+^README.Rmd
+^Vignette.Rmd
