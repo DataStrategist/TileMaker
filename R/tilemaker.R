@@ -82,10 +82,12 @@ compatibility with older versions of R only, and may be
         paste(Value,Units,sep=''),
 
         if(Former>Value){
-          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">
+          paste('<sup style= "font-size: 12px;color:#EEEEEE;
+vertical-align: top;">
                 &#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
         } else if (Former<Value){
-          paste('<sup style= "font-size: 12px;color:#EEEEEE;vertical-align: top;">
+          paste('<sup style= "font-size: 12px;color:#EEEEEE;
+vertical-align: top;">
                 &#9650;',round((Value-Former)/Former*100,1),'%</sup>',sep='')
         },
         '</h1>',
@@ -164,7 +166,8 @@ and may be defunct as soon as of the next release.",
       <meta name="viewport" content="width=device-width, initial-scale=1">',
       if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
       } else {'<link rel="stylesheet" href=
-        "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">'},
+        "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/
+        bootstrap.min.css">'},
       '</head><body><h1>',
       MainTitle,
       '</h1>',

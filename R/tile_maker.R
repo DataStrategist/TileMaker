@@ -48,11 +48,12 @@ ico <- function(x, chevron=FALSE) {
 #' b2 <- solo_box(type="danger",value = 13.7,txt = "Nutritional value")
 #' b3 <- solo_box(type="success",value = 1,txt = "Yumminess factor")
 #' b4 <- solo_box(value = 3.57, former=3,txt = "Times apple eaten", icon = "apple")
-#' finisher(b1,b2,b3,b4)
-#' finisher(div_maker(b1,b2,b3),div_maker(b4))
+#' finisher(title = "straight buttons", b1)
+#' finisher(title = "with divs",
+#'          div_maker(subtitle = "boom",textModifier = "h1",b1,b2,b3))
 #'
 #' ## Or taking advantage of the ability to change the textModifier:
-#' finisher(solo_box(value = 3,txt="uh huh",former = 2,textModifier = "h4"))
+#' finisher(title = "h4 modifier", solo_box(value = 3,txt="uh huh",former = 2,textModifier = "h4"))
 #' @export solo_box
 solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md",
                      icon = NULL, type = "info", link = NULL, units = NULL,
@@ -128,12 +129,13 @@ solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md",
 #' thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
 #' g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,
 #' thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
-#' finisher(div_maker(g1,g2,g3,g4))
+#' finisher(title = "Item", div_maker(subtitle = "subitems",textModifier = "h1",g1,g2,g3,g4))
 #' @export solo_gradient_box
-solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL, size = "md",
-                              icon = NULL, target=100, thresholdHigh=90,
-                              thresholdLow=50, link = NULL, units = NULL,
-                              hover = NULL, hide_value=FALSE,
+solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL,
+                              size = "md",icon = NULL, target=100,
+                              thresholdHigh=90, thresholdLow=50,
+                              link = NULL, units = NULL, hover = NULL,
+                              hide_value=FALSE,
                               textModifier="h1", ...) {
   Perc <- value / target * 100
   if (Perc >= thresholdHigh) {
@@ -209,9 +211,10 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL, size = "md"
 #' @details Allows for each button to contain several icon-number-text descriptions.
 #' @examples
 #' library(dplyr)
-#' multi_box(values=c(3,45),title = "Important <br>button",number_zoom=300,
-#' icons=c("apple","calendar"), type="warning", txt=c("times","reports")) %>%
-#' file_maker
+#'multi_box(values = c(3,45), title = "Important <br>button",
+#'          number_zoom = 300, icons = c("apple","calendar"), type = "warning",
+#'          txt = c("times","reports")) %>%
+#'  finisher
 #' \dontrun{
 #' if(interactive()){
 #'  #EXAMPLE1
@@ -279,7 +282,9 @@ multi_box <- function(icons = NULL, txt=NULL, values = NULL,
 #' @importFrom rlang !! enquo syms
 #' @return Returns a list object containing the matrix of buttons
 #' @examples
-#' finisher(tile_matrix(values=c(3,4,5),txt=c("Bob","Pedro","Ana")))
+#' finisher(title = "Tile Matrix", tile_matrix(data = head(iris),
+#'                                             values = Sepal.Length,
+#'                                             txt = Species))
 #' @export tile_matrix
 tile_matrix <- function(data, values, txt, icon, former, target=100,
                         thresholdHigh=90, thresholdLow=50, cols=4,
@@ -333,7 +338,8 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
     df$values[is.na(df$values)] <- 0.001
     warning("Converted NAs in values to 0.001")
   }
-  if (!is.na(former[1])) {
+  if (is.na(former[1])) {
+    browser()
     df$former[is.na(df$former)] <- 0.001
     warning("Converted NAs in former to 0.001")
   }
@@ -384,9 +390,9 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
 #' like "h2", "h3","p", etc. Default = "h1"
 #' @param ... \code{buttons to insert into the div} elements.
 #' @examples
-#' div_maker(subtitle = "Quantativity factors",
-#'           solo_gradient_box(value = 70),
-#'           solo_box(value=34))
+#'div_maker(subtitle = "Quantativity factors",textModifier = "h1",
+#'          solo_gradient_box(value = 70),
+#'          solo_box(value = 34))
 #' @export div_maker
 div_maker <- function(subtitle = NULL, textModifier = "h1", ...) {
   tags$div(
@@ -444,7 +450,7 @@ finisher <- function(title = NULL, css =
 
 # library(dplyr)
 # library(htmltools)
-# a <- tile_matrix(values = iris$Sepal.Length,titles = iris$Species,target = 5,thresholdHigh = 4,thresholdLow = 3)
+# a <-   tile_matrix(data = iris, values = Sepal.Length, txt = Species,target = 5,thresholdHigh = 4,thresholdLow = 3) %>% htmltools::html_print()
 
 # ico(NULL)
 # ico("apple")

@@ -57,5 +57,5 @@ g3 <- solo_gradient_box(value = 20,txt="Test1",target = 50,
 thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
 g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,
 thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
-finisher(div_maker(g1,g2,g3,g4))
+finisher(title = "Item", div_maker(subtitle = "subitems",textModifier = "h1",g1,g2,g3,g4))
 }

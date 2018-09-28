@@ -19,7 +19,7 @@ This function takes buttons made by any of the solo or multi buttons and makes a
 other HTML code, or for inclusion within the function of this package `finisher`.
 }
 \examples{
-div_maker(subtitle = "Quantativity factors",
-          solo_gradient_box(value = 70),
-          solo_box(value=34))
+div_maker(subtitle = "Quantativity factors",textModifier = "h1",
+         solo_gradient_box(value = 70),
+         solo_box(value = 34))
 }
