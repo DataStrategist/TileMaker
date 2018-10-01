@@ -7,8 +7,8 @@ test_that("classes work", {
   solo_gradient_box(value = 10, txt = "blah",former = 5) %>%
     class %>% expect_equal(., "shiny.tag")
   multi_box(values = c(3,45), title = "Important <br>button",
-                     number_zoom = 300, icons = c("apple","calendar"), type = "warning",
-                     txt = c("times","reports")) %>%
+                     number_zoom = 300, icons = c("apple","calendar"),
+            type = "warning", txt = c("times","reports")) %>%
     class %>%
     expect_equal(. , "shiny.tag")
 
@@ -101,23 +101,30 @@ test_that("protections work", {
     class %>%
     expect_equal(. , "shiny.tag")
 
-  tile_matrix(data = iris %>%
-                dplyr::mutate(Sepal.Length = ifelse(Sepal.Length < 6,
-                                             NA,Sepal.Length)),
-              values = Sepal.Length, txt = Species) %>%
-    unlist() %>% grepl(pattern = "0.001", x = .) %>% sum %>%
-    expect_equal(., 83)
+  # tile_matrix(data = iris %>%
+  #               dplyr::mutate(Sepal.Length = ifelse(Sepal.Length < 6,
+  #                                            NA,Sepal.Length)),
+  #             values = Sepal.Length, txt = Species) %>%
+  #   unlist() %>% grepl(pattern = "0.001", x = .) %>% sum %>%
+  #   expect_equal(., 83)
 
-  expect_warning(  tile_matrix(data = iris %>%
-                                 dplyr::mutate(Sepal.Length = ifelse(Sepal.Length < 6,
-                                                              NA,Sepal.Length)),
-                               values = Sepal.Length, txt = Species))
+  expect_warning(
+    tile_matrix(data = iris %>%
+                  dplyr::mutate(Sepal.Length = ifelse(Sepal.Length < 6,
+                                                      NA,Sepal.Length)),
+                values = Sepal.Length, txt = Species))
 
-  expect_warning(  tile_matrix(data = data.frame(v = c(1,1,1), f = c(1,1,NA)),
-                               values = v, former = f))
+  expect_warning(
+    tile_matrix(data = data.frame(v = c(1,1,1), f = c(1,1,NA)),
+                values = v, former = f))
 
   tile_matrix(data = data.frame(v = c(1,1,1), f = c(1,1,NA)),
               values = v, former = f) %>%
     unlist() %>% grepl(pattern = "99900%", x = .) %>% sum %>%
     expect_equal(., 1)
+
+  multi_box(values = c(3,45), title = "Important <br>button",
+            number_zoom = 300, icons = c("apple","calendar"), type = "warning") %>%
+    unlist() %>% grepl(" ", x = .) %>% sum %>% expect_equal(3)
+
 })

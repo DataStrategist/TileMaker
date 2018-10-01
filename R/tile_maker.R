@@ -328,7 +328,7 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
   ## Remake df and start adding extra stuffs
   df <- data_frame(txt, values, former, icon)
 
-  df$id <- 1:nrow(df)
+  df$id <- seq_along(1:nrow(df))
   df$butts <- list("")
 
   # df$stuff <- str_trunc(df$stuff,min(str_length(df$stuff)),side="right")
@@ -338,14 +338,17 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
     df$values[is.na(df$values)] <- 0.001
     warning("Converted NAs in values to 0.001")
   }
-  if (is.na(former[1])) {
-    browser()
+  # browser()
+  ## Need to protect against some NAs, but not if all of them are
+  if (any(is.na(former)) & !all(is.na(former))) {
+    # browser()
     df$former[is.na(df$former)] <- 0.001
     warning("Converted NAs in former to 0.001")
   }
 
-  for (i in 1:nrow(df)) {
-    if (!is.na(former[1])) {
+  for (i in seq_along(1:nrow(df))) {
+    ## do the top one if there's any formers, otherwise do the other
+    if (any(!is.na(former))) {
       df$butts[[i]] <- solo_gradient_box(
         value = df$values[i], txt = df$txt[i],
         size = 2, target = target, thresholdHigh = thresholdHigh,
