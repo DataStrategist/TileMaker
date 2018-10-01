@@ -1,5 +1,5 @@
 
-[![Travis-CI Build Status](https://travis-ci.org/mexindian/TileMaker.svg?branch=master)](https://travis-ci.org/mexindian/TileMaker)
+[![Travis-CI Build Status](https://travis-ci.org/DataStrategist/TileMaker.svg?branch=master)](https://travis-ci.org/DataStrategist/TileMaker)
 
 TileMaker
 =========
@@ -11,7 +11,7 @@ Now available as a package!
 
 To install, please type:
 
-    devtools::install_github("mexindian/TileMaker")
+    devtools::install_github("DataStrategist/TileMaker")
 
 Please see the [Intro vignette](http://htmlpreview.github.io/?https://raw.githubusercontent.com/DataStrategist/TileMaker/master/Vignette.html) to learn more about how to do some lovely stuff, but in the meantime, here's the basics:
 
