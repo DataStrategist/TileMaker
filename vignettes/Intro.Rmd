@@ -1,10 +1,21 @@
 ---
-title: "Introduction to TileMaker"
+title: "Intro"
 output: html_document
+# output:
+#   rmarkdown::html_vignette:
+#         css: //netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css
+vignette: >
+  %\VignetteIndexEntry{Intro}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteDepends{ggplot2, dplyr}
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 ## Meet the Tile
@@ -16,7 +27,7 @@ This package uses Twitter's [Bootstrap](https://getbootstrap.com/) CSS files, an
 Let's start small. Here's the most basic button:
 
 ```{r}
-library(TileMaker) ## to install, use devtools::install_github("mexindian/TileMaker")
+require(TileMaker) ## to install, use devtools::install_github("mexindian/TileMaker")
 solo_box(value = 3.3, txt = "Important parameter")
 ```
 
@@ -29,7 +40,18 @@ solo_box(
 )
 ```
 
-(did you try to hover your mouse over the button?) As you can see, plenty of bells and whistles. Most of the stuff above is self explanatory, except for the `size` which represents the relative size of the button (ignore the `div_maker` for now):
+(did you try to hover your mouse over the button?) As you can see, plenty of bells and whistles. Most of the stuff above is pretty intuitive, but let's explore a bit more, starting with icons (ignore the `div_maker` for now):
+
+```{r}
+div_maker(
+  subtitle = "Icons", textModifier = "h1",
+  solo_box(value = 3.3, txt = "envelope", icon = "envelope"),
+  solo_box(value = 3.3, txt = "pushpin", icon = "pushpin"),
+  solo_box(value = 3.3, txt = "calendar", icon = "calendar")
+)
+```
+
+^ as you can see, we are just using common [glyphicons](https://getbootstrap.com/docs/3.3/components/). See the link to check your options. Next, let's explore the size. 
 
 ```{r}
 div_maker(
@@ -40,7 +62,6 @@ div_maker(
   solo_box(value = 3.3, txt = "large", size = "lg")
 )
 ```
-
 
 ... and the `type`, which dictates the color using the css classes (watch the case sensitivity here!): 
 
@@ -126,10 +147,11 @@ mtcars %>%
 
 The concept of the `tile_matrix` is to provide a quick way to visualize simple information... for example summaries. The fact that the thresholds scale automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information. For example, if one wanted to quickly see diamond prices, we could:
 
-```{r}
+```{r BOOM}
 library(dplyr)
 library(ggplot2)
-diamonds %>%
+library(TileMaker)
+diamonds %>% 
   group_by(color) %>%
   summarize(price = mean(price)) %>%
   ## Assume there was some former price that was a bit different

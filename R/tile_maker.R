@@ -75,14 +75,14 @@ solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md",
               style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
               ico("chevron-down", chevron = TRUE),
               paste(round((as.numeric(former) - as.numeric(value)) /
-                            as.numeric(former) * 100, 1), "%", sep = "")
+                as.numeric(former) * 100, 1), "%", sep = "")
             )
           } else {
             tags$sup(
               style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
               ico("chevron-up", chevron = TRUE),
               paste(round((as.numeric(value) - as.numeric(former)) /
-                            as.numeric(former) * 100, 1), "%", sep = "")
+                as.numeric(former) * 100, 1), "%", sep = "")
             )
           }
         }
@@ -132,7 +132,7 @@ solo_box <- function(value = NULL, txt = NULL, former=NULL, size = "md",
 #' finisher(title = "Item", div_maker(subtitle = "subitems",textModifier = "h1",g1,g2,g3,g4))
 #' @export solo_gradient_box
 solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL,
-                              size = "md",icon = NULL, target=100,
+                              size = "md", icon = NULL, target=100,
                               thresholdHigh=90, thresholdLow=50,
                               link = NULL, units = NULL, hover = NULL,
                               hide_value=FALSE,
@@ -166,17 +166,19 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL,
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
                 ico("chevron-down", chevron = TRUE),
                 paste(round((as.numeric(former) -
-                               as.numeric(value)) /
-                              as.numeric(former) * 100, 1), "%", sep = "")
+                  as.numeric(value)) /
+                  as.numeric(former) * 100, 1), "%", sep = "")
               )
             } else {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
                 ico("chevron-up", chevron = TRUE),
                 paste(round((as.numeric(value) -
-                               as.numeric(former)) /
-                              as.numeric(former) * 100, 1),
-                      "%", sep = "")
+                  as.numeric(former)) /
+                  as.numeric(former) * 100, 1),
+                "%",
+                sep = ""
+                )
               )
             }
           }
@@ -211,7 +213,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former=NULL,
 #' @details Allows for each button to contain several icon-number-text descriptions.
 #' @examples
 #' library(dplyr)
-#'multi_box(values = c(3,45), title = "Important <br>button",
+#' multi_box(values = c(3,45), title = "Important <br>button",
 #'          number_zoom = 300, icons = c("apple","calendar"), type = "warning",
 #'          txt = c("times","reports")) %>%
 #'  finisher
@@ -318,8 +320,11 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
   )
 
   ## Errors
-  if (class(values) != "numeric" & class(values) != "integer") stop(
-    "values should be numeric")
+  if (class(values) != "numeric" & class(values) != "integer") {
+    stop(
+      "values should be numeric"
+    )
+  }
 
 
   ## Clean inputs
@@ -328,7 +333,7 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
   ## Remake df and start adding extra stuffs
   df <- data_frame(txt, values, former, icon)
 
-  df$id <- seq_along(1:nrow(df))
+  df$id <- 1:nrow(df)
   df$butts <- list("")
 
   # df$stuff <- str_trunc(df$stuff,min(str_length(df$stuff)),side="right")
@@ -371,7 +376,8 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
     Outputter <- list("")
     for (i in 1:ceiling(length(Sausage) / cols)) {
       Outputter[[i]] <- div_maker(Sausage[((i - 1) * cols + 1):(cols * i)],
-                                  textModifier = "h2")
+        textModifier = "h2"
+      )
     }
     Outputter
   }
@@ -393,7 +399,7 @@ tile_matrix <- function(data, values, txt, icon, former, target=100,
 #' like "h2", "h3","p", etc. Default = "h1"
 #' @param ... \code{buttons to insert into the div} elements.
 #' @examples
-#'div_maker(subtitle = "Quantativity factors",textModifier = "h1",
+#' div_maker(subtitle = "Quantativity factors",textModifier = "h1",
 #'          solo_gradient_box(value = 70),
 #'          solo_box(value = 34))
 #' @export div_maker

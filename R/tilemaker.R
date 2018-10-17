@@ -42,58 +42,76 @@
 #' # Button1;Button2;Button3
 #' @export
 
-ButtonMaker <- function(Color=1,Size=4,Value,Subtitle="",Link="",Icon="",
-                        Units="", Target=0,ThresholdHigh=0,ThresholdLow=0,
-                        Hover="", alpha=0.5, Former=Value){
-  .Deprecated(solo_box, package="tileMaker", "These functions are provided for
+ButtonMaker <- function(Color=1, Size=4, Value, Subtitle="", Link="", Icon="",
+                        Units="", Target=0, ThresholdHigh=0, ThresholdLow=0,
+                        Hover="", alpha=0.5, Former=Value) {
+  .Deprecated(solo_box,
+    package = "tileMaker", "These functions are provided for
 compatibility with older versions of R only, and may be
               defunct as soon as of the next release.",
-              old = as.character(sys.call(sys.parent()))[1L])
+    old = as.character(sys.call(sys.parent()))[1L]
+  )
   ## colors
-  colorList <- c("success",  "warning", "danger", "info", "primary", "default")
+  colorList <- c("success", "warning", "danger", "info", "primary", "default")
 
   ## sizes:
-  SizeList <- c("xs","sm","md","lg")
+  SizeList <- c("xs", "sm", "md", "lg")
 
-  paste(paste('<',
-              if(Link !=""){paste('a href="',Link,'" role="button" ',sep='')
-                } else{'button'},
-              ' type="button" class="btn ',sep=''),
-        if(Target ==0){
-          paste('btn-',colorList[Color],sep='')
-        } else {
-          Perc <- Value/Target *100
-          if(Perc > ThresholdHigh){
-            'btn-success'
-          } else if(Perc< ThresholdLow){
-            'btn-danger'
-          } else {
-            'btn-warning'
-          }
-        },
-        paste(' btn-', SizeList[Size],
-              '"',
+  paste(paste("<",
+    if (Link != "") {
+      paste('a href="', Link, '" role="button" ', sep = "")
+    } else {
+      "button"
+    },
+    ' type="button" class="btn ',
+    sep = ""
+  ),
+  if (Target == 0) {
+    paste("btn-", colorList[Color], sep = "")
+  } else {
+    Perc <- Value / Target * 100
+    if (Perc > ThresholdHigh) {
+      "btn-success"
+    } else if (Perc < ThresholdLow) {
+      "btn-danger"
+    } else {
+      "btn-warning"
+    }
+  },
+  paste(" btn-", SizeList[Size],
+    '"',
 
-              if(Hover !=""){paste(' title="',Hover,'" ')},
-              '><h1>',sep=''),
+    if (Hover != "") {
+      paste(' title="', Hover, '" ')
+    },
+    "><h1>",
+    sep = ""
+  ),
 
-        if(Icon !=""){paste(' <span class="',Icon,'" aria-hidden="true" style=
-                            "opacity:',alpha,'"></span> ',sep='')},
-        paste(Value,Units,sep=''),
+  if (Icon != "") {
+    paste(' <span class="', Icon, '" aria-hidden="true" style=
+                            "opacity:', alpha, '"></span> ', sep = "")
+  },
+  paste(Value, Units, sep = ""),
 
-        if(Former>Value){
-          paste('<sup style= "font-size: 12px;color:#EEEEEE;
+  if (Former > Value) {
+    paste('<sup style= "font-size: 12px;color:#EEEEEE;
 vertical-align: top;">
-                &#9660;',round((Former-Value)/Former*100,1),'%</sup>',sep='')
-        } else if (Former<Value){
-          paste('<sup style= "font-size: 12px;color:#EEEEEE;
+                &#9660;', round((Former - Value) / Former * 100, 1), "%</sup>", sep = "")
+  } else if (Former < Value) {
+    paste('<sup style= "font-size: 12px;color:#EEEEEE;
 vertical-align: top;">
-                &#9650;',round((Value-Former)/Former*100,1),'%</sup>',sep='')
-        },
-        '</h1>',
-        Subtitle,
-        if(Link !=""){'</a>'} else{'</button>'},
-        sep="")
+                &#9650;', round((Value - Former) / Former * 100, 1), "%</sup>", sep = "")
+  },
+  "</h1>",
+  Subtitle,
+  if (Link != "") {
+    "</a>"
+  } else {
+    "</button>"
+  },
+  sep = ""
+  )
 }
 
 #' DivMaker
@@ -112,16 +130,20 @@ vertical-align: top;">
 #' DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
 #' @export
 
-DivMaker <- function(Title="",Buttons){
-  .Deprecated(div_maker, package="tileMaker",
-"These functions are provided for compatibility with older versions of R only,
+DivMaker <- function(Title="", Buttons) {
+  .Deprecated(div_maker,
+    package = "tileMaker",
+    "These functions are provided for compatibility with older versions of R only,
 and may be defunct as soon as of the next release.",
-              old = as.character(sys.call(sys.parent()))[1L])
+    old = as.character(sys.call(sys.parent()))[1L]
+  )
   paste('<div class="container"><h2>',
-        Title,
-        '</h2>',
-        Buttons,
-        '</div>',sep="")
+    Title,
+    "</h2>",
+    Buttons,
+    "</div>",
+    sep = ""
+  )
 }
 
 
@@ -156,33 +178,41 @@ and may be defunct as soon as of the next release.",
 #' browseURL("example.html")
 #' @export
 
-TileMaker <- function(MainTitle="",Divs,FileName="x",ShowDate=FALSE,
-                      localCSS=FALSE){
-  .Deprecated(TileMaker, package="tileMaker",
-"These functions are provided for compatibility with older versions of R only,
+TileMaker <- function(MainTitle="", Divs, FileName="x", ShowDate=FALSE,
+                      localCSS=FALSE) {
+  .Deprecated(TileMaker,
+    package = "tileMaker",
+    "These functions are provided for compatibility with older versions of R only,
 and may be defunct as soon as of the next release.",
-              old = as.character(sys.call(sys.parent()))[1L])
+    old = as.character(sys.call(sys.parent()))[1L]
+  )
   paste('<!DOCTYPE html><html lang="en"><head>
       <meta name="viewport" content="width=device-width, initial-scale=1">',
-      if(localCSS==TRUE){'<link rel="stylesheet" href="bootstrap.min.css">'
-      } else {'<link rel="stylesheet" href=
+    if (localCSS == TRUE) {
+      '<link rel="stylesheet" href="bootstrap.min.css">'
+    } else {
+      '<link rel="stylesheet" href=
         "http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/
-        bootstrap.min.css">'},
-      '</head><body><h1>',
-      MainTitle,
-      '</h1>',
-      if(ShowDate){paste('<h2>Report Date: ',Sys.Date(),'</h2>',sep="")},
-      Divs,
-      '</body></html>',
-      sep="") -> somethin
+        bootstrap.min.css">'
+    },
+    "</head><body><h1>",
+    MainTitle,
+    "</h1>",
+    if (ShowDate) {
+      paste("<h2>Report Date: ", Sys.Date(), "</h2>", sep = "")
+    },
+    Divs,
+    "</body></html>",
+    sep = ""
+  ) -> somethin
 
-      ## Output file
-      if (FileName !="x") {
-        # sink(FileName)
-        # somethin
-        # sink()
-        cat(somethin,file=FileName)
-      } else {
-          somethin
-        }
+  ## Output file
+  if (FileName != "x") {
+    # sink(FileName)
+    # somethin
+    # sink()
+    cat(somethin, file = FileName)
+  } else {
+    somethin
+  }
 }
