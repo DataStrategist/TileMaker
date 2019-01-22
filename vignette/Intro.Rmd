@@ -3,7 +3,8 @@ title: "Intro"
 output: html_document
 # output:
 #   rmarkdown::html_vignette:
-#         css: //netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css
+#         css: //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+## Hrm... can't use html_vignette because it bulldozes the bootstrap css (ie, it removes icons)
 vignette: >
   %\VignetteIndexEntry{Intro}
   %\VignetteEngine{knitr::rmarkdown}

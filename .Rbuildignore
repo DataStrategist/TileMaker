@@ -1,3 +1,5 @@
+^Meta$
+^doc$
 ^.*\.css$
 ^example.html$
 ^.*\.Rproj$
