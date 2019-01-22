@@ -4,10 +4,10 @@
 \alias{solo_gradient_box}
 \title{solo_gradient_box}
 \usage{
-solo_gradient_box(value = NULL, txt = NULL, former = NULL, size = "md",
-  icon = NULL, target = 100, thresholdHigh = 90, thresholdLow = 50,
-  link = NULL, units = NULL, hover = NULL, hide_value = FALSE,
-  textModifier = "h1", ...)
+solo_gradient_box(value = NULL, txt = NULL, former = NULL,
+  size = "md", icon = NULL, target = 100, thresholdHigh = 90,
+  thresholdLow = 50, link = NULL, units = NULL, hover = NULL,
+  hide_value = FALSE, textModifier = "h1", ...)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}

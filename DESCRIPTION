@@ -7,7 +7,7 @@ Maintainer: Amit Kohli <amit@amitkohli.com>
 Description: This uses Bootstrap v3 buttons to create pretty single-data-point tiles for dashboards. Acts as an alternative to infoBox and valueBox.
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.1
 BugReports: https://github.com/mexindian/TileMaker/issues
 URL: https://github.com/mexindian/TileMaker
 Imports: htmltools, purrr, dplyr, rlang

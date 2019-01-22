@@ -5,8 +5,8 @@
 \title{solo_box}
 \usage{
 solo_box(value = NULL, txt = NULL, former = NULL, size = "md",
-  icon = NULL, type = "info", link = NULL, units = NULL, hover = NULL,
-  textModifier = "h1", ...)
+  icon = NULL, type = "info", link = NULL, units = NULL,
+  hover = NULL, textModifier = "h1", ...)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
