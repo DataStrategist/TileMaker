@@ -1,0 +1,304 @@
+
+R version 3.5.0 (2018-04-23) -- "Joy in Playing"
+Copyright (C) 2018 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "TileMaker"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> base::assign(".ExTimings", "TileMaker-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('TileMaker')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("ButtonMaker")
+> ### * ButtonMaker
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ButtonMaker
+> ### Title: ButtonMaker
+> ### Aliases: ButtonMaker
+> 
+> ### ** Examples
+> 
+> # ADD EXAMPLES HERE
+> # Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
+> # Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+> # Button3 <- ButtonMaker(Color = 4,Value = 1,Subtitle = "Yumminess factor")
+> # Button1;Button2;Button3
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ButtonMaker", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("DivMaker")
+> ### * DivMaker
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: DivMaker
+> ### Title: DivMaker
+> ### Aliases: DivMaker
+> 
+> ### ** Examples
+> 
+> # ADD EXAMPLES HERE
+> Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
+Warning: These functions are provided for
+compatibility with older versions of R only, and may be
+              defunct as soon as of the next release.
+> Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+Warning: These functions are provided for
+compatibility with older versions of R only, and may be
+              defunct as soon as of the next release.
+> DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+Warning: These functions are provided for compatibility with older versions of R only,
+and may be defunct as soon as of the next release.
+[1] "<div class=\"container\"><h2>Quantativity factors</h2><button type=\"button\" class=\"btn btn-warning btn-lg\"><h1>3.57</h1>B</button> <button type=\"button\" class=\"btn btn-danger btn-lg\"><h1>13.7</h1>Nutritional value</button></div>"
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("DivMaker", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("TileMaker")
+> ### * TileMaker
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: TileMaker
+> ### Title: TileMaker
+> ### Aliases: TileMaker
+> 
+> ### ** Examples
+> 
+> # ADD EXAMPLES HERE
+> Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
+Warning: These functions are provided for
+compatibility with older versions of R only, and may be
+              defunct as soon as of the next release.
+> Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
+Warning: These functions are provided for
+compatibility with older versions of R only, and may be
+              defunct as soon as of the next release.
+> Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
+Warning: These functions are provided for compatibility with older versions of R only,
+and may be defunct as soon as of the next release.
+> Div2 <- DivMaker(Title = "Inverse proportions",Buttons = paste(Button2,Button1))
+Warning: These functions are provided for compatibility with older versions of R only,
+and may be defunct as soon as of the next release.
+> TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
+Warning: These functions are provided for compatibility with older versions of R only,
+and may be defunct as soon as of the next release.
+> TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2))
+Warning: These functions are provided for compatibility with older versions of R only,
+and may be defunct as soon as of the next release.
+[1] "<!DOCTYPE html><html lang=\"en\"><head>\n      <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><link rel=\"stylesheet\" href=\n        \"http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/\n        bootstrap.min.css\"></head><body><h1>Hello</h1><div class=\"container\"><h2>Quantativity factors</h2><button type=\"button\" class=\"btn btn-warning btn-lg\"><h1>3.57</h1>B</button> <button type=\"button\" class=\"btn btn-danger btn-lg\"><h1>13.7</h1>Nutritional value</button></div> <div class=\"container\"><h2>Inverse proportions</h2><button type=\"button\" class=\"btn btn-danger btn-lg\"><h1>13.7</h1>Nutritional value</button> <button type=\"button\" class=\"btn btn-warning btn-lg\"><h1>3.57</h1>B</button></div></body></html>"
+> browseURL("example.html")
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("TileMaker", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("div_maker")
+> ### * div_maker
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: div_maker
+> ### Title: Div maker
+> ### Aliases: div_maker
+> 
+> ### ** Examples
+> 
+> div_maker(subtitle = "Quantativity factors",textModifier = "h1",
++          solo_gradient_box(value = 70),
++          solo_box(value = 34))
+<div class="container">
+  <h1>Quantativity factors</h1>
+  <a>
+    <button class="btn btn-md btn-warning" role="button" type="warning">
+      <h1>70</h1>
+      
+    </button>
+  </a>
+  <a>
+    <button class="btn btn-md btn-info" role="button" type="info">
+      <h1>34</h1>
+      
+    </button>
+  </a>
+</div>
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("div_maker", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("multi_box")
+> ### * multi_box
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: multi_box
+> ### Title: multi_box
+> ### Aliases: multi_box
+> 
+> ### ** Examples
+> 
+> library(dplyr)
+Warning: package 'dplyr' was built under R version 3.5.1
+
+Attaching package: 'dplyr'
+
+The following objects are masked from 'package:stats':
+
+    filter, lag
+
+The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union
+
+> multi_box(values = c(3,45), title = "Important <br>button",
++          number_zoom = 300, icons = c("apple","calendar"), type = "warning",
++          txt = c("times","reports")) %>%
++  finisher
+> ## Not run: 
+> ##D if(interactive()){
+> ##D  #EXAMPLE1
+> ##D  }
+> ## End(Not run)
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("multi_box", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+
+detaching 'package:dplyr'
+
+> nameEx("solo_box")
+> ### * solo_box
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: solo_box
+> ### Title: solo_box
+> ### Aliases: solo_box
+> 
+> ### ** Examples
+> 
+> b1 <- solo_box(type="warning",value = 3.57,txt = "B")
+> b2 <- solo_box(type="danger",value = 13.7,txt = "Nutritional value")
+> b3 <- solo_box(type="success",value = 1,txt = "Yumminess factor")
+> b4 <- solo_box(value = 3.57, former=3,txt = "Times apple eaten", icon = "apple")
+> finisher(title = "straight buttons", b1)
+> finisher(title = "with divs",
++          div_maker(subtitle = "boom",textModifier = "h1",b1,b2,b3))
+> 
+> ## Or taking advantage of the ability to change the textModifier:
+> finisher(title = "h4 modifier", solo_box(value = 3,txt="uh huh",former = 2,textModifier = "h4"))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("solo_box", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("solo_gradient_box")
+> ### * solo_gradient_box
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: solo_gradient_box
+> ### Title: solo_gradient_box
+> ### Aliases: solo_gradient_box
+> 
+> ### ** Examples
+> 
+> # ADD EXAMPLES HERE
+> g1 <- solo_gradient_box(value = 40)
+> g2 <- solo_gradient_box(value = 40,target = 50,
++ thresholdHigh = 80, thresholdLow=60)
+> g3 <- solo_gradient_box(value = 20,txt="Test1",target = 50,
++ thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
+> g4 <- solo_gradient_box(value = 35,txt="Test2",target = 50,
++ thresholdHigh = 80, thresholdLow=60,hide_value=TRUE)
+> finisher(title = "Item", div_maker(subtitle = "subitems",textModifier = "h1",g1,g2,g3,g4))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("solo_gradient_box", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("tile_matrix")
+> ### * tile_matrix
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: tile_matrix
+> ### Title: tileMatrix
+> ### Aliases: tile_matrix
+> 
+> ### ** Examples
+> 
+> finisher(title = "Tile Matrix", tile_matrix(data = head(iris),
++                                             values = Sepal.Length,
++                                             txt = Species))
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("tile_matrix", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  1.6 1.3 5.88 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

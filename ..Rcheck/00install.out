@@ -1,0 +1,16 @@
+* installing *source* package 'TileMaker' ...
+** R
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+*** arch - i386
+Warning: namespace 'leaflet' is not available and has been replaced
+by .GlobalEnv when processing object 'map'
+*** arch - x64
+Warning: namespace 'leaflet' is not available and has been replaced
+by .GlobalEnv when processing object 'map'
+* DONE (TileMaker)
+In R CMD INSTALL

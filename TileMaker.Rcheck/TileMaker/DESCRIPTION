@@ -11,9 +11,8 @@ RoxygenNote: 6.1.1
 BugReports: https://github.com/mexindian/TileMaker/issues
 URL: https://github.com/mexindian/TileMaker
 Imports: htmltools, purrr, dplyr, rlang
-Suggests:
-    testthat,
-    knitr,
-    rmarkdown,
-    ggplot2
+Suggests: testthat, knitr, rmarkdown, ggplot2
 VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2019-01-24 09:38:03 UTC; Amit
+Built: R 3.5.0; ; 2019-01-24 09:38:42 UTC; windows
