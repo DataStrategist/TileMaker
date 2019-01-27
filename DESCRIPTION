@@ -8,8 +8,8 @@ Description: This package builds handsome single-data-point boxes suitable for i
 License: MIT + file LICENSE
 LazyData: TRUE
 RoxygenNote: 6.1.1
-BugReports: https://github.com/mexindian/TileMaker/issues
-URL: https://github.com/mexindian/TileMaker
+BugReports: https://github.com/DataStrategist/TileMaker/issues
+URL: https://github.com/DataStrategist/TileMaker
 Imports: htmltools, purrr, dplyr, rlang
 Suggests:
     testthat,

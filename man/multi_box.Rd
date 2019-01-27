@@ -43,13 +43,15 @@ Allows for each button to contain several icon-number-text descriptions.
 }
 \examples{
 library(dplyr)
-multi_box(values = c(3,45), title = "Important <br>button",
-         number_zoom = 300, icons = c("apple","calendar"), type = "warning",
-         txt = c("times","reports")) \%>\%
- finisher
+multi_box(
+  values = c(3, 45), title = "Important <br>button",
+  number_zoom = 300, icons = c("apple", "calendar"), type = "warning",
+  txt = c("times", "reports")
+) \%>\%
+  finisher()
 \dontrun{
-if(interactive()){
- #EXAMPLE1
- }
+if (interactive()) {
+  # EXAMPLE1
+}
 }
 }

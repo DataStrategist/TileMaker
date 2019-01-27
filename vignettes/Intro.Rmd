@@ -28,7 +28,7 @@ This package uses Twitter's [Bootstrap](https://getbootstrap.com/) CSS files, an
 Let's start small. Here's the most basic button:
 
 ```{r}
-require(TileMaker) ## to install, use devtools::install_github("mexindian/TileMaker")
+require(TileMaker) ## to install, use devtools::install_github("DataStrategist/TileMaker")
 solo_box(value = 3.3, txt = "Important parameter")
 ```
 

@@ -45,7 +45,9 @@ Returns a list object containing the matrix of buttons
 Create a matrix of buttons suitable for quick comparisons
 }
 \examples{
-finisher(title = "Tile Matrix", tile_matrix(data = head(iris),
-                                            values = Sepal.Length,
-                                            txt = Species))
+finisher(title = "Tile Matrix", tile_matrix(
+  data = head(iris),
+  values = Sepal.Length,
+  txt = Species
+))
 }
