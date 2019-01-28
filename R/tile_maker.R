@@ -69,26 +69,28 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
-      tag(textModifier, tags$span(
-        ico(icon), value, units,
-        if (!is.null(former)) {
-          if (former > value) {
-            tags$sup(
-              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-              ico("chevron-down", chevron = TRUE),
-              paste(round((as.numeric(former) - as.numeric(value)) /
-                as.numeric(former) * 100, 1), "%", sep = "")
-            )
-          } else {
-            tags$sup(
-              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-              ico("chevron-up", chevron = TRUE),
-              paste(round((as.numeric(value) - as.numeric(former)) /
-                as.numeric(former) * 100, 1), "%", sep = "")
-            )
+        if (!(is.null(value) & is.null(units) & is.null(icon))) {
+          tag(textModifier, tags$span(
+          ico(icon), value, units,
+          if (!is.null(former)) {
+            if (former > value) {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                ico("chevron-down", chevron = TRUE),
+                paste(round((as.numeric(former) - as.numeric(value)) /
+                  as.numeric(former) * 100, 1), "%", sep = "")
+              )
+            } else {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                ico("chevron-up", chevron = TRUE),
+                paste(round((as.numeric(value) - as.numeric(former)) /
+                  as.numeric(former) * 100, 1), "%", sep = "")
+              )
+            }
           }
-        }
-      )$children),
+        )$children)
+      },
       HTML(txt),
       ...
     )
