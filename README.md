@@ -8,9 +8,9 @@ An R library that enables the creation of data tiles for inclusion in a html das
 
 To install, please type:
 
-    devtools::install_github("DataStrategist/TileMaker")
+    devtools::install_github("DataStrategist/TileMaker", build_vignettes = TRUE)
 
-Please see the [Intro vignette](http://htmlpreview.github.io/?https://raw.githubusercontent.com/DataStrategist/TileMaker/master/Vignette.html) to learn more about how to do some lovely stuff, but in the meantime, here's the basics:
+Please see the Intro vignette once you download the package](http://htmlpreview.github.io/?https://raw.githubusercontent.com/DataStrategist/TileMaker/master/Vignette.html) to learn more about how to do some lovely stuff, but in the meantime, here's the basics:
 
 This package is intended to "highlight single values", mainly in dashboards, reports or Shiny apps, and is highly customizeable. This is what it looks like:
 
