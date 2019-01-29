@@ -49,7 +49,7 @@ finisher(
   title = "with divs",
   divs = div_maker(subtitle = "boom",
   textModifier = "h1",
-  divs = c(b1, b2, b3))
+  div_maker(subtitle = "Boom", textModifier = "hi",b1, b2, b3))
 )
 
 ## Or taking advantage of the ability to change the textModifier:

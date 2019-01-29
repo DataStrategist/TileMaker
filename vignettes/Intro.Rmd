@@ -206,7 +206,7 @@ Div2 <- div_maker(subtitle = "Effect", textModifier = "h2", Button4, Button5)
 ## Now put them all together:
 finisher(
   title = "Important block", css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
-  file = NULL, textModifier = "h1", divs = c(Div1, Div2)
+  file = NULL, textModifier = "h1", div_maker(subtitle = "Boom", textModifier = "hi",Div1, Div2)
 )
 ```
 

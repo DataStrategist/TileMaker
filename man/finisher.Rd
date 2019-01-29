@@ -19,7 +19,7 @@ https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https:/
 
 \item{textModifier}{Optional css category of "large" text. In this case, title. Default=h1}
 
-\item{divs}{\code{div_maker} elements (or individual buttons, wrapped in `c()`).}
+\item{divs}{\code{div_maker} elements.}
 }
 \description{
 Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker`, or individual buttons if so desired, and

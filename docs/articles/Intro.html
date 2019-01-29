@@ -609,7 +609,7 @@ diamonds <span class="op">%&gt;%</span><span class="st"> </span>
 <h1>
 3170
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-925.1%
+293.7%
 </sup>
 </h1>
 D
@@ -620,7 +620,7 @@ D
 <h1>
 3077
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-654.8%
+103.5%
 </sup>
 </h1>
 E
@@ -631,7 +631,7 @@ E
 <h1>
 3725
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--928.3%
+-1296.9%
 </sup>
 </h1>
 F
@@ -642,7 +642,7 @@ F
 <h1>
 3999
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-120.7%
+137.1%
 </sup>
 </h1>
 G
@@ -657,7 +657,7 @@ G
 <h1>
 4487
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-2890.9%
+100.1%
 </sup>
 </h1>
 H
@@ -668,7 +668,7 @@ H
 <h1>
 5092
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-135.2%
+119.6%
 </sup>
 </h1>
 I
@@ -679,7 +679,7 @@ I
 <h1>
 5324
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--906.5%
+1138.3%
 </sup>
 </h1>
 J
@@ -869,12 +869,13 @@ Div2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/div_ma
 ## Now put them all together:
 <span class="kw"><a href="../reference/finisher.html">finisher</a></span>(
   <span class="dt">title =</span> <span class="st">"Important block"</span>, <span class="dt">css =</span> <span class="st">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span>,
-  <span class="dt">file =</span> <span class="ot">NULL</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>, <span class="dt">divs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(Div1, Div2)
+  <span class="dt">file =</span> <span class="ot">NULL</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>, <span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Boom"</span>, <span class="dt">textModifier =</span> <span class="st">"hi"</span>,Div1, Div2)
 )</code></pre></div>
 
 
 <h1>Important block</h1>
-div
+<div>
+<hi>Boom</hi><div class="container">
 <h2>Future</h2>
 <a>
 <button class="btn btn-md btn-danger" role="button" type="danger">
@@ -903,8 +904,8 @@ GW
 Powah
 </button>
 </a>
-div
-container
+</div>
+<div class="container">
 <h2>Effect</h2>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
@@ -921,6 +922,8 @@ Heads turned
 Answer
 </button>
 </a>
+</div>
+</div>
 
 
 <p>These functions are included to help with inclusion in different document types.. sometimes report types get finicky, but perhaps can stop complaining if they are included within a <code>finisher</code> block.</p>

@@ -83,7 +83,7 @@
 <p>An R library that enables the creation of data tiles for inclusion in a html dashboard or some such.</p>
 <p>To install, please type:</p>
 <pre><code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("DataStrategist/TileMaker", build_vignettes = TRUE)</a></code></pre>
-<p>Please see the <a href="http://datastrategist.github.io/TileMaker/">pkgdown site</a> to learn more about how to do some lovely stuff, but in the meantime, here’s the basics:</p>
+<p>Please see the <a href="http://datastrategist.github.io/TileMaker/articles/Intro.html">Intro Vignette</a> to learn more about how to do some lovely stuff, but in the meantime, here’s the basics:</p>
 <p>This package is intended to “highlight single values”, mainly in dashboards, reports or Shiny apps, and is highly customizeable. This is what it looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse,<span class="dt">quietly =</span> <span class="ot">TRUE</span>))
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(TileMaker)
@@ -112,12 +112,13 @@ d3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/div_maker.h
   <span class="dt">title =</span> <span class="st">"Important Reportings"</span>, 
   <span class="dt">css =</span> <span class="st">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span>,
   <span class="dt">file =</span> <span class="ot">NULL</span>, 
-  <span class="dt">textModifier =</span> <span class="st">"h1"</span>,<span class="dt">divs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(d1, d2, d3)
+  <span class="dt">textModifier =</span> <span class="st">"h1"</span>,<span class="kw"><a href="reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Boom"</span>, <span class="dt">textModifier =</span> <span class="st">"hi"</span>,d1, d2, d3)
 )</code></pre></div>
 
 
 <h1>Important Reportings</h1>
-div
+<div>
+<hi>Boom</hi><div class="container">
 <h1>First line</h1>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
@@ -134,8 +135,8 @@ Little piggies<br>go to the market
 test score I got
 </button>
 </a>
-div
-container
+</div>
+<div class="container">
 <h1>Second line</h1>
 <a>
 <button class="btn btn-md btn-success" role="button" type="success">
@@ -163,8 +164,8 @@ Mohammed
 </h3>
 </button>
 </a>
-div
-container
+</div>
+<div class="container">
 <h1>Boom line</h1>
 <a>
 <h1></h1>
@@ -231,6 +232,8 @@ virginica
 </h2>
 </div>
 </a>
+</div>
+</div>
 
 
 </div>

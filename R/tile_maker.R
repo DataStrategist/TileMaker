@@ -53,7 +53,7 @@ ico <- function(x, chevron = FALSE) {
 #'   title = "with divs",
 #'   divs = div_maker(subtitle = "boom",
 #'   textModifier = "h1",
-#'   divs = c(b1, b2, b3))
+#'   div_maker(subtitle = "Boom", textModifier = "hi",b1, b2, b3))
 #' )
 #'
 #' ## Or taking advantage of the ability to change the textModifier:
@@ -454,7 +454,7 @@ div_maker <- function(subtitle, textModifier, ...) {
 #' https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css
 #' @param file Optional filename if you desire to save the file.
 #' @param textModifier Optional css category of "large" text. In this case, title. Default=h1
-#' @param divs \code{div_maker} elements (or individual buttons, wrapped in `c()`).
+#' @param divs \code{div_maker} elements.
 #' @importFrom htmltools browsable save_html
 #' @export finisher
 finisher <- function(title = NULL, css =
