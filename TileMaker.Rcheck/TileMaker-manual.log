@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.9.27)  24 JAN 2019 09:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500 64-bit) (preloaded format=pdflatex 2018.9.27)  29 JAN 2019 17:05
 entering extended mode
-**C:/Users/Amit/AppData/Local/Temp/RtmpuKgumU/Rd2pdf36c41669772f/Rd2.tex
-(C:/Users/Amit/AppData/Local/Temp/RtmpuKgumU/Rd2pdf36c41669772f/Rd2.tex
+**C:/Users/Amit/AppData/Local/Temp/Rtmp6n4HAZ/Rd2pdf44b8e6c958/Rd2.tex
+(C:/Users/Amit/AppData/Local/Temp/Rtmp6n4HAZ/Rd2pdf44b8e6c958/Rd2.tex
 LaTeX2e <2017-04-15>
 Babel <3.15> and hyphenation patterns for 75 language(s) loaded.
 
@@ -23,7 +23,7 @@ File: bk10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(C:/PROGRA~1/R/R-35~1.0/share/texmf/tex/latex\Rd.sty
+(C:/PROGRA~1/R/R-35~1.2/share/texmf/tex/latex\Rd.sty
 Package: Rd 
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
@@ -708,9 +708,6 @@ Now handling font encoding PD1 ...
    defining Unicode char U+2026 (decimal 8230)
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
-)
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\latin1.def"
-File: latin1.def 2015/03/17 v1.2c Input encoding file
 ))
 \@indexfile=\write3
 \openout3 = `Rd2.idx'.
@@ -783,20 +780,23 @@ LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 11.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <20.74> not available
 (Font)              Font shape `T1/ptm/b/n' tried instead on input line 11.
-LaTeX Font Info:    Try loading font information for T1+zi4 on input line 20.
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
+File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
+)
+LaTeX Font Info:    Try loading font information for T1+zi4 on input line 21.
 
 (C:\Users\Amit\AppData\Roaming\MiKTeX\2.9\tex\latex\inconsolata\t1zi4.fd
 File: t1zi4.fd 2018/01/14 T1/zi4 (Inconsolata)
 )
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 10.0pt on input line 20.
+(Font)              scaled to size 10.0pt on input line 21.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 25.
+(Font)              <7> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 25.
+(Font)              <5> on input line 26.
 LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 32.
-LaTeX Font Info:    Try loading font information for T1+phv on input line 32.
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 34.
+LaTeX Font Info:    Try loading font information for T1+phv on input line 34.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\psnfss\t1phv.fd"
 File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
@@ -811,13 +811,13 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 
 
 {C:/Users/Amit/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Overfull \hbox (26.17722pt too wide) in paragraph at lines 63--64
+Overfull \hbox (26.17722pt too wide) in paragraph at lines 65--66
 []\T1/ptm/m/n/10 Optional glyph-icon that should be dis-played from http://getb
 ootstrap.com/components/ 
  []
 
 LaTeX Font Info:    Font shape `T1/zi4/m/n' will be
-(Font)              scaled to size 9.0pt on input line 88.
+(Font)              scaled to size 9.0pt on input line 90.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [2]
@@ -827,7 +827,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
-Overfull \hbox (157.25516pt too wide) in paragraph at lines 183--186
+Overfull \hbox (157.25516pt too wide) in paragraph at lines 187--190
 \T1/ptm/m/n/10 some oth-ers that might be in-ter-est-ing to you are: https://ma
 xcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css
  []
@@ -838,7 +838,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [4]
-Overfull \hbox (92.6557pt too wide) in paragraph at lines 242--244
+Overfull \hbox (92.6557pt too wide) in paragraph at lines 246--248
 []\T1/ptm/m/n/10 Optional boot-strap css el-e-ment that gov-erns the color. htt
 ps://v4-alpha.getbootstrap.com/utilities/colors/
  []
@@ -846,27 +846,21 @@ ps://v4-alpha.getbootstrap.com/utilities/colors/
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [5]
-Overfull \hbox (26.17722pt too wide) in paragraph at lines 306--308
+Overfull \hbox (26.17722pt too wide) in paragraph at lines 312--314
 []\T1/ptm/m/n/10 Optional glyph-icon that should be dis-played from http://getb
 ootstrap.com/components/
  []
 
 
-Overfull \hbox (92.6557pt too wide) in paragraph at lines 309--311
+Overfull \hbox (92.6557pt too wide) in paragraph at lines 315--317
 []\T1/ptm/m/n/10 Optional boot-strap css el-e-ment that gov-erns the color. htt
 ps://v4-alpha.getbootstrap.com/utilities/colors/
- []
-
-
-Overfull \hbox (20.24715pt too wide) in paragraph at lines 336--336
- []\T1/zi4/m/n/9 finisher(title = "h4 modifier", solo_box(value = 3,txt="uh huh
-",former = 2,textModifier = "h4"))[] 
  []
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ) [6]
-Overfull \hbox (26.17722pt too wide) in paragraph at lines 366--368
+Overfull \hbox (26.17722pt too wide) in paragraph at lines 378--380
 []\T1/ptm/m/n/10 Optional glyph-icon that should be dis-played from http://getb
 ootstrap.com/components/
  []
@@ -877,7 +871,7 @@ File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2017/01/28 v1.1t UTF-8 support for inputenc
 )
-Overfull \hbox (26.17722pt too wide) in paragraph at lines 484--486
+Overfull \hbox (26.17722pt too wide) in paragraph at lines 503--505
 []\T1/ptm/m/n/10 Optional glyph-icon that should be dis-played from http://getb
 ootstrap.com/components/
  []
@@ -886,23 +880,23 @@ ootstrap.com/components/
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 521.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 521.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 542.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 542.
  (Rd2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 521.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 521.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 542.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 542.
 Package rerunfilecheck Info: File `Rd2.out' has not changed.
 (rerunfilecheck)             Checksum: 554601C78AAEF7A434BC89063CD73F7F;599.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 521.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 542.
  ) 
 Here is how much of TeX's memory you used:
- 6663 strings out of 493312
- 95143 string characters out of 3138902
- 174768 words of memory out of 3000000
- 10012 multiletter control sequences out of 15000+200000
+ 6660 strings out of 493312
+ 95088 string characters out of 3138902
+ 174424 words of memory out of 3000000
+ 10010 multiletter control sequences out of 15000+200000
  37871 words of font info for 47 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 38i,6n,36p,333b,592s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,6n,36p,331b,644s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Users/Amit/AppDa
 ta/Roaming/MiKTeX/2.9/fonts/enc/dvips/inconsolata/i4-t1-0.enc}<C:/Users/Amit/Ap
 pData/Roaming/MiKTeX/2.9/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C
@@ -910,7 +904,7 @@ pData/Roaming/MiKTeX/2.9/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb><C
 s/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/urw/times/utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times
 /utmr8a.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Rd2.pdf (11 pages, 121885 bytes).
+Output written on Rd2.pdf (11 pages, 121987 bytes).
 PDF statistics:
  221 PDF objects out of 1000 (max. 8388607)
  80 named destinations out of 1000 (max. 500000)

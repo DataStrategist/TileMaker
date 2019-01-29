@@ -48,14 +48,18 @@ ico <- function(x, chevron = FALSE) {
 #' b2 <- solo_box(type = "danger", value = 13.7, txt = "Nutritional value")
 #' b3 <- solo_box(type = "success", value = 1, txt = "Yumminess factor")
 #' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
-#' finisher(title = "straight buttons", b1)
+#' finisher(title = "straight buttons", divs = b1)
 #' finisher(
 #'   title = "with divs",
-#'   div_maker(subtitle = "boom", textModifier = "h1", b1, b2, b3)
+#'   divs = div_maker(subtitle = "boom",
+#'   textModifier = "h1",
+#'   divs = c(b1, b2, b3))
 #' )
 #'
 #' ## Or taking advantage of the ability to change the textModifier:
-#' finisher(title = "h4 modifier", solo_box(value = 3, txt = "uh huh", former = 2, textModifier = "h4"))
+#' finisher(title = "h4 modifier",
+#' divs = solo_box(value = 3, txt = "uh huh",
+#' former = 2, textModifier = "h4"))
 #' @export solo_box
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, type = "info", link = NULL, units = NULL,
@@ -69,26 +73,28 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
-      tag(textModifier, tags$span(
-        ico(icon), value, units,
-        if (!is.null(former)) {
-          if (former > value) {
-            tags$sup(
-              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-              ico("chevron-down", chevron = TRUE),
-              paste(round((as.numeric(former) - as.numeric(value)) /
-                as.numeric(former) * 100, 1), "%", sep = "")
-            )
-          } else {
-            tags$sup(
-              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-              ico("chevron-up", chevron = TRUE),
-              paste(round((as.numeric(value) - as.numeric(former)) /
-                as.numeric(former) * 100, 1), "%", sep = "")
-            )
+        if (!(is.null(value) & is.null(units) & is.null(icon))) {
+          tag(textModifier, tags$span(
+          ico(icon), value, units,
+          if (!is.null(former)) {
+            if (former > value) {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                ico("chevron-down", chevron = TRUE),
+                paste(round((as.numeric(former) - as.numeric(value)) /
+                  as.numeric(former) * 100, 1), "%", sep = "")
+              )
+            } else {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                ico("chevron-up", chevron = TRUE),
+                paste(round((as.numeric(value) - as.numeric(former)) /
+                  as.numeric(former) * 100, 1), "%", sep = "")
+              )
+            }
           }
-        }
-      )$children),
+        )$children)
+      },
       HTML(txt),
       ...
     )
@@ -137,7 +143,8 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #'   value = 35, txt = "Test2", target = 50,
 #'   thresholdHigh = 80, thresholdLow = 60, hide_value = TRUE
 #' )
-#' finisher(title = "Item", div_maker(subtitle = "subitems", textModifier = "h1", g1, g2, g3, g4))
+#' finisher(title = "Item", divs = div_maker(subtitle = "subitems",
+#' textModifier = "h1", g1, g2, g3, g4))
 #' @export solo_gradient_box
 solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               size = "md", icon = NULL, target = 100,
@@ -222,11 +229,11 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @examples
 #' library(dplyr)
 #' multi_box(
-#'   values = c(3, 45), title = "Important <br>button",
+#'   values = c(21, 45), title = "Important <br>button",
 #'   number_zoom = 300, icons = c("apple", "calendar"), type = "warning",
 #'   txt = c("times", "reports")
 #' ) %>%
-#'   finisher()
+#'   finisher(divs = . )
 #' \dontrun{
 #' if (interactive()) {
 #'   # EXAMPLE1
@@ -294,7 +301,7 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
 #' @importFrom rlang !! enquo syms
 #' @return Returns a list object containing the matrix of buttons
 #' @examples
-#' finisher(title = "Tile Matrix", tile_matrix(
+#' finisher(title = "Tile Matrix", divs = tile_matrix(
 #'   data = head(iris),
 #'   values = Sepal.Length,
 #'   txt = Species
@@ -417,7 +424,7 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
 #'   solo_box(value = 34)
 #' )
 #' @export div_maker
-div_maker <- function(subtitle = NULL, textModifier = "h1", ...) {
+div_maker <- function(subtitle, textModifier, ...) {
   tags$div(
     class = "container",
     tag(textModifier, tags$span(subtitle)$children),
@@ -447,19 +454,20 @@ div_maker <- function(subtitle = NULL, textModifier = "h1", ...) {
 #' https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css
 #' @param file Optional filename if you desire to save the file.
 #' @param textModifier Optional css category of "large" text. In this case, title. Default=h1
-#' @param ... \code{div_maker} elements (or individual buttons).
+#' @param divs \code{div_maker} elements (or individual buttons, wrapped in `c()`).
 #' @importFrom htmltools browsable save_html
 #' @export finisher
 finisher <- function(title = NULL, css =
                        "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
-                     file = NULL, textModifier = "h1", ...) {
+                     file = NULL, textModifier = "h1", divs) {
+  divs[[2]] <- NULL
   tl <- tags$html(
     tags$head(
       tags$link(rel = "stylesheet", href = css)
     ),
     tags$body(
       tag(textModifier, tags$span(title)$children),
-      ...
+      divs
     )
   )
 

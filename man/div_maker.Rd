@@ -4,7 +4,7 @@
 \alias{div_maker}
 \title{Div maker}
 \usage{
-div_maker(subtitle = NULL, textModifier = "h1", ...)
+div_maker(subtitle, textModifier, ...)
 }
 \arguments{
 \item{subtitle}{The text heading of this row of buttons}

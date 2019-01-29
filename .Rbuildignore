@@ -1,5 +1,7 @@
+^_pkgdown\.yml$
 ^Meta$
 ^doc$
+^docs$
 ^.*\.css$
 ^example.html$
 ^.*\.Rproj$

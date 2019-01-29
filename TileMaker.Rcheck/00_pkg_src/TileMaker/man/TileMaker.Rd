@@ -32,12 +32,12 @@ combines them into an html file.
 }
 \examples{
 # ADD EXAMPLES HERE
-Button1 <- ButtonMaker(Color = 2,Value = 3.57,Subtitle = "B")
-Button2 <- ButtonMaker(Color = 3,Value = 13.7,Subtitle = "Nutritional value")
-Div1 <- DivMaker(Title = "Quantativity factors",Buttons = paste(Button1,Button2))
-Div2 <- DivMaker(Title = "Inverse proportions",Buttons = paste(Button2,Button1))
-TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2),FileName = "example.html")
-TileMaker(MainTitle = "Hello",Divs = paste(Div1,Div2))
+Button1 <- ButtonMaker(Color = 2, Value = 3.57, Subtitle = "B")
+Button2 <- ButtonMaker(Color = 3, Value = 13.7, Subtitle = "Nutritional value")
+Div1 <- DivMaker(Title = "Quantativity factors", Buttons = paste(Button1, Button2))
+Div2 <- DivMaker(Title = "Inverse proportions", Buttons = paste(Button2, Button1))
+TileMaker(MainTitle = "Hello", Divs = paste(Div1, Div2), FileName = "example.html")
+TileMaker(MainTitle = "Hello", Divs = paste(Div1, Div2))
 browseURL("example.html")
 }
 \references{

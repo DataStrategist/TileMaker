@@ -4,7 +4,7 @@
 \alias{div_maker}
 \title{Div maker}
 \usage{
-div_maker(subtitle = NULL, textModifier = "h1", ...)
+div_maker(subtitle, textModifier, ...)
 }
 \arguments{
 \item{subtitle}{The text heading of this row of buttons}
@@ -19,7 +19,9 @@ This function takes buttons made by any of the solo or multi buttons and makes a
 other HTML code, or for inclusion within the function of this package `finisher`.
 }
 \examples{
-div_maker(subtitle = "Quantativity factors",textModifier = "h1",
-         solo_gradient_box(value = 70),
-         solo_box(value = 34))
+div_maker(
+  subtitle = "Quantativity factors", textModifier = "h1",
+  solo_gradient_box(value = 70),
+  solo_box(value = 34)
+)
 }

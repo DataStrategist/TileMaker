@@ -1,11 +1,12 @@
 * using log directory 'C:/Users/Amit/Dropbox/My projects/TileMaker/TileMaker.Rcheck'
-* using R version 3.5.0 (2018-04-23)
+* using R version 3.5.2 (2018-12-20)
 * using platform: x86_64-w64-mingw32 (64-bit)
 * using session charset: ISO8859-1
 * using option '--as-cran'
 * checking for file 'TileMaker/DESCRIPTION' ... OK
 * checking extension type ... Package
 * this is package 'TileMaker' version '0.2.0'
+* package encoding: UTF-8
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Amit Kohli <amit@amitkohli.com>'
 
@@ -55,8 +56,7 @@ The Description field should not start with the package name,
 * checking package directory ... OK
 * checking 'build' directory ... OK
 * checking DESCRIPTION meta-information ... OK
-* checking top-level files ... NOTE
-Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installed.
+* checking top-level files ... OK
 * checking for left-over files ... OK
 * checking index information ... OK
 * checking package subdirectories ... OK
@@ -94,4 +94,4 @@ Files 'README.md' or 'NEWS.md' cannot be checked without 'pandoc' being installe
 * checking re-building of vignette outputs ... OK
 * checking PDF version of manual ... OK
 * DONE
-Status: 2 NOTEs
+Status: 1 NOTE

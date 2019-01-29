@@ -8,10 +8,11 @@ Description: This package builds handsome single-data-point boxes suitable for i
 License: MIT + file LICENSE
 LazyData: TRUE
 RoxygenNote: 6.1.1
-BugReports: https://github.com/mexindian/TileMaker/issues
-URL: https://github.com/mexindian/TileMaker
+BugReports: https://github.com/DataStrategist/TileMaker/issues
+URL: http://datastrategist.github.io/TileMaker/
 Imports: htmltools, purrr, dplyr, rlang
+Encoding: UTF-8
 Suggests: testthat, knitr, rmarkdown, ggplot2
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-01-24 09:38:03 UTC; Amit
+Packaged: 2019-01-29 17:02:17 UTC; Amit

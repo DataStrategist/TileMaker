@@ -6,7 +6,7 @@
 \usage{
 finisher(title = NULL,
   css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
-  file = NULL, textModifier = "h1", ...)
+  file = NULL, textModifier = "h1", divs)
 }
 \arguments{
 \item{title}{Title. Default NULL}
@@ -19,7 +19,7 @@ https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https:/
 
 \item{textModifier}{Optional css category of "large" text. In this case, title. Default=h1}
 
-\item{...}{\code{div_maker} elements (or individual buttons).}
+\item{divs}{\code{div_maker} elements (or individual buttons, wrapped in `c()`).}
 }
 \description{
 Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker`, or individual buttons if so desired, and

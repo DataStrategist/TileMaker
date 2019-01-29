@@ -9,8 +9,9 @@ License: MIT + file LICENSE
 LazyData: TRUE
 RoxygenNote: 6.1.1
 BugReports: https://github.com/DataStrategist/TileMaker/issues
-URL: https://github.com/DataStrategist/TileMaker
+URL: http://datastrategist.github.io/TileMaker/
 Imports: htmltools, purrr, dplyr, rlang
+Encoding: UTF-8
 Suggests:
     testthat,
     knitr,

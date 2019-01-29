@@ -61,14 +61,7 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/DataStrategist/TileMaker">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -83,7 +76,7 @@
       <h1>Intro</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/DataStrategist/TileMaker/blob/master/vignettes/Intro.Rmd"><code>vignettes/Intro.Rmd</code></a></small>
+      
       <div class="hidden name"><code>Intro.Rmd</code></div>
 
     </div>
@@ -246,9 +239,10 @@ Danger
 </div>
 <p>(we are using Bootstrap Version 3 by default but that’s customizeable).</p>
 <p>So it’s cool that we can change colors, but what if we wanted the color to change automatically, based on value? Well, let’s meet the next member of the family:</p>
-<div id="lets-go-solo_gradient_box" class="section level3">
-<h3 class="hasAnchor">
-<a href="#lets-go-solo_gradient_box" class="anchor"></a>Let’s go solo_gradient_box!!!</h3>
+</div>
+<div id="lets-go-solo_gradient_box" class="section level2">
+<h2 class="hasAnchor">
+<a href="#lets-go-solo_gradient_box" class="anchor"></a>Let’s go solo_gradient_box!!!</h2>
 <p>The solo_gradient box automatically changes colors from red to yellow to green based on a target and some thresholds. By default, the <code>target</code> is set to 100 and the thresholds are set to 50 and 90, but obviously those are customizeable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(
   <span class="dt">subtitle =</span> <span class="st">"gradients"</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>,
@@ -296,9 +290,9 @@ Customized target<br>and threshold
 <p>You can see that the box changes to orange since it’s now between <code>thresholdHigh</code> and <code>thresholdLow</code>. By the way, the thresholds are optimistic (ie, round up (so 90=green and 50=orange on default settings), because juuuuuuuust passing feels awesome and juuuuuust failing feels terrible.</p>
 <p>By the way, you will also notice the <code>&lt;br&gt;</code> above forcing a line break. Yes, that’s right, text accepts full html code, writen natively!</p>
 </div>
-<div id="its-your-turn-multi_box" class="section level3">
-<h3 class="hasAnchor">
-<a href="#its-your-turn-multi_box" class="anchor"></a>It’s your turn, multi_box!</h3>
+<div id="its-your-turn-multi_box" class="section level2">
+<h2 class="hasAnchor">
+<a href="#its-your-turn-multi_box" class="anchor"></a>It’s your turn, multi_box!</h2>
 <p>The <code>multi_box</code>, in contrast to the <code>solo_box</code>, takes multiple values in one button, providing an easy way to summarize a ton of information in one button.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/multi_box.html">multi_box</a></span>(<span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">txt =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Sally"</span>, <span class="st">"George"</span>, <span class="st">"Mohammed"</span>), <span class="dt">icons =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"check"</span>, <span class="st">"plus"</span>, <span class="st">"calendar"</span>), <span class="dt">title =</span> <span class="st">"Candidates"</span>)</code></pre></div>
 <a>
@@ -323,9 +317,9 @@ Mohammed
 </a>
 <p>Naturally, I was tempted to also construct a multi_gradient_box, but I haven’t because it seemed messy to have the color be dominated by one of the many values… so I don’t think it’s very useful. But please open an Issue if you have a good use case.</p>
 </div>
-<div id="last-but-not-least-heres-the-tile_matrix" class="section level3">
-<h3 class="hasAnchor">
-<a href="#last-but-not-least-heres-the-tile_matrix" class="anchor"></a>Last but not least, here’s the tile_matrix</h3>
+<div id="last-but-not-least-heres-the-tile_matrix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#last-but-not-least-heres-the-tile_matrix" class="anchor"></a>Last but not least, here’s the tile_matrix</h2>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr))
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
   <span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>),
@@ -615,7 +609,7 @@ diamonds <span class="op">%&gt;%</span><span class="st"> </span>
 <h1>
 3170
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-748.8%
+159.6%
 </sup>
 </h1>
 D
@@ -626,7 +620,7 @@ D
 <h1>
 3077
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-531.2%
+102%
 </sup>
 </h1>
 E
@@ -637,7 +631,7 @@ E
 <h1>
 3725
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-502.2%
+252.6%
 </sup>
 </h1>
 F
@@ -648,7 +642,7 @@ F
 <h1>
 3999
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-3005.6%
+151.6%
 </sup>
 </h1>
 G
@@ -663,7 +657,7 @@ G
 <h1>
 4487
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-124.8%
+726.4%
 </sup>
 </h1>
 H
@@ -674,7 +668,7 @@ H
 <h1>
 5092
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
--1091.6%
+1207.6%
 </sup>
 </h1>
 I
@@ -685,7 +679,7 @@ I
 <h1>
 5324
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-705.1%
+623.2%
 </sup>
 </h1>
 J
@@ -695,9 +689,9 @@ J
 </div>
 </a>
 </div>
-<div id="whats-this-former-business" class="section level3">
-<h3 class="hasAnchor">
-<a href="#whats-this-former-business" class="anchor"></a>What’s this “former” business?</h3>
+<div id="whats-this-former-business" class="section level2">
+<h2 class="hasAnchor">
+<a href="#whats-this-former-business" class="anchor"></a>What’s this “former” business?</h2>
 <p>So we’ve seen this <code>former</code> value a few times now, but what does it do? Simply put it contextualizes the displayed value in comparision with a former value. This is especially useful to measure performance increase or declines. In order to show the functionality, let’s use a quite contrived scenario:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr))
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
@@ -845,9 +839,9 @@ comparison to 50
 </div>
 </a>
 </div>
-<div id="grammar-of-tile_maker" class="section level3">
-<h3 class="hasAnchor">
-<a href="#grammar-of-tile_maker" class="anchor"></a>Grammar of tile_maker</h3>
+<div id="grammar-of-tile_maker" class="section level2">
+<h2 class="hasAnchor">
+<a href="#grammar-of-tile_maker" class="anchor"></a>Grammar of tile_maker</h2>
 <p>Buttons are put into a div (which is more or less an html “row”… kinda). And these divs are put into a finalizer.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Value1 &lt;-<span class="st"> </span><span class="dv">88</span>
 Value2 &lt;-<span class="st"> </span><span class="dv">1985</span>
@@ -875,12 +869,12 @@ Div2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/div_ma
 ## Now put them all together:
 <span class="kw"><a href="../reference/finisher.html">finisher</a></span>(
   <span class="dt">title =</span> <span class="st">"Important block"</span>, <span class="dt">css =</span> <span class="st">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span>,
-  <span class="dt">file =</span> <span class="ot">NULL</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>, Div1, Div2
+  <span class="dt">file =</span> <span class="ot">NULL</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>, <span class="dt">divs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(Div1, Div2)
 )</code></pre></div>
 
 
 <h1>Important block</h1>
-<div class="container">
+div
 <h2>Future</h2>
 <a>
 <button class="btn btn-md btn-danger" role="button" type="danger">
@@ -909,8 +903,8 @@ GW
 Powah
 </button>
 </a>
-</div>
-<div class="container">
+div
+container
 <h2>Effect</h2>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
@@ -927,20 +921,18 @@ Heads turned
 Answer
 </button>
 </a>
-</div>
 
 
 <p>These functions are included to help with inclusion in different document types.. sometimes report types get finicky, but perhaps can stop complaining if they are included within a <code>finisher</code> block.</p>
 </div>
-<div id="its-not-working-you-broke-my-entire-report-help" class="section level3">
-<h3 class="hasAnchor">
-<a href="#its-not-working-you-broke-my-entire-report-help" class="anchor"></a>It’s not working / you broke my entire report / help</h3>
+<div id="its-not-working-you-broke-my-entire-report-help" class="section level2">
+<h2 class="hasAnchor">
+<a href="#its-not-working-you-broke-my-entire-report-help" class="anchor"></a>It’s not working / you broke my entire report / help</h2>
 <p>So let’s be very clear… this is a hack, might even be an ugly hack. I’m controlling how these elements work by porting and controlling the HTML element within. Sometimes that makes a mess out of the document you’re preparing. Towhit, I have included a few features:</p>
 <ol style="list-style-type: decimal">
 <li>As mentioned in the previous section, try wrapping your buttons or groups of buttons in <code>div_maker</code>s, and/or in <code>finisher</code>s… that seems to do the trick most of the time.</li>
 <li>In some cases, for example in markdown documents that include a Table of Contents, that format depends on html stuff as well… so that’s where the <code>textModifier</code> bit comes in handy. You can change the textModifier from the default <code>h1</code> to <code>h4</code> or <code>&lt;br&gt;</code> or whatever else you think might work in your report. Experiment around!</li>
 </ol>
-</div>
 </div>
   </div>
 
@@ -950,6 +942,12 @@ Answer
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#meet-the-tile">Meet the Tile</a></li>
+      <li><a href="#lets-go-solo_gradient_box">Let’s go solo_gradient_box!!!</a></li>
+      <li><a href="#its-your-turn-multi_box">It’s your turn, multi_box!</a></li>
+      <li><a href="#last-but-not-least-heres-the-tile_matrix">Last but not least, here’s the tile_matrix</a></li>
+      <li><a href="#whats-this-former-business">What’s this “former” business?</a></li>
+      <li><a href="#grammar-of-tile_maker">Grammar of tile_maker</a></li>
+      <li><a href="#its-not-working-you-broke-my-entire-report-help">It’s not working / you broke my entire report / help</a></li>
       </ul>
 </div>
       </div>

@@ -40,14 +40,20 @@ This function crafts the actual tile per se, including the specific
 aesthetic traits for each tile. This is the simple version where you explicitly state the color.
 }
 \examples{
-b1 <- solo_box(type="warning",value = 3.57,txt = "B")
-b2 <- solo_box(type="danger",value = 13.7,txt = "Nutritional value")
-b3 <- solo_box(type="success",value = 1,txt = "Yumminess factor")
-b4 <- solo_box(value = 3.57, former=3,txt = "Times apple eaten", icon = "apple")
-finisher(title = "straight buttons", b1)
-finisher(title = "with divs",
-         div_maker(subtitle = "boom",textModifier = "h1",b1,b2,b3))
+b1 <- solo_box(type = "warning", value = 3.57, txt = "B")
+b2 <- solo_box(type = "danger", value = 13.7, txt = "Nutritional value")
+b3 <- solo_box(type = "success", value = 1, txt = "Yumminess factor")
+b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
+finisher(title = "straight buttons", divs = b1)
+finisher(
+  title = "with divs",
+  divs = div_maker(subtitle = "boom",
+  textModifier = "h1",
+  divs = c(b1, b2, b3))
+)
 
 ## Or taking advantage of the ability to change the textModifier:
-finisher(title = "h4 modifier", solo_box(value = 3,txt="uh huh",former = 2,textModifier = "h4"))
+finisher(title = "h4 modifier",
+divs = solo_box(value = 3, txt = "uh huh",
+former = 2, textModifier = "h4"))
 }

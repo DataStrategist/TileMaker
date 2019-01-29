@@ -1,5 +1,5 @@
 
-R version 3.5.0 (2018-04-23) -- "Joy in Playing"
+R version 3.5.2 (2018-12-20) -- "Eggshell Igloo"
 Copyright (C) 2018 The R Foundation for Statistical Computing
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 
@@ -16,8 +16,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 Type 'q()' to quit R.
 
 > library(testthat)
-Warning message:
-package 'testthat' was built under R version 3.5.1 
 > library(TileMaker)
 > 
 > test_check("TileMaker")
@@ -26,4 +24,4 @@ OK: 24 SKIPPED: 0 FAILED: 0
 > 
 > proc.time()
    user  system elapsed 
-   1.79    0.48    3.15 
+   1.39    0.34    1.96 
