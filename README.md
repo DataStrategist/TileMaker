@@ -10,5 +10,4 @@ To install, please type:
 
     devtools::install_github("DataStrategist/TileMaker", build_vignettes = TRUE)
 
-Please see the [pkgdown site](http://datastrategist.github.io/TileMaker/) to learn more about how to do some lovely stuff, but in the meantime, here's the basics:
-
+Please see the [pkgdown site](http://datastrategist.github.io/TileMaker/) to learn more about what is for and how to use all the bits and bobs.
