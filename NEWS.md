@@ -1,6 +1,6 @@
 # TileMaker 0.2.0
 
- * Created all new functions using htmlTools. All old function names are depreciated
+ * Created all new functions using htmlTools. All old functions have been removed (sorry!)
 
  * Seperated simple box from one that responds to threshold to clarify better hat imputs are required to each
 
