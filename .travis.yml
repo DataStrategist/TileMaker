@@ -4,3 +4,9 @@ language: r
 cache: packages
 r_binary_packages:
   - dplyr
+
+r_github_packages:
+  - jimhester/covr
+
+after_success:
+  - Rscript -e 'covr::coveralls()'
