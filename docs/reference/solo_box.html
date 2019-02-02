@@ -191,15 +191,21 @@ In this case, title. Default=h1</p></td>
 <span class='fu'><a href='finisher.html'>finisher</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"straight buttons"</span>, <span class='kw'>divs</span> <span class='kw'>=</span> <span class='no'>b1</span>)
 <span class='fu'><a href='finisher.html'>finisher</a></span>(
   <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"with divs"</span>,
-  <span class='kw'>divs</span> <span class='kw'>=</span> <span class='fu'><a href='div_maker.html'>div_maker</a></span>(<span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"boom"</span>,
-  <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"h1"</span>,
-  <span class='fu'><a href='div_maker.html'>div_maker</a></span>(<span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"Boom"</span>, <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"hi"</span>,<span class='no'>b1</span>, <span class='no'>b2</span>, <span class='no'>b3</span>))
+  <span class='kw'>divs</span> <span class='kw'>=</span> <span class='fu'><a href='div_maker.html'>div_maker</a></span>(
+    <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"boom"</span>,
+    <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"h1"</span>,
+    <span class='fu'><a href='div_maker.html'>div_maker</a></span>(<span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"Boom"</span>, <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"hi"</span>, <span class='no'>b1</span>, <span class='no'>b2</span>, <span class='no'>b3</span>)
+  )
 )
 
 <span class='co'>## Or taking advantage of the ability to change the textModifier:</span>
-<span class='fu'><a href='finisher.html'>finisher</a></span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"h4 modifier"</span>,
-<span class='kw'>divs</span> <span class='kw'>=</span> <span class='fu'>solo_box</span>(<span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>txt</span> <span class='kw'>=</span> <span class='st'>"uh huh"</span>,
-<span class='kw'>former</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"h4"</span>))</div></pre>
+<span class='fu'><a href='finisher.html'>finisher</a></span>(
+  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"h4 modifier"</span>,
+  <span class='kw'>divs</span> <span class='kw'>=</span> <span class='fu'>solo_box</span>(
+    <span class='kw'>value</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>txt</span> <span class='kw'>=</span> <span class='st'>"uh huh"</span>,
+    <span class='kw'>former</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"h4"</span>
+  )
+)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
