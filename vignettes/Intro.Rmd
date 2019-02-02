@@ -25,7 +25,9 @@ Dashboard Tiles/Notecards are a great way to visualize just one number, and make
 
 This package uses Twitter's [Bootstrap](https://getbootstrap.com/) CSS files, and pushes content into buttons that then have different functionality. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!
 
-Let's start small. Here's the most basic button:
+Let's start small. 
+Note: Please link to References for explanation on full functionality of used tile. (Available if function is underlined/highlighted when hovered over. eg. Hover over 'solo_box' below and click. )
+Here's the most basic button:
 
 ```{r}
 require(TileMaker) ## to install, use devtools::install_github("DataStrategist/TileMaker")
