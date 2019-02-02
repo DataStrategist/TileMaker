@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vignette Title • TileMaker</title>
+<title>TileMaker in Shiny • TileMaker</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Vignette Title">
+<script src="../pkgdown.js"></script><meta property="og:title" content="TileMaker in Shiny">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -56,7 +56,7 @@
       <a href="../articles/Intro.html">Intro</a>
     </li>
     <li>
-      <a href="../articles/shiny.html">Vignette Title</a>
+      <a href="../articles/shiny.html">TileMaker in Shiny</a>
     </li>
   </ul>
 </li>
@@ -73,16 +73,11 @@
 <!--/.navbar -->
 
       
-      </header><script src="shiny_files/htmlwidgets-1.3/htmlwidgets.js"></script><script src="shiny_files/jquery-1.12.4/jquery.min.js"></script><link href="shiny_files/leaflet-1.3.1/leaflet.css" rel="stylesheet">
-<script src="shiny_files/leaflet-1.3.1/leaflet.js"></script><link href="shiny_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
-<script src="shiny_files/Proj4Leaflet-1.0.1/proj4-compressed.js"></script><script src="shiny_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="shiny_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="shiny_files/leaflet-binding-2.0.2/leaflet.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Vignette Title</h1>
-                        <h4 class="author">Vignette Author</h4>
+      <h1>TileMaker in Shiny</h1>
             
-            <h4 class="date">2019-02-02</h4>
       
       
       <div class="hidden name"><code>shiny.Rmd</code></div>
@@ -91,6 +86,9 @@
 
     
     
+<p>It is also possible to push these Tiles into a Shiny app, using the <code>htmlOutput</code> and <code>renderUI</code>.</p>
+<p>You can either assign objects outside the Shiny call (in the below example b1 and d1 which includes b1 and b2), or you can embed buttons inside the Shiny app to display values from there.</p>
+<p>(In order to make this work, uncomment the last line in your console. )</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Attaching package: 'dplyr'</span>
@@ -102,89 +100,11 @@
 <span class="co">#&gt;     intersect, setdiff, setequal, union</span>
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(htmltools)
 <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(TileMaker)
-a &lt;-<span class="st">   </span><span class="kw"><a href="../reference/tile_matrix.html">tile_matrix</a></span>(<span class="dt">data =</span> iris, <span class="dt">values =</span> Sepal.Length, <span class="dt">txt =</span> Species,<span class="dt">target =</span> <span class="dv">5</span>,<span class="dt">thresholdHigh =</span> <span class="dv">4</span>,<span class="dt">thresholdLow =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>htmltools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/htmltools/topics/html_print">html_print</a></span>(.)
 
 b1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.57</span>, <span class="dt">txt =</span> <span class="st">"Times apple eaten"</span>, <span class="dt">icon =</span> <span class="st">"apple"</span>)
 b2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">13.7</span>, <span class="dt">txt =</span> <span class="st">"Nutritional value"</span>, <span class="dt">size =</span> <span class="st">"lg"</span>)
-b3 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="dv">1</span>, <span class="dt">txt =</span> <span class="st">"Yumminess factor"</span>, <span class="dt">type =</span> <span class="st">"danger"</span>)
-b4 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="dv">5</span>, <span class="dt">txt =</span> <span class="st">"Inconsistencies"</span>, <span class="dt">hover =</span> <span class="st">"This is the description"</span>)
 
 d1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Quantativity factors"</span>, <span class="dt">textModifier =</span> <span class="st">"h2"</span>, b1, b2)
-d2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Implementation procedures"</span>, <span class="dt">textModifier =</span> <span class="st">"h2"</span>, b3, b4)
-
-<span class="kw"><a href="../reference/finisher.html">finisher</a></span>(<span class="dt">title =</span> <span class="st">"Hello"</span>, <span class="dt">divs =</span> <span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Importantness"</span>,<span class="dt">textModifier =</span> <span class="st">"h1"</span>, b1, b2))</code></pre></div>
-
-
-<h1>Hello</h1>
-<div>
-<h1>Importantness</h1>
-<a>
-<button class="btn btn-md btn-info" role="button" type="info">
-<h1>
-<i class="glyphicon glyphicon-apple"></i>
-3.57
-</h1>
-Times apple eaten
-</button>
-</a>
-<a>
-<button class="btn btn-lg btn-info" role="button" type="info">
-<h1>13.7</h1>
-Nutritional value
-</button>
-</a>
-</div>
-
-
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-mapp &lt;-<span class="st"> </span>leaflet<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/leaflet/topics/map-layers">addTiles</a></span>(leaflet<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/leaflet/topics/leaflet">leaflet</a></span>())
-
-
-<span class="kw"><a href="../reference/finisher.html">finisher</a></span>(<span class="dt">title =</span> <span class="st">"Hello"</span>, 
-         <span class="dt">divs =</span> <span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Maps too!"</span>,  <span class="dt">textModifier =</span> <span class="st">"h2"</span>, d1, mapp, d2))</code></pre></div>
-
-
-<h1>Hello</h1>
-<div>
-<h2>Maps too!</h2>
-<div class="container">
-<h2>Quantativity factors</h2>
-<a>
-<button class="btn btn-md btn-info" role="button" type="info">
-<h1>
-<i class="glyphicon glyphicon-apple"></i>
-3.57
-</h1>
-Times apple eaten
-</button>
-</a>
-<a>
-<button class="btn btn-lg btn-info" role="button" type="info">
-<h1>13.7</h1>
-Nutritional value
-</button>
-</a>
-</div>
-<div id="htmlwidget-320db64a16ff1045e1ca" style="width:100%;height:400px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-320db64a16ff1045e1ca">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}]},"evals":[],"jsHooks":[]}</script><div class="container">
-<h2>Implementation procedures</h2>
-<a>
-<button class="btn btn-md btn-danger" role="button" type="danger">
-<h1>1</h1>
-Yumminess factor
-</button>
-</a>
-<a>
-<button class="btn btn-md btn-info" role="button" title="This is the description" type="info">
-<h1>5</h1>
-Inconsistencies
-</button>
-</a>
-</div>
-</div>
-
-
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 
 ## Shinydashboard Test --------------
 ## app.R ##
@@ -203,29 +123,20 @@ ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
   <span class="kw">dashboardBody</span>(
     <span class="co"># Boxes need to be put in a row (or column)</span>
     <span class="kw">fluidRow</span>(
-      <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/box">box</a></span>(<span class="kw">plotOutput</span>(<span class="st">"plot1"</span>, <span class="dt">height =</span> <span class="dv">250</span>)),
-
       <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/box">box</a></span>(
-        <span class="dt">title =</span> <span class="st">"Controls"</span>,
-        d1,
-        d2
+        b1, d1, <span class="kw">htmlOutput</span>(<span class="st">"plot1"</span>)
       )
     )
   )
 )
 
 server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
-  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Random">set.seed</a></span>(<span class="dv">122</span>)
-  histdata &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Normal">rnorm</a></span>(<span class="dv">500</span>)
-
-  output<span class="op">$</span>plot1 &lt;-<span class="st"> </span><span class="kw">render</span>({
-    data &lt;-<span class="st"> </span>histdata[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq_len</a></span>(input<span class="op">$</span>slider)]
-    <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/hist">hist</a></span>(data)
+  output<span class="op">$</span>plot1 &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
+    <span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"boom"</span>, <span class="dt">textModifier =</span> <span class="st">"h2"</span>, <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> input<span class="op">$</span>slider, <span class="dt">txt =</span> <span class="st">"Times apple eaten"</span>, <span class="dt">icon =</span> <span class="st">"apple"</span>))
   })
 }
 
-<span class="kw">shinyApp</span>(ui, server)</code></pre></div>
-<div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div>
+<span class="co"># shinyApp(ui, server)</span></code></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

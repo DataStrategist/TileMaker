@@ -54,7 +54,10 @@ div_maker(
 )
 ```
 
-^ as you can see, we are just using common [glyphicons](https://getbootstrap.com/docs/3.3/components/). See the link to check your options. Next, let's explore the size. 
+
+^ as you can see, we are just using common [glyphicons](https://getbootstrap.com/docs/3.3/components/). See the documentation to check your options. 
+
+Next, let's explore the size. 
 
 ## Size
 

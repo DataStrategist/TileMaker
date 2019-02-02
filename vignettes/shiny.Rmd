@@ -1,7 +1,5 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
-date: "`r Sys.Date()`"
+title: "TileMaker in Shiny"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
@@ -16,28 +14,22 @@ knitr::opts_chunk$set(
 )
 ```
 
+It is also possible to push these Tiles into a Shiny app, using the `htmlOutput` and `renderUI`.
+
+You can either assign objects outside the Shiny call (in the below example b1 and d1 which includes b1 and b2), or you can embed buttons inside the Shiny app to display values from there.
+
+(In order to make this work, uncomment the last line in your console. )
+
+
 ```{r}
 library(dplyr)
 library(htmltools)
 library(TileMaker)
-a <-   tile_matrix(data = iris, values = Sepal.Length, txt = Species,target = 5,thresholdHigh = 4,thresholdLow = 3) %>% htmltools::html_print(.)
 
 b1 <- solo_box(value = 3.57, txt = "Times apple eaten", icon = "apple")
 b2 <- solo_box(value = 13.7, txt = "Nutritional value", size = "lg")
-b3 <- solo_box(value = 1, txt = "Yumminess factor", type = "danger")
-b4 <- solo_box(value = 5, txt = "Inconsistencies", hover = "This is the description")
 
 d1 <- div_maker(subtitle = "Quantativity factors", textModifier = "h2", b1, b2)
-d2 <- div_maker(subtitle = "Implementation procedures", textModifier = "h2", b3, b4)
-
-finisher(title = "Hello", divs = div_maker(subtitle = "Importantness",textModifier = "h1", b1, b2))
-
-mapp <- leaflet::addTiles(leaflet::leaflet())
-
-
-finisher(title = "Hello", 
-         divs = div_maker(subtitle = "Maps too!",  textModifier = "h2", d1, mapp, d2))
-
 
 ## Shinydashboard Test --------------
 ## app.R ##
@@ -51,27 +43,19 @@ ui <- dashboardPage(
   dashboardBody(
     # Boxes need to be put in a row (or column)
     fluidRow(
-      box(plotOutput("plot1", height = 250)),
-
       box(
-        title = "Controls",
-        d1,
-        d2
+        b1, d1, htmlOutput("plot1")
       )
     )
   )
 )
 
 server <- function(input, output) {
-  set.seed(122)
-  histdata <- rnorm(500)
-
-  output$plot1 <- render({
-    data <- histdata[seq_len(input$slider)]
-    hist(data)
+  output$plot1 <- renderUI({
+    div_maker(subtitle = "boom", textModifier = "h2", solo_box(value = input$slider, txt = "Times apple eaten", icon = "apple"))
   })
 }
 
-shinyApp(ui, server)
+# shinyApp(ui, server)
 ```
 
