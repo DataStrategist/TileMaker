@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Meet the Tile
+# Meet the Tile
 
 Dashboard Tiles/Notecards are a great way to visualize just one number, and make it big and pretty. They can emphasize results in an easily digestible and colourful format. This package dates back to the days before infoboxes and valueboxes were available from [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) and [shinydashboards](https://rstudio.github.io/shinydashboard/), and still has some utility today due to it's flexibility.
 
@@ -43,9 +43,11 @@ solo_box(
 
 (did you try to hover your mouse over the button?) As you can see, plenty of bells and whistles. Most of the stuff above is pretty intuitive, but let's explore a bit more, starting with icons (ignore the `div_maker` for now):
 
+## Icons
+
 ```{r}
 div_maker(
-  subtitle = "Icons", textModifier = "h1",
+  subtitle = "One pic is worth a thousand words", textModifier = "h3",
   solo_box(value = 3.3, txt = "envelope", icon = "envelope"),
   solo_box(value = 3.3, txt = "pushpin", icon = "pushpin"),
   solo_box(value = 3.3, txt = "calendar", icon = "calendar")
@@ -54,9 +56,11 @@ div_maker(
 
 ^ as you can see, we are just using common [glyphicons](https://getbootstrap.com/docs/3.3/components/). See the link to check your options. Next, let's explore the size. 
 
+## Size
+
 ```{r}
 div_maker(
-  subtitle = "sizes", textModifier = "h1",
+  subtitle = "Supersize it!", textModifier = "h3",
   solo_box(value = 3.3, txt = "extra small", size = "xs"),
   solo_box(value = 3.3, txt = "small", size = "sm"),
   solo_box(value = 3.3, txt = "medium", size = "md"),
@@ -64,11 +68,13 @@ div_maker(
 )
 ```
 
-... and the `type`, which dictates the color using the css classes (watch the case sensitivity here!): 
+And the `type`, which dictates the color using the css classes (watch the case sensitivity here!).
+
+## Color
 
 ```{r}
 div_maker(
-  subtitle = "colors", textModifier = "h1",
+  subtitle = "... all the colors of a rainbow", textModifier = "h3",
   solo_box(value = 3.3, txt = "Default", type = "default"),
   solo_box(value = 3.3, txt = "Primary", type = "primary"),
   solo_box(value = 3.3, txt = "Success", type = "success"),
@@ -82,7 +88,7 @@ div_maker(
 
 So it's cool that we can change colors, but what if we wanted the color to change automatically, based on value? Well, let's meet the next member of the family:
 
-## Let's go solo_gradient_box!!!
+# Let's go solo_gradient_box!!!
 
 The solo_gradient box automatically changes colors from red to yellow to green based on a target and some thresholds. By default, the `target` is set to 100 and the thresholds are set to 50 and 90, but obviously those are customizeable.
 
@@ -111,7 +117,7 @@ You can see that the box changes to orange since it's now between `thresholdHigh
 
 By the way, you will also notice the `<br>` above forcing a line break. Yes, that's right, text accepts full html code, writen natively!
 
-## It's your turn, multi_box!
+# It's your turn, multi_box!
 
 The `multi_box`, in contrast to the `solo_box`, takes multiple values in one button, providing an easy way to summarize a ton of information in one button.
 
@@ -121,7 +127,7 @@ multi_box(values = c(4, 5, 6), txt = c("Sally", "George", "Mohammed"), icons = c
 
 Naturally, I was tempted to also construct a multi_gradient_box, but I haven't because it seemed messy to have the color be dominated by one of the many values... so I don't think it's very useful. But please open an Issue if you have a good use case.
 
-## Last but not least, here's the tile_matrix
+# Last but not least, here's the tile_matrix
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
@@ -160,7 +166,7 @@ diamonds %>%
   tile_matrix(data = ., values = price, txt = color, former = old_price, target = 5000, roundVal = 0)
 ```
 
-## What's this "former" business?
+# What's this "former" business?
 
 So we've seen this `former` value a few times now, but what does it do? Simply put it contextualizes the displayed value in comparision with a former value. This is especially useful to measure performance increase or declines. In order to show the functionality, let's use a quite contrived scenario:
 
@@ -176,7 +182,7 @@ df <- data_frame(
 tile_matrix(data = df, values = values, txt = txt, former = former)
 ```
 
-## Grammar of tile_maker
+# Grammar of tile_maker
 Buttons are put into a div (which is more or less an html "row"... kinda). And these divs are put into a finalizer.
 
 ```{r}
@@ -212,7 +218,7 @@ finisher(
 
 These functions are included to help with inclusion in different document types.. sometimes report types get finicky, but perhaps can stop complaining if they are included within a `finisher` block. 
 
-## It's not working / you broke my entire report / help
+# It's not working / you broke my entire report / help
 
 So let's be very clear... this is a hack, might even be an ugly hack. I'm controlling how these elements work by porting and controlling the HTML element within. Sometimes that makes a mess out of the document you're preparing. Towhit, I have included a few features:
 

@@ -1,0 +1,77 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r}
+library(dplyr)
+library(htmltools)
+library(TileMaker)
+a <-   tile_matrix(data = iris, values = Sepal.Length, txt = Species,target = 5,thresholdHigh = 4,thresholdLow = 3) %>% htmltools::html_print(.)
+
+b1 <- solo_box(value = 3.57, txt = "Times apple eaten", icon = "apple")
+b2 <- solo_box(value = 13.7, txt = "Nutritional value", size = "lg")
+b3 <- solo_box(value = 1, txt = "Yumminess factor", type = "danger")
+b4 <- solo_box(value = 5, txt = "Inconsistencies", hover = "This is the description")
+
+d1 <- div_maker(subtitle = "Quantativity factors", textModifier = "h2", b1, b2)
+d2 <- div_maker(subtitle = "Implementation procedures", textModifier = "h2", b3, b4)
+
+finisher(title = "Hello", divs = div_maker(subtitle = "Importantness",textModifier = "h1", b1, b2))
+
+mapp <- leaflet::addTiles(leaflet::leaflet())
+
+
+finisher(title = "Hello", 
+         divs = div_maker(subtitle = "Maps too!",  textModifier = "h2", d1, mapp, d2))
+
+
+## Shinydashboard Test --------------
+## app.R ##
+library(shinydashboard)
+library(shiny)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Basic dashboard"),
+  dashboardSidebar(
+        sliderInput("slider", "Number of observations:", 1, 100, 50)),
+  dashboardBody(
+    # Boxes need to be put in a row (or column)
+    fluidRow(
+      box(plotOutput("plot1", height = 250)),
+
+      box(
+        title = "Controls",
+        d1,
+        d2
+      )
+    )
+  )
+)
+
+server <- function(input, output) {
+  set.seed(122)
+  histdata <- rnorm(500)
+
+  output$plot1 <- render({
+    data <- histdata[seq_len(input$slider)]
+    hist(data)
+  })
+}
+
+shinyApp(ui, server)
+```
+
