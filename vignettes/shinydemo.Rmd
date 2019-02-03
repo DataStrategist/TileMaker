@@ -2,7 +2,7 @@
 title: "TileMaker in Shiny"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Demo of Shiny}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -31,30 +31,30 @@ b2 <- solo_box(value = 13.7, txt = "Nutritional value", size = "lg")
 
 d1 <- div_maker(subtitle = "Quantativity factors", textModifier = "h2", b1, b2)
 
-## Shinydashboard Test --------------
-## app.R ##
-library(shinydashboard)
-library(shiny)
-
-ui <- dashboardPage(
-  dashboardHeader(title = "Basic dashboard"),
-  dashboardSidebar(
-        sliderInput("slider", "Number of observations:", 1, 100, 50)),
-  dashboardBody(
-    # Boxes need to be put in a row (or column)
-    fluidRow(
-      box(
-        b1, d1, htmlOutput("plot1")
-      )
-    )
-  )
-)
-
-server <- function(input, output) {
-  output$plot1 <- renderUI({
-    div_maker(subtitle = "boom", textModifier = "h2", solo_box(value = input$slider, txt = "Times apple eaten", icon = "apple"))
-  })
-}
+# ## Shinydashboard Test --------------
+# ## app.R ##
+# library(shinydashboard)
+# library(shiny)
+# 
+# ui <- dashboardPage(
+#   dashboardHeader(title = "Basic dashboard"),
+#   dashboardSidebar(
+#         sliderInput("slider", "Number of observations:", 1, 100, 50)),
+#   dashboardBody(
+#     # Boxes need to be put in a row (or column)
+#     fluidRow(
+#       box(
+#         b1, d1, htmlOutput("plot1")
+#       )
+#     )
+#   )
+# )
+# 
+# server <- function(input, output) {
+#   output$plot1 <- renderUI({
+#     div_maker(subtitle = "boom", textModifier = "h2", solo_box(value = input$slider, txt = "Times apple eaten", icon = "apple"))
+#   })
+# }
 
 # shinyApp(ui, server)
 ```

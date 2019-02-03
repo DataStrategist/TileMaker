@@ -56,7 +56,7 @@
       <a href="../articles/Intro.html">Intro</a>
     </li>
     <li>
-      <a href="../articles/shiny.html">TileMaker in Shiny</a>
+      <a href="../articles/shinydemo.html">TileMaker in Shiny</a>
     </li>
   </ul>
 </li>
@@ -80,7 +80,7 @@
             
       
       
-      <div class="hidden name"><code>shiny.Rmd</code></div>
+      <div class="hidden name"><code>shinydemo.Rmd</code></div>
 
     </div>
 
@@ -106,35 +106,30 @@ b2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/solo_box
 
 d1 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Quantativity factors"</span>, <span class="dt">textModifier =</span> <span class="st">"h2"</span>, b1, b2)
 
-## Shinydashboard Test --------------
-## app.R ##
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shinydashboard)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: 'shinydashboard'</span>
-<span class="co">#&gt; The following object is masked from 'package:graphics':</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     box</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(shiny)
-
-ui &lt;-<span class="st"> </span><span class="kw">dashboardPage</span>(
-  <span class="kw">dashboardHeader</span>(<span class="dt">title =</span> <span class="st">"Basic dashboard"</span>),
-  <span class="kw">dashboardSidebar</span>(
-        <span class="kw">sliderInput</span>(<span class="st">"slider"</span>, <span class="st">"Number of observations:"</span>, <span class="dv">1</span>, <span class="dv">100</span>, <span class="dv">50</span>)),
-  <span class="kw">dashboardBody</span>(
-    <span class="co"># Boxes need to be put in a row (or column)</span>
-    <span class="kw">fluidRow</span>(
-      <span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/box">box</a></span>(
-        b1, d1, <span class="kw">htmlOutput</span>(<span class="st">"plot1"</span>)
-      )
-    )
-  )
-)
-
-server &lt;-<span class="st"> </span><span class="cf">function</span>(input, output) {
-  output<span class="op">$</span>plot1 &lt;-<span class="st"> </span><span class="kw">renderUI</span>({
-    <span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"boom"</span>, <span class="dt">textModifier =</span> <span class="st">"h2"</span>, <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> input<span class="op">$</span>slider, <span class="dt">txt =</span> <span class="st">"Times apple eaten"</span>, <span class="dt">icon =</span> <span class="st">"apple"</span>))
-  })
-}
+<span class="co"># ## Shinydashboard Test --------------</span>
+<span class="co"># ## app.R ##</span>
+<span class="co"># library(shinydashboard)</span>
+<span class="co"># library(shiny)</span>
+<span class="co"># </span>
+<span class="co"># ui &lt;- dashboardPage(</span>
+<span class="co">#   dashboardHeader(title = "Basic dashboard"),</span>
+<span class="co">#   dashboardSidebar(</span>
+<span class="co">#         sliderInput("slider", "Number of observations:", 1, 100, 50)),</span>
+<span class="co">#   dashboardBody(</span>
+<span class="co">#     # Boxes need to be put in a row (or column)</span>
+<span class="co">#     fluidRow(</span>
+<span class="co">#       box(</span>
+<span class="co">#         b1, d1, htmlOutput("plot1")</span>
+<span class="co">#       )</span>
+<span class="co">#     )</span>
+<span class="co">#   )</span>
+<span class="co"># )</span>
+<span class="co"># </span>
+<span class="co"># server &lt;- function(input, output) {</span>
+<span class="co">#   output$plot1 &lt;- renderUI({</span>
+<span class="co">#     div_maker(subtitle = "boom", textModifier = "h2", solo_box(value = input$slider, txt = "Times apple eaten", icon = "apple"))</span>
+<span class="co">#   })</span>
+<span class="co"># }</span>
 
 <span class="co"># shinyApp(ui, server)</span></code></pre></div>
   </div>
