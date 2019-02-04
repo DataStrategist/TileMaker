@@ -32,7 +32,8 @@
 
 <meta property="og:title" content="solo_gradient_box — solo_gradient_box" />
 
-<meta property="og:description" content="This function crafts a tile like solo_box, but this one changes color according to value" />
+<meta property="og:description" content="This function crafts a solo_box tile displaying a red orange green color.
+The color is defined by the value of the target compared to the thresholds." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,14 +117,15 @@
 
     <div class="ref-description">
     
-    <p>This function crafts a tile like solo_box, but this one changes color according to value</p>
+    <p>This function crafts a solo_box tile displaying a red orange green color.
+The color is defined by the value of the target compared to the thresholds.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>solo_gradient_box</span>(<span class='kw'>value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>txt</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>former</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>size</span> <span class='kw'>=</span> <span class='st'>"md"</span>, <span class='kw'>icon</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>thresholdHigh</span> <span class='kw'>=</span> <span class='fl'>90</span>,
   <span class='kw'>thresholdLow</span> <span class='kw'>=</span> <span class='fl'>50</span>, <span class='kw'>link</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>units</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>hover</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>hide_value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"h1"</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>hide_value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>textModifier</span> <span class='kw'>=</span> <span class='st'>"h1"</span>, <span class='kw'>revert</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -186,6 +188,10 @@ the large number, but still take advantage of the conditional formatting.</p></t
     <tr>
       <th>textModifier</th>
       <td><p>Optional css category of "large" text. In this case, the icon, value and unit. Default=h1</p></td>
+    </tr>
+    <tr>
+      <th>revert</th>
+      <td><p>Invert type box. Green become red and red become green.</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -7,7 +7,7 @@
 solo_gradient_box(value = NULL, txt = NULL, former = NULL,
   size = "md", icon = NULL, target = 100, thresholdHigh = 90,
   thresholdLow = 50, link = NULL, units = NULL, hover = NULL,
-  hide_value = FALSE, textModifier = "h1", ...)
+  hide_value = FALSE, textModifier = "h1", revert = FALSE, ...)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
@@ -43,10 +43,13 @@ the large number, but still take advantage of the conditional formatting.}
 
 \item{textModifier}{Optional css category of "large" text. In this case, the icon, value and unit. Default=h1}
 
+\item{revert}{Invert type box. Green become red and red become green.}
+
 \item{...}{Optional additional html elements}
 }
 \description{
-This function crafts a tile like solo_box, but this one changes color according to value
+This function crafts a solo_box tile displaying a red orange green color.
+The color is defined by the value of the target compared to the thresholds.
 }
 \examples{
 # ADD EXAMPLES HERE
