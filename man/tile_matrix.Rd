@@ -11,7 +11,7 @@ tile_matrix(data, values, txt, icon, former, target = 100,
 \arguments{
 \item{data}{a dataframe containing the data you would like to plot}
 
-\item{values}{a Vector containing values for each tile, contained in the datframe `data`}
+\item{values}{a Vector containing values for each tile, contained in the dataframe `data`}
 
 \item{txt}{Vector containing titles for each tile, contained in the datframe `data`}
 
