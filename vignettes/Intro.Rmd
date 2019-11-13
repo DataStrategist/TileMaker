@@ -62,6 +62,8 @@ If you rest your mouse over above button, you should see the text "Warning reaso
 
 Most of the features above are pretty intuitive. Most favored, icons are also available using [Glyphicons](https://getbootstrap.com/docs/3.3/components/).
 
+## Icons
+
 ```{r}
 div_maker(
   subtitle = "Icons", textModifier = "h4",
@@ -209,6 +211,21 @@ This is especially useful to measure growth of a metric.
 ## Grammar of tile_maker
 
 Buttons are put into a div tag and final values are put into a finalizer.
+
+```{r}
+suppressPackageStartupMessages(library(dplyr))
+df <- data_frame(
+  values = seq(from = 0, to = 100, by = 10),
+  txt = "comparison to 50",
+  former = 50
+)
+
+## Let's pretend that all previous values were 50... so:
+tile_matrix(data = df, values = values, txt = txt, former = former)
+```
+
+# Grammar of tile_maker
+Buttons are put into a div (which is more or less an html "row"... kinda). And these divs are put into a finalizer.
 
 ```{r}
 Value1 <- 88

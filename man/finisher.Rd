@@ -13,7 +13,7 @@ finisher(title = NULL,
 
 \item{css}{A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7
 bootstrap CDN because they support icons, but some others that might be interesting to you are:
-https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css}
+https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css (but if you use version 4 you will lose the ability to display icons).}
 
 \item{file}{Optional filename if you desire to save the file.}
 

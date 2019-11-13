@@ -51,15 +51,21 @@ ico <- function(x, chevron = FALSE) {
 #' finisher(title = "straight buttons", divs = b1)
 #' finisher(
 #'   title = "with divs",
-#'   divs = div_maker(subtitle = "boom",
-#'   textModifier = "h1",
-#'   div_maker(subtitle = "Boom", textModifier = "hi",b1, b2, b3))
+#'   divs = div_maker(
+#'     subtitle = "boom",
+#'     textModifier = "h1",
+#'     div_maker(subtitle = "Boom", textModifier = "hi", b1, b2, b3)
+#'   )
 #' )
-#'
+#' 
 #' ## Or taking advantage of the ability to change the textModifier:
-#' finisher(title = "h4 modifier",
-#' divs = solo_box(value = 3, txt = "uh huh",
-#' former = 2, textModifier = "h4"))
+#' finisher(
+#'   title = "h4 modifier",
+#'   divs = solo_box(
+#'     value = 3, txt = "uh huh",
+#'     former = 2, textModifier = "h4"
+#'   )
+#' )
 #' @export solo_box
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, type = "info", link = NULL, units = NULL,
@@ -73,8 +79,8 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
-        if (!(is.null(value) & is.null(units) & is.null(icon))) {
-          tag(textModifier, tags$span(
+      if (!(is.null(value) & is.null(units) & is.null(icon))) {
+        tag(textModifier, tags$span(
           ico(icon), value, units,
           if (!is.null(former)) {
             if (former > value) {
@@ -145,8 +151,10 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #'   value = 35, txt = "Test2", target = 50,
 #'   thresholdHigh = 80, thresholdLow = 60, hide_value = TRUE
 #' )
-#' finisher(title = "Item", divs = div_maker(subtitle = "subitems",
-#' textModifier = "h1", g1, g2, g3, g4))
+#' finisher(title = "Item", divs = div_maker(
+#'   subtitle = "subitems",
+#'   textModifier = "h1", g1, g2, g3, g4
+#' ))
 #' @export solo_gradient_box
 solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               size = "md", icon = NULL, target = 100,
@@ -235,7 +243,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #'   number_zoom = 300, icons = c("apple", "calendar"), type = "warning",
 #'   txt = c("times", "reports")
 #' ) %>%
-#'   finisher(divs = . )
+#'   finisher(divs = .)
 #' \dontrun{
 #' if (interactive()) {
 #'   # EXAMPLE1
@@ -453,7 +461,7 @@ div_maker <- function(subtitle, textModifier, ...) {
 #' @param title Title. Default NULL
 #' @param css A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7
 #' bootstrap CDN because they support icons, but some others that might be interesting to you are:
-#' https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css
+#' https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css (but if you use version 4 you will lose the ability to display icons).
 #' @param file Optional filename if you desire to save the file.
 #' @param textModifier Optional css category of "large" text. In this case, title. Default=h1
 #' @param divs \code{div_maker} elements.

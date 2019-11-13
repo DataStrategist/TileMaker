@@ -1,6 +1,7 @@
 
 [![Travis-CI Build Status](https://travis-ci.org/DataStrategist/TileMaker.svg?branch=master)](https://travis-ci.org/DataStrategist/TileMaker)
 [![Coverage Status](https://coveralls.io/repos/github/DataStrategist/TileMaker/badge.svg?branch=master)](https://coveralls.io/github/DataStrategist/TileMaker?branch=master)
+[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/DataStrategist)
 
 TileMaker
 =========

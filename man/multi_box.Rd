@@ -48,7 +48,7 @@ multi_box(
   number_zoom = 300, icons = c("apple", "calendar"), type = "warning",
   txt = c("times", "reports")
 ) \%>\%
-  finisher(divs = . )
+  finisher(divs = .)
 \dontrun{
 if (interactive()) {
   # EXAMPLE1

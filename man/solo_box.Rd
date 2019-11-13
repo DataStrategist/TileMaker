@@ -47,13 +47,19 @@ b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "appl
 finisher(title = "straight buttons", divs = b1)
 finisher(
   title = "with divs",
-  divs = div_maker(subtitle = "boom",
-  textModifier = "h1",
-  div_maker(subtitle = "Boom", textModifier = "hi",b1, b2, b3))
+  divs = div_maker(
+    subtitle = "boom",
+    textModifier = "h1",
+    div_maker(subtitle = "Boom", textModifier = "hi", b1, b2, b3)
+  )
 )
 
 ## Or taking advantage of the ability to change the textModifier:
-finisher(title = "h4 modifier",
-divs = solo_box(value = 3, txt = "uh huh",
-former = 2, textModifier = "h4"))
+finisher(
+  title = "h4 modifier",
+  divs = solo_box(
+    value = 3, txt = "uh huh",
+    former = 2, textModifier = "h4"
+  )
+)
 }

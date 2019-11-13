@@ -4,7 +4,7 @@ context("test-tile_maker")
 test_that("classes work", {
   expect_equal(ico("star") %>% class(), "shiny.tag")
   expect_equal(solo_box(value = 10, txt = "blah", former = 5) %>%
-                 class(), "shiny.tag")
+    class(), "shiny.tag")
   solo_gradient_box(value = 10, txt = "blah", former = 5) %>%
     class() %>%
     expect_equal(., "shiny.tag")
@@ -45,35 +45,35 @@ test_that("classes work", {
 
 test_that("'former' calc and chevrons work", {
   expect_equal(solo_box(value = 10, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("chevron-up", x = .) %>%
-                 sum(), 1)
+    unlist() %>%
+    grepl("chevron-up", x = .) %>%
+    sum(), 1)
   expect_equal(solo_box(value = 4, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("chevron-down", x = .) %>%
-                 sum(), 1)
+    unlist() %>%
+    grepl("chevron-down", x = .) %>%
+    sum(), 1)
   expect_equal(solo_box(value = 10, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("100%", x = .) %>%
-                 sum(), 1)
+    unlist() %>%
+    grepl("100%", x = .) %>%
+    sum(), 1)
 
   expect_equal(solo_gradient_box(value = 10, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("chevron-up", x = .) %>%
-                 sum(), 1)
+    unlist() %>%
+    grepl("chevron-up", x = .) %>%
+    sum(), 1)
   expect_equal(solo_gradient_box(value = 4, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("chevron-down", x = .) %>%
-                 sum(), 1)
+    unlist() %>%
+    grepl("chevron-down", x = .) %>%
+    sum(), 1)
   expect_equal(solo_gradient_box(value = 10, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("100%", x = .) %>%
-                 sum(), 1)
+    unlist() %>%
+    grepl("100%", x = .) %>%
+    sum(), 1)
 
   expect_equal(solo_box(value = 10, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("100%", x = .) %>%
-                 sum(), 1)
+    unlist() %>%
+    grepl("100%", x = .) %>%
+    sum(), 1)
 
   tile_matrix(
     data = iris %>% head(4),
@@ -88,17 +88,17 @@ test_that("'former' calc and chevrons work", {
 
 test_that("all colors work", {
   expect_equal(solo_gradient_box(value = 10, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("danger", x = .) %>%
-                 sum(), 2)
+    unlist() %>%
+    grepl("danger", x = .) %>%
+    sum(), 2)
   expect_equal(solo_gradient_box(value = 80, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("warning", x = .) %>%
-                 sum(), 2)
+    unlist() %>%
+    grepl("warning", x = .) %>%
+    sum(), 2)
   expect_equal(solo_gradient_box(value = 95, txt = "blah", former = 5) %>%
-                 unlist() %>%
-                 grepl("success", x = .) %>%
-                 sum(), 2)
+    unlist() %>%
+    grepl("success", x = .) %>%
+    sum(), 2)
 })
 
 test_that("errors error out", {
@@ -137,7 +137,7 @@ test_that("protections work", {
     tile_matrix(
       data = iris %>%
         dplyr::mutate(Sepal.Length = ifelse(Sepal.Length < 6,
-                                            NA, Sepal.Length
+          NA, Sepal.Length
         )),
       values = Sepal.Length, txt = Species
     )
@@ -164,4 +164,3 @@ test_that("protections work", {
     sum() %>%
     expect_equal(3)
 })
-
