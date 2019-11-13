@@ -1,12 +1,10 @@
 ---
 title: "Intro"
-output: html_document
-# output:
-#   rmarkdown::html_vignette:
-#         css: //maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
-## Hrm... can't use html_vignette because it bulldozes the bootstrap css (ie, it removes icons)
+output:
+  html_document: default
+  pdf_document: default
 vignette: >
-  %\VignetteIndexEntry{Intro}
+  %\VignetteIndexEntry{Intro} 
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{ggplot2, dplyr}
@@ -19,53 +17,71 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Meet the Tile
+## Overview
 
-Dashboard Tiles/Notecards are a great way to visualize just one number, and make it big and pretty. They can emphasize results in an easily digestible and colourful format. This package dates back to the days before infoboxes and valueboxes were available from [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) and [shinydashboards](https://rstudio.github.io/shinydashboard/), and still has some utility today due to it's flexibility.
+Dashboard Tiles, also named Notecards, are a great way to visualize key numbers.
+They can emphasize results in an easily digestible and colorful format.
+This package is an alternative to infoboxes and valueboxes available from [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) and [shinydashboards](https://rstudio.github.io/shinydashboard/).
 
-This package uses Twitter's [Bootstrap](https://getbootstrap.com/) CSS files, and pushes content into buttons that then have different functionality. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!
+This package uses Twitter's [Bootstrap](https://getbootstrap.com/) CSS files. It pushes the key numbers into buttons using all the functionnality provided by bootstrap.
+These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!
 
-Let's start small. 
-Note: Please link to References for explanation on full functionality of used tile. (Available if function is underlined/highlighted when hovered over. eg. Hover over 'solo_box' below and click. )
-Here's the most basic button:
+## Getting Started
 
-```{r}
-require(TileMaker) ## to install, use devtools::install_github("DataStrategist/TileMaker")
-solo_box(value = 3.3, txt = "Important parameter")
+Install the TileMaker package from Github as follows:
+
+```{r, eval=FALSE}
+# install.packages("TileMaker")
+devtools::install_github("DataStrategist/TileMaker")
 ```
 
-^ The solo_box only represents one value. But that doesn't mean it's boring! Here's a fully featured `solo_box`:
+```{r}
+library(TileMaker)
+```
+
+## Solo Box
+
+The ``solo_box`` function allows to create a simple colored box.
+
+```{r}
+solo_box(value = 3.3, txt = "My metric")
+```
+
+The ``solo_box`` function only represents one key value. In addition, many feature exist allowing to tune the box entirely.
 
 ```{r}
 solo_box(
-  value = 42, txt = "Absolute truth", former = 99, size = "lg", icon = "check",
-  type = "warning", link = "http://google.com", units = "kg", hover = "I believe in fairies", textModifier = "h3"
+  value = 42, txt = "My metric", former = 99, size = "lg", icon = "check",
+  type = "warning", link = "https://google.com", units = "kg", hover = "Warning reason", textModifier = "h3"
 )
 ```
 
-(did you try to hover your mouse over the button?) As you can see, plenty of bells and whistles. Most of the stuff above is pretty intuitive, but let's explore a bit more, starting with icons (ignore the `div_maker` for now):
+If you rest your mouse over above button, you should see the text "Warning reason" appearing.
+
+### Icons
+
+Most of the features above are pretty intuitive. Most favored, icons are also available using [Glyphicons](https://getbootstrap.com/docs/3.3/components/).
 
 ## Icons
 
 ```{r}
 div_maker(
-  subtitle = "One pic is worth a thousand words", textModifier = "h3",
+  subtitle = "Icons", textModifier = "h4",
   solo_box(value = 3.3, txt = "envelope", icon = "envelope"),
   solo_box(value = 3.3, txt = "pushpin", icon = "pushpin"),
   solo_box(value = 3.3, txt = "calendar", icon = "calendar")
 )
 ```
 
+Only the name of the icon needs to be supplied, the left hand side of the icon name, "gyphicon-" is automatically managed.
 
-^ as you can see, we are just using common [glyphicons](https://getbootstrap.com/docs/3.3/components/). See the documentation to check your options. 
+The ``div_maker`` functions allows to wrap multiple icons together.
 
-Next, let's explore the size. 
-
-## Size
+### Size
 
 ```{r}
 div_maker(
-  subtitle = "Supersize it!", textModifier = "h3",
+  subtitle = "sizes", textModifier = "h4",
   solo_box(value = 3.3, txt = "extra small", size = "xs"),
   solo_box(value = 3.3, txt = "small", size = "sm"),
   solo_box(value = 3.3, txt = "medium", size = "md"),
@@ -73,13 +89,16 @@ div_maker(
 )
 ```
 
-And the `type`, which dictates the color using the css classes (watch the case sensitivity here!).
+### Color
 
-## Color
+The ``type`` argument controls the type of box and dictates the color.
+
+By default, Bootstrap Version 3 is used. 6 types of boxes are available.
+It can be customised to use boostrap 4.
 
 ```{r}
 div_maker(
-  subtitle = "... all the colors of a rainbow", textModifier = "h3",
+  subtitle = "colors", textModifier = "h4",
   solo_box(value = 3.3, txt = "Default", type = "default"),
   solo_box(value = 3.3, txt = "Primary", type = "primary"),
   solo_box(value = 3.3, txt = "Success", type = "success"),
@@ -89,53 +108,66 @@ div_maker(
 )
 ```
 
-(we are using Bootstrap Version 3 by default but that's customizeable).
+<br>
 
-So it's cool that we can change colors, but what if we wanted the color to change automatically, based on value? Well, let's meet the next member of the family:
+```{r, echo=FALSE}
+solo_box(value = NULL, txt = "Watch the case sensitivity of the txt argument here!", type = "warning")
+```
 
-# Let's go solo_gradient_box!!!
+## Solo Gradient Box
 
-The solo_gradient box automatically changes colors from red to yellow to green based on a target and some thresholds. By default, the `target` is set to 100 and the thresholds are set to 50 and 90, but obviously those are customizeable.
+The ``solo_gradient_box`` function allows to automatically pick colors among classic traffic light colors, green-orange-red, and some thresholds. By default, the `target` is set to 100 and thresholds are set to 50 and 90.
 
 ```{r}
 div_maker(
-  subtitle = "gradients", textModifier = "h1",
+  subtitle = "Available gradients", textModifier = "h4",
   solo_gradient_box(value = 95, txt = "Grade 1"),
   solo_gradient_box(value = 80, txt = "Grade 2"),
   solo_gradient_box(value = 40, txt = "Grade 3")
 )
 ```
 
-Now let's change the target only, but leave the thresholds on their default values (set to 50% and 90% of targets respectively) . Let's change the target to 50.
+By default, the value is used as the target.
+It is possible to compare the value to a target using the `target` argument.
+The color is then determined by comparing ``target / value`` to the thresholds.
 
 ```{r}
-solo_gradient_box(value = 46, txt = "Customized target", target = 50)
+div_maker(
+  subtitle = "Playing with the thresholds", textModifier = "h4",
+  solo_gradient_box(value = 24, txt = "Grade 1", target = 50),
+  solo_gradient_box(value = 25, txt = "Grade 2", target = 50),
+  solo_gradient_box(value = 44, txt = "Grade 2", target = 50),
+  solo_gradient_box(value = 45, txt = "Grade 3", target = 50)
+)
 ```
 
-The above shows up green, because 46 of 50 is still 92%, but if we change the thresholdHigh to 93%:
+<br>
+
+Arguments ``thresholdHigh`` and ``thresholdLow`` allow to customise the thresholds.
 
 ```{r}
 solo_gradient_box(value = 46, txt = "Customized target<br>and threshold", target = 50, thresholdHigh = 93)
 ```
 
-You can see that the box changes to orange since it's now between `thresholdHigh` and `thresholdLow`. By the way, the thresholds are optimistic (ie, round up (so 90=green and 50=orange on default settings), because juuuuuuuust passing feels awesome and juuuuuust failing feels terrible.
+You can see that the box changes to orange since it's now between `thresholdHigh` and `thresholdLow`.
 
-By the way, you will also notice the `<br>` above forcing a line break. Yes, that's right, text accepts full html code, writen natively!
+The `<br>` element above forces a line break. Text accepts full html code, natively written.
 
-# It's your turn, multi_box!
+## Multi Box
 
-The `multi_box`, in contrast to the `solo_box`, takes multiple values in one button, providing an easy way to summarize a ton of information in one button.
+The `multi_box` function takes multiple values in one button, providing an easy way to summarize a ton of information in one button.
 
 ```{r}
 multi_box(values = c(4, 5, 6), txt = c("Sally", "George", "Mohammed"), icons = c("check", "plus", "calendar"), title = "Candidates")
 ```
 
-Naturally, I was tempted to also construct a multi_gradient_box, but I haven't because it seemed messy to have the color be dominated by one of the many values... so I don't think it's very useful. But please open an Issue if you have a good use case.
+## Tile Matrix
 
-# Last but not least, here's the tile_matrix
+The ``tile_matrix`` function creates several new `solo_gradient_boxes` and compiles them all into a grid.
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
+
 df <- data_frame(
   values = c(2, 5, 6),
   txt = c("Sally", "George", "Mohammed")
@@ -143,26 +175,28 @@ df <- data_frame(
 tile_matrix(df, values = values, txt = txt, target = 10, thresholdHigh = 60, thresholdLow = 40, textModifier = "h2")
 ```
 
-^ As you can see, the `tile_matrix` creates several new `solo_gradient_boxes` and compiles them all into a matrix. The point of this is to easily visualize data from a `data.frame`, and of course it takes a `data.frame` as a first input in order to be tidyverse compliant. Some examples:
+The function takes a dataframe as first value and as such can be used in a tidyverse pipe.
+
+Example:
 
 ```{r}
 mtcars %>%
-  ## we can't feed `names(mtcars)` as an input, so let's assign it as a column heading
-  mutate(names = rownames(mtcars)) %>%
-  ## pipe the dataframe directly into the tile_matrix!
+  # name of car model is contained in the rowname 
+  mutate(names = rownames(.)) %>%
   tile_matrix(
-    data = .,
     values = "disp", txt = "names",
     target = 500, thresholdHigh = 80, thresholdLow = 50
   )
 ```
 
-The concept of the `tile_matrix` is to provide a quick way to visualize simple information... for example summaries. The fact that the thresholds scale automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information. For example, if one wanted to quickly see diamond prices, we could:
+<br>
+
+The concept of the `tile_matrix` is to provide a quick way to visualize simple informations. The fact that the thresholds scale automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information.
+
+For example, if one wanted to quickly see diamond prices:
 
 ```{r BOOM}
-library(dplyr)
 library(ggplot2)
-library(TileMaker)
 diamonds %>% 
   group_by(color) %>%
   summarize(price = mean(price)) %>%
@@ -171,9 +205,12 @@ diamonds %>%
   tile_matrix(data = ., values = price, txt = color, former = old_price, target = 5000, roundVal = 0)
 ```
 
-# What's this "former" business?
+The ``former`` argument contextualizes the displayed value in comparison with a former value.
+This is especially useful to measure growth of a metric.
 
-So we've seen this `former` value a few times now, but what does it do? Simply put it contextualizes the displayed value in comparision with a former value. This is especially useful to measure performance increase or declines. In order to show the functionality, let's use a quite contrived scenario:
+## Grammar of tile_maker
+
+Buttons are put into a div tag and final values are put into a finalizer.
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
@@ -221,14 +258,15 @@ finisher(
 )
 ```
 
-These functions are included to help with inclusion in different document types.. sometimes report types get finicky, but perhaps can stop complaining if they are included within a `finisher` block. 
+These functions are included to help with inclusion in different document types and for testing small snipets of code.
 
-# It's not working / you broke my entire report / help
+## Bug Report / help
 
-So let's be very clear... this is a hack, might even be an ugly hack. I'm controlling how these elements work by porting and controlling the HTML element within. Sometimes that makes a mess out of the document you're preparing. Towhit, I have included a few features:
+HTML elements within `tile_maker` blocks have a fixed css  controlled by the functions. It may affect others elements of your webpage.
 
- 1. As mentioned in the previous section, try wrapping your buttons or groups of buttons in `div_maker`s, and/or in `finisher`s... that seems to do the trick most of the time.
- 2. In some cases, for example in markdown documents that include a Table of Contents, that format depends on html stuff as well... so that's where the `textModifier` bit comes in handy. You can change the textModifier from the default `h1` to `h4` or `<br>` or whatever else you think might work in your report. Experiment around! 
+The tilemaker package work by porting bootstrap functionnality and controlling the HTML element within. It may affect others elements of your webpage.
 
- 
+A few features are included to try to prevent these effects:
 
+ 1. Most of the time, wrapping your buttons or groups of buttons in `div_maker`s, and/or in `finisher`s... seems to fix issues most of the time.
+ 2. In some cases, for example in markdown documents that include a Table of Contents, format depends of previous html elements. It is advised to then use the `textModifier` option. You can change the textModifier from the default `h1` to `h4` or `<br>` or anything you think might work in your report.

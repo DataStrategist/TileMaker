@@ -110,7 +110,8 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 
 #' solo_gradient_box
 #'
-#' This function crafts a tile like solo_box, but this one changes color according to value
+#' This function crafts a solo_box tile displaying a red orange green color.
+#' The color is defined by the value of the target compared to the thresholds.
 #'
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param txt Optional subtext that should appear under the value
@@ -132,6 +133,7 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param hide_value Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
 #' the large number, but still take advantage of the conditional formatting.
 #' @param textModifier Optional css category of "large" text. In this case, the icon, value and unit. Default=h1
+#' @param revert Invert type box. Green become red and red become green.
 #' @param ... Optional additional html elements
 #' @importFrom htmltools HTML tags tag
 #' @examples
@@ -159,12 +161,12 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               thresholdHigh = 90, thresholdLow = 50,
                               link = NULL, units = NULL, hover = NULL,
                               hide_value = FALSE,
-                              textModifier = "h1", ...) {
+                              textModifier = "h1", revert = FALSE, ...) {
   Perc <- value / target * 100
   if (Perc >= thresholdHigh) {
-    finalType <- "success"
+    if(revert == FALSE) finalType <- "success" else finalType <- "danger"
   } else if (Perc < thresholdLow) {
-    finalType <- "danger"
+    if(revert == FALSE) finalType <- "danger" else finalType <- "success"
   } else {
     finalType <- "warning"
   }
@@ -288,7 +290,7 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
 #' Create a matrix of buttons suitable for quick comparisons
 #'
 #' @param data a dataframe containing the data you would like to plot
-#' @param values a Vector containing values for each tile, contained in the datframe `data`
+#' @param values a Vector containing values for each tile, contained in the dataframe `data`
 #' @param txt Vector containing titles for each tile, contained in the datframe `data`
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
 #' the name of thing you want, like "check"... not the full "gyphicon-check"

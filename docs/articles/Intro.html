@@ -86,28 +86,38 @@
 
     
     
-<div id="meet-the-tile" class="section level1">
-<h1 class="hasAnchor">
-<a href="#meet-the-tile" class="anchor"></a>Meet the Tile</h1>
-<p>Dashboard Tiles/Notecards are a great way to visualize just one number, and make it big and pretty. They can emphasize results in an easily digestible and colourful format. This package dates back to the days before infoboxes and valueboxes were available from <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a> and <a href="https://rstudio.github.io/shinydashboard/">shinydashboards</a>, and still has some utility today due to it’s flexibility.</p>
-<p>This package uses Twitter’s <a href="https://getbootstrap.com/">Bootstrap</a> CSS files, and pushes content into buttons that then have different functionality. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!</p>
-<p>Let’s start small. Note: Please link to References for explanation on full functionality of used tile. (Available if function is underlined/highlighted when hovered over. eg. Hover over ‘solo_box’ below and click. ) Here’s the most basic button:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">require</a></span>(TileMaker) ## to install, use devtools::install_github("DataStrategist/TileMaker")
-<span class="co">#&gt; Loading required package: TileMaker</span>
-<span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"Important parameter"</span>)</code></pre></div>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>Dashboard Tiles, also named Notecards, are a great way to visualize key numbers. They can emphasize results in an easily digestible and colorful format. This package is an alternative to infoboxes and valueboxes available from <a href="https://rmarkdown.rstudio.com/flexdashboard/">flexdashboard</a> and <a href="https://rstudio.github.io/shinydashboard/">shinydashboards</a>.</p>
+<p>This package uses Twitter’s <a href="https://getbootstrap.com/">Bootstrap</a> CSS files. It pushes the key numbers into buttons using all the functionnality provided by bootstrap. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!</p>
+</div>
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting Started</h2>
+<p>Install the TileMaker package from Github as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("TileMaker")</span>
+devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"DataStrategist/TileMaker"</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(TileMaker)</code></pre></div>
+</div>
+<div id="solo-box" class="section level2">
+<h2 class="hasAnchor">
+<a href="#solo-box" class="anchor"></a>Solo Box</h2>
+<p>The <code>solo_box</code> function allows to create a simple colored box.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"My metric"</span>)</code></pre></div>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
 <h1>3.3</h1>
-Important parameter
+My metric
 </button>
 </a>
-<p>^ The solo_box only represents one value. But that doesn’t mean it’s boring! Here’s a fully featured <code>solo_box</code>:</p>
+<p>The <code>solo_box</code> function only represents one key value. In addition, many feature exist allowing to tune the box entirely.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(
-  <span class="dt">value =</span> <span class="dv">42</span>, <span class="dt">txt =</span> <span class="st">"Absolute truth"</span>, <span class="dt">former =</span> <span class="dv">99</span>, <span class="dt">size =</span> <span class="st">"lg"</span>, <span class="dt">icon =</span> <span class="st">"check"</span>,
-  <span class="dt">type =</span> <span class="st">"warning"</span>, <span class="dt">link =</span> <span class="st">"http://google.com"</span>, <span class="dt">units =</span> <span class="st">"kg"</span>, <span class="dt">hover =</span> <span class="st">"I believe in fairies"</span>, <span class="dt">textModifier =</span> <span class="st">"h3"</span>
+  <span class="dt">value =</span> <span class="dv">42</span>, <span class="dt">txt =</span> <span class="st">"My metric"</span>, <span class="dt">former =</span> <span class="dv">99</span>, <span class="dt">size =</span> <span class="st">"lg"</span>, <span class="dt">icon =</span> <span class="st">"check"</span>,
+  <span class="dt">type =</span> <span class="st">"warning"</span>, <span class="dt">link =</span> <span class="st">"https://google.com"</span>, <span class="dt">units =</span> <span class="st">"kg"</span>, <span class="dt">hover =</span> <span class="st">"Warning reason"</span>, <span class="dt">textModifier =</span> <span class="st">"h3"</span>
 )</code></pre></div>
-<a href="http://google.com">
-<button class="btn btn-lg btn-warning" role="button" title="I believe in fairies" type="warning">
+<a href="https://google.com">
+<button class="btn btn-lg btn-warning" role="button" title="Warning reason" type="warning">
 <h3>
 <i class="glyphicon glyphicon-check"></i>
 42
@@ -116,21 +126,22 @@ kg
 57.6%
 </sup>
 </h3>
-Absolute truth
+My metric
 </button>
 </a>
-<p>(did you try to hover your mouse over the button?) As you can see, plenty of bells and whistles. Most of the stuff above is pretty intuitive, but let’s explore a bit more, starting with icons (ignore the <code>div_maker</code> for now):</p>
-<div id="icons" class="section level2">
-<h2 class="hasAnchor">
-<a href="#icons" class="anchor"></a>Icons</h2>
+<p>If you rest your mouse over above button, you should see the text “Warning reason” appearing.</p>
+<div id="icons" class="section level3">
+<h3 class="hasAnchor">
+<a href="#icons" class="anchor"></a>Icons</h3>
+<p>Most of the features above are pretty intuitive. Most favored, icons are also available using <a href="https://getbootstrap.com/docs/3.3/components/">Glyphicons</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(
-  <span class="dt">subtitle =</span> <span class="st">"One pic is worth a thousand words"</span>, <span class="dt">textModifier =</span> <span class="st">"h3"</span>,
+  <span class="dt">subtitle =</span> <span class="st">"Icons"</span>, <span class="dt">textModifier =</span> <span class="st">"h4"</span>,
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"envelope"</span>, <span class="dt">icon =</span> <span class="st">"envelope"</span>),
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"pushpin"</span>, <span class="dt">icon =</span> <span class="st">"pushpin"</span>),
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"calendar"</span>, <span class="dt">icon =</span> <span class="st">"calendar"</span>)
 )</code></pre></div>
 <div class="container">
-<h3>One pic is worth a thousand words</h3>
+<h4>Icons</h4>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
 <h1>
@@ -159,21 +170,21 @@ calendar
 </button>
 </a>
 </div>
-<p>^ as you can see, we are just using common <a href="https://getbootstrap.com/docs/3.3/components/">glyphicons</a>. See the documentation to check your options.</p>
-<p>Next, let’s explore the size.</p>
+<p>Only the name of the icon needs to be supplied, the left hand side of the icon name, “gyphicon-” is automatically managed.</p>
+<p>The <code>div_maker</code> functions allows to wrap multiple icons together.</p>
 </div>
-<div id="size" class="section level2">
-<h2 class="hasAnchor">
-<a href="#size" class="anchor"></a>Size</h2>
+<div id="size" class="section level3">
+<h3 class="hasAnchor">
+<a href="#size" class="anchor"></a>Size</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(
-  <span class="dt">subtitle =</span> <span class="st">"Supersize it!"</span>, <span class="dt">textModifier =</span> <span class="st">"h3"</span>,
+  <span class="dt">subtitle =</span> <span class="st">"sizes"</span>, <span class="dt">textModifier =</span> <span class="st">"h4"</span>,
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"extra small"</span>, <span class="dt">size =</span> <span class="st">"xs"</span>),
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"small"</span>, <span class="dt">size =</span> <span class="st">"sm"</span>),
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"medium"</span>, <span class="dt">size =</span> <span class="st">"md"</span>),
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"large"</span>, <span class="dt">size =</span> <span class="st">"lg"</span>)
 )</code></pre></div>
 <div class="container">
-<h3>Supersize it!</h3>
+<h4>sizes</h4>
 <a>
 <button class="btn btn-xs btn-info" role="button" type="info">
 <h1>3.3</h1>
@@ -199,13 +210,14 @@ large
 </button>
 </a>
 </div>
-<p>And the <code>type</code>, which dictates the color using the css classes (watch the case sensitivity here!).</p>
 </div>
-<div id="color" class="section level2">
-<h2 class="hasAnchor">
-<a href="#color" class="anchor"></a>Color</h2>
+<div id="color" class="section level3">
+<h3 class="hasAnchor">
+<a href="#color" class="anchor"></a>Color</h3>
+<p>The <code>type</code> argument controls the type of box and dictates the color.</p>
+<p>By default, Bootstrap Version 3 is used. 6 types of boxes are available. It can be customised to use boostrap 4.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(
-  <span class="dt">subtitle =</span> <span class="st">"... all the colors of a rainbow"</span>, <span class="dt">textModifier =</span> <span class="st">"h3"</span>,
+  <span class="dt">subtitle =</span> <span class="st">"colors"</span>, <span class="dt">textModifier =</span> <span class="st">"h4"</span>,
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"Default"</span>, <span class="dt">type =</span> <span class="st">"default"</span>),
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"Primary"</span>, <span class="dt">type =</span> <span class="st">"primary"</span>),
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"Success"</span>, <span class="dt">type =</span> <span class="st">"success"</span>),
@@ -214,7 +226,7 @@ large
   <span class="kw"><a href="../reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="fl">3.3</span>, <span class="dt">txt =</span> <span class="st">"Danger"</span>, <span class="dt">type =</span> <span class="st">"danger"</span>)
 )</code></pre></div>
 <div class="container">
-<h3>... all the colors of a rainbow</h3>
+<h4>colors</h4>
 <a>
 <button class="btn btn-md btn-default" role="button" type="default">
 <h1>3.3</h1>
@@ -252,22 +264,24 @@ Danger
 </button>
 </a>
 </div>
-<p>(we are using Bootstrap Version 3 by default but that’s customizeable).</p>
-<p>So it’s cool that we can change colors, but what if we wanted the color to change automatically, based on value? Well, let’s meet the next member of the family:</p>
+<p><br></p>
+<a>
+<button class="btn btn-md btn-warning" role="button" type="warning">Watch the case sensitivity of the txt argument here!</button>
+</a>
 </div>
 </div>
-<div id="lets-go-solo_gradient_box" class="section level1">
-<h1 class="hasAnchor">
-<a href="#lets-go-solo_gradient_box" class="anchor"></a>Let’s go solo_gradient_box!!!</h1>
-<p>The solo_gradient box automatically changes colors from red to yellow to green based on a target and some thresholds. By default, the <code>target</code> is set to 100 and the thresholds are set to 50 and 90, but obviously those are customizeable.</p>
+<div id="solo-gradient-box" class="section level2">
+<h2 class="hasAnchor">
+<a href="#solo-gradient-box" class="anchor"></a>Solo Gradient Box</h2>
+<p>The <code>solo_gradient_box</code> function allows to automatically pick colors among classic traffic light colors, green-orange-red, and some thresholds. By default, the <code>target</code> is set to 100 and thresholds are set to 50 and 90.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(
-  <span class="dt">subtitle =</span> <span class="st">"gradients"</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>,
+  <span class="dt">subtitle =</span> <span class="st">"Available gradients"</span>, <span class="dt">textModifier =</span> <span class="st">"h4"</span>,
   <span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">95</span>, <span class="dt">txt =</span> <span class="st">"Grade 1"</span>),
   <span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">80</span>, <span class="dt">txt =</span> <span class="st">"Grade 2"</span>),
   <span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">40</span>, <span class="dt">txt =</span> <span class="st">"Grade 3"</span>)
 )</code></pre></div>
 <div class="container">
-<h1>gradients</h1>
+<h4>Available gradients</h4>
 <a>
 <button class="btn btn-md btn-success" role="button" type="success">
 <h1>95</h1>
@@ -287,15 +301,43 @@ Grade 3
 </button>
 </a>
 </div>
-<p>Now let’s change the target only, but leave the thresholds on their default values (set to 50% and 90% of targets respectively) . Let’s change the target to 50.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">46</span>, <span class="dt">txt =</span> <span class="st">"Customized target"</span>, <span class="dt">target =</span> <span class="dv">50</span>)</code></pre></div>
+<p>By default, the value is used as the target. It is possible to compare the value to a target using the <code>target</code> argument. The color is then determined by comparing <code>target / value</code> to the thresholds.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/div_maker.html">div_maker</a></span>(
+  <span class="dt">subtitle =</span> <span class="st">"Playing with the thresholds"</span>, <span class="dt">textModifier =</span> <span class="st">"h4"</span>,
+  <span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">24</span>, <span class="dt">txt =</span> <span class="st">"Grade 1"</span>, <span class="dt">target =</span> <span class="dv">50</span>),
+  <span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">25</span>, <span class="dt">txt =</span> <span class="st">"Grade 2"</span>, <span class="dt">target =</span> <span class="dv">50</span>),
+  <span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">44</span>, <span class="dt">txt =</span> <span class="st">"Grade 2"</span>, <span class="dt">target =</span> <span class="dv">50</span>),
+  <span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">45</span>, <span class="dt">txt =</span> <span class="st">"Grade 3"</span>, <span class="dt">target =</span> <span class="dv">50</span>)
+)</code></pre></div>
+<div class="container">
+<h4>Playing with the thresholds</h4>
 <a>
-<button class="btn btn-md btn-success" role="button" type="success">
-<h1>46</h1>
-Customized target
+<button class="btn btn-md btn-danger" role="button" type="danger">
+<h1>24</h1>
+Grade 1
 </button>
 </a>
-<p>The above shows up green, because 46 of 50 is still 92%, but if we change the thresholdHigh to 93%:</p>
+<a>
+<button class="btn btn-md btn-warning" role="button" type="warning">
+<h1>25</h1>
+Grade 2
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-warning" role="button" type="warning">
+<h1>44</h1>
+Grade 2
+</button>
+</a>
+<a>
+<button class="btn btn-md btn-success" role="button" type="success">
+<h1>45</h1>
+Grade 3
+</button>
+</a>
+</div>
+<p><br></p>
+<p>Arguments <code>thresholdHigh</code> and <code>thresholdLow</code> allow to customise the thresholds.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">46</span>, <span class="dt">txt =</span> <span class="st">"Customized target&lt;br&gt;and threshold"</span>, <span class="dt">target =</span> <span class="dv">50</span>, <span class="dt">thresholdHigh =</span> <span class="dv">93</span>)</code></pre></div>
 <a>
 <button class="btn btn-md btn-warning" role="button" type="warning">
@@ -303,13 +345,13 @@ Customized target
 Customized target<br>and threshold
 </button>
 </a>
-<p>You can see that the box changes to orange since it’s now between <code>thresholdHigh</code> and <code>thresholdLow</code>. By the way, the thresholds are optimistic (ie, round up (so 90=green and 50=orange on default settings), because juuuuuuuust passing feels awesome and juuuuuust failing feels terrible.</p>
-<p>By the way, you will also notice the <code>&lt;br&gt;</code> above forcing a line break. Yes, that’s right, text accepts full html code, writen natively!</p>
+<p>You can see that the box changes to orange since it’s now between <code>thresholdHigh</code> and <code>thresholdLow</code>.</p>
+<p>The <code>&lt;br&gt;</code> element above forces a line break. Text accepts full html code, natively written.</p>
 </div>
-<div id="its-your-turn-multi_box" class="section level1">
-<h1 class="hasAnchor">
-<a href="#its-your-turn-multi_box" class="anchor"></a>It’s your turn, multi_box!</h1>
-<p>The <code>multi_box</code>, in contrast to the <code>solo_box</code>, takes multiple values in one button, providing an easy way to summarize a ton of information in one button.</p>
+<div id="multi-box" class="section level2">
+<h2 class="hasAnchor">
+<a href="#multi-box" class="anchor"></a>Multi Box</h2>
+<p>The <code>multi_box</code> function takes multiple values in one button, providing an easy way to summarize a ton of information in one button.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/multi_box.html">multi_box</a></span>(<span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">txt =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Sally"</span>, <span class="st">"George"</span>, <span class="st">"Mohammed"</span>), <span class="dt">icons =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"check"</span>, <span class="st">"plus"</span>, <span class="st">"calendar"</span>), <span class="dt">title =</span> <span class="st">"Candidates"</span>)</code></pre></div>
 <a>
 <button class="btn btn-md btn-info" role="button" type="info">
@@ -331,12 +373,14 @@ Mohammed
 </h3>
 </button>
 </a>
-<p>Naturally, I was tempted to also construct a multi_gradient_box, but I haven’t because it seemed messy to have the color be dominated by one of the many values… so I don’t think it’s very useful. But please open an Issue if you have a good use case.</p>
 </div>
-<div id="last-but-not-least-heres-the-tile_matrix" class="section level1">
-<h1 class="hasAnchor">
-<a href="#last-but-not-least-heres-the-tile_matrix" class="anchor"></a>Last but not least, here’s the tile_matrix</h1>
+<div id="tile-matrix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#tile-matrix" class="anchor"></a>Tile Matrix</h2>
+<p>The <code>tile_matrix</code> function creates several new <code>solo_gradient_boxes</code> and compiles them all into a grid.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr))
+<span class="co">#&gt; Warning: package 'dplyr' was built under R version 3.5.2</span>
+
 df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
   <span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>),
   <span class="dt">txt =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Sally"</span>, <span class="st">"George"</span>, <span class="st">"Mohammed"</span>)
@@ -369,13 +413,12 @@ Mohammed
 </h2>
 </div>
 </a>
-<p>^ As you can see, the <code>tile_matrix</code> creates several new <code>solo_gradient_boxes</code> and compiles them all into a matrix. The point of this is to easily visualize data from a <code>data.frame</code>, and of course it takes a <code>data.frame</code> as a first input in order to be tidyverse compliant. Some examples:</p>
+<p>The function takes a dataframe as first value and as such can be used in a tidyverse pipe.</p>
+<p>Example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
-<span class="st">  </span>## we can't feed `names(mtcars)` as an input, so let's assign it as a column heading
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">names =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(mtcars)) <span class="op">%&gt;%</span>
-<span class="st">  </span>## pipe the dataframe directly into the tile_matrix!
+<span class="st">  </span><span class="co"># name of car model is contained in the rowname </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">names =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(.)) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw"><a href="../reference/tile_matrix.html">tile_matrix</a></span>(
-    <span class="dt">data =</span> .,
     <span class="dt">values =</span> <span class="st">"disp"</span>, <span class="dt">txt =</span> <span class="st">"names"</span>,
     <span class="dt">target =</span> <span class="dv">500</span>, <span class="dt">thresholdHigh =</span> <span class="dv">80</span>, <span class="dt">thresholdLow =</span> <span class="dv">50</span>
   )</code></pre></div>
@@ -606,10 +649,11 @@ Volvo 142E
 </h2>
 </div>
 </a>
-<p>The concept of the <code>tile_matrix</code> is to provide a quick way to visualize simple information… for example summaries. The fact that the thresholds scale automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information. For example, if one wanted to quickly see diamond prices, we could:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(TileMaker)
+<p><br></p>
+<p>The concept of the <code>tile_matrix</code> is to provide a quick way to visualize simple informations. The fact that the thresholds scale automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information.</p>
+<p>For example, if one wanted to quickly see diamond prices:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)
+<span class="co">#&gt; Warning: package 'ggplot2' was built under R version 3.5.2</span>
 diamonds <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">group_by</span>(color) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarize</span>(<span class="dt">price =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(price)) <span class="op">%&gt;%</span>
@@ -625,7 +669,7 @@ diamonds <span class="op">%&gt;%</span><span class="st"> </span>
 <h1>
 3170
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-559.5%
+1299.9%
 </sup>
 </h1>
 D
@@ -636,7 +680,7 @@ D
 <h1>
 3077
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-3016.7%
+315.5%
 </sup>
 </h1>
 E
@@ -647,7 +691,7 @@ E
 <h1>
 3725
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-1008.6%
+-601.1%
 </sup>
 </h1>
 F
@@ -658,7 +702,7 @@ F
 <h1>
 3999
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-167.1%
+442.2%
 </sup>
 </h1>
 G
@@ -673,7 +717,7 @@ G
 <h1>
 4487
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-119.9%
+-2550.1%
 </sup>
 </h1>
 H
@@ -684,7 +728,7 @@ H
 <h1>
 5092
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-9301.6%
+9090.3%
 </sup>
 </h1>
 I
@@ -695,7 +739,7 @@ I
 <h1>
 5324
 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-243.3%
+183.6%
 </sup>
 </h1>
 J
@@ -704,161 +748,13 @@ J
 </h2>
 </div>
 </a>
+<p>The <code>former</code> argument contextualizes the displayed value in comparison with a former value. This is especially useful to measure growth of a metric.</p>
 </div>
-<div id="whats-this-former-business" class="section level1">
-<h1 class="hasAnchor">
-<a href="#whats-this-former-business" class="anchor"></a>What’s this “former” business?</h1>
-<p>So we’ve seen this <code>former</code> value a few times now, but what does it do? Simply put it contextualizes the displayed value in comparision with a former value. This is especially useful to measure performance increase or declines. In order to show the functionality, let’s use a quite contrived scenario:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressPackageStartupMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr))
-df &lt;-<span class="st"> </span><span class="kw">data_frame</span>(
-  <span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">100</span>, <span class="dt">by =</span> <span class="dv">10</span>),
-  <span class="dt">txt =</span> <span class="st">"comparison to 50"</span>,
-  <span class="dt">former =</span> <span class="dv">50</span>
-)
+<div id="grammar-of-tile_maker" class="section level2">
+<h2 class="hasAnchor">
+<a href="#grammar-of-tile_maker" class="anchor"></a>Grammar of tile_maker</h2>
+<p>Buttons are put into a div tag and final values are put into a finalizer.</p>
 
-## Let's pretend that all previous values were 50... so:
-<span class="kw"><a href="../reference/tile_matrix.html">tile_matrix</a></span>(<span class="dt">data =</span> df, <span class="dt">values =</span> values, <span class="dt">txt =</span> txt, <span class="dt">former =</span> former)</code></pre></div>
-<a>
-<h1></h1>
-<div class="container">
-<h2>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-0
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
-100%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-10
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
-80%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-20
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
-60%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-30
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
-40%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-</h2>
-</div>
-<div class="container">
-<h2>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-40
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
-20%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>
-50
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-0%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>
-60
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-20%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>
-70
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-40%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-</h2>
-</div>
-<div class="container">
-<h2>
-<a>
-<button class="btn btn-2 btn-warning" role="button" type="warning">
-<h1>
-80
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-60%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-success" role="button" type="success">
-<h1>
-90
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-80%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-success" role="button" type="success">
-<h1>
-100
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-100%
-</sup>
-</h1>
-comparison to 50
-</button>
-</a>
-</h2>
-</div>
-</a>
-</div>
-<div id="grammar-of-tile_maker" class="section level1">
-<h1 class="hasAnchor">
-<a href="#grammar-of-tile_maker" class="anchor"></a>Grammar of tile_maker</h1>
-<p>Buttons are put into a div (which is more or less an html “row”… kinda). And these divs are put into a finalizer.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Value1 &lt;-<span class="st"> </span><span class="dv">88</span>
 Value2 &lt;-<span class="st"> </span><span class="dv">1985</span>
 Value3 &lt;-<span class="st"> </span><span class="fl">1.22</span>
@@ -942,15 +838,17 @@ Answer
 </div>
 
 
-<p>These functions are included to help with inclusion in different document types.. sometimes report types get finicky, but perhaps can stop complaining if they are included within a <code>finisher</code> block.</p>
+<p>These functions are included to help with inclusion in different document types and for testing small snipets of code.</p>
 </div>
-<div id="its-not-working-you-broke-my-entire-report-help" class="section level1">
-<h1 class="hasAnchor">
-<a href="#its-not-working-you-broke-my-entire-report-help" class="anchor"></a>It’s not working / you broke my entire report / help</h1>
-<p>So let’s be very clear… this is a hack, might even be an ugly hack. I’m controlling how these elements work by porting and controlling the HTML element within. Sometimes that makes a mess out of the document you’re preparing. Towhit, I have included a few features:</p>
+<div id="bug-report-help" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-report-help" class="anchor"></a>Bug Report / help</h2>
+<p>HTML elements within <code>tile_maker</code> blocks have a fixed css controlled by the functions. It may affect others elements of your webpage.</p>
+<p>The tilemaker package work by porting bootstrap functionnality and controlling the HTML element within. It may affect others elements of your webpage.</p>
+<p>A few features are included to try to prevent these effects:</p>
 <ol style="list-style-type: decimal">
-<li>As mentioned in the previous section, try wrapping your buttons or groups of buttons in <code>div_maker</code>s, and/or in <code>finisher</code>s… that seems to do the trick most of the time.</li>
-<li>In some cases, for example in markdown documents that include a Table of Contents, that format depends on html stuff as well… so that’s where the <code>textModifier</code> bit comes in handy. You can change the textModifier from the default <code>h1</code> to <code>h4</code> or <code>&lt;br&gt;</code> or whatever else you think might work in your report. Experiment around!</li>
+<li>Most of the time, wrapping your buttons or groups of buttons in <code>div_maker</code>s, and/or in <code>finisher</code>s… seems to fix issues most of the time.</li>
+<li>In some cases, for example in markdown documents that include a Table of Contents, format depends of previous html elements. It is advised to then use the <code>textModifier</code> option. You can change the textModifier from the default <code>h1</code> to <code>h4</code> or <code>&lt;br&gt;</code> or anything you think might work in your report.</li>
 </ol>
 </div>
   </div>
@@ -960,19 +858,14 @@ Answer
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#meet-the-tile">Meet the Tile</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#icons">Icons</a></li>
-      <li><a href="#size">Size</a></li>
-      <li><a href="#color">Color</a></li>
-      </ul>
-</li>
-      <li><a href="#lets-go-solo_gradient_box">Let’s go solo_gradient_box!!!</a></li>
-      <li><a href="#its-your-turn-multi_box">It’s your turn, multi_box!</a></li>
-      <li><a href="#last-but-not-least-heres-the-tile_matrix">Last but not least, here’s the tile_matrix</a></li>
-      <li><a href="#whats-this-former-business">What’s this “former” business?</a></li>
+<li><a href="#overview">Overview</a></li>
+      <li><a href="#getting-started">Getting Started</a></li>
+      <li><a href="#solo-box">Solo Box</a></li>
+      <li><a href="#solo-gradient-box">Solo Gradient Box</a></li>
+      <li><a href="#multi-box">Multi Box</a></li>
+      <li><a href="#tile-matrix">Tile Matrix</a></li>
       <li><a href="#grammar-of-tile_maker">Grammar of tile_maker</a></li>
-      <li><a href="#its-not-working-you-broke-my-entire-report-help">It’s not working / you broke my entire report / help</a></li>
+      <li><a href="#bug-report-help">Bug Report / help</a></li>
       </ul>
 </div>
       </div>
