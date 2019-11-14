@@ -43,7 +43,7 @@ the large number, but still take advantage of the conditional formatting.}
 
 \item{textModifier}{Optional css category of "large" text. In this case, the icon, value and unit. Default=h1}
 
-\item{revert}{Invert type box. Green become red and red become green.}
+\item{revert}{Invert colorbox. Green become red and red become green.}
 
 \item{...}{Optional additional html elements}
 }

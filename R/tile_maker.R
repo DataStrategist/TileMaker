@@ -34,7 +34,7 @@ ico <- function(x, chevron = FALSE) {
 #' "xs","sm","md","lg")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
 #' the name of thing you want, like "check"... not the full "gyphicon-check"
-#' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+#' @param colorOptional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
 #' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
@@ -44,9 +44,9 @@ ico <- function(x, chevron = FALSE) {
 #' @param ... Optional additional html elements
 #' @importFrom htmltools HTML tag tags
 #' @examples
-#' b1 <- solo_box(type = "warning", value = 3.57, txt = "B")
-#' b2 <- solo_box(type = "danger", value = 13.7, txt = "Nutritional value")
-#' b3 <- solo_box(type = "success", value = 1, txt = "Yumminess factor")
+#' b1 <- solo_box(color= "warning", value = 3.57, txt = "B")
+#' b2 <- solo_box(color= "danger", value = 13.7, txt = "Nutritional value")
+#' b3 <- solo_box(color= "success", value = 1, txt = "Yumminess factor")
 #' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
 #' finisher(title = "straight buttons", divs = b1)
 #' finisher(
@@ -57,7 +57,7 @@ ico <- function(x, chevron = FALSE) {
 #'     div_maker(subtitle = "Boom", textModifier = "hi", b1, b2, b3)
 #'   )
 #' )
-#' 
+#'
 #' ## Or taking advantage of the ability to change the textModifier:
 #' finisher(
 #'   title = "h4 modifier",
@@ -68,14 +68,14 @@ ico <- function(x, chevron = FALSE) {
 #' )
 #' @export solo_box
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
-                     icon = NULL, type = "info", link = NULL, units = NULL,
+                     icon = NULL, color= "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", ...) {
   tags$a(
     href = link,
     tags$button(
       title = hover,
-      # type = "button",
-      type = type,
+      # color= "button",
+      color= type,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
@@ -133,7 +133,7 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param hide_value Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
 #' the large number, but still take advantage of the conditional formatting.
 #' @param textModifier Optional css category of "large" text. In this case, the icon, value and unit. Default=h1
-#' @param revert Invert type box. Green become red and red become green.
+#' @param revert Invert colorbox. Green become red and red become green.
 #' @param ... Optional additional html elements
 #' @importFrom htmltools HTML tags tag
 #' @examples
@@ -164,11 +164,11 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               textModifier = "h1", revert = FALSE, ...) {
   Perc <- value / target * 100
   if (Perc >= thresholdHigh) {
-    if(revert == FALSE) finalType <- "success" else finalType <- "danger"
+    if(revert == FALSE) finalcolor<- "success" else finalcolor<- "danger"
   } else if (Perc < thresholdLow) {
-    if(revert == FALSE) finalType <- "danger" else finalType <- "success"
+    if(revert == FALSE) finalcolor<- "danger" else finalcolor<- "success"
   } else {
-    finalType <- "warning"
+    finalcolor<- "warning"
   }
 
   tags$a(
@@ -176,8 +176,8 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     tags$button(
       href = link,
       title = hover,
-      # type = "button",
-      type = finalType,
+      # color= "button",
+      color= finalType,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size),
@@ -224,7 +224,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @param title Top title, Default: NULL
 #' @param size Optional size specified in the bootstrap css classes:
 #' "xs","sm","md","lg")
-#' @param type Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+#' @param colorOptional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
 #' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'
 #' @param link Optional hyperlink to redirect to after a user click, Default: NULL
 #' @param number_zoom Optional magnification \% for number vs normal text, Default: 150
@@ -240,7 +240,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' library(dplyr)
 #' multi_box(
 #'   values = c(21, 45), title = "Important <br>button",
-#'   number_zoom = 300, icons = c("apple", "calendar"), type = "warning",
+#'   number_zoom = 300, icons = c("apple", "calendar"), color= "warning",
 #'   txt = c("times", "reports")
 #' ) %>%
 #'   finisher(divs = .)
@@ -253,7 +253,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @export
 multi_box <- function(icons = NULL, txt = NULL, values = NULL,
                       title = NULL, size = "md",
-                      type = "info", link = NULL, number_zoom = 150,
+                      color= "info", link = NULL, number_zoom = 150,
                       hover = NULL, ...) {
   ## Define function that can be pmapped
   gutsMaker <- function(values, txt, icons) {
@@ -273,8 +273,8 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
     tags$button(
       href = link,
       title = hover,
-      # type = "button",
-      type = type,
+      # color= "button",
+      color= type,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),

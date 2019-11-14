@@ -10,3 +10,4 @@
 ^.*\.png$
 ^README.Rmd$
 ^.git$
+CODE_OF_CONDUCT.md

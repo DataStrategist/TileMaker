@@ -5,7 +5,7 @@
 \title{multi_box}
 \usage{
 multi_box(icons = NULL, txt = NULL, values = NULL, title = NULL,
-  size = "md", type = "info", link = NULL, number_zoom = 150,
+  size = "md", color = "info", link = NULL, number_zoom = 150,
   hover = NULL, ...)
 }
 \arguments{
@@ -20,9 +20,6 @@ multi_box(icons = NULL, txt = NULL, values = NULL, title = NULL,
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
 
-\item{type}{Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'}
-
 \item{link}{Optional hyperlink to redirect to after a user click, Default: NULL}
 
 \item{number_zoom}{Optional magnification \% for number vs normal text, Default: 150}
@@ -31,6 +28,9 @@ Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default
 mouse over the tile, Default: NULL}
 
 \item{...}{add any other html code here}
+
+\item{colorOptional}{bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'}
 }
 \value{
 an HTML object
@@ -45,7 +45,7 @@ Allows for each button to contain several icon-number-text descriptions.
 library(dplyr)
 multi_box(
   values = c(21, 45), title = "Important <br>button",
-  number_zoom = 300, icons = c("apple", "calendar"), type = "warning",
+  number_zoom = 300, icons = c("apple", "calendar"), color= "warning",
   txt = c("times", "reports")
 ) \%>\%
   finisher(divs = .)

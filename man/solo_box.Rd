@@ -5,7 +5,7 @@
 \title{solo_box}
 \usage{
 solo_box(value = NULL, txt = NULL, former = NULL, size = "md",
-  icon = NULL, type = "info", link = NULL, units = NULL,
+  icon = NULL, color = "info", link = NULL, units = NULL,
   hover = NULL, textModifier = "h1", ...)
 }
 \arguments{
@@ -21,9 +21,6 @@ solo_box(value = NULL, txt = NULL, former = NULL, size = "md",
 \item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
 the name of thing you want, like "check"... not the full "gyphicon-check"}
 
-\item{type}{Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"}
-
 \item{link}{Optional hyperlink that should be followed on click}
 
 \item{units}{Optional units that should be displayed after Value}
@@ -34,15 +31,18 @@ Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"}
 In this case, title. Default=h1}
 
 \item{...}{Optional additional html elements}
+
+\item{colorOptional}{bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"}
 }
 \description{
 This function crafts the actual tile per se, including the specific
 aesthetic traits for each tile. This is the simple version where you explicitly state the color.
 }
 \examples{
-b1 <- solo_box(type = "warning", value = 3.57, txt = "B")
-b2 <- solo_box(type = "danger", value = 13.7, txt = "Nutritional value")
-b3 <- solo_box(type = "success", value = 1, txt = "Yumminess factor")
+b1 <- solo_box(color= "warning", value = 3.57, txt = "B")
+b2 <- solo_box(color= "danger", value = 13.7, txt = "Nutritional value")
+b3 <- solo_box(color= "success", value = 1, txt = "Yumminess factor")
 b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
 finisher(title = "straight buttons", divs = b1)
 finisher(
