@@ -1,20 +1,27 @@
 
-[![Travis-CI Build Status](https://travis-ci.org/DataStrategist/TileMaker.svg?branch=master)](https://travis-ci.org/DataStrategist/TileMaker)
-[![Coverage Status](https://coveralls.io/repos/github/DataStrategist/TileMaker/badge.svg?branch=master)](https://coveralls.io/github/DataStrategist/TileMaker?branch=master)
+[![Travis-CI Build
+Status](https://travis-ci.org/DataStrategist/TileMaker.svg?branch=master)](https://travis-ci.org/DataStrategist/TileMaker)
+[![Coverage
+Status](https://coveralls.io/repos/github/DataStrategist/TileMaker/badge.svg?branch=master)](https://coveralls.io/github/DataStrategist/TileMaker?branch=master)
 [![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](https://saythanks.io/to/DataStrategist)
 
-TileMaker
-=========
+# TileMaker
 
-An R library that enables the creation of data tiles for inclusion in a html dashboard or some such.
+An R library that enables the creation of data tiles for inclusion in a
+html dashboard or some such.
 
 To install, please type:
 
     devtools::install_github("DataStrategist/TileMaker", build_vignettes = TRUE)
 
-Please see the [Intro Vignette](http://datastrategist.github.io/TileMaker/articles/Intro.html) to learn more about how to do some lovely stuff, but in the meantime, here's the basics:
+Please see the [Intro
+Vignette](http://datastrategist.github.io/TileMaker/articles/Intro.html)
+to learn more about how to do some lovely stuff, but in the meantime,
+here’s the basics:
 
-This package is intended to "highlight single values", mainly in dashboards, reports or Shiny apps, and is highly customizeable. This is what it looks like:
+This package is intended to “highlight single values”, mainly in
+dashboards, reports or Shiny apps, and is highly customizeable. This is
+what it looks like:
 
 ``` r
 suppressWarnings(suppressMessages(library(tidyverse,quietly = TRUE)))
@@ -72,7 +79,7 @@ First line
 
 </h1>
 
-<a> <button class="btn btn-md btn-info" role="button" type="info">
+<a> <button class="btn btn-md btn-info" color="info" role="button">
 
 <h1>
 
@@ -81,7 +88,7 @@ First line
 </h1>
 
 Little piggies<br>go to the market </button> </a> <a>
-<button class="btn btn-md btn-warning" role="button" type="warning">
+<button class="btn btn-md btn-warning" color="warning" role="button">
 
 <h1>
 
@@ -101,7 +108,8 @@ Second line
 
 </h1>
 
-<a> <button class="btn btn-md btn-success" role="button" type="success">
+<a>
+<button class="btn btn-md btn-success" color="success" role="button">
 
 <h1>
 
@@ -110,7 +118,7 @@ Second line
 </h1>
 
 test score I wanted </button> </a> <a>
-<button class="btn btn-md btn-info" role="button" type="info">
+<button class="btn btn-md btn-info" color="info" role="button">
 
 <h1>
 
@@ -163,7 +171,7 @@ Boom line
 
 <h2>
 
-<a> <button class="btn btn-2 btn-danger" role="button" type="danger">
+<a> <button class="btn btn-2 btn-danger" color="danger" role="button">
 
 <h1>
 
@@ -172,7 +180,7 @@ Boom line
 </h1>
 
 setosa </button> </a> <a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
+<button class="btn btn-2 btn-danger" color="danger" role="button">
 
 <h1>
 
@@ -181,7 +189,7 @@ setosa </button> </a> <a>
 </h1>
 
 versicolor </button> </a> <a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
+<button class="btn btn-2 btn-danger" color="danger" role="button">
 
 <h1>
 
@@ -205,7 +213,7 @@ virginica </button> </a>
 
 <h2>
 
-<a> <button class="btn btn-2 btn-danger" role="button" type="danger">
+<a> <button class="btn btn-2 btn-danger" color="danger" role="button">
 
 <h1>
 
@@ -216,7 +224,7 @@ virginica </button> </a>
 </h1>
 
 setosa </button> </a> <a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
+<button class="btn btn-2 btn-danger" color="danger" role="button">
 
 <h1>
 
@@ -227,7 +235,7 @@ setosa </button> </a> <a>
 </h1>
 
 versicolor </button> </a> <a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
+<button class="btn btn-2 btn-danger" color="danger" role="button">
 
 <h1>
 

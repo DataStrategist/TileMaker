@@ -75,10 +75,10 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
     tags$button(
       title = hover,
       # color= "button",
-      color= type,
+      color= color,
       role = "button",
       # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
+      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
           ico(icon), value, units,
@@ -177,11 +177,11 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       href = link,
       title = hover,
       # color= "button",
-      color= finalType,
+      color= finalcolor,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size),
-      class = paste0("btn-", finalType),
+      class = paste0("btn-", finalcolor),
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
           ico(icon), value, units,
@@ -274,10 +274,10 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
       href = link,
       title = hover,
       # color= "button",
-      color= type,
+      color= color,
       role = "button",
       # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", type),
+      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       tags$h1(HTML(title)),
       pmap(list(values, txt, icons), gutsMaker)
     )

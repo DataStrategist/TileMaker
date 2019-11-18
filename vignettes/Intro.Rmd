@@ -3,6 +3,7 @@ title: "Intro"
 output:
   html_document: default
   pdf_document: default
+  github_document: default
 vignette: >
   %\VignetteIndexEntry{Intro} 
   %\VignetteEngine{knitr::rmarkdown}
@@ -170,7 +171,7 @@ The ``tile_matrix`` function creates several new `solo_gradient_boxes` and compi
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
 
-df <- data_frame(
+df <- tibble(
   values = c(2, 5, 6),
   txt = c("Sally", "George", "Mohammed")
 )
@@ -214,7 +215,7 @@ So we've seen this `former` value a few times now, but what does it do? Simply p
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
-df <- data_frame(
+df <- tibble(
   values = seq(from = 0, to = 100, by = 10),
   txt = "comparison to 50",
   former = 50

@@ -11,7 +11,7 @@ test_that("classes work", {
   multi_box(
     values = c(3, 45), title = "Important <br>button",
     number_zoom = 300, icons = c("apple", "calendar"),
-    type = "warning", txt = c("times", "reports")
+    color = "warning", txt = c("times", "reports")
   ) %>%
     class() %>%
     expect_equal(., "shiny.tag")
@@ -112,7 +112,7 @@ test_that("errors error out", {
 test_that("protections work", {
   multi_box(
     values = c(3, 45), number_zoom = 300, icons = c("apple", "calendar"),
-    type = "warning",
+    color = "warning",
     txt = c("times", "reports")
   ) %>%
     class() %>%
@@ -120,7 +120,7 @@ test_that("protections work", {
 
   multi_box(
     values = c(3, 45), title = "Important <br>button",
-    number_zoom = 300, type = "warning",
+    number_zoom = 300, color = "warning",
     txt = c("times", "reports")
   ) %>%
     class() %>%
@@ -157,7 +157,7 @@ test_that("protections work", {
 
   multi_box(
     values = c(3, 45), title = "Important <br>button",
-    number_zoom = 300, icons = c("apple", "calendar"), type = "warning"
+    number_zoom = 300, icons = c("apple", "calendar"), color = "warning"
   ) %>%
     unlist() %>%
     grepl(" ", x = .) %>%
