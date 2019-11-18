@@ -177,11 +177,11 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       href = link,
       title = hover,
       # color= "button",
-      color= finalType,
+      color= finalcolor,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size),
-      class = paste0("btn-", finalType),
+      class = paste0("btn-", finalcolor),
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
           ico(icon), value, units,
