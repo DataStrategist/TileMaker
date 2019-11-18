@@ -21,6 +21,9 @@ solo_box(value = NULL, txt = NULL, former = NULL, size = "md",
 \item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
 the name of thing you want, like "check"... not the full "gyphicon-check"}
 
+\item{color}{Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"}
+
 \item{link}{Optional hyperlink that should be followed on click}
 
 \item{units}{Optional units that should be displayed after Value}
@@ -31,9 +34,6 @@ the name of thing you want, like "check"... not the full "gyphicon-check"}
 In this case, title. Default=h1}
 
 \item{...}{Optional additional html elements}
-
-\item{colorOptional}{bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"}
 }
 \description{
 This function crafts the actual tile per se, including the specific

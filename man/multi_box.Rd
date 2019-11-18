@@ -20,6 +20,9 @@ multi_box(icons = NULL, txt = NULL, values = NULL, title = NULL,
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
 
+\item{color}{Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'}
+
 \item{link}{Optional hyperlink to redirect to after a user click, Default: NULL}
 
 \item{number_zoom}{Optional magnification \% for number vs normal text, Default: 150}
@@ -28,9 +31,6 @@ multi_box(icons = NULL, txt = NULL, values = NULL, title = NULL,
 mouse over the tile, Default: NULL}
 
 \item{...}{add any other html code here}
-
-\item{colorOptional}{bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'}
 }
 \value{
 an HTML object

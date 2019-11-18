@@ -34,7 +34,7 @@ ico <- function(x, chevron = FALSE) {
 #' "xs","sm","md","lg")
 #' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
 #' the name of thing you want, like "check"... not the full "gyphicon-check"
-#' @param colorOptional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+#' @param color Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
 #' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
@@ -224,7 +224,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @param title Top title, Default: NULL
 #' @param size Optional size specified in the bootstrap css classes:
 #' "xs","sm","md","lg")
-#' @param colorOptional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
+#' @param color Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
 #' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'
 #' @param link Optional hyperlink to redirect to after a user click, Default: NULL
 #' @param number_zoom Optional magnification \% for number vs normal text, Default: 150
