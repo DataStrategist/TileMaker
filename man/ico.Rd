@@ -7,7 +7,7 @@
 ico(x, chevron = FALSE)
 }
 \arguments{
-\item{x}{Icon name. See http://getbootstrap.com/components/}
+\item{x}{Icon name. See https://getbootstrap.com/docs/3.3/components/}
 
 \item{chevron}{binary to denote whether there is a former value to compare against or not.}
 }

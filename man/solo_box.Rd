@@ -4,9 +4,19 @@
 \alias{solo_box}
 \title{solo_box}
 \usage{
-solo_box(value = NULL, txt = NULL, former = NULL, size = "md",
-  icon = NULL, color = "info", link = NULL, units = NULL,
-  hover = NULL, textModifier = "h1", ...)
+solo_box(
+  value = NULL,
+  txt = NULL,
+  former = NULL,
+  size = "md",
+  icon = NULL,
+  color = "info",
+  link = NULL,
+  units = NULL,
+  hover = NULL,
+  textModifier = "h1",
+  ...
+)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
@@ -18,26 +28,30 @@ solo_box(value = NULL, txt = NULL, former = NULL, size = "md",
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
 
-\item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
-the name of thing you want, like "check"... not the full "gyphicon-check"}
+\item{icon}{Optional glyphicon that should be displayed from
+https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+of thing you want, like "check"... not the full "gyphicon-check"}
 
-\item{color}{Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"}
+\item{color}{Optional bootstrap css element that governs the color.
+https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
+"primary", "success", "info", "warning", "danger"}
 
 \item{link}{Optional hyperlink that should be followed on click}
 
 \item{units}{Optional units that should be displayed after Value}
 
-\item{hover}{Optional tooltip, or text that will show up when a user rests their mouse over the tile.}
+\item{hover}{Optional tooltip, or text that will show up when a user rests
+their mouse over the tile.}
 
-\item{textModifier}{Optional css category of "large" text. In this case, the icon, value and unit.
-In this case, title. Default=h1}
+\item{textModifier}{Optional css category of "large" text. In this case, the
+icon, value and unit. In this case, title. Default=h1}
 
 \item{...}{Optional additional html elements}
 }
 \description{
-This function crafts the actual tile per se, including the specific
-aesthetic traits for each tile. This is the simple version where you explicitly state the color.
+This function crafts the actual tile per se, including the specific aesthetic
+traits for each tile. This is the simple version where you explicitly state
+the color.
 }
 \examples{
 b1 <- solo_box(color= "warning", value = 3.57, txt = "B")

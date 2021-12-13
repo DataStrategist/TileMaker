@@ -9,14 +9,16 @@ div_maker(subtitle, textModifier, ...)
 \arguments{
 \item{subtitle}{The text heading of this row of buttons}
 
-\item{textModifier}{Optional css category of "large" text. In this case, subtitle. Use css flags
+\item{textModifier}{Optional css category of "large" text. In this case,
+  subtitle. Use css flags
 like "h2", "h3","p", etc. Default = "h1"}
 
 \item{...}{\code{buttons to insert into the div} elements.}
 }
 \description{
-This function takes buttons made by any of the solo or multi buttons and makes an a row (HTML `div`) suitable for inclusion in
-other HTML code, or for inclusion within the function of this package `finisher`.
+This function takes buttons made by any of the solo or multi buttons and
+makes an a row (HTML `div`) suitable for inclusion in other HTML code, or for
+inclusion within the function of this package `finisher`.
 }
 \examples{
 div_maker(

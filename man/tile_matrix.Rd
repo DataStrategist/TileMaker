@@ -4,39 +4,60 @@
 \alias{tile_matrix}
 \title{tileMatrix}
 \usage{
-tile_matrix(data, values, txt, icon, former, target = 100,
-  thresholdHigh = 90, thresholdLow = 50, cols = 4, title = NULL,
-  roundVal = 1, textModifier = "h1")
+tile_matrix(
+  data,
+  values,
+  txt,
+  icon,
+  former,
+  target = 100,
+  thresholdHigh = 90,
+  thresholdLow = 50,
+  cols = 4,
+  title = NULL,
+  roundVal = 1,
+  textModifier = "h1"
+)
 }
 \arguments{
 \item{data}{a dataframe containing the data you would like to plot}
 
-\item{values}{a Vector containing values for each tile, contained in the dataframe `data`}
+\item{values}{a Vector containing values for each tile, contained in the
+dataframe `data`}
 
-\item{txt}{Vector containing titles for each tile, contained in the datframe `data`}
+\item{txt}{Vector containing titles for each tile, contained in the datframe
+`data`}
 
-\item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
-the name of thing you want, like "check"... not the full "gyphicon-check"}
+\item{icon}{Optional glyphicon that should be displayed from
+https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+of thing you want, like "check"... not the full "gyphicon-check"}
 
-\item{former}{optional vector containing former values (to show change from last), contained in the datframe `data`}
+\item{former}{optional vector containing former values (to show change from
+last), contained in the datframe `data`}
 
-\item{target}{Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow}
+\item{target}{Optional target that the value should be compared against. Use
+with ThresholdHigh and THresholdLow}
 
-\item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from 0-100 as a percent of target. IE, this value
-represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdHigh will show as green,
-and if not, as orange. Use w/ target and ThresholdLow.}
+\item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from
+0-100 as a percent of target. IE, this value represents the RATIO of the
+VALUE to the target that, if above or equal to the ThresholdHigh will show
+as green, and if not, as orange. Use w/ target and ThresholdLow.}
 
-\item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100 as a percent of target. IE, this value
-represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdLow will show as orange,
+\item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100
+as a percent of target. IE, this value represents the RATIO of the VALUE to
+the target that, if above or equal to the ThresholdLow will show as orange,
 and if not, as red. Use w/ target and ThresholdHigh.}
 
-\item{cols}{Number of columns that the matrix should tile around. Defaults to 4}
+\item{cols}{Number of columns that the matrix should tile around. Defaults to
+4}
 
 \item{title}{The title the matrix should have.}
 
-\item{roundVal}{Number of decimals that Value will be rounded to. Defaults to 1}
+\item{roundVal}{Number of decimals that Value will be rounded to. Defaults to
+1}
 
-\item{textModifier}{Optional css category of "large" text. In this case, the icon, value and unit. Default=h1}
+\item{textModifier}{Optional css category of "large" text. In this case, the
+icon, value and unit. Default=h1}
 }
 \value{
 Returns a list object containing the matrix of buttons

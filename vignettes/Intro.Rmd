@@ -1,5 +1,5 @@
 ---
-title: "Intro"
+title: "Overview"
 output:
   html_document: default
   pdf_document: default
@@ -18,21 +18,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Overview
+## Introduction
 
 Dashboard Tiles, also named Notecards, are a great way to visualize key numbers.
 They can emphasize results in an easily digestible and colorful format.
-This package is an alternative to infoboxes and valueboxes available from [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) and [shinydashboards](https://rstudio.github.io/shinydashboard/).
+This package is a more fully featured alternative to infoboxes and valueboxes available from [flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/) and [shinydashboards](https://rstudio.github.io/shinydashboard/).
 
-This package uses Twitter's [Bootstrap](https://getbootstrap.com/) CSS files. It pushes the key numbers into buttons using all the functionnality provided by bootstrap.
-These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. See examples below!
+This package uses Twitter's [Bootstrap](https://getbootstrap.com/) CSS files to provide pleasant aesthetics to the tiles. These buttons are good for embedding in static reports, in Rmd files, and Shiny dashboards. This page will show you how to use the main features of these tiles.
 
 ## Getting Started
 
 Install the TileMaker package from Github as follows:
 
 ```{r, eval=FALSE}
-# install.packages("TileMaker")
+# install.packages("TileMaker") ## soon!
 devtools::install_github("DataStrategist/TileMaker")
 ```
 
@@ -40,8 +39,7 @@ devtools::install_github("DataStrategist/TileMaker")
 library(TileMaker)
 ```
 
-Let's start small. 
-Note: Please link to References for explanation on full functionality of used tile. (Available if function is underlined/highlighted when hovered over. eg. Hover over 'solo_box' below and click. )
+Let's start small:
 
 ## Solo Box
 
@@ -51,7 +49,9 @@ The ``solo_box`` function allows to create a simple colored box.
 solo_box(value = 3.3, txt = "My metric")
 ```
 
-The ``solo_box`` function only represents one key value. In addition, many feature exist allowing to tune the box entirely.
+<br>
+
+The ``solo_box`` function represents one key value, and should be used to demonstrate an important number inyour reports. There are many ways we can customize this tile, for example:
 
 ```{r}
 solo_box(
@@ -60,13 +60,13 @@ solo_box(
 )
 ```
 
-If you rest your mouse over above button, you should see the text "Warning reason" appearing.
+<br>
 
-### Icons
-
-Most of the features above are pretty intuitive. Most favored, icons are also available using [Glyphicons](https://getbootstrap.com/docs/3.3/components/).
+Not only can you see many more details, but if you rest your mouse over the button, you should see the text "Warning reason" appear.
 
 ## Icons
+
+Icons are available using [Glyphicons](https://getbootstrap.com/docs/3.3/components/).
 
 ```{r}
 div_maker(
@@ -77,9 +77,9 @@ div_maker(
 )
 ```
 
-Only the name of the icon needs to be supplied, the left hand side of the icon name, "gyphicon-" is automatically managed.
+<br>
 
-The `div_maker` functions allows to wrap multiple icons together.
+Click the link above for a full list of available icons. As you can see above, only the name of the icon needs to be supplied, ie "envelope", rather than "gyphicon-envelope".
 
 ### Size
 
@@ -92,6 +92,10 @@ div_maker(
   solo_box(value = 3.3, txt = "large", size = "lg")
 )
 ```
+
+<br>
+
+(Don't worry about the `div_maker` function for now, it'll be explained later, but for now we're using it to "tie" multiple icons together).
 
 ### Color
 
@@ -120,20 +124,20 @@ solo_box(value = NULL, txt = "Watch the case sensitivity of the color argument!"
 
 # Let's go solo_gradient_box!!!
 
-The ``solo_gradient_box`` function allows to automatically pick colors among classic traffic light colors, green-orange-red, and some thresholds. By default, the `target` is set to 100 and thresholds are set to 50 and 90.
+The ``solo_gradient_box`` function lets us set targets and limits, and then changes the color depending on the value. Therefore, if a `value` is high, it'll be green, if it's "medium" it'll be orange, or if it's low, then it'll be red. By default, the `target` is set to 100 and thresholds are set to 50 and 90, although these are customizeable.
 
 ```{r}
 div_maker(
-  subtitle = "Available gradients", textModifier = "h4",
+  subtitle = "Default gradients", textModifier = "h4",
   solo_gradient_box(value = 95, txt = "Grade 1"),
   solo_gradient_box(value = 80, txt = "Grade 2"),
   solo_gradient_box(value = 40, txt = "Grade 3")
 )
 ```
 
-By default, the value is used as the target.
-It is possible to compare the value to a target using the `target` argument.
-The color is then determined by comparing ``target / value`` to the thresholds.
+<br>
+All of these limits are customizeable, so we can change the `target` or the thresholds (`thresholdHigh` and `thresholdLow`).
+The color is then determined by comparing ``value/target * 100`` to the thresholds.
 
 ```{r}
 div_maker(
@@ -146,27 +150,30 @@ div_maker(
 ```
 
 <br>
-
-Arguments ``thresholdHigh`` and ``thresholdLow`` allow to customise the thresholds.
+The arguments ``thresholdHigh`` and ``thresholdLow`` can be used to change _when_ the values change color from green to orange and from orange to red respectively. For example, the value `95` was used above and had a green color (because the default `thresholdHigh` of 90 was used), but if we change the `thresholdHigh` to 96, we see that a value of `95` is still orange.
 
 ```{r}
-solo_gradient_box(value = 46, txt = "Customized target<br>and threshold", target = 50, thresholdHigh = 93)
+solo_gradient_box(value = 95, txt = "Customized<br>threshold", thresholdHigh = 96)
 ```
 
-You can see that the box changes to orange since it's now between `thresholdHigh` and `thresholdLow`.
+<br>
 
-The `<br>` element above forces a line break. Text accepts full html code, natively written.
+By the way, the `<br>` element in the `text` argument above forces a line break. Text accepts full html code, natively written.
 
 # It's your turn, multi_box!
 
-The `multi_box` function takes multiple values in one button, providing an easy way to summarize a ton of information in one button.
+The `multi_box` function takes multiple values in one button, providing an easy way to summarize "a few" key values together. I say "a few"... if it's more than 5 perhaps a line or bar chart starts becoming more appropriate? Of course that's a style thing and everybody has their own opinions. Anyways, here's the `multi_box`:
 
 ```{r}
 multi_box(values = c(4, 5, 6), txt = c("Sally", "George", "Mohammed"), icons = c("check", "plus", "calendar"), title = "Candidates")
 ```
 
+<br>
+
+As you can see, each entry can have it's own icon. The color is not dependant on any value as that would perhaps be confusing. It can be changed manually if desired. 
+
 # Last but not least, here's the tile_matrix
-The ``tile_matrix`` function creates several new `solo_gradient_boxes` and compiles them all into a grid, but the best part about it is that it takes a data.frame as input.
+The ``tile_matrix`` function creates several new `solo_gradient_boxes` and compiles them all into a grid, but the best part about it is that it takes a `data.frame` or a `tibble` as input.
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
@@ -178,40 +185,55 @@ df <- tibble(
 tile_matrix(df, values = values, txt = txt, target = 10, thresholdHigh = 60, thresholdLow = 40, textModifier = "h2")
 ```
 
-The function takes a dataframe as first value and as such can be used in a tidyverse pipe.
-
-Example:
+The function takes a dataframe as first value and as such can be used in a [tidyverse](https://www.tidyverse.org) pipe. For example:
 
 ```{r}
 mtcars %>%
   # name of car model is contained in the rowname 
   mutate(names = rownames(.)) %>%
+  # let's just take 8 entries:
+  sample_n(8) %>% 
   tile_matrix(
     values = "disp", txt = "names",
-    target = 500, thresholdHigh = 80, thresholdLow = 50
+    target = 400, thresholdHigh = 80, thresholdLow = 50
   )
 ```
 
 <br>
 
-The concept of the `tile_matrix` is to provide a quick way to visualize simple informations. The fact that the thresholds scale automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information.
+The concept of the `tile_matrix` is to provide a quick way to visualize one feature of the dataset. The fact that the thresholds scales automatically to the target is useful, since one need only set the target in order to quickly obtain actionable information.
 
-For example, if one wanted to quickly see diamond prices:
+The number of tiles per column is `4` by default, but is customizeable using the `cols` argument.
+
+Another example, if one wanted to quickly see average diamond prices by cut, we could do so easily:
 
 ```{r BOOM}
 library(ggplot2)
 diamonds %>% 
-  group_by(color) %>%
+  group_by(cut) %>%
   summarize(price = mean(price)) %>%
-  ## Assume there was some former price that was a bit different
-  mutate(old_price = price * (1 * runif(n = 7, min = -.2, max = .5))) %>%
-  tile_matrix(data = ., values = price, txt = color, former = old_price, target = 5000, roundVal = 0)
+  tile_matrix(data = ., values = price, txt = cut, target = 4500, roundVal = 0, cols = 5)
 ```
 
+<br>
 
-# What's this "former" business?
+# Comparing against a `former` version?
 
-So we've seen this `former` value a few times now, but what does it do? Simply put, the ``former`` argument contextualizes the displayed value in comparison with a former value. This is especially useful to measure growth of a metric. In order to show the functionality, let's use a quite contrived scenario:
+What if we had former diamond prices for the above tileset? Well, we could use the `former` argument to quickly show if there's an increase or a decrease:
+
+```{r BOOM1}
+library(ggplot2)
+diamonds %>% 
+  group_by(cut) %>%
+  summarize(price = mean(price)) %>%
+  ## Assume there was some former price that was a bit different
+  mutate(old_price = price * (1 * runif(n = 5, min = 0.95, max = 1.05))) %>%
+  tile_matrix(data = ., values = price, txt = cut, former = old_price, target = 4500, roundVal = 0, cols = 5)
+```
+
+<br>
+
+So what exactly does `former` do? It contextualizes the displayed value in comparison with a former value for that same tile. This is especially useful to measure growth of a metric. In order to show the functionality, let's use a quite contrived scenario in which valuesw range from 1 to 100, but in all cases, the former value was 50. See how the number in the top right corner changes:
 
 ```{r}
 suppressPackageStartupMessages(library(dplyr))
@@ -222,13 +244,16 @@ df <- tibble(
 )
 
 ## Let's pretend that all previous values were 50... so:
-tile_matrix(data = df, values = values, txt = txt, former = former)
+tile_matrix(data = df, values = values, txt = txt, former = former, target = 1000)
 ```
 
+<br>
 
-## Grammar of tile_maker
+Important note: the color changes on the `value`, not on the `former`. For now I've forced the boxes to be red by having a high `target`, but just be clear on what the color is showing in real situations.
 
-Buttons are put into a div tag and final values are put into a finalizer. The finalizer either creates a visible block of code or can be saved to a file for convenience.
+## Grammar of Tiles
+
+There are a few more bits and bobs, but that's the main features! All that's left is to discuss how to group tiles. For that we have two functions: `div_maker` and the bluntly named `finisher`. Individual tiles are put into a `div_maker` in order to group them in a row, and then those `div_maker` objects are put into a `finisher` call to create one object. The finished tile-set either creates a visible block of code or can be saved to a file for convenience by setting the `file` argument to `NULL`. Here is a "real-world" example:
 
 ```{r}
 Value1 <- 88
@@ -261,17 +286,15 @@ finisher(
 )
 ```
 
-These functions are included to help with inclusion in different document colors and for testing small snipets of code.
+<br>
 
-# Bug Report / help
-
-HTML elements within `tile_maker` blocks have a fixed css  controlled by the functions. It may affect others elements of your webpage.
+# Help! My report broke!
 
 The tilemaker package works by porting bootstrap functionality and controlling the HTML element within. It may affect others elements of your webpage.
 
 A few features are included to try to prevent these effects:
 
- 1. Most of the time, wrapping your buttons or groups of buttons in `div_maker`s, and/or in `finisher`s... seems to fix issues most of the time.
- 2. In some cases, for example in markdown documents that include a Table of Contents, format depends of previous html elements. It is advised to then use the `textModifier` option. You can change the textModifier from the default `h1` to `h4` or `<br>` or anything you think might work in your report.
+ 1. Most of the time, wrapping your buttons or groups of buttons in `div_maker`s, and/or in `finisher`s can be effective.
+ 2. In some cases, for example in markdown documents that include a Table of Contents, format depends of previous html elements. It is advised to then change the `textModifier` option. You can change the textModifier from the default `h1` to `h4` or `<br>` or anything you think might work in your report.
 
 If you need help not covered here, please use [the Issues page](https://github.com/DataStrategist/TileMaker/issues).

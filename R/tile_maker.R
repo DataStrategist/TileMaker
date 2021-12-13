@@ -2,7 +2,7 @@
 #'
 #' Auxiliary function to generate icons
 #'
-#' @param x Icon name. See http://getbootstrap.com/components/
+#' @param x Icon name. See https://getbootstrap.com/docs/3.3/components/
 #' @param chevron binary to denote whether there is a former value to compare against or not.
 #' @importFrom htmltools tags browsable
 #' @rdname ico
@@ -24,23 +24,27 @@ ico <- function(x, chevron = FALSE) {
 
 #' solo_box
 #'
-#' This function crafts the actual tile per se, including the specific
-#' aesthetic traits for each tile. This is the simple version where you explicitly state the color.
+#' This function crafts the actual tile per se, including the specific aesthetic
+#' traits for each tile. This is the simple version where you explicitly state
+#' the color.
 #'
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param former The numeric old value to use for comparison to 'value'
 #' @param txt Optional subtext that should appear under the value
 #' @param size Optional size specified in the bootstrap css classes:
-#' "xs","sm","md","lg")
-#' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
-#' the name of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-#' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger"
+#'   "xs","sm","md","lg")
+#' @param icon Optional glyphicon that should be displayed from
+#'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+#'   of thing you want, like "check"... not the full "gyphicon-check"
+#' @param color Optional bootstrap css element that governs the color.
+#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
+#'   "primary", "success", "info", "warning", "danger"
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
-#' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
-#' @param textModifier Optional css category of "large" text. In this case, the icon, value and unit.
-#' In this case, title. Default=h1
+#' @param hover Optional tooltip, or text that will show up when a user rests
+#'   their mouse over the tile.
+#' @param textModifier Optional css category of "large" text. In this case, the
+#'   icon, value and unit. In this case, title. Default=h1
 #' @param ... Optional additional html elements
 #' @importFrom htmltools HTML tag tags
 #' @examples
@@ -117,22 +121,29 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param txt Optional subtext that should appear under the value
 #' @param former The last value that should be used for comparison purposes
 #' @param size Optional size specified in the bootstrap css classes:
-#' "xs","sm","md","lg")
-#' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
-#' the name of thing you want, like "check"... not the full "gyphicon-check"
-#' @param target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
-#' @param thresholdHigh Optional edge between \"green\" and \"orange\" from 0-100 as a percent of target. IE, this value
-#' represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdHigh will show as green,
-#' and if not, as orange. Use w/ target and ThresholdLow.
-#' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100 as a percent of target. IE, this value
-#' represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdLow will show as orange,
-#' and if not, as red. Use w/ target and ThresholdHigh.
+#'   "xs","sm","md","lg")
+#' @param icon Optional glyphicon that should be displayed from
+#'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+#'   of thing you want, like "check"... not the full "gyphicon-check"
+#' @param target Optional target that the value should be compared against. Use
+#'   with ThresholdHigh and THresholdLow
+#' @param thresholdHigh Optional edge between \"green\" and \"orange\" from
+#'   0-100 as a percent of target. IE, this value represents the RATIO of the
+#'   VALUE to the target that, if above or equal to the ThresholdHigh will show
+#'   as green, and if not, as orange. Use w/ target and ThresholdLow.
+#' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100
+#'   as a percent of target. IE, this value represents the RATIO of the VALUE to
+#'   the target that, if above or equal to the ThresholdLow will show as orange,
+#'   and if not, as red. Use w/ target and ThresholdHigh.
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
-#' @param hover Optional tooltip, or text that will show up when a user rests their mouse over the tile.
-#' @param hide_value Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
-#' the large number, but still take advantage of the conditional formatting.
-#' @param textModifier Optional css category of "large" text. In this case, the icon, value and unit. Default=h1
+#' @param hover Optional tooltip, or text that will show up when a user rests
+#'   their mouse over the tile.
+#' @param hide_value Optionally and paradoxically hide value. Normally FALSE,
+#'   change this value to TRUE in order to suppress the large number, but still
+#'   take advantage of the conditional formatting.
+#' @param textModifier Optional css category of "large" text. In this case, the
+#'   icon, value and unit. Default=h1
 #' @param revert Invert colorbox. Green become red and red become green.
 #' @param ... Optional additional html elements
 #' @importFrom htmltools HTML tags tag
@@ -223,11 +234,14 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @param values vector of values to display, Default: NULL
 #' @param title Top title, Default: NULL
 #' @param size Optional size specified in the bootstrap css classes:
-#' "xs","sm","md","lg")
-#' @param color Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-#' Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'
-#' @param link Optional hyperlink to redirect to after a user click, Default: NULL
-#' @param number_zoom Optional magnification \% for number vs normal text, Default: 150
+#'   "xs","sm","md","lg")
+#' @param color Optional bootstrap css element that governs the color.
+#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
+#'   "primary", "success", "info", "warning", "danger", Default: 'info'
+#' @param link Optional hyperlink to redirect to after a user click, Default:
+#'   NULL
+#' @param number_zoom Optional magnification \% for number vs normal text,
+#'   Default: 150
 #'
 #' @param hover Optional tooltip, or text that will show up when a user rests their
 #' mouse over the tile, Default: NULL
@@ -290,22 +304,32 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
 #' Create a matrix of buttons suitable for quick comparisons
 #'
 #' @param data a dataframe containing the data you would like to plot
-#' @param values a Vector containing values for each tile, contained in the dataframe `data`
-#' @param txt Vector containing titles for each tile, contained in the datframe `data`
-#' @param icon Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
-#' the name of thing you want, like "check"... not the full "gyphicon-check"
-#' @param former optional vector containing former values (to show change from last), contained in the datframe `data`
-#' @param target Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow
-#' @param thresholdHigh Optional edge between \"green\" and \"orange\" from 0-100 as a percent of target. IE, this value
-#' represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdHigh will show as green,
-#' and if not, as orange. Use w/ target and ThresholdLow.
-#' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100 as a percent of target. IE, this value
-#' represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdLow will show as orange,
-#' and if not, as red. Use w/ target and ThresholdHigh.
-#' @param cols Number of columns that the matrix should tile around. Defaults to 4
+#' @param values a Vector containing values for each tile, contained in the
+#'   dataframe `data`
+#' @param txt Vector containing titles for each tile, contained in the datframe
+#'   `data`
+#' @param icon Optional glyphicon that should be displayed from
+#'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+#'   of thing you want, like "check"... not the full "gyphicon-check"
+#' @param former optional vector containing former values (to show change from
+#'   last), contained in the datframe `data`
+#' @param target Optional target that the value should be compared against. Use
+#'   with ThresholdHigh and THresholdLow
+#' @param thresholdHigh Optional edge between \"green\" and \"orange\" from
+#'   0-100 as a percent of target. IE, this value represents the RATIO of the
+#'   VALUE to the target that, if above or equal to the ThresholdHigh will show
+#'   as green, and if not, as orange. Use w/ target and ThresholdLow.
+#' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100
+#'   as a percent of target. IE, this value represents the RATIO of the VALUE to
+#'   the target that, if above or equal to the ThresholdLow will show as orange,
+#'   and if not, as red. Use w/ target and ThresholdHigh.
+#' @param cols Number of columns that the matrix should tile around. Defaults to
+#'   4
 #' @param title The title the matrix should have.
-#' @param roundVal Number of decimals that Value will be rounded to. Defaults to 1
-#' @param textModifier Optional css category of "large" text. In this case, the icon, value and unit. Default=h1
+#' @param roundVal Number of decimals that Value will be rounded to. Defaults to
+#'   1
+#' @param textModifier Optional css category of "large" text. In this case, the
+#'   icon, value and unit. Default=h1
 #' @importFrom htmltools HTML tag tags
 #' @importFrom dplyr pull %>%  data_frame
 #' @importFrom rlang !! enquo syms
@@ -420,11 +444,13 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
 
 #' Div maker
 #'
-#' This function takes buttons made by any of the solo or multi buttons and makes an a row (HTML `div`) suitable for inclusion in
-#' other HTML code, or for inclusion within the function of this package `finisher`.
+#' This function takes buttons made by any of the solo or multi buttons and
+#' makes an a row (HTML `div`) suitable for inclusion in other HTML code, or for
+#' inclusion within the function of this package `finisher`.
 #'
 #' @param subtitle The text heading of this row of buttons
-#' @param textModifier Optional css category of "large" text. In this case, subtitle. Use css flags
+#' @param textModifier Optional css category of "large" text. In this case,
+#'   subtitle. Use css flags
 #' like "h2", "h3","p", etc. Default = "h1"
 #' @param ... \code{buttons to insert into the div} elements.
 #' @examples
@@ -454,16 +480,22 @@ div_maker <- function(subtitle, textModifier, ...) {
 
 #' finisher
 #'
-#' Function 3 of 3, the last step. This function grabs the Divs created by `DivMaker`, or individual buttons if so desired, and
-#' combines them into a freestanding html file. Use this when you don't want the buttons to be part of a file, but a file itself.
-#' or, you could also use this as a convenient way of wrapping up buttons without using a div (although it is a bit irregular).
+#' Function 3 of 3, the last step. This function grabs the Divs created by
+#' `DivMaker`, or individual buttons if so desired, and combines them into a
+#' freestanding html file. Use this when you don't want the buttons to be part
+#' of a file, but a file itself. or, you could also use this as a convenient way
+#' of wrapping up buttons without using a div (although it is a bit irregular).
 #'
 #' @param title Title. Default NULL
-#' @param css A string indicating css url, for final installations pls save the css file locally. By default we are using the 3.3.7
-#' bootstrap CDN because they support icons, but some others that might be interesting to you are:
-#' https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or https://bootswatch.com/4/flatly/bootstrap.css (but if you use version 4 you will lose the ability to display icons).
+#' @param css A string indicating css url, for final installations pls save the
+#'   css file locally. By default we are using the 3.3.7 bootstrap CDN because
+#'   they support icons, but some others that might be interesting to you are:
+#'   https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css or
+#'   https://bootswatch.com/4/flatly/bootstrap.css (but if you use version 4 you
+#'   will lose the ability to display icons).
 #' @param file Optional filename if you desire to save the file.
-#' @param textModifier Optional css category of "large" text. In this case, title. Default=h1
+#' @param textModifier Optional css category of "large" text. In this case,
+#'   title. Default=h1
 #' @param divs \code{div_maker} elements.
 #' @importFrom htmltools browsable save_html
 #' @export finisher

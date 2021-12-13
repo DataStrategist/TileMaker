@@ -4,9 +4,18 @@
 \alias{multi_box}
 \title{multi_box}
 \usage{
-multi_box(icons = NULL, txt = NULL, values = NULL, title = NULL,
-  size = "md", color = "info", link = NULL, number_zoom = 150,
-  hover = NULL, ...)
+multi_box(
+  icons = NULL,
+  txt = NULL,
+  values = NULL,
+  title = NULL,
+  size = "md",
+  color = "info",
+  link = NULL,
+  number_zoom = 150,
+  hover = NULL,
+  ...
+)
 }
 \arguments{
 \item{icons}{vector of Icons to display, Default: NULL}
@@ -20,12 +29,15 @@ multi_box(icons = NULL, txt = NULL, values = NULL, title = NULL,
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
 
-\item{color}{Optional bootstrap css element that governs the color. https://v4-alpha.getbootstrap.com/utilities/colors/
-Choose from: "Muted", "Primary", "Success", "Info", "Warning", "Danger", Default: 'info'}
+\item{color}{Optional bootstrap css element that governs the color.
+https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
+"primary", "success", "info", "warning", "danger", Default: 'info'}
 
-\item{link}{Optional hyperlink to redirect to after a user click, Default: NULL}
+\item{link}{Optional hyperlink to redirect to after a user click, Default:
+NULL}
 
-\item{number_zoom}{Optional magnification \% for number vs normal text, Default: 150}
+\item{number_zoom}{Optional magnification \% for number vs normal text,
+Default: 150}
 
 \item{hover}{Optional tooltip, or text that will show up when a user rests their
 mouse over the tile, Default: NULL}

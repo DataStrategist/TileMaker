@@ -4,10 +4,23 @@
 \alias{solo_gradient_box}
 \title{solo_gradient_box}
 \usage{
-solo_gradient_box(value = NULL, txt = NULL, former = NULL,
-  size = "md", icon = NULL, target = 100, thresholdHigh = 90,
-  thresholdLow = 50, link = NULL, units = NULL, hover = NULL,
-  hide_value = FALSE, textModifier = "h1", revert = FALSE, ...)
+solo_gradient_box(
+  value = NULL,
+  txt = NULL,
+  former = NULL,
+  size = "md",
+  icon = NULL,
+  target = 100,
+  thresholdHigh = 90,
+  thresholdLow = 50,
+  link = NULL,
+  units = NULL,
+  hover = NULL,
+  hide_value = FALSE,
+  textModifier = "h1",
+  revert = FALSE,
+  ...
+)
 }
 \arguments{
 \item{value}{The numeric value you want to highlight (the main enchilada)}
@@ -19,29 +32,36 @@ solo_gradient_box(value = NULL, txt = NULL, former = NULL,
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
 
-\item{icon}{Optional glyphicon that should be displayed from http://getbootstrap.com/components/ you need only supply
-the name of thing you want, like "check"... not the full "gyphicon-check"}
+\item{icon}{Optional glyphicon that should be displayed from
+https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+of thing you want, like "check"... not the full "gyphicon-check"}
 
-\item{target}{Optional target that the value should be compared against. Use with ThresholdHigh and THresholdLow}
+\item{target}{Optional target that the value should be compared against. Use
+with ThresholdHigh and THresholdLow}
 
-\item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from 0-100 as a percent of target. IE, this value
-represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdHigh will show as green,
-and if not, as orange. Use w/ target and ThresholdLow.}
+\item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from
+0-100 as a percent of target. IE, this value represents the RATIO of the
+VALUE to the target that, if above or equal to the ThresholdHigh will show
+as green, and if not, as orange. Use w/ target and ThresholdLow.}
 
-\item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100 as a percent of target. IE, this value
-represents the RATIO of the VALUE to the target that, if above or equal to the ThresholdLow will show as orange,
+\item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100
+as a percent of target. IE, this value represents the RATIO of the VALUE to
+the target that, if above or equal to the ThresholdLow will show as orange,
 and if not, as red. Use w/ target and ThresholdHigh.}
 
 \item{link}{Optional hyperlink that should be followed on click}
 
 \item{units}{Optional units that should be displayed after Value}
 
-\item{hover}{Optional tooltip, or text that will show up when a user rests their mouse over the tile.}
+\item{hover}{Optional tooltip, or text that will show up when a user rests
+their mouse over the tile.}
 
-\item{hide_value}{Optionally and paradoxically hide value. Normally FALSE, change this value to TRUE in order to suppress
-the large number, but still take advantage of the conditional formatting.}
+\item{hide_value}{Optionally and paradoxically hide value. Normally FALSE,
+change this value to TRUE in order to suppress the large number, but still
+take advantage of the conditional formatting.}
 
-\item{textModifier}{Optional css category of "large" text. In this case, the icon, value and unit. Default=h1}
+\item{textModifier}{Optional css category of "large" text. In this case, the
+icon, value and unit. Default=h1}
 
 \item{revert}{Invert colorbox. Green become red and red become green.}
 

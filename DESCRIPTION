@@ -7,7 +7,7 @@ Maintainer: Amit Kohli <amit@amitkohli.com>
 Description: This package builds handsome single-data-point boxes suitable for inclusion in dashboards. It uses the Bootstrap v3 css buttons to make the process easy. Acts as a more fully-featured alternative to infoBox and valueBox.
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.2
 BugReports: https://github.com/DataStrategist/TileMaker/issues
 URL: http://datastrategist.github.io/TileMaker/
 Imports: htmltools, purrr, dplyr, rlang
