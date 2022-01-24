@@ -48,9 +48,9 @@ ico <- function(x, chevron = FALSE) {
 #' @param ... Optional additional html elements
 #' @importFrom htmltools HTML tag tags
 #' @examples
-#' b1 <- solo_box(color= "warning", value = 3.57, txt = "B")
-#' b2 <- solo_box(color= "danger", value = 13.7, txt = "Nutritional value")
-#' b3 <- solo_box(color= "success", value = 1, txt = "Yumminess factor")
+#' b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
+#' b2 <- solo_box(color = "danger", value = 13.7, txt = "Nutritional value")
+#' b3 <- solo_box(color = "success", value = 1, txt = "Yumminess factor")
 #' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
 #' finisher(title = "straight buttons", divs = b1)
 #' finisher(
@@ -72,14 +72,14 @@ ico <- function(x, chevron = FALSE) {
 #' )
 #' @export solo_box
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
-                     icon = NULL, color= "info", link = NULL, units = NULL,
+                     icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", ...) {
   tags$a(
     href = link,
     tags$button(
       title = hover,
       # color= "button",
-      color= color,
+      color = color,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
@@ -114,27 +114,33 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 
 #' solo_gradient_box
 #'
-#' This function crafts a solo_box tile displaying a red orange green color.
-#' The color is defined by the value of the target compared to the thresholds.
+#' This function crafts a solo_box tile displaying a red orange green color. The
+#' color is defined by the value of the target compared to the thresholds.
 #'
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param txt Optional subtext that should appear under the value
-#' @param former The last value that should be used for comparison purposes
+#' @param former The last value that should be used as information in the
+#'   chevron, or for relative mode
 #' @param size Optional size specified in the bootstrap css classes:
 #'   "xs","sm","md","lg")
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
 #' @param target Optional target that the value should be compared against. Use
-#'   with ThresholdHigh and THresholdLow
+#'   with thresholdHigh and thresholdLow. Note, `target` is ignored in relative
+#'   mode, and you might want to change the thresholdHigh to 105 and threholdLow
+#'   to 95 (to trigger red/green if +/- 5% outside the margins)
 #' @param thresholdHigh Optional edge between \"green\" and \"orange\" from
 #'   0-100 as a percent of target. IE, this value represents the RATIO of the
-#'   VALUE to the target that, if above or equal to the ThresholdHigh will show
-#'   as green, and if not, as orange. Use w/ target and ThresholdLow.
+#'   VALUE to the target that, if above or equal to the thresholdHigh will show
+#'   as green, and if not, as orange. Use w/ target and thresholdLow.
 #' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100
 #'   as a percent of target. IE, this value represents the RATIO of the VALUE to
 #'   the target that, if above or equal to the ThresholdLow will show as orange,
-#'   and if not, as red. Use w/ target and ThresholdHigh.
+#'   and if not, as red. Use w/ target and thresholdHigh.
+#' @param relative Alternate mode where the `value` is compared against `former`
+#'   rather than `target`. This mode is suitable to change the color of the
+#'   button based on previous values rather than comparison to a standard.
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -145,7 +151,9 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param textModifier Optional css category of "large" text. In this case, the
 #'   icon, value and unit. Default=h1
 #' @param revert Invert colorbox. Green become red and red become green.
-#' @param ... Optional additional html elements
+#' @param ... Optional additional html elements. For example, if you would like
+#'   two buttons to fit into a section in a flexdashboard, you could specify
+#'   `style = 'width:100%;height:50%'`
 #' @importFrom htmltools HTML tags tag
 #' @examples
 #' # ADD EXAMPLES HERE
@@ -162,24 +170,38 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #'   value = 35, txt = "Test2", target = 50,
 #'   thresholdHigh = 80, thresholdLow = 60, hide_value = TRUE
 #' )
+#' ## This one shows relative and revert options. Since 29160
+#' is about 6% higher than 27420, it is triggered by the "high"
+#' level, but since revert is TRUE, insteaad of showing as
+#' green, it's showing as red.
+#' g5 <- solo_gradient_box(
+#'   value = 29160, former = 27420,
+#'   relative = TRUE, revert = TRUE,
+#'   thresholdHigh = 105, thresholdLow = 95
+#' )
 #' finisher(title = "Item", divs = div_maker(
 #'   subtitle = "subitems",
-#'   textModifier = "h1", g1, g2, g3, g4
+#'   textModifier = "h1", g1, g2, g3, g4, g5
 #' ))
 #' @export solo_gradient_box
 solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               size = "md", icon = NULL, target = 100,
                               thresholdHigh = 90, thresholdLow = 50,
-                              link = NULL, units = NULL, hover = NULL,
-                              hide_value = FALSE,
+                              relative = FALSE, link = NULL, units = NULL,
+                              hover = NULL, hide_value = FALSE,
                               textModifier = "h1", revert = FALSE, ...) {
-  Perc <- value / target * 100
-  if (Perc >= thresholdHigh) {
-    if(revert == FALSE) finalcolor<- "success" else finalcolor<- "danger"
-  } else if (Perc < thresholdLow) {
-    if(revert == FALSE) finalcolor<- "danger" else finalcolor<- "success"
+  if (relative == FALSE) {
+    Perc <- value / target * 100
   } else {
-    finalcolor<- "warning"
+    Perc <- value / former * 100
+  }
+
+  if (Perc >= thresholdHigh) {
+    if (revert == FALSE) finalcolor <- "success" else finalcolor <- "danger"
+  } else if (Perc < thresholdLow) {
+    if (revert == FALSE) finalcolor <- "danger" else finalcolor <- "success"
+  } else {
+    finalcolor <- "warning"
   }
 
   tags$a(
@@ -188,7 +210,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       href = link,
       title = hover,
       # color= "button",
-      color= finalcolor,
+      color = finalcolor,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size),
@@ -254,7 +276,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' library(dplyr)
 #' multi_box(
 #'   values = c(21, 45), title = "Important <br>button",
-#'   number_zoom = 300, icons = c("apple", "calendar"), color= "warning",
+#'   number_zoom = 300, icons = c("apple", "calendar"), color = "warning",
 #'   txt = c("times", "reports")
 #' ) %>%
 #'   finisher(divs = .)
@@ -267,7 +289,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @export
 multi_box <- function(icons = NULL, txt = NULL, values = NULL,
                       title = NULL, size = "md",
-                      color= "info", link = NULL, number_zoom = 150,
+                      color = "info", link = NULL, number_zoom = 150,
                       hover = NULL, ...) {
   ## Define function that can be pmapped
   gutsMaker <- function(values, txt, icons) {
@@ -288,7 +310,7 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
       href = link,
       title = hover,
       # color= "button",
-      color= color,
+      color = color,
       role = "button",
       # classes: size, color
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
@@ -314,15 +336,15 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
 #' @param former optional vector containing former values (to show change from
 #'   last), contained in the datframe `data`
 #' @param target Optional target that the value should be compared against. Use
-#'   with ThresholdHigh and THresholdLow
+#'   with thresholdHigh and THresholdLow
 #' @param thresholdHigh Optional edge between \"green\" and \"orange\" from
 #'   0-100 as a percent of target. IE, this value represents the RATIO of the
-#'   VALUE to the target that, if above or equal to the ThresholdHigh will show
-#'   as green, and if not, as orange. Use w/ target and ThresholdLow.
+#'   VALUE to the target that, if above or equal to the thresholdHigh will show
+#'   as green, and if not, as orange. Use w/ target and thresholdLow.
 #' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100
 #'   as a percent of target. IE, this value represents the RATIO of the VALUE to
 #'   the target that, if above or equal to the ThresholdLow will show as orange,
-#'   and if not, as red. Use w/ target and ThresholdHigh.
+#'   and if not, as red. Use w/ target and thresholdHigh.
 #' @param cols Number of columns that the matrix should tile around. Defaults to
 #'   4
 #' @param title The title the matrix should have.
