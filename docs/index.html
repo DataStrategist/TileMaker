@@ -6,19 +6,22 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Create Tiles Suitable For Html Dashboards • TileMaker</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
+<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Create Tiles Suitable For Html Dashboards">
 <meta property="og:description" content="This package builds handsome single-data-point boxes suitable for inclusion in dashboards. It uses the Bootstrap v3 css buttons to make the process easy. Acts as a more fully-featured alternative to infoBox and valueBox.">
-<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
-    <div class="container template-article">
+<body data-spy="scroll" data-target="#toc">
+    
+
+    <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -30,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">TileMaker</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.5</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fa fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -53,7 +50,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/Intro.html">Intro</a>
+      <a href="articles/Intro.html">Overview</a>
     </li>
     <li>
       <a href="articles/shinydemo.html">TileMaker in Shiny</a>
@@ -64,7 +61,14 @@
   <a href="news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/DataStrategist/TileMaker/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -73,218 +77,235 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
-  <div class="col-md-9 contents">
-    
+  <div class="contents col-md-9">
 
-    
-    
 
-<div id="tilemaker" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#tilemaker" class="anchor"></a>TileMaker</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="tilemaker">TileMaker<a class="anchor" aria-label="anchor" href="#tilemaker"></a>
+</h1></div>
 <p>An R library that enables the creation of data tiles for inclusion in a html dashboard or some such.</p>
 <p>To install, please type:</p>
-<pre><code><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">devtools::install_github("DataStrategist/TileMaker", build_vignettes = TRUE)</a></code></pre>
-<p>Please see the <a href="http://datastrategist.github.io/TileMaker/articles/Intro.html">Intro Vignette</a> to learn more about how to do some lovely stuff, but in the meantime, here’s the basics:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"DataStrategist/TileMaker"</span>, <span class="at">build_vignettes =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Please see the <a href="http://datastrategist.github.io/TileMaker/articles/Intro.html" class="external-link">Intro Vignette</a> to learn more about how to do some lovely stuff, but in the meantime, here’s the basics:</p>
 <p>This package is intended to “highlight single values”, mainly in dashboards, reports or Shiny apps, and is highly customizeable. This is what it looks like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/warning">suppressWarnings</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/message">suppressMessages</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse,<span class="dt">quietly =</span> <span class="ot">TRUE</span>)))
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(TileMaker)
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span>,quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://datastrategist.github.io/TileMaker/" class="external-link">TileMaker</a></span><span class="op">)</span>
 
-a &lt;-<span class="st"> </span><span class="kw"><a href="reference/solo_box.html">solo_box</a></span>(<span class="dt">value =</span> <span class="dv">3</span>, <span class="dt">txt =</span> <span class="st">"Little piggies&lt;br&gt;go to the market"</span>, <span class="dt">icon =</span> <span class="st">"piggy-bank"</span>)
-b &lt;-<span class="st"> </span><span class="kw"><a href="reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">65</span>, <span class="dt">txt =</span> <span class="st">"test score I got"</span>)
-c &lt;-<span class="st"> </span><span class="kw"><a href="reference/solo_gradient_box.html">solo_gradient_box</a></span>(<span class="dt">value =</span> <span class="dv">95</span>, <span class="dt">txt =</span> <span class="st">"test score I wanted"</span>)
-d &lt;-<span class="st"> </span><span class="kw"><a href="reference/multi_box.html">multi_box</a></span>(<span class="dt">values =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="dt">txt =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Sally"</span>, <span class="st">"George"</span>, <span class="st">"Mohammed"</span>), <span class="dt">icons =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"check"</span>, <span class="st">"plus"</span>, <span class="st">"calendar"</span>), <span class="dt">title =</span> <span class="st">"Candidates"</span>)
+<span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solo_box.html">solo_box</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fl">3</span>, txt <span class="op">=</span> <span class="st">"Little piggies&lt;br&gt;go to the market"</span>, icon <span class="op">=</span> <span class="st">"piggy-bank"</span><span class="op">)</span>
+<span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solo_gradient_box.html">solo_gradient_box</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fl">65</span>, txt <span class="op">=</span> <span class="st">"test score I got"</span><span class="op">)</span>
+<span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/solo_gradient_box.html">solo_gradient_box</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fl">95</span>, txt <span class="op">=</span> <span class="st">"test score I wanted"</span><span class="op">)</span>
+<span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/multi_box.html">multi_box</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span>, txt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Sally"</span>, <span class="st">"George"</span>, <span class="st">"Mohammed"</span><span class="op">)</span>, icons <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"check"</span>, <span class="st">"plus"</span>, <span class="st">"calendar"</span><span class="op">)</span>, title <span class="op">=</span> <span class="st">"Candidates"</span><span class="op">)</span>
 
-e &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">a =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Petal.Length)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/tile_matrix.html">tile_matrix</a></span>(<span class="dt">values =</span> a, <span class="dt">txt =</span> Species)
+<span class="va">e</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="reference/tile_matrix.html">tile_matrix</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">a</span>, txt <span class="op">=</span> <span class="va">Species</span><span class="op">)</span>
 
-f &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarize</span>(<span class="dt">a =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Petal.Length)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">old_a =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw"><a href="reference/tile_matrix.html">tile_matrix</a></span>(<span class="dt">data =</span> ., <span class="dt">values =</span> a, <span class="dt">txt =</span> Species, <span class="dt">former =</span>  old_a)
+<span class="va">f</span> <span class="op">&lt;-</span> <span class="va">iris</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">Species</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">Petal.Length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>old_a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="reference/tile_matrix.html">tile_matrix</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">.</span>, values <span class="op">=</span> <span class="va">a</span>, txt <span class="op">=</span> <span class="va">Species</span>, former <span class="op">=</span>  <span class="va">old_a</span><span class="op">)</span>
 
-d1 &lt;-<span class="st"> </span><span class="kw"><a href="reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"First line"</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>, a, b)
-d2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Second line"</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>, c, d)
-d3 &lt;-<span class="st"> </span><span class="kw"><a href="reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Boom line"</span>, <span class="dt">textModifier =</span> <span class="st">"h1"</span>, e, f)
+<span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/div_maker.html">div_maker</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"First line"</span>, textModifier <span class="op">=</span> <span class="st">"h1"</span>, <span class="va">a</span>, <span class="va">b</span><span class="op">)</span>
+<span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/div_maker.html">div_maker</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Second line"</span>, textModifier <span class="op">=</span> <span class="st">"h1"</span>, <span class="va">c</span>, <span class="va">d</span><span class="op">)</span>
+<span class="va">d3</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/div_maker.html">div_maker</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Boom line"</span>, textModifier <span class="op">=</span> <span class="st">"h1"</span>, <span class="va">e</span>, <span class="va">f</span><span class="op">)</span>
 
-<span class="kw"><a href="reference/finisher.html">finisher</a></span>(
-  <span class="dt">title =</span> <span class="st">"Important Reportings"</span>, 
-  <span class="dt">css =</span> <span class="st">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span>,
-  <span class="dt">file =</span> <span class="ot">NULL</span>, 
-  <span class="dt">textModifier =</span> <span class="st">"h1"</span>,<span class="kw"><a href="reference/div_maker.html">div_maker</a></span>(<span class="dt">subtitle =</span> <span class="st">"Boom"</span>, <span class="dt">textModifier =</span> <span class="st">"hi"</span>,d1, d2, d3)
-)</code></pre></div>
+<span class="fu"><a href="reference/finisher.html">finisher</a></span><span class="op">(</span>
+  title <span class="op">=</span> <span class="st">"Important Reportings"</span>, 
+  css <span class="op">=</span> <span class="st">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"</span>,
+  file <span class="op">=</span> <span class="cn">NULL</span>, 
+  textModifier <span class="op">=</span> <span class="st">"h1"</span>,<span class="fu"><a href="reference/div_maker.html">div_maker</a></span><span class="op">(</span>subtitle <span class="op">=</span> <span class="st">"Boom"</span>, textModifier <span class="op">=</span> <span class="st">"hi"</span>,<span class="va">d1</span>, <span class="va">d2</span>, <span class="va">d3</span><span class="op">)</span>
+<span class="op">)</span></code></pre></div>
+<!--html_preserve-->
 
 
-<h1>Important Reportings</h1>
+<h1 id="tilemaker-1">
+<a class="anchor" aria-label="anchor" href="#tilemaker-1"></a>
+</h1>
+<p>Important Reportings</p>
+
 <div>
-<hi>Boom</hi><div class="container">
-<h1>First line</h1>
-<a>
-<button class="btn btn-md btn-info" role="button" type="info">
+<p><hi>Boom</hi></p>
+<div class="container">
 <h1>
-<i class="glyphicon glyphicon-piggy-bank"></i>
-3
 </h1>
-Little piggies<br>go to the market
-</button>
-</a>
-<a>
-<button class="btn btn-md btn-warning" role="button" type="warning">
-<h1>65</h1>
-test score I got
-</button>
-</a>
+<p>First line</p>
+
+<p><a> <button class="btn btn-md btn-info" color="info" role="button"></button></a></p>
+<h1>
+</h1>
+<p><i class="glyphicon glyphicon-piggy-bank"></i> 3</p>
+
+<p>Little piggies<br>go to the market   <a> <button class="btn btn-md btn-warning" color="warning" role="button"></button></a></p>
+<h1>
+</h1>
+<p>65</p>
+
+<p>test score I got  </p>
 </div>
 <div class="container">
-<h1>Second line</h1>
-<a>
-<button class="btn btn-md btn-success" role="button" type="success">
-<h1>95</h1>
-test score I wanted
-</button>
-</a>
-<a>
-<button class="btn btn-md btn-info" role="button" type="info">
-<h1>Candidates</h1>
+<h1>
+</h1>
+<p>Second line</p>
+
+<p><a> <button class="btn btn-md btn-success" color="success" role="button"></button></a></p>
+<h1>
+</h1>
+<p>95</p>
+
+<p>test score I wanted   <a> <button class="btn btn-md btn-info" color="info" role="button"></button></a></p>
+<h1>
+</h1>
+<p>Candidates</p>
+
 <h3>
-<i class="glyphicon glyphicon-check"></i>
-<span style="font-size:150%">4</span>
-Sally
 </h3>
+<p><i class="glyphicon glyphicon-check"></i> <span style="font-size:150%">4</span> Sally</p>
+
 <h3>
-<i class="glyphicon glyphicon-plus"></i>
-<span style="font-size:150%">5</span>
-George
 </h3>
+<p><i class="glyphicon glyphicon-plus"></i> <span style="font-size:150%">5</span> George</p>
+
 <h3>
-<i class="glyphicon glyphicon-calendar"></i>
-<span style="font-size:150%">6</span>
-Mohammed
 </h3>
-</button>
-</a>
+<p><i class="glyphicon glyphicon-calendar"></i> <span style="font-size:150%">6</span> Mohammed</p>
+
+
+<p></p>
 </div>
 <div class="container">
-<h1>Boom line</h1>
-<a>
-<h1></h1>
+<h1>
+</h1>
+<p>Boom line</p>
+
+<p><a></a></p>
+<h1>
+</h1>
 <div class="container">
 <h2>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>1.5</h1>
-setosa
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>4.3</h1>
-versicolor
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>5.6</h1>
-virginica
-</button>
-</a>
 </h2>
+<p><a> <button class="btn btn-2 btn-danger" color="danger" role="button"></button></a></p>
+<h1>
+</h1>
+<p>1.5</p>
+
+<p>setosa   <a> <button class="btn btn-2 btn-danger" color="danger" role="button"></button></a></p>
+<h1>
+</h1>
+<p>4.3</p>
+
+<p>versicolor   <a> <button class="btn btn-2 btn-danger" color="danger" role="button"></button></a></p>
+<h1>
+</h1>
+<p>5.6</p>
+
+<p>virginica  </p>
+
 </div>
-</a>
-<a>
-<h1></h1>
+<p> <a></a></p>
+<h1>
+</h1>
 <div class="container">
 <h2>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-1.5
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i>
-50%
-</sup>
-</h1>
-setosa
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-4.3
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-7.5%
-</sup>
-</h1>
-versicolor
-</button>
-</a>
-<a>
-<button class="btn btn-2 btn-danger" role="button" type="danger">
-<h1>
-5.6
-<sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i>
-12%
-</sup>
-</h1>
-virginica
-</button>
-</a>
 </h2>
+<p><a> <button class="btn btn-2 btn-danger" color="danger" role="button"></button></a></p>
+<h1>
+</h1>
+<p>1.5 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-down" style="font-size: 10px; vertical-align: top;"></i> 50% </sup></p>
+
+<p>setosa   <a> <button class="btn btn-2 btn-danger" color="danger" role="button"></button></a></p>
+<h1>
+</h1>
+<p>4.3 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i> 7.5% </sup></p>
+
+<p>versicolor   <a> <button class="btn btn-2 btn-danger" color="danger" role="button"></button></a></p>
+<h1>
+</h1>
+<p>5.6 <sup style="font-size: 12px;color:#EEEEEE;vertical-align: top;"><i class="glyphicon glyphicon-chevron-up" style="font-size: 10px; vertical-align: top;"></i> 12% </sup></p>
+
+<p>virginica  </p>
+
 </div>
-</a>
+<p></p>
 </div>
 </div>
 
 
+<!--/html_preserve-->
 </div>
+
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Report a bug at <br><a href="https://github.com/DataStrategist/TileMaker/issues">https://​github.com/​DataStrategist/​TileMaker/​issues</a>
-</li>
+<li><a href="https://github.com/DataStrategist/TileMaker/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/DataStrategist/TileMaker/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing TileMaker</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Amit Kohli <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
 
-      <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/DataStrategist/TileMaker"><img src="https://travis-ci.org/DataStrategist/TileMaker.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://travis-ci.org/DataStrategist/TileMaker" class="external-link"><img src="https://travis-ci.org/DataStrategist/TileMaker.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://coveralls.io/github/DataStrategist/TileMaker?branch=master" class="external-link"><img src="https://coveralls.io/repos/github/DataStrategist/TileMaker/badge.svg?branch=master" alt="Coverage Status"></a></li>
 </ul>
 </div>
-</div>
 
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Amit Kohli.</p>
+  <p></p>
+<p>Developed by Amit Kohli.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
+
       </footer>
 </div>
+
+  
+
 
   
 
