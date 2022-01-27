@@ -192,3 +192,30 @@ solo_gradient_box(
 expect_warning(solo_gradient_box(
   value = 40, former = 35,
   thresholdHigh = 80, thresholdLow = 95, relative = TRUE))
+
+context('pretty')
+
+solo_gradient_box(
+  value = 40345.13124123, former = 35,
+  thresholdHigh = 80, thresholdLow = 95, pretty = ",") %>%
+  grepl("40,345\n", .) %>%
+  expect_true()
+
+solo_gradient_box(
+  value = 445.13124123, former = 35,
+  thresholdHigh = 80, thresholdLow = 95, pretty = ",") %>%
+  grepl("445.1\n", .) %>%
+  expect_true()
+
+solo_gradient_box(
+  value = 4445.13124123, former = 35,
+  thresholdHigh = 80, thresholdLow = 95, pretty = " ") %>%
+  grepl("4 445\n", .) %>%
+  expect_true()
+
+solo_gradient_box(
+  value = 4445.13124123, former = 35,
+  thresholdHigh = 80, thresholdLow = 95, pretty = ".") %>%
+  grepl("4.445\n", .) %>%
+  expect_true() %>%
+  expect_warning()

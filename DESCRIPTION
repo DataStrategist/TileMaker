@@ -1,7 +1,7 @@
 Package: TileMaker
 Type: Package
 Title: Create Tiles Suitable For Html Dashboards
-Version: 0.2.5
+Version: 0.2.6
 Author: Amit Kohli, Joshua Kunst
 Maintainer: Amit Kohli <amit@amitkohli.com>
 Description: This package builds handsome single-data-point boxes suitable for inclusion in dashboards. It uses the Bootstrap v3 css buttons to make the process easy. Acts as a more fully-featured alternative to infoBox and valueBox.

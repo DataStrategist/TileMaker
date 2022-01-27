@@ -93,7 +93,7 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
           ico(icon), ifelse(pretty == "," | pretty == "." | pretty == " ",
-                            prettify(value), value),
+                            prettify(value, pretty), value),
           units,
           if (!is.null(former)) {
             if (former > value) {
@@ -237,7 +237,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
         tag(textModifier, tags$span(
           ico(icon),
           ifelse(pretty == "," | pretty == "." | pretty == " ",
-                            prettify(value), value), units,
+                            prettify(value, pretty), value), units,
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -605,7 +605,7 @@ aquastat_rounder <- function(x){
 
 prettify <- function(x, pretty = NULL){
   if (is.numeric(x)){
-    value = aquastat_rounder(value)
+    value = aquastat_rounder(x)
     value = prettyNum(value, big.mark = pretty)
   }
   return(value)
