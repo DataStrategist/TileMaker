@@ -2,7 +2,7 @@
 % Please edit documentation in R/tile_maker.R
 \name{solo_gradient_box}
 \alias{solo_gradient_box}
-\title{solo_gradient_box}
+\title{box that changes colors based on value}
 \usage{
 solo_gradient_box(
   value = NULL,
@@ -13,12 +13,14 @@ solo_gradient_box(
   target = 100,
   thresholdHigh = 90,
   thresholdLow = 50,
+  relative = FALSE,
   link = NULL,
   units = NULL,
   hover = NULL,
   hide_value = FALSE,
   textModifier = "h1",
   revert = FALSE,
+  pretty = FALSE,
   ...
 )
 }
@@ -27,7 +29,8 @@ solo_gradient_box(
 
 \item{txt}{Optional subtext that should appear under the value}
 
-\item{former}{The last value that should be used for comparison purposes}
+\item{former}{The last value that should be used as information in the
+chevron, or for relative mode}
 
 \item{size}{Optional size specified in the bootstrap css classes:
 "xs","sm","md","lg")}
@@ -37,17 +40,23 @@ https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 of thing you want, like "check"... not the full "gyphicon-check"}
 
 \item{target}{Optional target that the value should be compared against. Use
-with ThresholdHigh and THresholdLow}
+with thresholdHigh and thresholdLow. Note, 'target' is ignored in relative
+mode, and you might want to change the thresholdHigh to 105 and threholdLow
+to 95 (to trigger red/green if +/- 5\% outside the margins)}
 
-\item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from
+\item{thresholdHigh}{Optional edge between "green" and "orange" from
 0-100 as a percent of target. IE, this value represents the RATIO of the
-VALUE to the target that, if above or equal to the ThresholdHigh will show
-as green, and if not, as orange. Use w/ target and ThresholdLow.}
+VALUE to the target that, if above or equal to the thresholdHigh will show
+as green, and if not, as orange. Use w/ target and thresholdLow.}
 
-\item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100
+\item{thresholdLow}{Optional border between "orange" and "red" from 0-100
 as a percent of target. IE, this value represents the RATIO of the VALUE to
-the target that, if above or equal to the ThresholdLow will show as orange,
-and if not, as red. Use w/ target and ThresholdHigh.}
+the target that, if above or equal to the thresholdLow will show as orange,
+and if not, as red. Use w/ target and thresholdHigh.}
+
+\item{relative}{Alternate mode where the 'value' is compared against `former`
+rather than 'target'. This mode is suitable to change the color of the
+button based on previous values rather than comparison to a standard.}
 
 \item{link}{Optional hyperlink that should be followed on click}
 
@@ -65,14 +74,26 @@ icon, value and unit. Default=h1}
 
 \item{revert}{Invert colorbox. Green become red and red become green.}
 
-\item{...}{Optional additional html elements}
+\item{pretty}{Optionally allow numbers to become embellished. Accepted values
+are FALSE (default), or the desired divider (",", ".", " "). If this
+option is not left as FALSE, rounding is automatically implemented.}
+
+\item{...}{Optional additional html elements. For example, if you would like
+two buttons to fit into a section in a flexdashboard, you could specify
+"style = 'width:100\%;height:50\%'"}
+}
+\value{
+HTML code for a button with desired properties
 }
 \description{
-This function crafts a solo_box tile displaying a red orange green color.
-The color is defined by the value of the target compared to the thresholds.
+This function crafts a solo_box tile displaying a red orange
+  green color. The color is defined by the value of the target compared to
+  the thresholds.
+}
+\details{
+DETAILS
 }
 \examples{
-# ADD EXAMPLES HERE
 g1 <- solo_gradient_box(value = 40)
 g2 <- solo_gradient_box(
   value = 40, target = 50,
@@ -86,8 +107,17 @@ g4 <- solo_gradient_box(
   value = 35, txt = "Test2", target = 50,
   thresholdHigh = 80, thresholdLow = 60, hide_value = TRUE
 )
+## This one shows relative and revert options. Since 29160
+## is about 6\\% higher than 27420, it is triggered by the "high"
+## level, but since revert is TRUE, insteaad of showing as
+## green, it's showing as red.
+g5 <- solo_gradient_box(
+  value = 29160, former = 27420,
+  relative = TRUE, revert = TRUE,
+  thresholdHigh = 105, thresholdLow = 95
+)
 finisher(title = "Item", divs = div_maker(
   subtitle = "subitems",
-  textModifier = "h1", g1, g2, g3, g4
+  textModifier = "h1", g1, g2, g3, g4, g5
 ))
 }

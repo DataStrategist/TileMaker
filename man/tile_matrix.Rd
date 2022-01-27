@@ -36,17 +36,17 @@ of thing you want, like "check"... not the full "gyphicon-check"}
 last), contained in the datframe `data`}
 
 \item{target}{Optional target that the value should be compared against. Use
-with ThresholdHigh and THresholdLow}
+with thresholdHigh and THresholdLow}
 
 \item{thresholdHigh}{Optional edge between \"green\" and \"orange\" from
 0-100 as a percent of target. IE, this value represents the RATIO of the
-VALUE to the target that, if above or equal to the ThresholdHigh will show
-as green, and if not, as orange. Use w/ target and ThresholdLow.}
+VALUE to the target that, if above or equal to the thresholdHigh will show
+as green, and if not, as orange. Use w/ target and thresholdLow.}
 
 \item{thresholdLow}{Optional border between \"orange\" and \"red\" from 0-100
 as a percent of target. IE, this value represents the RATIO of the VALUE to
 the target that, if above or equal to the ThresholdLow will show as orange,
-and if not, as red. Use w/ target and ThresholdHigh.}
+and if not, as red. Use w/ target and thresholdHigh.}
 
 \item{cols}{Number of columns that the matrix should tile around. Defaults to
 4}

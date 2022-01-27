@@ -1,9 +1,10 @@
-#' ico
+#'ico
 #'
-#' Auxiliary function to generate icons
+#' @description Auxiliary function to generate icons
 #'
 #' @param x Icon name. See https://getbootstrap.com/docs/3.3/components/
-#' @param chevron binary to denote whether there is a former value to compare against or not.
+#' @param chevron binary to denote whether there is a former value to compare
+#'  against or not.
 #' @importFrom htmltools tags browsable
 #' @rdname ico
 #' @export
@@ -22,11 +23,10 @@ ico <- function(x, chevron = FALSE) {
 }
 
 
-#' solo_box
-#'
-#' This function crafts the actual tile per se, including the specific aesthetic
-#' traits for each tile. This is the simple version where you explicitly state
-#' the color.
+#' @title solo_box
+#' @description This function crafts the actual tile per se, including the
+#'   specific aesthetic traits for each tile. This is the simple version where
+#'   you explicitly state the color.
 #'
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param former The numeric old value to use for comparison to 'value'
@@ -45,7 +45,12 @@ ico <- function(x, chevron = FALSE) {
 #'   their mouse over the tile.
 #' @param textModifier Optional css category of "large" text. In this case, the
 #'   icon, value and unit. In this case, title. Default=h1
-#' @param ... Optional additional html elements
+#' @param pretty Optionally allow numbers to become embellished. Accepted values
+#'   are FALSE (default), or the desired divider (",", ".", " ", etc). If this
+#'   option is not left as FALSE, rounding is automatically implemented.
+#' @param ... Optional additional html elements. For example, if you would like
+#'   two buttons to fit into a section in a flexdashboard, you could specify
+#'   style = 'width:100\%;height:50\%'
 #' @importFrom htmltools HTML tag tags
 #' @examples
 #' b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
@@ -71,9 +76,15 @@ ico <- function(x, chevron = FALSE) {
 #'   )
 #' )
 #' @export solo_box
+
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", ...) {
+                     hover = NULL, textModifier = "h1", pretty = FALSE, ...) {
+  if (is.numeric(value) & (pretty == "," | pretty == "." | pretty == " ")){
+    value = aquastat_rounder(value)
+    value = prettyNum(value, big.mark = pretty)
+  }
+
   tags$a(
     href = link,
     tags$button(
@@ -112,11 +123,11 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 }
 
 
-#' solo_gradient_box
-#'
-#' This function crafts a solo_box tile displaying a red orange green color. The
-#' color is defined by the value of the target compared to the thresholds.
-#'
+
+#' @title box that changes colors based on value
+#' @description This function crafts a solo_box tile displaying a red orange
+#'   green color. The color is defined by the value of the target compared to
+#'   the thresholds.
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param txt Optional subtext that should appear under the value
 #' @param former The last value that should be used as information in the
@@ -127,19 +138,19 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
 #' @param target Optional target that the value should be compared against. Use
-#'   with thresholdHigh and thresholdLow. Note, `target` is ignored in relative
+#'   with thresholdHigh and thresholdLow. Note, 'target' is ignored in relative
 #'   mode, and you might want to change the thresholdHigh to 105 and threholdLow
-#'   to 95 (to trigger red/green if +/- 5% outside the margins)
-#' @param thresholdHigh Optional edge between \"green\" and \"orange\" from
+#'   to 95 (to trigger red/green if +/- 5\% outside the margins)
+#' @param thresholdHigh Optional edge between "green" and "orange" from
 #'   0-100 as a percent of target. IE, this value represents the RATIO of the
 #'   VALUE to the target that, if above or equal to the thresholdHigh will show
 #'   as green, and if not, as orange. Use w/ target and thresholdLow.
-#' @param thresholdLow Optional border between \"orange\" and \"red\" from 0-100
+#' @param thresholdLow Optional border between "orange" and "red" from 0-100
 #'   as a percent of target. IE, this value represents the RATIO of the VALUE to
-#'   the target that, if above or equal to the ThresholdLow will show as orange,
+#'   the target that, if above or equal to the thresholdLow will show as orange,
 #'   and if not, as red. Use w/ target and thresholdHigh.
-#' @param relative Alternate mode where the `value` is compared against `former`
-#'   rather than `target`. This mode is suitable to change the color of the
+#' @param relative Alternate mode where the 'value' is compared against `former`
+#'   rather than 'target'. This mode is suitable to change the color of the
 #'   button based on previous values rather than comparison to a standard.
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
@@ -151,12 +162,16 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param textModifier Optional css category of "large" text. In this case, the
 #'   icon, value and unit. Default=h1
 #' @param revert Invert colorbox. Green become red and red become green.
+#' @param pretty Optionally allow numbers to become embellished. Accepted values
+#'   are FALSE (default), or the desired divider (",", ".", " "). If this
+#'   option is not left as FALSE, rounding is automatically implemented.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
-#'   `style = 'width:100%;height:50%'`
+#'   "style = 'width:100\%;height:50\%'"
 #' @importFrom htmltools HTML tags tag
+#' @return HTML code for a button with desired properties
+#' @details DETAILS
 #' @examples
-#' # ADD EXAMPLES HERE
 #' g1 <- solo_gradient_box(value = 40)
 #' g2 <- solo_gradient_box(
 #'   value = 40, target = 50,
@@ -171,9 +186,9 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #'   thresholdHigh = 80, thresholdLow = 60, hide_value = TRUE
 #' )
 #' ## This one shows relative and revert options. Since 29160
-#' is about 6% higher than 27420, it is triggered by the "high"
-#' level, but since revert is TRUE, insteaad of showing as
-#' green, it's showing as red.
+#' ## is about 6\% higher than 27420, it is triggered by the "high"
+#' ## level, but since revert is TRUE, insteaad of showing as
+#' ## green, it's showing as red.
 #' g5 <- solo_gradient_box(
 #'   value = 29160, former = 27420,
 #'   relative = TRUE, revert = TRUE,
@@ -183,13 +198,16 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #'   subtitle = "subitems",
 #'   textModifier = "h1", g1, g2, g3, g4, g5
 #' ))
-#' @export solo_gradient_box
+#' @rdname solo_gradient_box
+#' @export
+
 solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               size = "md", icon = NULL, target = 100,
                               thresholdHigh = 90, thresholdLow = 50,
                               relative = FALSE, link = NULL, units = NULL,
                               hover = NULL, hide_value = FALSE,
-                              textModifier = "h1", revert = FALSE, ...) {
+                              textModifier = "h1", revert = FALSE, pretty = FALSE,
+                              ...) {
   if (relative == FALSE) {
     Perc <- value / target * 100
   } else {
@@ -202,6 +220,11 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     if (revert == FALSE) finalcolor <- "danger" else finalcolor <- "success"
   } else {
     finalcolor <- "warning"
+  }
+
+  if (is.numeric(value) & (pretty == "," | pretty == "." | pretty == " ")){
+    value = aquastat_rounder(value)
+    value = prettyNum(value, big.mark = pretty)
   }
 
   tags$a(
@@ -353,7 +376,8 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
 #' @param textModifier Optional css category of "large" text. In this case, the
 #'   icon, value and unit. Default=h1
 #' @importFrom htmltools HTML tag tags
-#' @importFrom dplyr pull %>%  data_frame
+#' @importFrom dplyr pull %>%
+#' @importFrom tibble tibble
 #' @importFrom rlang !! enquo syms
 #' @return Returns a list object containing the matrix of buttons
 #' @examples
@@ -406,7 +430,7 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
   values <- round(values, roundVal)
 
   ## Remake df and start adding extra stuffs
-  df <- data_frame(txt, values, former, icon)
+  df <- tibble(txt, values, former, icon)
 
   df$id <- 1:nrow(df)
   df$butts <- list("")
@@ -540,4 +564,27 @@ finisher <- function(title = NULL, css =
   } else {
     save_html(tl, file = file)
   }
+}
+
+
+#' @title Perform UN-style rounding
+#' @description Rounds numbers greater than 1000 to no decimals,
+#' greater than 100 to one decimal, etc.
+#' @param x number to round
+#' @return x, but rounded
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname aquastat_rounder
+
+aquastat_rounder <- function(x){
+  ifelse (x >1000, round(x,digits=0),
+          ifelse (x >100,  round(x,digits=1),
+                  ifelse (x >10,  round(x,digits=2),
+                          ifelse (x >1,   round(x,digits=3),
+                                  ifelse (x >0.0001, round(x,digits=4),x)))))
 }

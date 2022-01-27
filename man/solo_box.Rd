@@ -15,6 +15,7 @@ solo_box(
   units = NULL,
   hover = NULL,
   textModifier = "h1",
+  pretty = FALSE,
   ...
 )
 }
@@ -46,17 +47,23 @@ their mouse over the tile.}
 \item{textModifier}{Optional css category of "large" text. In this case, the
 icon, value and unit. In this case, title. Default=h1}
 
-\item{...}{Optional additional html elements}
+\item{pretty}{Optionally allow numbers to become embellished. Accepted values
+are FALSE (default), or the desired divider (",", ".", " ", etc). If this
+option is not left as FALSE, rounding is automatically implemented.}
+
+\item{...}{Optional additional html elements. For example, if you would like
+two buttons to fit into a section in a flexdashboard, you could specify
+style = 'width:100\%;height:50\%'}
 }
 \description{
-This function crafts the actual tile per se, including the specific aesthetic
-traits for each tile. This is the simple version where you explicitly state
-the color.
+This function crafts the actual tile per se, including the
+  specific aesthetic traits for each tile. This is the simple version where
+  you explicitly state the color.
 }
 \examples{
-b1 <- solo_box(color= "warning", value = 3.57, txt = "B")
-b2 <- solo_box(color= "danger", value = 13.7, txt = "Nutritional value")
-b3 <- solo_box(color= "success", value = 1, txt = "Yumminess factor")
+b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
+b2 <- solo_box(color = "danger", value = 13.7, txt = "Nutritional value")
+b3 <- solo_box(color = "success", value = 1, txt = "Yumminess factor")
 b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
 finisher(title = "straight buttons", divs = b1)
 finisher(
