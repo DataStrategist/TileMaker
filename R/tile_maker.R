@@ -80,10 +80,6 @@ ico <- function(x, chevron = FALSE) {
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", pretty = FALSE, ...) {
-  if (is.numeric(value) & (pretty == "," | pretty == "." | pretty == " ")){
-    value = aquastat_rounder(value)
-    value = prettyNum(value, big.mark = pretty)
-  }
 
   tags$a(
     href = link,
@@ -96,7 +92,9 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
-          ico(icon), value, units,
+          ico(icon), ifelse(pretty == "," | pretty == "." | pretty == " ",
+                            prettify(value), value),
+          units,
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -211,6 +209,8 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
   if (relative == FALSE) {
     Perc <- value / target * 100
   } else {
+    if (is.null(former)) stop("If you select 'relative' mode, please provide a 'former' value.")
+    if (thresholdHigh < 100) warning("In relative mode, thresholdHigh should be more than 100.")
     Perc <- value / former * 100
   }
 
@@ -220,11 +220,6 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     if (revert == FALSE) finalcolor <- "danger" else finalcolor <- "success"
   } else {
     finalcolor <- "warning"
-  }
-
-  if (is.numeric(value) & (pretty == "," | pretty == "." | pretty == " ")){
-    value = aquastat_rounder(value)
-    value = prettyNum(value, big.mark = pretty)
   }
 
   tags$a(
@@ -240,7 +235,9 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       class = paste0("btn-", finalcolor),
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
-          ico(icon), value, units,
+          ico(icon),
+          ifelse(pretty == "," | pretty == "." | pretty == " ",
+                            prettify(value), value), units,
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -587,4 +584,29 @@ aquastat_rounder <- function(x){
                   ifelse (x >10,  round(x,digits=2),
                           ifelse (x >1,   round(x,digits=3),
                                   ifelse (x >0.0001, round(x,digits=4),x)))))
+}
+
+
+#' @title apply pretty format or not
+#' @description to be used inside the functions, just a convenient way to apply
+#'   just-in-time formatting
+#' @param x thingie to evaluate (whether it should be prettified or not)
+#' @param pretty inheriting the value that should be used as a big-number separator
+#' @return returns a character string that looks like x, but beautified
+#' @details DETAILS
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  #EXAMPLE1
+#'  }
+#' }
+#' @rdname prettify
+#' @export
+
+prettify <- function(x, pretty = NULL){
+  if (is.numeric(x)){
+    value = aquastat_rounder(value)
+    value = prettyNum(value, big.mark = pretty)
+  }
+  return(value)
 }

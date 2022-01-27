@@ -164,3 +164,31 @@ test_that("protections work", {
     sum() %>%
     expect_equal(3)
 })
+
+context("relative mode")
+
+expect_error(solo_gradient_box(
+  value = 40, target = 50,
+  thresholdHigh = 80, thresholdLow = 60, relative = TRUE))
+
+solo_gradient_box(
+  value = 40, former = 50,
+  thresholdHigh = 105, thresholdLow = 95, relative = TRUE) %>%
+  grepl("danger", .) %>%
+  expect_true()
+
+solo_gradient_box(
+  value = 40, former = 40,
+  thresholdHigh = 105, thresholdLow = 95, relative = TRUE) %>%
+  grepl("warning", .) %>%
+  expect_true()
+
+solo_gradient_box(
+  value = 40, former = 35,
+  thresholdHigh = 105, thresholdLow = 95, relative = TRUE) %>%
+  grepl("success", .) %>%
+  expect_true()
+
+expect_warning(solo_gradient_box(
+  value = 40, former = 35,
+  thresholdHigh = 80, thresholdLow = 95, relative = TRUE))
