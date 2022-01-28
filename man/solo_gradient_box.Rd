@@ -20,7 +20,7 @@ solo_gradient_box(
   hide_value = FALSE,
   textModifier = "h1",
   revert = FALSE,
-  pretty = FALSE,
+  pretty = NULL,
   ...
 )
 }
@@ -75,7 +75,7 @@ icon, value and unit. Default=h1}
 \item{revert}{Invert colorbox. Green become red and red become green.}
 
 \item{pretty}{Optionally allow numbers to become embellished. Accepted values
-are FALSE (default), or the desired divider (",", ".", " "). If this
+are NULL (default), or the desired divider (",", ".", " "). If this
 option is not left as FALSE, rounding is automatically implemented.}
 
 \item{...}{Optional additional html elements. For example, if you would like

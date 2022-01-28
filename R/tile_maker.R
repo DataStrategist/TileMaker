@@ -46,7 +46,7 @@ ico <- function(x, chevron = FALSE) {
 #' @param textModifier Optional css category of "large" text. In this case, the
 #'   icon, value and unit. In this case, title. Default=h1
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
-#'   are FALSE (default), or the desired divider (",", ".", " ", etc). If this
+#'   are NULL (default), or the desired divider (",", ".", " ", etc). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
@@ -79,7 +79,7 @@ ico <- function(x, chevron = FALSE) {
 
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", pretty = FALSE, ...) {
+                     hover = NULL, textModifier = "h1", pretty = NULL, ...) {
 
   tags$a(
     href = link,
@@ -161,7 +161,7 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #'   icon, value and unit. Default=h1
 #' @param revert Invert colorbox. Green become red and red become green.
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
-#'   are FALSE (default), or the desired divider (",", ".", " "). If this
+#'   are NULL (default), or the desired divider (",", ".", " "). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
@@ -204,7 +204,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               thresholdHigh = 90, thresholdLow = 50,
                               relative = FALSE, link = NULL, units = NULL,
                               hover = NULL, hide_value = FALSE,
-                              textModifier = "h1", revert = FALSE, pretty = FALSE,
+                              textModifier = "h1", revert = FALSE, pretty = NULL,
                               ...) {
   if (relative == FALSE) {
     if (target == 100) message("-- using target value of 100 --")
@@ -680,9 +680,7 @@ aquastat_rounder <- function(x){
 #' @export
 
 prettify <- function(x, pretty = NULL){
-  if (is.numeric(x)){
-    x = aquastat_rounder(x)
-    x = prettyNum(x, big.mark = pretty)
-  }
+  if (is.numeric(x))     x = aquastat_rounder(x)
+  if (!is.null(pretty))  x = prettyNum(x, big.mark = pretty)
   return(x)
 }

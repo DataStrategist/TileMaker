@@ -15,7 +15,7 @@ solo_box(
   units = NULL,
   hover = NULL,
   textModifier = "h1",
-  pretty = FALSE,
+  pretty = NULL,
   ...
 )
 }
@@ -48,7 +48,7 @@ their mouse over the tile.}
 icon, value and unit. In this case, title. Default=h1}
 
 \item{pretty}{Optionally allow numbers to become embellished. Accepted values
-are FALSE (default), or the desired divider (",", ".", " ", etc). If this
+are NULL (default), or the desired divider (",", ".", " ", etc). If this
 option is not left as FALSE, rounding is automatically implemented.}
 
 \item{...}{Optional additional html elements. For example, if you would like
