@@ -165,7 +165,12 @@ test_that("protections work", {
     expect_equal(3)
 })
 
-context("relative mode")
+
+# -------------------------------------------------------------------------
+
+context("relative mode/not-relative")
+
+solo_gradient_box(value = 4) %>% expect_message()
 
 expect_error(solo_gradient_box(
   value = 40, target = 50,
@@ -193,6 +198,20 @@ expect_warning(solo_gradient_box(
   value = 40, former = 35,
   thresholdHigh = 80, thresholdLow = 95, relative = TRUE))
 
+
+solo_gradient_box(value = 40, relative = TRUE) %>%
+  expect_error()
+
+solo_gradient_box(value = 40, former = 35, thresholdHigh = 90, relative = TRUE) %>%
+  expect_warning()
+
+solo_gradient_box(value = 40, former = 35,
+                  thresholdHigh = 105, thresholdLow = 90, relative = TRUE) %>%
+  expect_warning()
+
+
+# -------------------------------------------------------------------------
+
 context('pretty')
 
 solo_gradient_box(
@@ -219,3 +238,8 @@ solo_gradient_box(
   grepl("4.445\n", .) %>%
   expect_true() %>%
   expect_warning()
+
+iris_shared <- crosstalk::SharedData$new(iris)
+sw <- summarywidget::summarywidget(iris_shared)
+
+solo_box(value = sw, test = T)

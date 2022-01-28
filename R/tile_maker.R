@@ -92,8 +92,8 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
-          ico(icon), ifelse(pretty == "," | pretty == "." | pretty == " ",
-                            prettify(value, pretty), value),
+          ico(icon),
+          prettify(value, pretty),
           units,
           if (!is.null(former)) {
             if (former > value) {
@@ -207,10 +207,12 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               textModifier = "h1", revert = FALSE, pretty = FALSE,
                               ...) {
   if (relative == FALSE) {
+    if (target == 100) message("-- using target value of 100 --")
     Perc <- value / target * 100
   } else {
-    if (is.null(former)) stop("If you select 'relative' mode, please provide a 'former' value.")
-    if (thresholdHigh < 100) warning("In relative mode, thresholdHigh should be more than 100.")
+    if (is.null(former)) stop("In relative mode you must provide 'former'")
+    if (thresholdHigh < 100) warning('In relative mode, thresholdHigh should probably be over 100')
+    if ((100 - thresholdLow) != (thresholdHigh - 100)) warning("Are you sure you want inbalanced thresholds? thresholdHigh and thresholdLow should probably be equidistant from 100, unless you are sure of what you're showing.")
     Perc <- value / former * 100
   }
 
@@ -236,8 +238,8 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
           ico(icon),
-          ifelse(pretty == "," | pretty == "." | pretty == " ",
-                            prettify(value, pretty), value), units,
+          prettify(value, pretty),
+          units,
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -267,6 +269,80 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     )
   )
 }
+
+
+#' @title solo_box_ct
+#' @description Simple tile, suitable for usage with summarywidget in a
+#'   crosstalk context
+#' @param value The numeric value you want to highlight (the main enchilada)
+#' @param txt Optional subtext that should appear under the value
+#' @param size Optional size specified in the bootstrap css classes:
+#'   "xs","sm","md","lg")
+#' @param icon Optional glyphicon that should be displayed from
+#'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+#'   of thing you want, like "check"... not the full "gyphicon-check"
+#' @param color Optional bootstrap css element that governs the color.
+#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
+#'   "primary", "success", "info", "warning", "danger"
+#' @param link Optional hyperlink that should be followed on click
+#' @param units Optional units that should be displayed after Value
+#' @param hover Optional tooltip, or text that will show up when a user rests
+#'   their mouse over the tile.
+#' @param textModifier Optional css category of "large" text. In this case, the
+#'   icon, value and unit. In this case, title. Default=h1
+#' @param ... Optional additional html elements. For example, if you would like
+#'   two buttons to fit into a section in a flexdashboard, you could specify
+#'   style = 'width:100\%;height:50\%'
+#' @importFrom htmltools HTML tag tags
+#' @examples
+#' b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
+#' b2 <- solo_box(color = "danger", value = 13.7, txt = "Nutritional value")
+#' b3 <- solo_box(color = "success", value = 1, txt = "Yumminess factor")
+#' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
+#' finisher(title = "straight buttons", divs = b1)
+#' finisher(
+#'   title = "with divs",
+#'   divs = div_maker(
+#'     subtitle = "boom",
+#'     textModifier = "h1",
+#'     div_maker(subtitle = "Boom", textModifier = "hi", b1, b2, b3)
+#'   )
+#' )
+#'
+#' ## Or taking advantage of the ability to change the textModifier:
+#' finisher(
+#'   title = "h4 modifier",
+#'   divs = solo_box(
+#'     value = 3, txt = "uh huh",
+#'     former = 2, textModifier = "h4"
+#'   )
+#' )
+#' @export solo_box_ct
+
+solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
+                     icon = NULL, color = "info", link = NULL, units = NULL,
+                     hover = NULL, textModifier = "h1", ...) {
+
+  tags$a(
+    href = link,
+    tags$button(
+      title = hover,
+      # color= "button",
+      color = color,
+      role = "button",
+      # classes: size, color
+      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+      if (!(is.null(value) & is.null(units) & is.null(icon))) {
+        tag(textModifier, tags$span(
+          ico(icon), value, units
+        )$children)
+      },
+      HTML(txt),
+      ...
+    )
+  )
+}
+
 
 
 #' @title multi_box
@@ -605,8 +681,8 @@ aquastat_rounder <- function(x){
 
 prettify <- function(x, pretty = NULL){
   if (is.numeric(x)){
-    value = aquastat_rounder(x)
-    value = prettyNum(value, big.mark = pretty)
+    x = aquastat_rounder(x)
+    x = prettyNum(x, big.mark = pretty)
   }
-  return(value)
+  return(x)
 }
