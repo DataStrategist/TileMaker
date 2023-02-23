@@ -122,6 +122,79 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 
 
 
+
+#' @title solo_box_ct
+#' @description Simple tile, suitable for usage with summarywidget in a
+#'   crosstalk context
+#' @param value The numeric value you want to highlight (the main enchilada)
+#' @param txt Optional subtext that should appear under the value
+#' @param size Optional size specified in the bootstrap css classes:
+#'   "xs","sm","md","lg")
+#' @param icon Optional glyphicon that should be displayed from
+#'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
+#'   of thing you want, like "check"... not the full "gyphicon-check"
+#' @param color Optional bootstrap css element that governs the color.
+#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
+#'   "primary", "success", "info", "warning", "danger"
+#' @param link Optional hyperlink that should be followed on click
+#' @param units Optional units that should be displayed after Value
+#' @param hover Optional tooltip, or text that will show up when a user rests
+#'   their mouse over the tile.
+#' @param textModifier Optional css category of "large" text. In this case, the
+#'   icon, value and unit. In this case, title. Default=h1
+#' @param ... Optional additional html elements. For example, if you would like
+#'   two buttons to fit into a section in a flexdashboard, you could specify
+#'   style = 'width:100\%;height:50\%'
+#' @importFrom htmltools HTML tag tags
+#' @examples
+#' b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
+#' b2 <- solo_box(color = "danger", value = 13.7, txt = "Nutritional value")
+#' b3 <- solo_box(color = "success", value = 1, txt = "Yumminess factor")
+#' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
+#' finisher(title = "straight buttons", divs = b1)
+#' finisher(
+#'   title = "with divs",
+#'   divs = div_maker(
+#'     subtitle = "boom",
+#'     textModifier = "h1",
+#'     div_maker(subtitle = "Boom", textModifier = "hi", b1, b2, b3)
+#'   )
+#' )
+#'
+#' ## Or taking advantage of the ability to change the textModifier:
+#' finisher(
+#'   title = "h4 modifier",
+#'   divs = solo_box(
+#'     value = 3, txt = "uh huh",
+#'     former = 2, textModifier = "h4"
+#'   )
+#' )
+#' @export solo_box_ct
+
+solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
+                        icon = NULL, color = "info", link = NULL, units = NULL,
+                        hover = NULL, textModifier = "h1", ...) {
+
+  tags$a(
+    href = link,
+    tags$button(
+      title = hover,
+      # color= "button",
+      color = color,
+      role = "button",
+      # classes: size, color
+      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+      if (!(is.null(value) & is.null(units) & is.null(icon))) {
+        tag(textModifier, tags$span(
+          ico(icon), value, units
+        )$children)
+      },
+      HTML(txt),
+      ...
+    )
+  )
+}
+
 #' @title box that changes colors based on value
 #' @description This function crafts a solo_box tile displaying a red orange
 #'   green color. The color is defined by the value of the target compared to
@@ -271,70 +344,149 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 }
 
 
-#' @title solo_box_ct
-#' @description Simple tile, suitable for usage with summarywidget in a
-#'   crosstalk context
+
+#' @title box that changes colors based on value, cross-talk enabled version
+#' @description This function crafts a solo_box tile displaying a red orange
+#'   green color. The color is defined by the value of the target compared to
+#'   the thresholds.
 #' @param value The numeric value you want to highlight (the main enchilada)
 #' @param txt Optional subtext that should appear under the value
+#' @param former The last value that should be used as information in the
+#'   chevron, or for relative mode
 #' @param size Optional size specified in the bootstrap css classes:
 #'   "xs","sm","md","lg")
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional bootstrap css element that governs the color.
-#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
-#'   "primary", "success", "info", "warning", "danger"
+#' @param target Optional target that the value should be compared against. Use
+#'   with thresholdHigh and thresholdLow. Note, 'target' is ignored in relative
+#'   mode, and you might want to change the thresholdHigh to 105 and threholdLow
+#'   to 95 (to trigger red/green if +/- 5\% outside the margins)
+#' @param thresholdHigh Optional edge between "green" and "orange" from
+#'   0-100 as a percent of target. IE, this value represents the RATIO of the
+#'   VALUE to the target that, if above or equal to the thresholdHigh will show
+#'   as green, and if not, as orange. Use w/ target and thresholdLow.
+#' @param thresholdLow Optional border between "orange" and "red" from 0-100
+#'   as a percent of target. IE, this value represents the RATIO of the VALUE to
+#'   the target that, if above or equal to the thresholdLow will show as orange,
+#'   and if not, as red. Use w/ target and thresholdHigh.
+#' @param relative Alternate mode where the 'value' is compared against `former`
+#'   rather than 'target'. This mode is suitable to change the color of the
+#'   button based on previous values rather than comparison to a standard.
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
 #'   their mouse over the tile.
+#' @param hide_value Optionally and paradoxically hide value. Normally FALSE,
+#'   change this value to TRUE in order to suppress the large number, but still
+#'   take advantage of the conditional formatting.
 #' @param textModifier Optional css category of "large" text. In this case, the
-#'   icon, value and unit. In this case, title. Default=h1
+#'   icon, value and unit. Default=h1
+#' @param revert Invert colorbox. Green become red and red become green.
+#' @param pretty Optionally allow numbers to become embellished. Accepted values
+#'   are NULL (default), or the desired divider (",", ".", " "). If this
+#'   option is not left as FALSE, rounding is automatically implemented.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
-#'   style = 'width:100\%;height:50\%'
-#' @importFrom htmltools HTML tag tags
+#'   "style = 'width:100\%;height:50\%'"
+#' @importFrom htmltools HTML tags tag
+#' @return HTML code for a button with desired properties
+#' @details DETAILS
 #' @examples
-#' b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
-#' b2 <- solo_box(color = "danger", value = 13.7, txt = "Nutritional value")
-#' b3 <- solo_box(color = "success", value = 1, txt = "Yumminess factor")
-#' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
-#' finisher(title = "straight buttons", divs = b1)
-#' finisher(
-#'   title = "with divs",
-#'   divs = div_maker(
-#'     subtitle = "boom",
-#'     textModifier = "h1",
-#'     div_maker(subtitle = "Boom", textModifier = "hi", b1, b2, b3)
-#'   )
+#' g1 <- solo_gradient_box_ct(value = 40)
+#' g2 <- solo_gradient_box_ct(
+#'   value = 40, target = 50,
+#'   thresholdHigh = 80, thresholdLow = 60
 #' )
-#'
-#' ## Or taking advantage of the ability to change the textModifier:
-#' finisher(
-#'   title = "h4 modifier",
-#'   divs = solo_box(
-#'     value = 3, txt = "uh huh",
-#'     former = 2, textModifier = "h4"
-#'   )
+#' g3 <- solo_gradient_box_ct(
+#'   value = 20, txt = "Test1", target = 50,
+#'   thresholdHigh = 80, thresholdLow = 60, hide_value = TRUE
 #' )
-#' @export solo_box_ct
+#' g4 <- solo_gradient_box_ct(
+#'   value = 35, txt = "Test2", target = 50,
+#'   thresholdHigh = 80, thresholdLow = 60, hide_value = TRUE
+#' )
+#' ## This one shows relative and revert options. Since 29160
+#' ## is about 6\% higher than 27420, it is triggered by the "high"
+#' ## level, but since revert is TRUE, insteaad of showing as
+#' ## green, it's showing as red.
+#' g5 <- solo_gradient_box_ct(
+#'   value = 29160, former = 27420,
+#'   relative = TRUE, revert = TRUE,
+#'   thresholdHigh = 105, thresholdLow = 95
+#' )
+#' finisher(title = "Item", divs = div_maker(
+#'   subtitle = "subitems",
+#'   textModifier = "h1", g1, g2, g3, g4, g5
+#' ))
+#' @rdname solo_gradient_box_ct
+#' @export
 
-solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
-                     icon = NULL, color = "info", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", ...) {
+solo_gradient_box_ct <- function(value = NULL, txt = NULL, former = NULL,
+                              size = "md", icon = NULL, target = 100,
+                              thresholdHigh = 90, thresholdLow = 50,
+                              relative = FALSE, link = NULL, units = NULL,
+                              hover = NULL, hide_value = FALSE,
+                              textModifier = "h1", revert = FALSE, pretty = NULL,
+                              ...) {
+  if (relative == FALSE) {
+    if (target == 100) message("-- using target value of 100 --")
+    Perc <- value / target * 100
+  } else {
+    if (is.null(former)) stop("In relative mode you must provide 'former'")
+    if (thresholdHigh < 100) warning('In relative mode, thresholdHigh should probably be over 100')
+    if ((100 - thresholdLow) != (thresholdHigh - 100)) warning("Are you sure you want inbalanced thresholds? thresholdHigh and thresholdLow should probably be equidistant from 100, unless you are sure of what you're showing.")
+    Perc <- value / former * 100
+  }
+
+  if (Perc >= thresholdHigh) {
+    if (revert == FALSE) finalcolor <- "success" else finalcolor <- "danger"
+  } else if (Perc < thresholdLow) {
+    if (revert == FALSE) finalcolor <- "danger" else finalcolor <- "success"
+  } else {
+    finalcolor <- "warning"
+  }
+
+  value <- value$x$data
 
   tags$a(
     href = link,
     tags$button(
+      href = link,
       title = hover,
       # color= "button",
-      color = color,
+      color = finalcolor,
       role = "button",
       # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
-      if (!(is.null(value) & is.null(units) & is.null(icon))) {
+      class = "btn", class = paste0("btn-", size),
+      class = paste0("btn-", finalcolor),
+      if (hide_value == FALSE) {
         tag(textModifier, tags$span(
-          ico(icon), value, units
+          ico(icon),
+          prettify(value, pretty),
+          units,
+          if (!is.null(former)) {
+            if (former > value) {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                ico("chevron-down", chevron = TRUE),
+                paste(round((as.numeric(former) -
+                  as.numeric(value)) /
+                  as.numeric(former) * 100, 1), "%", sep = "")
+              )
+            } else {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                ico("chevron-up", chevron = TRUE),
+                paste(round((as.numeric(value) -
+                  as.numeric(former)) /
+                  as.numeric(former) * 100, 1),
+                "%",
+                sep = ""
+                )
+              )
+            }
+          }
         )$children)
       },
       HTML(txt),
