@@ -429,6 +429,9 @@ solo_gradient_box_ct <- function(value = NULL, txt = NULL, former = NULL,
                               hover = NULL, hide_value = FALSE,
                               textModifier = "h1", revert = FALSE, pretty = NULL,
                               ...) {
+
+  value <- value$x$data
+
   if (relative == FALSE) {
     if (target == 100) message("-- using target value of 100 --")
     Perc <- value / target * 100
@@ -447,7 +450,6 @@ solo_gradient_box_ct <- function(value = NULL, txt = NULL, former = NULL,
     finalcolor <- "warning"
   }
 
-  value <- value$x$data
 
   tags$a(
     href = link,
