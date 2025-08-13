@@ -93,8 +93,9 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
           ico(icon),
+          if (!is.null(units) && (units == "£" || units == "$")) units,
           prettify(value, pretty),
-          units,
+          if (is.null(units) || (units != "£" && units != "$")) units,
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -238,8 +239,9 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
           ico(icon),
+          if (!is.null(units) && (units == "£" || units == "$")) units,
           prettify(value, pretty),
-          units,
+          if (is.null(units) || (units != "£" && units != "$")) units,
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -334,7 +336,10 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
-          ico(icon), value, units
+          ico(icon), 
+          if (!is.null(units) && (units == "£" || units == "$")) units,
+          value, 
+          if (is.null(units) || (units != "£" && units != "$")) units
         )$children)
       },
       HTML(txt),
