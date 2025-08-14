@@ -246,28 +246,28 @@ test_that("currency units appear before value", {
     paste(collapse = " ") %>%
     grepl("\\$42", x = .) %>%
     sum(), 1)
-  
-  # Test that £ appears before the value  
+
+  # Test that £ appears before the value
   expect_equal(solo_box(value = 100, txt = "Cost", units = "£") %>%
     unlist() %>%
     paste(collapse = " ") %>%
     grepl("£100", x = .) %>%
     sum(), 1)
-  
+
   # Test that non-currency units still appear after the value
   expect_equal(solo_box(value = 42, txt = "Weight", units = "kg") %>%
     unlist() %>%
     paste(collapse = " ") %>%
     grepl("42.*kg", x = .) %>%
     sum(), 1)
-    
+
   # Test solo_gradient_box with currency
   expect_equal(solo_gradient_box(value = 50, txt = "Revenue", units = "$") %>%
     unlist() %>%
     paste(collapse = " ") %>%
     grepl("\\$50", x = .) %>%
     sum(), 1)
-    
+
   # Test solo_gradient_box with non-currency
   expect_equal(solo_gradient_box(value = 75, txt = "Score", units = "%") %>%
     unlist() %>%
@@ -277,6 +277,7 @@ test_that("currency units appear before value", {
 })
 
 iris_shared <- crosstalk::SharedData$new(iris)
+# devtools::install_github("kent37/summarywidget")
 sw <- summarywidget::summarywidget(iris_shared)
 
 solo_box(value = sw, test = T)
