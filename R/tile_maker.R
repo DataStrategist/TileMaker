@@ -81,15 +81,12 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", pretty = NULL, ...) {
 
-  tags$a(
-    href = link,
-    tags$button(
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", color),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
           ico(icon),
@@ -122,10 +119,17 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
           }
         )$children)
       },
-      HTML(txt),
+      if (!is.null(txt)) tags$div(HTML(txt), style = "margin-top: 10px;"),
       ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
@@ -232,17 +236,12 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     finalcolor <- "warning"
   }
 
-  tags$a(
-    href = link,
-    tags$button(
-      href = link,
-      title = hover,
-      # color= "button",
-      color = finalcolor,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size),
-      class = paste0("btn-", finalcolor),
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", finalcolor),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
           ico(icon),
@@ -280,10 +279,17 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
           }
         )$children)
       },
-      HTML(txt),
+      if (!is.null(txt)) tags$div(HTML(txt), style = "margin-top: 10px;"),
       ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
@@ -339,15 +345,12 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", ...) {
 
-  tags$a(
-    href = link,
-    tags$button(
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", color),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
           ico(icon),
@@ -363,10 +366,17 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
           )
         )$children)
       },
-      HTML(txt),
+      if (!is.null(txt)) tags$div(HTML(txt), style = "margin-top: 10px;"),
       ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
@@ -425,21 +435,25 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
   if (is.null(txt)) txt <- rep(" ", length(values))
   if (is.null(icons)) icons <- rep(" ", length(values))
 
-  ## Now build button
-  tags$a(
-    href = link,
-    tags$button(
-      href = link,
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
-      tags$h1(HTML(title)),
-      pmap(list(values, txt, icons), gutsMaker)
+  ## Now build panel
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", color),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
+      if (!is.null(title)) tags$h1(HTML(title)),
+      pmap(list(values, txt, icons), gutsMaker),
+      ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
