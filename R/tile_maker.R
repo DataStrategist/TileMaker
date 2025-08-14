@@ -51,6 +51,12 @@ ico <- function(x, chevron = FALSE) {
 #' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
 #'   percentage calculation. If FALSE (default), calculates percentage unless 
 #'   former equals 0, in which case it automatically uses raw format.
+#' @param width_percent Optional width as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts where you want buttons to fill specific portions of a row.
+#' @param height_percent Optional height as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts to control tile height when text wrapping affects row heights.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   style = 'width:100\%;height:50\%'
@@ -83,12 +89,30 @@ ico <- function(x, chevron = FALSE) {
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", pretty = NULL, 
-                     raw_comparisons = FALSE, ...) {
+                     raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, ...) {
+
+  # Build style attribute for width and height percentages
+  style_parts <- character(0)
+  if (!is.null(width_percent)) {
+    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+                                        if (!grepl("%$", width_percent)) "%" else "", ";"))
+  }
+  if (!is.null(height_percent)) {
+    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+                                        if (!grepl("%$", height_percent)) "%" else "", ";"))
+  }
+  percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
 
   panel_content <- tags$div(
     title = hover,
     class = "panel", class = paste0("panel-", color),
-    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    style = if (length(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    )) > 0) paste(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    ), collapse = " ") else NULL,
     tags$div(
       class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
@@ -188,6 +212,12 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
 #'   percentage calculation. If FALSE (default), calculates percentage unless 
 #'   former equals 0, in which case it automatically uses raw format.
+#' @param width_percent Optional width as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts where you want buttons to fill specific portions of a row.
+#' @param height_percent Optional height as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts to control tile height when text wrapping affects row heights.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   "style = 'width:100\%;height:50\%'"
@@ -230,7 +260,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               relative = FALSE, link = NULL, units = NULL,
                               hover = NULL, hide_value = FALSE,
                               textModifier = "h1", revert = FALSE, pretty = NULL,
-                              raw_comparisons = FALSE, ...) {
+                              raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, ...) {
   if (relative == FALSE) {
     if (target == 100) message("-- using target value of 100 --")
     Perc <- value / target * 100
@@ -249,10 +279,28 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     finalcolor <- "warning"
   }
 
+  # Build style attribute for width and height percentages
+  style_parts <- character(0)
+  if (!is.null(width_percent)) {
+    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+                                        if (!grepl("%$", width_percent)) "%" else "", ";"))
+  }
+  if (!is.null(height_percent)) {
+    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+                                        if (!grepl("%$", height_percent)) "%" else "", ";"))
+  }
+  percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
+
   panel_content <- tags$div(
     title = hover,
     class = "panel", class = paste0("panel-", finalcolor),
-    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    style = if (length(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    )) > 0) paste(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    ), collapse = " ") else NULL,
     tags$div(
       class = "panel-body text-center",
       if (hide_value == FALSE) {
@@ -331,6 +379,12 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #'   their mouse over the tile.
 #' @param textModifier Optional css category of "large" text. In this case, the
 #'   icon, value and unit. In this case, title. Default=h1
+#' @param width_percent Optional width as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts where you want buttons to fill specific portions of a row.
+#' @param height_percent Optional height as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts to control tile height when text wrapping affects row heights.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   style = 'width:100\%;height:50\%'
@@ -362,12 +416,30 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 
 solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", ...) {
+                     hover = NULL, textModifier = "h1", width_percent = NULL, height_percent = NULL, ...) {
+
+  # Build style attribute for width and height percentages
+  style_parts <- character(0)
+  if (!is.null(width_percent)) {
+    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+                                        if (!grepl("%$", width_percent)) "%" else "", ";"))
+  }
+  if (!is.null(height_percent)) {
+    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+                                        if (!grepl("%$", height_percent)) "%" else "", ";"))
+  }
+  percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
 
   panel_content <- tags$div(
     title = hover,
     class = "panel", class = paste0("panel-", color),
-    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    style = if (length(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    )) > 0) paste(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    ), collapse = " ") else NULL,
     tags$div(
       class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
@@ -418,6 +490,12 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #'
 #' @param hover Optional tooltip, or text that will show up when a user rests their
 #' mouse over the tile, Default: NULL
+#' @param width_percent Optional width as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts where you want buttons to fill specific portions of a row.
+#' @param height_percent Optional height as a percentage. Can be specified as a 
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#'   layouts to control tile height when text wrapping affects row heights.
 #' @param ... add any other html code here
 #' @importFrom purrr pmap
 #' @importFrom htmltools HTML span a tags
@@ -441,7 +519,7 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 multi_box <- function(icons = NULL, txt = NULL, values = NULL,
                       title = NULL, size = "md",
                       color = "info", link = NULL, number_zoom = 150,
-                      hover = NULL, ...) {
+                      hover = NULL, width_percent = NULL, height_percent = NULL, ...) {
   ## Define function that can be pmapped
   gutsMaker <- function(values, txt, icons) {
     tags$h3(
@@ -454,11 +532,29 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
   if (is.null(txt)) txt <- rep(" ", length(values))
   if (is.null(icons)) icons <- rep(" ", length(values))
 
+  # Build style attribute for width and height percentages
+  style_parts <- character(0)
+  if (!is.null(width_percent)) {
+    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+                                        if (!grepl("%$", width_percent)) "%" else "", ";"))
+  }
+  if (!is.null(height_percent)) {
+    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+                                        if (!grepl("%$", height_percent)) "%" else "", ";"))
+  }
+  percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
+
   ## Now build panel
   panel_content <- tags$div(
     title = hover,
     class = "panel", class = paste0("panel-", color),
-    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    style = if (length(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    )) > 0) paste(c(
+      if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+      percent_style
+    ), collapse = " ") else NULL,
     tags$div(
       class = "panel-body text-center",
       if (!is.null(title)) tags$h1(HTML(title)),
