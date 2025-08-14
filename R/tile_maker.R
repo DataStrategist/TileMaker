@@ -48,6 +48,9 @@ ico <- function(x, chevron = FALSE) {
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
 #'   are NULL (default), or the desired divider (",", ".", " ", etc). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
+#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
+#'   percentage calculation. If FALSE (default), calculates percentage unless 
+#'   former equals 0, in which case it automatically uses raw format.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   style = 'width:100\%;height:50\%'
@@ -79,24 +82,36 @@ ico <- function(x, chevron = FALSE) {
 
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", pretty = NULL, ...) {
+                     hover = NULL, textModifier = "h1", pretty = NULL, 
+                     raw_comparisons = FALSE, ...) {
 
-  tags$a(
-    href = link,
-    tags$button(
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", color),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
           ico(icon),
-          prettify(value, pretty),
-          units,
+          # Handle value and units display using case_when logic
+          dplyr::case_when(
+            # Currency symbols appear before value with no space
+            !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
+            !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
+            # Non-currency units appear after value with space
+            !is.null(units) ~ paste(prettify(value, pretty), units),
+            # No units, just the value
+            TRUE ~ as.character(prettify(value, pretty))
+          ),
           if (!is.null(former)) {
-            if (former > value) {
+            # Check if we should use raw comparisons or if former is 0
+            if (raw_comparisons || former == 0) {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                paste("last:", former, sep = " ")
+              )
+            } else if (former > value) {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
                 ico("chevron-down", chevron = TRUE),
@@ -114,10 +129,17 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
           }
         )$children)
       },
-      HTML(txt),
+      if (!is.null(txt)) tags$div(HTML(txt), style = "margin-top: 10px;"),
       ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
@@ -163,6 +185,9 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
 #'   are NULL (default), or the desired divider (",", ".", " "). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
+#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
+#'   percentage calculation. If FALSE (default), calculates percentage unless 
+#'   former equals 0, in which case it automatically uses raw format.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   "style = 'width:100\%;height:50\%'"
@@ -205,7 +230,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               relative = FALSE, link = NULL, units = NULL,
                               hover = NULL, hide_value = FALSE,
                               textModifier = "h1", revert = FALSE, pretty = NULL,
-                              ...) {
+                              raw_comparisons = FALSE, ...) {
   if (relative == FALSE) {
     if (target == 100) message("-- using target value of 100 --")
     Perc <- value / target * 100
@@ -224,24 +249,33 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     finalcolor <- "warning"
   }
 
-  tags$a(
-    href = link,
-    tags$button(
-      href = link,
-      title = hover,
-      # color= "button",
-      color = finalcolor,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size),
-      class = paste0("btn-", finalcolor),
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", finalcolor),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
           ico(icon),
-          prettify(value, pretty),
-          units,
+          # Handle value and units display using case_when logic
+          dplyr::case_when(
+            # Currency symbols appear before value with no space
+            !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
+            !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
+            # Non-currency units appear after value with space
+            !is.null(units) ~ paste(prettify(value, pretty), units),
+            # No units, just the value
+            TRUE ~ as.character(prettify(value, pretty))
+          ),
           if (!is.null(former)) {
-            if (former > value) {
+            # Check if we should use raw comparisons or if former is 0
+            if (raw_comparisons || former == 0) {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                paste("last:", former, sep = " ")
+              )
+            } else if (former > value) {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
                 ico("chevron-down", chevron = TRUE),
@@ -264,10 +298,17 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
           }
         )$children)
       },
-      HTML(txt),
+      if (!is.null(txt)) tags$div(HTML(txt), style = "margin-top: 10px;"),
       ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
@@ -323,24 +364,38 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", ...) {
 
-  tags$a(
-    href = link,
-    tags$button(
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", color),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
-          ico(icon), value, units
+          ico(icon),
+          # Handle value and units display using case_when logic
+          dplyr::case_when(
+            # Currency symbols appear before value with no space
+            !is.null(units) && units == "$" ~ paste0("$", value),
+            !is.null(units) && units == "£" ~ paste0("£", value),
+            # Non-currency units appear after value with space
+            !is.null(units) ~ paste(value, units),
+            # No units, just the value
+            TRUE ~ as.character(value)
+          )
         )$children)
       },
-      HTML(txt),
+      if (!is.null(txt)) tags$div(HTML(txt), style = "margin-top: 10px;"),
       ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
@@ -399,21 +454,25 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
   if (is.null(txt)) txt <- rep(" ", length(values))
   if (is.null(icons)) icons <- rep(" ", length(values))
 
-  ## Now build button
-  tags$a(
-    href = link,
-    tags$button(
-      href = link,
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
-      tags$h1(HTML(title)),
-      pmap(list(values, txt, icons), gutsMaker)
+  ## Now build panel
+  panel_content <- tags$div(
+    title = hover,
+    class = "panel", class = paste0("panel-", color),
+    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    tags$div(
+      class = "panel-body text-center",
+      if (!is.null(title)) tags$h1(HTML(title)),
+      pmap(list(values, txt, icons), gutsMaker),
+      ...
     )
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, panel_content, style = "text-decoration: none; color: inherit;")
+  } else {
+    panel_content
+  }
 }
 
 
