@@ -46,6 +46,7 @@ finisher(
   title = "Important Reportings", 
   css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
   file = NULL, 
-  textModifier = "h1",div_maker(subtitle = "Boom", textModifier = "hi",d1, d2, d3)
+  textModifier = "h1",
+  divs = div_maker(subtitle = "Boom", textModifier = "h2", d1, d2, d3)
 )
 ```
