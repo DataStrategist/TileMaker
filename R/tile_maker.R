@@ -81,51 +81,55 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", pretty = NULL, ...) {
 
-  tags$a(
-    href = link,
-    tags$button(
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
-      if (!(is.null(value) & is.null(units) & is.null(icon))) {
-        tag(textModifier, tags$span(
-          ico(icon),
-          # Handle value and units display using case_when logic
-          dplyr::case_when(
-            # Currency symbols appear before value with no space
-            !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
-            !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
-            # Non-currency units appear after value with space
-            !is.null(units) ~ paste(prettify(value, pretty), units),
-            # No units, just the value
-            TRUE ~ as.character(prettify(value, pretty))
-          ),
-          if (!is.null(former)) {
-            if (former > value) {
-              tags$sup(
-                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                ico("chevron-down", chevron = TRUE),
-                paste(round((as.numeric(former) - as.numeric(value)) /
-                  as.numeric(former) * 100, 1), "%", sep = "")
-              )
-            } else {
-              tags$sup(
-                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                ico("chevron-up", chevron = TRUE),
-                paste(round((as.numeric(value) - as.numeric(former)) /
-                  as.numeric(former) * 100, 1), "%", sep = "")
-              )
-            }
+  button_content <- tags$button(
+    title = hover,
+    # color= "button",
+    color = color,
+    role = "button",
+    # classes: size, color
+    class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+    if (!(is.null(value) & is.null(units) & is.null(icon))) {
+      tag(textModifier, tags$span(
+        ico(icon),
+        # Handle value and units display using case_when logic
+        dplyr::case_when(
+          # Currency symbols appear before value with no space
+          !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
+          !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
+          # Non-currency units appear after value with space
+          !is.null(units) ~ paste(prettify(value, pretty), units),
+          # No units, just the value
+          TRUE ~ as.character(prettify(value, pretty))
+        ),
+        if (!is.null(former)) {
+          if (former > value) {
+            tags$sup(
+              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+              ico("chevron-down", chevron = TRUE),
+              paste(round((as.numeric(former) - as.numeric(value)) /
+                as.numeric(former) * 100, 1), "%", sep = "")
+            )
+          } else {
+            tags$sup(
+              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+              ico("chevron-up", chevron = TRUE),
+              paste(round((as.numeric(value) - as.numeric(former)) /
+                as.numeric(former) * 100, 1), "%", sep = "")
+            )
           }
-        )$children)
-      },
-      HTML(txt),
-      ...
-    )
+        }
+      )$children)
+    },
+    HTML(txt),
+    ...
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, button_content)
+  } else {
+    button_content
+  }
 }
 
 
@@ -232,58 +236,61 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     finalcolor <- "warning"
   }
 
-  tags$a(
-    href = link,
-    tags$button(
-      href = link,
-      title = hover,
-      # color= "button",
-      color = finalcolor,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size),
-      class = paste0("btn-", finalcolor),
-      if (hide_value == FALSE) {
-        tag(textModifier, tags$span(
-          ico(icon),
-          # Handle value and units display using case_when logic
-          dplyr::case_when(
-            # Currency symbols appear before value with no space
-            !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
-            !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
-            # Non-currency units appear after value with space
-            !is.null(units) ~ paste(prettify(value, pretty), units),
-            # No units, just the value
-            TRUE ~ as.character(prettify(value, pretty))
-          ),
-          if (!is.null(former)) {
-            if (former > value) {
-              tags$sup(
-                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                ico("chevron-down", chevron = TRUE),
-                paste(round((as.numeric(former) -
-                  as.numeric(value)) /
-                  as.numeric(former) * 100, 1), "%", sep = "")
+  button_content <- tags$button(
+    title = hover,
+    # color= "button",
+    color = finalcolor,
+    role = "button",
+    # classes: size, color
+    class = "btn", class = paste0("btn-", size),
+    class = paste0("btn-", finalcolor),
+    if (hide_value == FALSE) {
+      tag(textModifier, tags$span(
+        ico(icon),
+        # Handle value and units display using case_when logic
+        dplyr::case_when(
+          # Currency symbols appear before value with no space
+          !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
+          !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
+          # Non-currency units appear after value with space
+          !is.null(units) ~ paste(prettify(value, pretty), units),
+          # No units, just the value
+          TRUE ~ as.character(prettify(value, pretty))
+        ),
+        if (!is.null(former)) {
+          if (former > value) {
+            tags$sup(
+              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+              ico("chevron-down", chevron = TRUE),
+              paste(round((as.numeric(former) -
+                as.numeric(value)) /
+                as.numeric(former) * 100, 1), "%", sep = "")
+            )
+          } else {
+            tags$sup(
+              style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+              ico("chevron-up", chevron = TRUE),
+              paste(round((as.numeric(value) -
+                as.numeric(former)) /
+                as.numeric(former) * 100, 1),
+              "%",
+              sep = ""
               )
-            } else {
-              tags$sup(
-                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                ico("chevron-up", chevron = TRUE),
-                paste(round((as.numeric(value) -
-                  as.numeric(former)) /
-                  as.numeric(former) * 100, 1),
-                "%",
-                sep = ""
-                )
-              )
-            }
+            )
           }
-        )$children)
-      },
-      HTML(txt),
-      ...
-    )
+        }
+      )$children)
+    },
+    HTML(txt),
+    ...
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, button_content)
+  } else {
+    button_content
+  }
 }
 
 
@@ -339,34 +346,38 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", ...) {
 
-  tags$a(
-    href = link,
-    tags$button(
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
-      if (!(is.null(value) & is.null(units) & is.null(icon))) {
-        tag(textModifier, tags$span(
-          ico(icon),
-          # Handle value and units display using case_when logic
-          dplyr::case_when(
-            # Currency symbols appear before value with no space
-            !is.null(units) && units == "$" ~ paste0("$", value),
-            !is.null(units) && units == "£" ~ paste0("£", value),
-            # Non-currency units appear after value with space
-            !is.null(units) ~ paste(value, units),
-            # No units, just the value
-            TRUE ~ as.character(value)
-          )
-        )$children)
-      },
-      HTML(txt),
-      ...
-    )
+  button_content <- tags$button(
+    title = hover,
+    # color= "button",
+    color = color,
+    role = "button",
+    # classes: size, color
+    class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+    if (!(is.null(value) & is.null(units) & is.null(icon))) {
+      tag(textModifier, tags$span(
+        ico(icon),
+        # Handle value and units display using case_when logic
+        dplyr::case_when(
+          # Currency symbols appear before value with no space
+          !is.null(units) && units == "$" ~ paste0("$", value),
+          !is.null(units) && units == "£" ~ paste0("£", value),
+          # Non-currency units appear after value with space
+          !is.null(units) ~ paste(value, units),
+          # No units, just the value
+          TRUE ~ as.character(value)
+        )
+      )$children)
+    },
+    HTML(txt),
+    ...
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, button_content)
+  } else {
+    button_content
+  }
 }
 
 
@@ -426,20 +437,23 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
   if (is.null(icons)) icons <- rep(" ", length(values))
 
   ## Now build button
-  tags$a(
-    href = link,
-    tags$button(
-      href = link,
-      title = hover,
-      # color= "button",
-      color = color,
-      role = "button",
-      # classes: size, color
-      class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
-      tags$h1(HTML(title)),
-      pmap(list(values, txt, icons), gutsMaker)
-    )
+  button_content <- tags$button(
+    title = hover,
+    # color= "button",
+    color = color,
+    role = "button",
+    # classes: size, color
+    class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
+    tags$h1(HTML(title)),
+    pmap(list(values, txt, icons), gutsMaker)
   )
+
+  # Only wrap in anchor tag if link is provided and not empty
+  if (!is.null(link) && link != "") {
+    tags$a(href = link, button_content)
+  } else {
+    button_content
+  }
 }
 
 
