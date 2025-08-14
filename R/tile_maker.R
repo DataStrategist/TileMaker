@@ -92,10 +92,19 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
+          # Handle icon
           ico(icon),
-          if (!is.null(units) && (units == "£" || units == "$")) units,
-          prettify(value, pretty),
-          if (is.null(units) || (units != "£" && units != "$")) units,
+          # Handle value and units display using case_when logic
+          dplyr::case_when(
+            # Currency symbols appear before value with no space
+            !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
+            !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
+            # Non-currency units appear after value with space
+            !is.null(units) ~ paste(prettify(value, pretty), units),
+            # No units, just the value
+            TRUE ~ prettify(value, pretty)
+          ),
+          # Handle former value comparison arrows
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -238,10 +247,19 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       class = paste0("btn-", finalcolor),
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
+          # Handle icon
           ico(icon),
-          if (!is.null(units) && (units == "£" || units == "$")) units,
-          prettify(value, pretty),
-          if (is.null(units) || (units != "£" && units != "$")) units,
+          # Handle value and units display using case_when logic
+          dplyr::case_when(
+            # Currency symbols appear before value with no space
+            !is.null(units) && units == "$" ~ paste0("$", prettify(value, pretty)),
+            !is.null(units) && units == "£" ~ paste0("£", prettify(value, pretty)),
+            # Non-currency units appear after value with space
+            !is.null(units) ~ paste(prettify(value, pretty), units),
+            # No units, just the value
+            TRUE ~ prettify(value, pretty)
+          ),
+          # Handle former value comparison arrows
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -336,10 +354,18 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
-          ico(icon), 
-          if (!is.null(units) && (units == "£" || units == "$")) units,
-          value, 
-          if (is.null(units) || (units != "£" && units != "$")) units
+          # Handle icon
+          ico(icon),
+          # Handle value and units display using case_when logic
+          dplyr::case_when(
+            # Currency symbols appear before value with no space
+            !is.null(units) && units == "$" ~ paste0("$", value),
+            !is.null(units) && units == "£" ~ paste0("£", value),
+            # Non-currency units appear after value with space
+            !is.null(units) ~ paste(value, units),
+            # No units, just the value
+            TRUE ~ as.character(value)
+          )
         )$children)
       },
       HTML(txt),
