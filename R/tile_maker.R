@@ -36,9 +36,10 @@ ico <- function(x, chevron = FALSE) {
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional bootstrap css element that governs the color.
-#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
-#'   "primary", "success", "info", "warning", "danger"
+#' @param color Optional color for the tile. For bootstrap semantic colors 
+#'   ("success", "warning", "danger"), uses Bootstrap panel classes. For other
+#'   values ("info", "primary", "muted"), uses custom background colors. Custom
+#'   hex color codes (e.g., "#b7b7b7") are also supported.
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -81,10 +82,28 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", pretty = NULL, ...) {
 
+  # Define color mapping for non-bootstrap colors
+  color_map <- list(
+    "info" = "#b7b7b7",
+    "primary" = "#428bca", 
+    "muted" = "#777777"
+  )
+  
+  # Use bootstrap panels for success, warning, danger; custom colors for others
+  if (color %in% c("success", "warning", "danger")) {
+    panel_class <- paste0("panel-", color)
+    custom_style <- if (!is.null(link) && link != "") "cursor: pointer;" else NULL
+  } else {
+    panel_class <- "panel panel-default"
+    background_color <- if (color %in% names(color_map)) color_map[[color]] else color
+    cursor_style <- if (!is.null(link) && link != "") "cursor: pointer;" else ""
+    custom_style <- paste0("background-color: ", background_color, "; ", cursor_style)
+  }
+
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", color),
-    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    class = panel_class,
+    style = custom_style,
     tags$div(
       class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
@@ -303,9 +322,10 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional bootstrap css element that governs the color.
-#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
-#'   "primary", "success", "info", "warning", "danger"
+#' @param color Optional color for the tile. For bootstrap semantic colors 
+#'   ("success", "warning", "danger"), uses Bootstrap panel classes. For other
+#'   values ("info", "primary", "muted"), uses custom background colors. Custom
+#'   hex color codes (e.g., "#b7b7b7") are also supported.
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -345,10 +365,28 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", ...) {
 
+  # Define color mapping for non-bootstrap colors
+  color_map <- list(
+    "info" = "#b7b7b7",
+    "primary" = "#428bca", 
+    "muted" = "#777777"
+  )
+  
+  # Use bootstrap panels for success, warning, danger; custom colors for others
+  if (color %in% c("success", "warning", "danger")) {
+    panel_class <- paste0("panel-", color)
+    custom_style <- if (!is.null(link) && link != "") "cursor: pointer;" else NULL
+  } else {
+    panel_class <- "panel panel-default"
+    background_color <- if (color %in% names(color_map)) color_map[[color]] else color
+    cursor_style <- if (!is.null(link) && link != "") "cursor: pointer;" else ""
+    custom_style <- paste0("background-color: ", background_color, "; ", cursor_style)
+  }
+
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", color),
-    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    class = panel_class,
+    style = custom_style,
     tags$div(
       class = "panel-body text-center",
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
@@ -389,9 +427,10 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #' @param title Top title, Default: NULL
 #' @param size Optional size specified in the bootstrap css classes:
 #'   "xs","sm","md","lg")
-#' @param color Optional bootstrap css element that governs the color.
-#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
-#'   "primary", "success", "info", "warning", "danger", Default: 'info'
+#' @param color Optional color for the tile. For bootstrap semantic colors 
+#'   ("success", "warning", "danger"), uses Bootstrap panel classes. For other
+#'   values ("info", "primary", "muted"), uses custom background colors. Custom
+#'   hex color codes (e.g., "#b7b7b7") are also supported. Default: 'info'
 #' @param link Optional hyperlink to redirect to after a user click, Default:
 #'   NULL
 #' @param number_zoom Optional magnification \% for number vs normal text,
@@ -435,11 +474,29 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
   if (is.null(txt)) txt <- rep(" ", length(values))
   if (is.null(icons)) icons <- rep(" ", length(values))
 
+  # Define color mapping for non-bootstrap colors
+  color_map <- list(
+    "info" = "#b7b7b7",
+    "primary" = "#428bca", 
+    "muted" = "#777777"
+  )
+  
+  # Use bootstrap panels for success, warning, danger; custom colors for others
+  if (color %in% c("success", "warning", "danger")) {
+    panel_class <- paste0("panel-", color)
+    custom_style <- if (!is.null(link) && link != "") "cursor: pointer;" else NULL
+  } else {
+    panel_class <- "panel panel-default"
+    background_color <- if (color %in% names(color_map)) color_map[[color]] else color
+    cursor_style <- if (!is.null(link) && link != "") "cursor: pointer;" else ""
+    custom_style <- paste0("background-color: ", background_color, "; ", cursor_style)
+  }
+
   ## Now build panel
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", color),
-    style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
+    class = panel_class,
+    style = custom_style,
     tags$div(
       class = "panel-body text-center",
       if (!is.null(title)) tags$h1(HTML(title)),
@@ -622,6 +679,7 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
 div_maker <- function(subtitle, textModifier, ...) {
   tags$div(
     class = "container",
+    style = "display: flex;",
     tag(textModifier, tags$span(subtitle)$children),
     ...
   )
