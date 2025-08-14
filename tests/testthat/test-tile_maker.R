@@ -86,6 +86,50 @@ test_that("'former' calc and chevrons work", {
     expect_equal(., 4)
 })
 
+test_that("raw_comparisons parameter works correctly", {
+  # Test that former=0 automatically uses raw format (no Inf%)
+  expect_equal(solo_box(value = 10, txt = "test", former = 0) %>%
+    unlist() %>%
+    grepl("last: 0", x = .) %>%
+    sum(), 1)
+  
+  # Test that former=0 does not contain Inf or NaN
+  expect_equal(solo_box(value = 10, txt = "test", former = 0) %>%
+    unlist() %>%
+    grepl("Inf|NaN", x = .) %>%
+    sum(), 0)
+  
+  # Test raw_comparisons=TRUE shows "last: X" format
+  expect_equal(solo_box(value = 10, txt = "test", former = 5, raw_comparisons = TRUE) %>%
+    unlist() %>%
+    grepl("last: 5", x = .) %>%
+    sum(), 1)
+  
+  # Test raw_comparisons=TRUE does not show percentage
+  expect_equal(solo_box(value = 10, txt = "test", former = 5, raw_comparisons = TRUE) %>%
+    unlist() %>%
+    grepl("%", x = .) %>%
+    sum(), 0)
+  
+  # Test raw_comparisons=FALSE with non-zero former shows percentage
+  expect_equal(solo_box(value = 10, txt = "test", former = 5, raw_comparisons = FALSE) %>%
+    unlist() %>%
+    grepl("100%", x = .) %>%
+    sum(), 1)
+  
+  # Test solo_gradient_box with former=0
+  expect_equal(solo_gradient_box(value = 10, txt = "test", former = 0) %>%
+    unlist() %>%
+    grepl("last: 0", x = .) %>%
+    sum(), 1)
+  
+  # Test solo_gradient_box with raw_comparisons=TRUE
+  expect_equal(solo_gradient_box(value = 10, txt = "test", former = 5, raw_comparisons = TRUE) %>%
+    unlist() %>%
+    grepl("last: 5", x = .) %>%
+    sum(), 1)
+})
+
 test_that("all colors work", {
   expect_equal(solo_gradient_box(value = 10, txt = "blah", former = 5) %>%
     unlist() %>%

@@ -48,6 +48,9 @@ ico <- function(x, chevron = FALSE) {
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
 #'   are NULL (default), or the desired divider (",", ".", " ", etc). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
+#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
+#'   percentage calculation. If FALSE (default), calculates percentage unless 
+#'   former equals 0, in which case it automatically uses raw format.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   style = 'width:100\%;height:50\%'
@@ -79,7 +82,8 @@ ico <- function(x, chevron = FALSE) {
 
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "info", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", pretty = NULL, ...) {
+                     hover = NULL, textModifier = "h1", pretty = NULL, 
+                     raw_comparisons = FALSE, ...) {
 
   panel_content <- tags$div(
     title = hover,
@@ -101,7 +105,13 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
             TRUE ~ as.character(prettify(value, pretty))
           ),
           if (!is.null(former)) {
-            if (former > value) {
+            # Check if we should use raw comparisons or if former is 0
+            if (raw_comparisons || former == 0) {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                paste("last:", former, sep = " ")
+              )
+            } else if (former > value) {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
                 ico("chevron-down", chevron = TRUE),
@@ -175,6 +185,9 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
 #'   are NULL (default), or the desired divider (",", ".", " "). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
+#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
+#'   percentage calculation. If FALSE (default), calculates percentage unless 
+#'   former equals 0, in which case it automatically uses raw format.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   "style = 'width:100\%;height:50\%'"
@@ -217,7 +230,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               relative = FALSE, link = NULL, units = NULL,
                               hover = NULL, hide_value = FALSE,
                               textModifier = "h1", revert = FALSE, pretty = NULL,
-                              ...) {
+                              raw_comparisons = FALSE, ...) {
   if (relative == FALSE) {
     if (target == 100) message("-- using target value of 100 --")
     Perc <- value / target * 100
@@ -256,7 +269,13 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
             TRUE ~ as.character(prettify(value, pretty))
           ),
           if (!is.null(former)) {
-            if (former > value) {
+            # Check if we should use raw comparisons or if former is 0
+            if (raw_comparisons || former == 0) {
+              tags$sup(
+                style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
+                paste("last:", former, sep = " ")
+              )
+            } else if (former > value) {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
                 ico("chevron-down", chevron = TRUE),
