@@ -18,7 +18,11 @@ Please see the [Intro Vignette](http://datastrategist.github.io/TileMaker/articl
 
 This package is intended to "highlight single values", mainly in dashboards, reports or Shiny apps, and is highly customizeable. This is what it looks like:
 
-```{r}
+![TileMaker Example](example.PNG)
+
+Here's the code that generates the tiles above:
+
+```{r eval=FALSE}
 suppressWarnings(suppressMessages(library(tidyverse,quietly = TRUE)))
 library(TileMaker)
 
@@ -46,6 +50,7 @@ finisher(
   title = "Important Reportings", 
   css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
   file = NULL, 
-  textModifier = "h1",div_maker(subtitle = "Boom", textModifier = "hi",d1, d2, d3)
+  textModifier = "h1",
+  divs = div_maker(subtitle = "Boom", textModifier = "h2", d1, d2, d3)
 )
 ```
