@@ -97,7 +97,8 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
     panel_class <- "panel panel-default"
     background_color <- if (color %in% names(color_map)) color_map[[color]] else color
     cursor_style <- if (!is.null(link) && link != "") "cursor: pointer;" else ""
-    custom_style <- paste0("background-color: ", background_color, "; ", cursor_style)
+    custom_style <- paste0("background-color: ", background_color, ";", 
+                          if (cursor_style != "") paste0(" ", cursor_style) else "")
   }
 
   panel_content <- tags$div(
@@ -380,7 +381,8 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
     panel_class <- "panel panel-default"
     background_color <- if (color %in% names(color_map)) color_map[[color]] else color
     cursor_style <- if (!is.null(link) && link != "") "cursor: pointer;" else ""
-    custom_style <- paste0("background-color: ", background_color, "; ", cursor_style)
+    custom_style <- paste0("background-color: ", background_color, ";", 
+                          if (cursor_style != "") paste0(" ", cursor_style) else "")
   }
 
   panel_content <- tags$div(
@@ -489,7 +491,8 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
     panel_class <- "panel panel-default"
     background_color <- if (color %in% names(color_map)) color_map[[color]] else color
     cursor_style <- if (!is.null(link) && link != "") "cursor: pointer;" else ""
-    custom_style <- paste0("background-color: ", background_color, "; ", cursor_style)
+    custom_style <- paste0("background-color: ", background_color, ";", 
+                          if (cursor_style != "") paste0(" ", cursor_style) else "")
   }
 
   ## Now build panel
