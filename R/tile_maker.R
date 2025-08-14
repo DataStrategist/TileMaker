@@ -12,11 +12,10 @@ ico <- function(x, chevron = FALSE) {
   if (is.null(x)) {
     NULL
   } else if (chevron == FALSE) {
-    tags$i(class = "glyphicon", class = paste0("glyphicon-", x))
+    tags$i(class = paste("glyphicon", paste0("glyphicon-", x)))
   } else if (chevron == TRUE) {
     tags$i(
-      class = "glyphicon",
-      class = paste0("glyphicon-", x),
+      class = paste("glyphicon", paste0("glyphicon-", x)),
       style = "font-size: 10px; vertical-align: top;"
     )
   }
@@ -258,7 +257,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", finalcolor),
+    class = paste("panel", paste0("panel-", finalcolor)),
     style = if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
     tags$div(
       class = "panel-body text-center",
@@ -682,8 +681,10 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
 div_maker <- function(subtitle, textModifier, ...) {
   tags$div(
     class = "container",
-    style = "display: flex;",
-    tag(textModifier, tags$span(subtitle)$children),
+    style = "display: flex; flex-direction: row; align-items: center;",
+    if (!missing(subtitle) && !is.null(subtitle)) {
+      tag(textModifier, tags$span(subtitle))
+    },
     ...
   )
 }
