@@ -92,7 +92,6 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
-          # Handle icon
           ico(icon),
           # Handle value and units display using case_when logic
           dplyr::case_when(
@@ -102,9 +101,8 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
             # Non-currency units appear after value with space
             !is.null(units) ~ paste(prettify(value, pretty), units),
             # No units, just the value
-            TRUE ~ prettify(value, pretty)
+            TRUE ~ as.character(prettify(value, pretty))
           ),
-          # Handle former value comparison arrows
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -247,7 +245,6 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
       class = paste0("btn-", finalcolor),
       if (hide_value == FALSE) {
         tag(textModifier, tags$span(
-          # Handle icon
           ico(icon),
           # Handle value and units display using case_when logic
           dplyr::case_when(
@@ -257,9 +254,8 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
             # Non-currency units appear after value with space
             !is.null(units) ~ paste(prettify(value, pretty), units),
             # No units, just the value
-            TRUE ~ prettify(value, pretty)
+            TRUE ~ as.character(prettify(value, pretty))
           ),
-          # Handle former value comparison arrows
           if (!is.null(former)) {
             if (former > value) {
               tags$sup(
@@ -354,7 +350,6 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
       class = "btn", class = paste0("btn-", size), class = paste0("btn-", color),
       if (!(is.null(value) & is.null(units) & is.null(icon))) {
         tag(textModifier, tags$span(
-          # Handle icon
           ico(icon),
           # Handle value and units display using case_when logic
           dplyr::case_when(
