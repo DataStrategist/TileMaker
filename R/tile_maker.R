@@ -36,9 +36,10 @@ ico <- function(x, chevron = FALSE) {
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional bootstrap css element that governs the color.
-#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
-#'   "primary", "success", "info", "warning", "danger"
+#' @param color Optional background color. Can be a bootstrap css class name
+#'   ("primary", "success", "info", "warning", "danger", "default") or an actual
+#'   color value (hex like "#FF5733", named like "red", or rgb like "rgb(255,87,51)").
+#'   Default is "primary".
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -57,6 +58,9 @@ ico <- function(x, chevron = FALSE) {
 #' @param height_percent Optional height as a percentage. Can be specified as a 
 #'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
 #'   layouts to control tile height when text wrapping affects row heights.
+#' @param text_color Optional text color. Can be any valid CSS color value 
+#'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
+#'   If not specified, uses default Bootstrap text styling.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   style = 'width:100\%;height:50\%'
@@ -87,9 +91,16 @@ ico <- function(x, chevron = FALSE) {
 #' @export solo_box
 
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
-                     icon = NULL, color = "info", link = NULL, units = NULL,
+                     icon = NULL, color = "primary", link = NULL, units = NULL,
                      hover = NULL, textModifier = "h1", pretty = NULL, 
-                     raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, ...) {
+                     raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, 
+                     text_color = NULL, ...) {
+
+  # Helper function to determine if color is a bootstrap class or actual color
+  is_bootstrap_color <- function(color) {
+    bootstrap_colors <- c("default", "primary", "success", "info", "warning", "danger", "muted")
+    tolower(color) %in% bootstrap_colors
+  }
 
   # Build style attribute for width and height percentages
   style_parts <- character(0)
@@ -101,11 +112,25 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
     style_parts <- c(style_parts, paste0("height: ", height_percent, 
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
+  
+  # Add background color if it's not a bootstrap class
+  if (!is_bootstrap_color(color)) {
+    style_parts <- c(style_parts, paste0("background-color: ", color, ";"))
+  }
+  
+  # Add text color if specified
+  if (!is.null(text_color)) {
+    style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
+  }
+  
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
+
+  # Determine panel class - use bootstrap class if it's a bootstrap color, otherwise use default styling
+  panel_class <- if (is_bootstrap_color(color)) paste0("panel-", color) else "panel panel-default"
 
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", color),
+    class = panel_class,
     style = if (length(c(
       if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
       percent_style
@@ -218,6 +243,9 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param height_percent Optional height as a percentage. Can be specified as a 
 #'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
 #'   layouts to control tile height when text wrapping affects row heights.
+#' @param text_color Optional text color. Can be any valid CSS color value 
+#'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
+#'   If not specified, uses default Bootstrap text styling.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   "style = 'width:100\%;height:50\%'"
@@ -260,7 +288,8 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               relative = FALSE, link = NULL, units = NULL,
                               hover = NULL, hide_value = FALSE,
                               textModifier = "h1", revert = FALSE, pretty = NULL,
-                              raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, ...) {
+                              raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, 
+                              text_color = NULL, ...) {
   if (relative == FALSE) {
     if (target == 100) message("-- using target value of 100 --")
     Perc <- value / target * 100
@@ -271,12 +300,13 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     Perc <- value / former * 100
   }
 
+  # Define pleasant pastel colors for gradient states
   if (Perc >= thresholdHigh) {
-    if (revert == FALSE) finalcolor <- "success" else finalcolor <- "danger"
+    if (revert == FALSE) finalcolor <- "#C8E6C9" else finalcolor <- "#FFCDD2"  # pastel green or pastel red
   } else if (Perc < thresholdLow) {
-    if (revert == FALSE) finalcolor <- "danger" else finalcolor <- "success"
+    if (revert == FALSE) finalcolor <- "#FFCDD2" else finalcolor <- "#C8E6C9"  # pastel red or pastel green
   } else {
-    finalcolor <- "warning"
+    finalcolor <- "#FFF9C4"  # pastel yellow
   }
 
   # Build style attribute for width and height percentages
@@ -289,11 +319,20 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
     style_parts <- c(style_parts, paste0("height: ", height_percent, 
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
+  
+  # Add background color (always a color value now, not bootstrap class)
+  style_parts <- c(style_parts, paste0("background-color: ", finalcolor, ";"))
+  
+  # Add text color if specified
+  if (!is.null(text_color)) {
+    style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
+  }
+  
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
 
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", finalcolor),
+    class = "panel panel-default",
     style = if (length(c(
       if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
       percent_style
@@ -370,9 +409,10 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional bootstrap css element that governs the color.
-#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
-#'   "primary", "success", "info", "warning", "danger"
+#' @param color Optional background color. Can be a bootstrap css class name
+#'   ("primary", "success", "info", "warning", "danger", "default") or an actual
+#'   color value (hex like "#FF5733", named like "red", or rgb like "rgb(255,87,51)").
+#'   Default is "primary".
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -385,6 +425,9 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @param height_percent Optional height as a percentage. Can be specified as a 
 #'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
 #'   layouts to control tile height when text wrapping affects row heights.
+#' @param text_color Optional text color. Can be any valid CSS color value 
+#'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
+#'   If not specified, uses default Bootstrap text styling.
 #' @param ... Optional additional html elements. For example, if you would like
 #'   two buttons to fit into a section in a flexdashboard, you could specify
 #'   style = 'width:100\%;height:50\%'
@@ -415,8 +458,15 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @export solo_box_ct
 
 solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
-                     icon = NULL, color = "info", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", width_percent = NULL, height_percent = NULL, ...) {
+                     icon = NULL, color = "primary", link = NULL, units = NULL,
+                     hover = NULL, textModifier = "h1", width_percent = NULL, height_percent = NULL, 
+                     text_color = NULL, ...) {
+
+  # Helper function to determine if color is a bootstrap class or actual color
+  is_bootstrap_color <- function(color) {
+    bootstrap_colors <- c("default", "primary", "success", "info", "warning", "danger", "muted")
+    tolower(color) %in% bootstrap_colors
+  }
 
   # Build style attribute for width and height percentages
   style_parts <- character(0)
@@ -428,11 +478,25 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
     style_parts <- c(style_parts, paste0("height: ", height_percent, 
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
+  
+  # Add background color if it's not a bootstrap class
+  if (!is_bootstrap_color(color)) {
+    style_parts <- c(style_parts, paste0("background-color: ", color, ";"))
+  }
+  
+  # Add text color if specified
+  if (!is.null(text_color)) {
+    style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
+  }
+  
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
+
+  # Determine panel class - use bootstrap class if it's a bootstrap color, otherwise use default styling
+  panel_class <- if (is_bootstrap_color(color)) paste0("panel-", color) else "panel panel-default"
 
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", color),
+    class = panel_class,
     style = if (length(c(
       if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
       percent_style
@@ -480,9 +544,10 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #' @param title Top title, Default: NULL
 #' @param size Optional size specified in the bootstrap css classes:
 #'   "xs","sm","md","lg")
-#' @param color Optional bootstrap css element that governs the color.
-#'   https://v4-alpha.getbootstrap.com/utilities/colors/ Choose from: "muted",
-#'   "primary", "success", "info", "warning", "danger", Default: 'info'
+#' @param color Optional background color. Can be a bootstrap css class name
+#'   ("primary", "success", "info", "warning", "danger", "default") or an actual
+#'   color value (hex like "#FF5733", named like "red", or rgb like "rgb(255,87,51)").
+#'   Default is "primary".
 #' @param link Optional hyperlink to redirect to after a user click, Default:
 #'   NULL
 #' @param number_zoom Optional magnification \% for number vs normal text,
@@ -496,6 +561,9 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #' @param height_percent Optional height as a percentage. Can be specified as a 
 #'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
 #'   layouts to control tile height when text wrapping affects row heights.
+#' @param text_color Optional text color. Can be any valid CSS color value 
+#'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
+#'   If not specified, uses default Bootstrap text styling.
 #' @param ... add any other html code here
 #' @importFrom purrr pmap
 #' @importFrom htmltools HTML span a tags
@@ -518,8 +586,9 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #' @export
 multi_box <- function(icons = NULL, txt = NULL, values = NULL,
                       title = NULL, size = "md",
-                      color = "info", link = NULL, number_zoom = 150,
-                      hover = NULL, width_percent = NULL, height_percent = NULL, ...) {
+                      color = "primary", link = NULL, number_zoom = 150,
+                      hover = NULL, width_percent = NULL, height_percent = NULL, 
+                      text_color = NULL, ...) {
   ## Define function that can be pmapped
   gutsMaker <- function(values, txt, icons) {
     tags$h3(
@@ -532,6 +601,12 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
   if (is.null(txt)) txt <- rep(" ", length(values))
   if (is.null(icons)) icons <- rep(" ", length(values))
 
+  # Helper function to determine if color is a bootstrap class or actual color
+  is_bootstrap_color <- function(color) {
+    bootstrap_colors <- c("default", "primary", "success", "info", "warning", "danger", "muted")
+    tolower(color) %in% bootstrap_colors
+  }
+
   # Build style attribute for width and height percentages
   style_parts <- character(0)
   if (!is.null(width_percent)) {
@@ -542,12 +617,26 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
     style_parts <- c(style_parts, paste0("height: ", height_percent, 
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
+  
+  # Add background color if it's not a bootstrap class
+  if (!is_bootstrap_color(color)) {
+    style_parts <- c(style_parts, paste0("background-color: ", color, ";"))
+  }
+  
+  # Add text color if specified
+  if (!is.null(text_color)) {
+    style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
+  }
+  
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
+
+  # Determine panel class - use bootstrap class if it's a bootstrap color, otherwise use default styling
+  panel_class <- if (is_bootstrap_color(color)) paste0("panel-", color) else "panel panel-default"
 
   ## Now build panel
   panel_content <- tags$div(
     title = hover,
-    class = "panel", class = paste0("panel-", color),
+    class = panel_class,
     style = if (length(c(
       if (!is.null(link) && link != "") "cursor: pointer;" else NULL,
       percent_style
