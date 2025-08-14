@@ -131,18 +131,19 @@ test_that("raw_comparisons parameter works correctly", {
 })
 
 test_that("all colors work", {
+  # Test that solo_gradient_box uses pastel colors instead of bootstrap classes
   expect_equal(solo_gradient_box(value = 10, txt = "blah", former = 5) %>%
     unlist() %>%
-    grepl("danger", x = .) %>%
-    sum(), 2)
+    grepl("#FFCDD2", x = .) %>%  # pastel red
+    sum(), 1)
   expect_equal(solo_gradient_box(value = 80, txt = "blah", former = 5) %>%
     unlist() %>%
-    grepl("warning", x = .) %>%
-    sum(), 2)
+    grepl("#FFF9C4", x = .) %>%  # pastel yellow
+    sum(), 1)
   expect_equal(solo_gradient_box(value = 95, txt = "blah", former = 5) %>%
     unlist() %>%
-    grepl("success", x = .) %>%
-    sum(), 2)
+    grepl("#C8E6C9", x = .) %>%  # pastel green
+    sum(), 1)
 })
 
 test_that("errors error out", {
@@ -223,19 +224,19 @@ expect_error(solo_gradient_box(
 solo_gradient_box(
   value = 40, former = 50,
   thresholdHigh = 105, thresholdLow = 95, relative = TRUE) %>%
-  grepl("danger", .) %>%
+  grepl("#FFCDD2", .) %>%  # pastel red
   expect_true()
 
 solo_gradient_box(
   value = 40, former = 40,
   thresholdHigh = 105, thresholdLow = 95, relative = TRUE) %>%
-  grepl("warning", .) %>%
+  grepl("#FFF9C4", .) %>%  # pastel yellow
   expect_true()
 
 solo_gradient_box(
   value = 40, former = 35,
   thresholdHigh = 105, thresholdLow = 95, relative = TRUE) %>%
-  grepl("success", .) %>%
+  grepl("#C8E6C9", .) %>%  # pastel green
   expect_true()
 
 expect_warning(solo_gradient_box(
@@ -378,6 +379,40 @@ test_that("width_percent and height_percent parameters are optional", {
   
   box4 <- solo_box_ct(value = 10, txt = "Test")
   expect_equal(class(box4), "shiny.tag")
+})
+
+test_that("new color API works correctly", {
+  # Test that default color changed to "primary"
+  box1 <- solo_box(value = 42, txt = "Test")
+  box1_str <- unlist(box1) %>% paste(collapse = " ")
+  expect_equal(grepl("panel-primary", box1_str), TRUE)
+  
+  # Test custom hex color support
+  box2 <- solo_box(value = 42, txt = "Test", color = "#FF5733")
+  box2_str <- unlist(box2) %>% paste(collapse = " ")
+  expect_equal(grepl("background-color: #FF5733", box2_str), TRUE)
+  expect_equal(grepl("panel-default", box2_str), TRUE)  # Should use default panel
+  
+  # Test text color support
+  box3 <- solo_box(value = 42, txt = "Test", text_color = "white")
+  box3_str <- unlist(box3) %>% paste(collapse = " ")
+  expect_equal(grepl("color: white", box3_str), TRUE)
+  
+  # Test backward compatibility with bootstrap colors
+  box4 <- solo_box(value = 42, txt = "Test", color = "warning")
+  box4_str <- unlist(box4) %>% paste(collapse = " ")
+  expect_equal(grepl("panel-warning", box4_str), TRUE)
+  expect_equal(grepl("background-color:", box4_str), FALSE)  # Should not have custom background
+  
+  # Test multi_box with new defaults
+  multi1 <- multi_box(values = c(1, 2), txt = c("A", "B"))
+  multi1_str <- unlist(multi1) %>% paste(collapse = " ")
+  expect_equal(grepl("panel-primary", multi1_str), TRUE)
+  
+  # Test solo_box_ct with new defaults
+  ct1 <- solo_box_ct(value = 10, txt = "Test")
+  ct1_str <- unlist(ct1) %>% paste(collapse = " ")
+  expect_equal(grepl("panel-primary", ct1_str), TRUE)
 })
 
 iris_shared <- crosstalk::SharedData$new(iris)

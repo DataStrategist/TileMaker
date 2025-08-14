@@ -99,20 +99,33 @@ div_maker(
 
 ### Color
 
-The `color` argument controls the type of box which dictates the color.
+The `color` argument controls the background color of the box.
 
-By default, Bootstrap Version 3 is used. 6 colors of boxes are available.
-It can be customised to use boostrap 4.
+You can use either Bootstrap color class names or actual color values (hex, rgb, named colors).
+By default, boxes use the "primary" Bootstrap color.
 
 ```{r}
 div_maker(
   subtitle = "... all the colors of a rainbow", textModifier = "h3",
-  solo_box(value = 3.3, txt = "Default", color = "default"),
-  solo_box(value = 3.3, txt = "Primary", color = "primary"),
+  solo_box(value = 3.3, txt = "Default (Primary)", color = "primary"),
   solo_box(value = 3.3, txt = "Success", color = "success"),
   solo_box(value = 3.3, txt = "Info", color = "info"),
   solo_box(value = 3.3, txt = "Warning", color = "warning"),
-  solo_box(value = 3.3, txt = "Danger", color = "danger")
+  solo_box(value = 3.3, txt = "Danger", color = "danger"),
+  solo_box(value = 3.3, txt = "Custom Hex", color = "#FF6B35")
+)
+```
+
+<br>
+
+You can also control the text color separately using the `text_color` parameter:
+
+```{r}
+div_maker(
+  subtitle = "Custom text colors", textModifier = "h3",
+  solo_box(value = 3.3, txt = "White Text", color = "#2E8B57", text_color = "white"),
+  solo_box(value = 3.3, txt = "Yellow Text", color = "primary", text_color = "#FFD700"),
+  solo_box(value = 3.3, txt = "Dark Text", color = "#F0F8FF", text_color = "#333333")
 )
 ```
 
@@ -124,7 +137,7 @@ solo_box(value = NULL, txt = "Watch the case sensitivity of the color argument!"
 
 # Let's go solo_gradient_box!!!
 
-The ``solo_gradient_box`` function lets us set targets and limits, and then changes the color depending on the value. Therefore, if a `value` is high, it'll be green, if it's "medium" it'll be orange, or if it's low, then it'll be red. By default, the `target` is set to 100 and thresholds are set to 50 and 90, although these are customizeable.
+The ``solo_gradient_box`` function lets us set targets and limits, and then changes the color depending on the value. Now it uses pleasant pastel colors: pastel green for high values, pastel yellow for medium values, and pastel red for low values. By default, the `target` is set to 100 and thresholds are set to 50 and 90, although these are customizeable.
 
 ```{r}
 div_maker(
