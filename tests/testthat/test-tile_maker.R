@@ -320,6 +320,66 @@ test_that("currency units appear before value", {
     sum(), 1)
 })
 
+test_that("width_percent and height_percent parameters work correctly", {
+  # Test solo_box with width_percent as number
+  box1 <- solo_box(value = 42, txt = "Test", width_percent = 50)
+  box1_str <- unlist(box1) %>% paste(collapse = " ")
+  expect_equal(grepl("width: 50%;", box1_str), TRUE)
+  
+  # Test solo_box with width_percent as string with %
+  box2 <- solo_box(value = 42, txt = "Test", width_percent = "32%")
+  box2_str <- unlist(box2) %>% paste(collapse = " ")
+  expect_equal(grepl("width: 32%;", box2_str), TRUE)
+  
+  # Test solo_box with height_percent as number
+  box3 <- solo_box(value = 42, txt = "Test", height_percent = 75)
+  box3_str <- unlist(box3) %>% paste(collapse = " ")
+  expect_equal(grepl("height: 75%;", box3_str), TRUE)
+  
+  # Test solo_box with both width_percent and height_percent
+  box4 <- solo_box(value = 42, txt = "Test", width_percent = 33, height_percent = 50)
+  box4_str <- unlist(box4) %>% paste(collapse = " ")
+  expect_equal(grepl("width: 33%;", box4_str), TRUE)
+  expect_equal(grepl("height: 50%;", box4_str), TRUE)
+  
+  # Test solo_gradient_box with width_percent
+  box5 <- solo_gradient_box(value = 75, txt = "Gradient", width_percent = 25, target = 100)
+  box5_str <- unlist(box5) %>% paste(collapse = " ")
+  expect_equal(grepl("width: 25%;", box5_str), TRUE)
+  
+  # Test multi_box with height_percent
+  box6 <- multi_box(values = c(1, 2), txt = c("A", "B"), height_percent = "40%")
+  box6_str <- unlist(box6) %>% paste(collapse = " ")
+  expect_equal(grepl("height: 40%;", box6_str), TRUE)
+  
+  # Test solo_box_ct with both parameters
+  box7 <- solo_box_ct(value = 10, txt = "CT Test", width_percent = 48, height_percent = 60)
+  box7_str <- unlist(box7) %>% paste(collapse = " ")
+  expect_equal(grepl("width: 48%;", box7_str), TRUE)
+  expect_equal(grepl("height: 60%;", box7_str), TRUE)
+  
+  # Test that existing link styling is preserved when using percentages
+  box8 <- solo_box(value = 42, txt = "Test", width_percent = 50, link = "http://example.com")
+  box8_str <- unlist(box8) %>% paste(collapse = " ")
+  expect_equal(grepl("cursor: pointer;", box8_str), TRUE)
+  expect_equal(grepl("width: 50%;", box8_str), TRUE)
+})
+
+test_that("width_percent and height_percent parameters are optional", {
+  # Test that functions work without the new parameters (backward compatibility)
+  box1 <- solo_box(value = 42, txt = "Test")
+  expect_equal(class(box1), "shiny.tag")
+  
+  box2 <- solo_gradient_box(value = 75, target = 100)
+  expect_equal(class(box2), "shiny.tag")
+  
+  box3 <- multi_box(values = c(1, 2), txt = c("A", "B"))
+  expect_equal(class(box3), "shiny.tag")
+  
+  box4 <- solo_box_ct(value = 10, txt = "Test")
+  expect_equal(class(box4), "shiny.tag")
+})
+
 iris_shared <- crosstalk::SharedData$new(iris)
 # devtools::install_github("kent37/summarywidget")
 sw <- summarywidget::summarywidget(iris_shared)
