@@ -73,7 +73,8 @@ finisher(
   title = "Important Reportings", 
   css = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",
   file = NULL, 
-  textModifier = "h1",div_maker(subtitle = "Boom", textModifier = "hi",d1, d2, d3)
+  textModifier = "h1",
+  divs = div_maker(subtitle = "Boom", textModifier = "h2", d1, d2, d3)
 )
 ```
 
@@ -81,7 +82,7 @@ finisher(
 <body>
 <h1>Important Reportings</h1>
 <div>
-<hi>Boom</hi>
+<h2>Boom</h2>
 <div class="container">
 <h1>First line</h1>
 <div class="panel panel-info">
