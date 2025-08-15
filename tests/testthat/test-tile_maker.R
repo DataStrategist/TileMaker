@@ -11,7 +11,7 @@ test_that("classes work", {
   multi_box(
     values = c(3, 45), title = "Important <br>button",
     number_zoom = 300, icons = c("apple", "calendar"),
-    color = "warning", txt = c("times", "reports")
+    color = "#FFC107", txt = c("times", "reports")
   ) %>%
     class() %>%
     expect_equal(., "shiny.tag")
@@ -157,7 +157,7 @@ test_that("errors error out", {
 test_that("protections work", {
   multi_box(
     values = c(3, 45), number_zoom = 300, icons = c("apple", "calendar"),
-    color = "warning",
+    color = "#FFC107",
     txt = c("times", "reports")
   ) %>%
     class() %>%
@@ -165,7 +165,7 @@ test_that("protections work", {
 
   multi_box(
     values = c(3, 45), title = "Important <br>button",
-    number_zoom = 300, color = "warning",
+    number_zoom = 300, color = "#FFC107",
     txt = c("times", "reports")
   ) %>%
     class() %>%
@@ -202,7 +202,7 @@ test_that("protections work", {
 
   multi_box(
     values = c(3, 45), title = "Important <br>button",
-    number_zoom = 300, icons = c("apple", "calendar"), color = "warning"
+    number_zoom = 300, icons = c("apple", "calendar"), color = "#FFC107"
   ) %>%
     unlist() %>%
     grepl(" ", x = .) %>%
@@ -381,11 +381,12 @@ test_that("width_percent and height_percent parameters are optional", {
   expect_equal(class(box4), "shiny.tag")
 })
 
-test_that("new color API works correctly", {
-  # Test that default color changed to "primary"
+test_that("simplified color API works correctly", {
+  # Test that default color changed to "#DDF4FF"
   box1 <- solo_box(value = 42, txt = "Test")
   box1_str <- unlist(box1) %>% paste(collapse = " ")
-  expect_equal(grepl("panel-primary", box1_str), TRUE)
+  expect_equal(grepl("background-color: #DDF4FF", box1_str), TRUE)
+  expect_equal(grepl("panel-default", box1_str), TRUE)  # Should always use panel-default
   
   # Test custom hex color support
   box2 <- solo_box(value = 42, txt = "Test", color = "#FF5733")
@@ -398,21 +399,17 @@ test_that("new color API works correctly", {
   box3_str <- unlist(box3) %>% paste(collapse = " ")
   expect_equal(grepl("color: white", box3_str), TRUE)
   
-  # Test backward compatibility with bootstrap colors
-  box4 <- solo_box(value = 42, txt = "Test", color = "warning")
-  box4_str <- unlist(box4) %>% paste(collapse = " ")
-  expect_equal(grepl("panel-warning", box4_str), TRUE)
-  expect_equal(grepl("background-color:", box4_str), FALSE)  # Should not have custom background
-  
   # Test multi_box with new defaults
   multi1 <- multi_box(values = c(1, 2), txt = c("A", "B"))
   multi1_str <- unlist(multi1) %>% paste(collapse = " ")
-  expect_equal(grepl("panel-primary", multi1_str), TRUE)
+  expect_equal(grepl("background-color: #DDF4FF", multi1_str), TRUE)
+  expect_equal(grepl("panel-default", multi1_str), TRUE)
   
   # Test solo_box_ct with new defaults
   ct1 <- solo_box_ct(value = 10, txt = "Test")
   ct1_str <- unlist(ct1) %>% paste(collapse = " ")
-  expect_equal(grepl("panel-primary", ct1_str), TRUE)
+  expect_equal(grepl("background-color: #DDF4FF", ct1_str), TRUE)
+  expect_equal(grepl("panel-default", ct1_str), TRUE)
 })
 
 iris_shared <- crosstalk::SharedData$new(iris)
