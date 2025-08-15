@@ -36,10 +36,10 @@ ico <- function(x, chevron = FALSE) {
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional background color. Can be a bootstrap css class name
-#'   ("primary", "success", "info", "warning", "danger", "default") or an actual
-#'   color value (hex like "#FF5733", named like "red", or rgb like "rgb(255,87,51)").
-#'   Default is "primary".
+#' @param color Optional background color as a color value (hex like "#FF5733",
+#'   named like "red", or rgb like "rgb(255,87,51)"). Default is "#DDF4FF".
+#'   
+#'   
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -66,9 +66,9 @@ ico <- function(x, chevron = FALSE) {
 #'   style = 'width:100\%;height:50\%'
 #' @importFrom htmltools HTML tag tags
 #' @examples
-#' b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
-#' b2 <- solo_box(color = "danger", value = 13.7, txt = "Nutritional value")
-#' b3 <- solo_box(color = "success", value = 1, txt = "Yumminess factor")
+#' b1 <- solo_box(color = "#FFC107", value = 3.57, txt = "B")
+#' b2 <- solo_box(color = "#DC3545", value = 13.7, txt = "Nutritional value")
+#' b3 <- solo_box(color = "#28A745", value = 1, txt = "Yumminess factor")
 #' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
 #' finisher(title = "straight buttons", divs = b1)
 #' finisher(
@@ -398,10 +398,10 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #' @param icon Optional glyphicon that should be displayed from
 #'   https://getbootstrap.com/docs/3.3/components/ you need only supply the name
 #'   of thing you want, like "check"... not the full "gyphicon-check"
-#' @param color Optional background color. Can be a bootstrap css class name
-#'   ("primary", "success", "info", "warning", "danger", "default") or an actual
-#'   color value (hex like "#FF5733", named like "red", or rgb like "rgb(255,87,51)").
-#'   Default is "primary".
+#' @param color Optional background color as a color value (hex like "#FF5733",
+#'   named like "red", or rgb like "rgb(255,87,51)"). Default is "#DDF4FF".
+#'   
+#'   
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -422,9 +422,9 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #'   style = 'width:100\%;height:50\%'
 #' @importFrom htmltools HTML tag tags
 #' @examples
-#' b1 <- solo_box(color = "warning", value = 3.57, txt = "B")
-#' b2 <- solo_box(color = "danger", value = 13.7, txt = "Nutritional value")
-#' b3 <- solo_box(color = "success", value = 1, txt = "Yumminess factor")
+#' b1 <- solo_box(color = "#FFC107", value = 3.57, txt = "B")
+#' b2 <- solo_box(color = "#DC3545", value = 13.7, txt = "Nutritional value")
+#' b3 <- solo_box(color = "#28A745", value = 1, txt = "Yumminess factor")
 #' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
 #' finisher(title = "straight buttons", divs = b1)
 #' finisher(
@@ -522,10 +522,10 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #' @param title Top title, Default: NULL
 #' @param size Optional size specified in the bootstrap css classes:
 #'   "xs","sm","md","lg")
-#' @param color Optional background color. Can be a bootstrap css class name
-#'   ("primary", "success", "info", "warning", "danger", "default") or an actual
-#'   color value (hex like "#FF5733", named like "red", or rgb like "rgb(255,87,51)").
-#'   Default is "primary".
+#' @param color Optional background color as a color value (hex like "#FF5733",
+#'   named like "red", or rgb like "rgb(255,87,51)"). Default is "#DDF4FF".
+#'   
+#'   
 #' @param link Optional hyperlink to redirect to after a user click, Default:
 #'   NULL
 #' @param number_zoom Optional magnification \% for number vs normal text,
@@ -551,7 +551,7 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #' library(dplyr)
 #' multi_box(
 #'   values = c(21, 45), title = "Important <br>button",
-#'   number_zoom = 300, icons = c("apple", "calendar"), color = "warning",
+#'   number_zoom = 300, icons = c("apple", "calendar"), color = "#FFC107",
 #'   txt = c("times", "reports")
 #' ) %>%
 #'   finisher(divs = .)
