@@ -38,8 +38,8 @@ ico <- function(x, chevron = FALSE) {
 #'   of thing you want, like "check"... not the full "gyphicon-check"
 #' @param color Optional background color as a color value (hex like "#FF5733",
 #'   named like "red", or rgb like "rgb(255,87,51)"). Default is "#DDF4FF".
-#'   
-#'   
+#'
+#'
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
@@ -49,16 +49,16 @@ ico <- function(x, chevron = FALSE) {
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
 #'   are NULL (default), or the desired divider (",", ".", " ", etc). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
-#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
-#'   percentage calculation. If FALSE (default), calculates percentage unless 
+#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of
+#'   percentage calculation. If FALSE (default), calculates percentage unless
 #'   former equals 0, in which case it automatically uses raw format.
-#' @param width_percent Optional width as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param width_percent Optional width as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts where you want buttons to fill specific portions of a row.
-#' @param height_percent Optional height as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param height_percent Optional height as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts to control tile height when text wrapping affects row heights.
-#' @param text_color Optional text color. Can be any valid CSS color value 
+#' @param text_color Optional text color. Can be any valid CSS color value
 #'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
 #'   If not specified, uses default Bootstrap text styling.
 #' @param ... Optional additional html elements. For example, if you would like
@@ -66,10 +66,11 @@ ico <- function(x, chevron = FALSE) {
 #'   style = 'width:100\%;height:50\%'
 #' @importFrom htmltools HTML tag tags
 #' @examples
-#' b1 <- solo_box(color = "#FFC107", value = 3.57, txt = "B")
+#' b1 <- solo_box(color = "#fjfjfj", value = 3.57, txt = "B")
 #' b2 <- solo_box(color = "#DC3545", value = 13.7, txt = "Nutritional value")
 #' b3 <- solo_box(color = "#28A745", value = 1, txt = "Yumminess factor")
 #' b4 <- solo_box(value = 3.57, former = 3, txt = "Times apple eaten", icon = "apple")
+
 #' finisher(title = "straight buttons", divs = b1)
 #' finisher(
 #'   title = "with divs",
@@ -92,29 +93,29 @@ ico <- function(x, chevron = FALSE) {
 
 solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
                      icon = NULL, color = "#DDF4FF", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", pretty = NULL, 
-                     raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, 
+                     hover = NULL, textModifier = "h1", pretty = NULL,
+                     raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL,
                      text_color = NULL, ...) {
 
   # Build style attribute for width and height percentages
   style_parts <- character(0)
   if (!is.null(width_percent)) {
-    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+    style_parts <- c(style_parts, paste0("width: ", width_percent,
                                         if (!grepl("%$", width_percent)) "%" else "", ";"))
   }
   if (!is.null(height_percent)) {
-    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+    style_parts <- c(style_parts, paste0("height: ", height_percent,
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
-  
+
   # Always add background color
   style_parts <- c(style_parts, paste0("background-color: ", color, ";"))
-  
+
   # Add text color if specified
   if (!is.null(text_color)) {
     style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
   }
-  
+
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
 
   panel_content <- tags$div(
@@ -147,7 +148,7 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
             if (raw_comparisons || former == 0) {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                paste("last:", former, sep = " ")
+                paste("last:", former, sep = "\u00A0")
               )
             } else if (former > value) {
               tags$sup(
@@ -223,16 +224,16 @@ solo_box <- function(value = NULL, txt = NULL, former = NULL, size = "md",
 #' @param pretty Optionally allow numbers to become embellished. Accepted values
 #'   are NULL (default), or the desired divider (",", ".", " "). If this
 #'   option is not left as FALSE, rounding is automatically implemented.
-#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of 
-#'   percentage calculation. If FALSE (default), calculates percentage unless 
+#' @param raw_comparisons Logical. If TRUE, shows "last: X" instead of
+#'   percentage calculation. If FALSE (default), calculates percentage unless
 #'   former equals 0, in which case it automatically uses raw format.
-#' @param width_percent Optional width as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param width_percent Optional width as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts where you want buttons to fill specific portions of a row.
-#' @param height_percent Optional height as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param height_percent Optional height as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts to control tile height when text wrapping affects row heights.
-#' @param text_color Optional text color. Can be any valid CSS color value 
+#' @param text_color Optional text color. Can be any valid CSS color value
 #'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
 #'   If not specified, uses default Bootstrap text styling.
 #' @param ... Optional additional html elements. For example, if you would like
@@ -277,7 +278,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
                               relative = FALSE, link = NULL, units = NULL,
                               hover = NULL, hide_value = FALSE,
                               textModifier = "h1", revert = FALSE, pretty = NULL,
-                              raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL, 
+                              raw_comparisons = FALSE, width_percent = NULL, height_percent = NULL,
                               text_color = NULL, ...) {
   if (relative == FALSE) {
     if (target == 100) message("-- using target value of 100 --")
@@ -301,22 +302,22 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
   # Build style attribute for width and height percentages
   style_parts <- character(0)
   if (!is.null(width_percent)) {
-    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+    style_parts <- c(style_parts, paste0("width: ", width_percent,
                                         if (!grepl("%$", width_percent)) "%" else "", ";"))
   }
   if (!is.null(height_percent)) {
-    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+    style_parts <- c(style_parts, paste0("height: ", height_percent,
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
-  
+
   # Add background color (always a color value now, not bootstrap class)
   style_parts <- c(style_parts, paste0("background-color: ", finalcolor, ";"))
-  
+
   # Add text color if specified
   if (!is.null(text_color)) {
     style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
   }
-  
+
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
 
   panel_content <- tags$div(
@@ -349,7 +350,7 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
             if (raw_comparisons || former == 0) {
               tags$sup(
                 style = "font-size: 12px;color:#EEEEEE;vertical-align: top;",
-                paste("last:", former, sep = " ")
+                paste("last:", former, sep = "\u00A0")
               )
             } else if (former > value) {
               tags$sup(
@@ -400,21 +401,21 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 #'   of thing you want, like "check"... not the full "gyphicon-check"
 #' @param color Optional background color as a color value (hex like "#FF5733",
 #'   named like "red", or rgb like "rgb(255,87,51)"). Default is "#DDF4FF".
-#'   
-#'   
+#'
+#'
 #' @param link Optional hyperlink that should be followed on click
 #' @param units Optional units that should be displayed after Value
 #' @param hover Optional tooltip, or text that will show up when a user rests
 #'   their mouse over the tile.
 #' @param textModifier Optional css category of "large" text. In this case, the
 #'   icon, value and unit. In this case, title. Default=h1
-#' @param width_percent Optional width as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param width_percent Optional width as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts where you want buttons to fill specific portions of a row.
-#' @param height_percent Optional height as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param height_percent Optional height as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts to control tile height when text wrapping affects row heights.
-#' @param text_color Optional text color. Can be any valid CSS color value 
+#' @param text_color Optional text color. Can be any valid CSS color value
 #'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
 #'   If not specified, uses default Bootstrap text styling.
 #' @param ... Optional additional html elements. For example, if you would like
@@ -448,28 +449,28 @@ solo_gradient_box <- function(value = NULL, txt = NULL, former = NULL,
 
 solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
                      icon = NULL, color = "#DDF4FF", link = NULL, units = NULL,
-                     hover = NULL, textModifier = "h1", width_percent = NULL, height_percent = NULL, 
+                     hover = NULL, textModifier = "h1", width_percent = NULL, height_percent = NULL,
                      text_color = NULL, ...) {
 
   # Build style attribute for width and height percentages
   style_parts <- character(0)
   if (!is.null(width_percent)) {
-    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+    style_parts <- c(style_parts, paste0("width: ", width_percent,
                                         if (!grepl("%$", width_percent)) "%" else "", ";"))
   }
   if (!is.null(height_percent)) {
-    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+    style_parts <- c(style_parts, paste0("height: ", height_percent,
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
-  
+
   # Always add background color
   style_parts <- c(style_parts, paste0("background-color: ", color, ";"))
-  
+
   # Add text color if specified
   if (!is.null(text_color)) {
     style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
   }
-  
+
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
 
   panel_content <- tags$div(
@@ -524,8 +525,8 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #'   "xs","sm","md","lg")
 #' @param color Optional background color as a color value (hex like "#FF5733",
 #'   named like "red", or rgb like "rgb(255,87,51)"). Default is "#DDF4FF".
-#'   
-#'   
+#'
+#'
 #' @param link Optional hyperlink to redirect to after a user click, Default:
 #'   NULL
 #' @param number_zoom Optional magnification \% for number vs normal text,
@@ -533,13 +534,13 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 #'
 #' @param hover Optional tooltip, or text that will show up when a user rests their
 #' mouse over the tile, Default: NULL
-#' @param width_percent Optional width as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param width_percent Optional width as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts where you want buttons to fill specific portions of a row.
-#' @param height_percent Optional height as a percentage. Can be specified as a 
-#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard 
+#' @param height_percent Optional height as a percentage. Can be specified as a
+#'   number (e.g., 50) or string with % (e.g., "50%"). Useful for flexdashboard
 #'   layouts to control tile height when text wrapping affects row heights.
-#' @param text_color Optional text color. Can be any valid CSS color value 
+#' @param text_color Optional text color. Can be any valid CSS color value
 #'   (hex like "#FFFFFF", named like "white", or rgb like "rgb(255,255,255)").
 #'   If not specified, uses default Bootstrap text styling.
 #' @param ... add any other html code here
@@ -565,7 +566,7 @@ solo_box_ct <- function(value = NULL, txt = NULL, size = "md",
 multi_box <- function(icons = NULL, txt = NULL, values = NULL,
                       title = NULL, size = "md",
                       color = "#DDF4FF", link = NULL, number_zoom = 150,
-                      hover = NULL, width_percent = NULL, height_percent = NULL, 
+                      hover = NULL, width_percent = NULL, height_percent = NULL,
                       text_color = NULL, ...) {
   ## Define function that can be pmapped
   gutsMaker <- function(values, txt, icons) {
@@ -582,22 +583,22 @@ multi_box <- function(icons = NULL, txt = NULL, values = NULL,
   # Build style attribute for width and height percentages
   style_parts <- character(0)
   if (!is.null(width_percent)) {
-    style_parts <- c(style_parts, paste0("width: ", width_percent, 
+    style_parts <- c(style_parts, paste0("width: ", width_percent,
                                         if (!grepl("%$", width_percent)) "%" else "", ";"))
   }
   if (!is.null(height_percent)) {
-    style_parts <- c(style_parts, paste0("height: ", height_percent, 
+    style_parts <- c(style_parts, paste0("height: ", height_percent,
                                         if (!grepl("%$", height_percent)) "%" else "", ";"))
   }
-  
+
   # Always add background color
   style_parts <- c(style_parts, paste0("background-color: ", color, ";"))
-  
+
   # Add text color if specified
   if (!is.null(text_color)) {
     style_parts <- c(style_parts, paste0("color: ", text_color, ";"))
   }
-  
+
   percent_style <- if (length(style_parts) > 0) paste(style_parts, collapse = " ") else NULL
 
   ## Now build panel

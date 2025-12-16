@@ -29,6 +29,7 @@ library(TileMaker)
 
 a <- solo_box(value = 3, txt = "Little piggies<br>go to the market", icon = "piggy-bank")
 b <- solo_gradient_box(value = 65, txt = "test score I got")
+
 ```
 
     ## -- using target value of 100 --
@@ -84,7 +85,7 @@ finisher(
 <hi>Boom</hi>
 <div class="container">
 <h1>First line</h1>
-<div class="panel panel-info">
+<div class="panel-primary">
 <div class="panel-body text-center">
 <h1>
 <i class="glyphicon glyphicon-piggy-bank"></i>
@@ -93,7 +94,7 @@ finisher(
 <div style="margin-top: 10px;">Little piggies<br>go to the market</div>
 </div>
 </div>
-<div class="panel panel-warning">
+<div class="panel panel-default" style="background-color: #FFF9C4;">
 <div class="panel-body text-center">
 <h1>65</h1>
 <div style="margin-top: 10px;">test score I got</div>
@@ -102,13 +103,13 @@ finisher(
 </div>
 <div class="container">
 <h1>Second line</h1>
-<div class="panel panel-success">
+<div class="panel panel-default" style="background-color: #C8E6C9;">
 <div class="panel-body text-center">
 <h1>95</h1>
 <div style="margin-top: 10px;">test score I wanted</div>
 </div>
 </div>
-<div class="panel panel-info">
+<div class="panel-primary">
 <div class="panel-body text-center">
 <h1>Candidates</h1>
 <h3>
@@ -135,19 +136,19 @@ Mohammed
 <h1></h1>
 <div class="container">
 <h2>
-<div class="panel panel-danger">
+<div class="panel panel-default" style="background-color: #FFCDD2;">
 <div class="panel-body text-center">
 <h1>1.5</h1>
 <div style="margin-top: 10px;">setosa</div>
 </div>
 </div>
-<div class="panel panel-danger">
+<div class="panel panel-default" style="background-color: #FFCDD2;">
 <div class="panel-body text-center">
 <h1>4.3</h1>
 <div style="margin-top: 10px;">versicolor</div>
 </div>
 </div>
-<div class="panel panel-danger">
+<div class="panel panel-default" style="background-color: #FFCDD2;">
 <div class="panel-body text-center">
 <h1>5.6</h1>
 <div style="margin-top: 10px;">virginica</div>
@@ -160,7 +161,7 @@ Mohammed
 <h1></h1>
 <div class="container">
 <h2>
-<div class="panel panel-danger">
+<div class="panel panel-default" style="background-color: #FFCDD2;">
 <div class="panel-body text-center">
 <h1>
 1.5
@@ -172,7 +173,7 @@ Mohammed
 <div style="margin-top: 10px;">setosa</div>
 </div>
 </div>
-<div class="panel panel-danger">
+<div class="panel panel-default" style="background-color: #FFCDD2;">
 <div class="panel-body text-center">
 <h1>
 4.3
@@ -184,7 +185,7 @@ Mohammed
 <div style="margin-top: 10px;">versicolor</div>
 </div>
 </div>
-<div class="panel panel-danger">
+<div class="panel panel-default" style="background-color: #FFCDD2;">
 <div class="panel-body text-center">
 <h1>
 5.6
@@ -203,3 +204,6 @@ Mohammed
 </div>
 </body>
 </html>
+
+## Tags
+`dashboard` `r-package` `shiny` `visualization`
