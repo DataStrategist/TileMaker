@@ -791,10 +791,15 @@ tile_matrix <- function(data, values, txt, icon, former, target = 100,
 #'   solo_box(value = 34)
 #' )
 #' @export div_maker
-div_maker <- function(subtitle, textModifier, ...) {
+div_maker <- function(subtitle, textModifier, subnote = NULL, ...) {
   tags$div(
     class = "container",
     tag(textModifier, tags$span(subtitle)$children),
+    if (!is.null(subnote)) tags$p(
+      class = "text-muted",
+      style = "margin-top: -8px; font-size: 85%;",
+      subnote
+    ),
     tags$div(
       style = "display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start;",
       ...
