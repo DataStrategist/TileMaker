@@ -795,7 +795,10 @@ div_maker <- function(subtitle, textModifier, ...) {
   tags$div(
     class = "container",
     tag(textModifier, tags$span(subtitle)$children),
-    ...
+    tags$div(
+      style = "display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-start;",
+      ...
+    )
   )
 }
 
