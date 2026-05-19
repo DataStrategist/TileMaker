@@ -17,3 +17,4 @@ vignettes/*.pdf
 .httr-oauth
 .Rproj.user
 inst/doc
+..Rcheck/
